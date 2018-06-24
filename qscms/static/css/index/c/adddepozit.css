@@ -1,0 +1,109 @@
+@charset "utf-8";
+.wizard_form {
+	width: 550px;
+	margin: auto;
+}
+#winout .wizard_form {
+	width: 860px!important;
+}
+.wizard_rows {
+	width: 100%;
+}
+.wizard_rows .wizard_row_title, .wizard_rows .wizard_row_field {
+	float: none!important;
+	width: 100%!important;
+	text-align: left!important;
+	padding: 5px!important;
+}
+.wizard_rows .wizard_row_field .radio_item {
+	padding: 4px 15px!important;
+}
+.wizard_rows .wizard_row_descr {
+	width: 100%!important;
+}
+.wizard_rows .wizard_row_descr .hintlink {
+	display: none!important;
+}
+.wizard_rows .wizard_row_descr .hintbody {
+	display: block!important;
+	color: #777!important;
+	padding: 7px 20px!important;
+}
+#wizard_in_request_112, #wizard_in_request_21, #wizard_out_request_12_ {
+	width: 550px!important;
+	margin: 0 auto!important;
+	padding: 0!important;
+}
+#wizard_in_request_112 .form_pattern, #wizard_in_request_21 .form_pattern, #wizard_out_request_12 .form_pattern {
+	display: none!important;
+}
+#wizard_in_request_112 .wizard_row_title, #wizard_in_request_21 .wizard_row_title, #wizard_out_request_12 .wizard_row_title {
+	width: 180px!important;
+	text-align: right!important;
+	float: left!important;
+}
+#wizard_in_request_112 .wizard_row_field, #wizard_in_request_21 .wizard_row_field, #wizard_out_request_12 .wizard_row_field {
+	width: 300px!important;
+	float: left!important;
+}
+#wizard_in_request_112 .wizard_row_descr, #wizard_in_request_21 .wizard_row_descr, #wizard_out_request_12 .wizard_row_descr {
+	width: 20px!important;
+	text-align: left!important;
+	float: left!important;
+}
+#wizard_in_request_112 .hintlink, #wizard_in_request_21 .hintlink, #wizard_out_request_12 .hintlink {
+	width: 25px!important;
+	height: 25px!important;
+	float: left!important;
+	display: block!important;
+}
+#wizard_in_request_112 .hintbody, #wizard_in_request_21 .hintbody, #wizard_out_request_12 .hintbody {
+	display: none!important;
+}
+#wizard_in_request_112 .deftextinput, #wizard_in_request_112 .combo, #wizard_in_request_112 .combo-panel, #wizard_field_winh_id_currency, #wizard_in_request_112 .combo-text, #wizard_out_request_12 .deftextinput, #wizard_out_request_12 .combo, #wizard_out_request_12 .combo-panel, #wizard_out_request_12 .combo-text {
+	width: 280px!important;
+}
+#wizard_in_request_21 .deftextinput, #wizard_in_request_21 .combo, #wizard_in_request_21 .combo-panel, #wizard_field_winh_addaccexept_currency, #wizard_in_request_21 .combo-text {
+	width: 280px!important;
+}
+#wizard_in_request_21 .datebox {
+	width: 260px!important;
+	;
+}
+.help_button_container {
+	width: 1100px;
+	height: 110px;
+	display: block;
+	magrin: 0 auto;
+}
+.help_button {
+	padding: 0px;
+	cursor: pointer;
+	text-decoration: none;
+	font-size: 30px;
+	text-shadow: 1px 2px 3px #fff;
+	font-weight: bold;
+	color: #416AA3;
+	display: block;
+	width: 500px;
+	height: 110px;
+	background: transparent url("help_button2.png") no-repeat center;
+}
+.help_button .translate {
+	height: 80px;
+	padding: 35px 0px 0 40px;
+}
+#winap .wizard_row {
+	width: 47%;
+	float: left;
+	clear: none;
+}
+#wizard_row_winap_all_data {
+	width: 100%!important;
+}
+#wrowd_wizard_row_winap_text, #wrowd_wizard_row_winap_pay_date, #wrowd_wizard_row_winap_all_data {
+	clear: both;
+}
+#wizard_field_winroll_reason {
+	width: 90%;
+}

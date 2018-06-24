@@ -1,0 +1,61 @@
+{sub h}
+{ajaxLoading downTpl 
+	{eval
+		if (form::is_form_hash()) {
+			extract(form::get3('url', 'saveDir'));
+			$rs = startDown($url, $saveDir);
+			if ($rs !== true) echo $rs;
+			else echo '下载成功！';
+		}
+	}
+}
+{ajaxLoading downCSS 
+	{eval
+		if (form::is_form_hash()) {
+			extract(form::get3('url', 'saveDir'));
+			$rs = downCSSFile($url, $saveDir);
+			if ($rs !== true) echo $rs;
+			else echo '下载成功！';
+		}
+	}
+}
+{if $method == 'html'}
+	{adminForm
+		目标地址,null=请输入要下载的地址      |url    |text|480|240
+		保存路径,null=请输入模板及附件保存地址|saveDir|code,<input type="text" name="saveDir" id="saveDir"  value="{echo empty($saveDir) ? qscms::getCfgPath('/system/cacheDirRoot+/system/cacheDirs/data').'tpl/' : $saveDir}" class="form-control" style="width:480px" preg="null=请输入模板及附件保存地址" />
+	}
+	<script language="javascript">
+	$(function(){
+		var postData = function(){
+			var hash = $('[name=hash]').val();
+			var url = $('#url').val();
+			var saveDir = $('#saveDir').val();
+			return 'hash='+encodeURI(hash)+'&url='+encodeURI(url)+'&saveDir='+encodeURI(saveDir);
+		};
+		$('form').submit(function(){
+			{ajaxCallLoading downTpl 模板下载 postData()}
+			return false;
+		});
+	});
+	</script>
+{elseif $method == 'css'}
+	{adminForm
+		目标地址,null=请输入要下载的地址      |url    |text|480|240
+		保存路径,null=请输入模板及附件保存地址|saveDir|code,<input type="text" name="saveDir" id="saveDir"  value="{echo empty($saveDir) ? qscms::getCfgPath('/system/cacheDirRoot+/system/cacheDirs/data').'tpl/' : $saveDir}" class="form-control" style="width:480px" preg="null=请输入模板及附件保存地址" />
+	}
+	<script language="javascript">
+	$(function(){
+		var postData = function(){
+			var hash = $('[name=hash]').val();
+			var url = $('#url').val();
+			var saveDir = $('#saveDir').val();
+			return 'hash='+encodeURI(hash)+'&url='+encodeURI(url)+'&saveDir='+encodeURI(saveDir);
+		};
+		$('form').submit(function(){
+			{ajaxCallLoading downCSS CSS下载 postData()}
+			return false;
+		});
+	});
+	</script>
+{/if}
+{sub f}

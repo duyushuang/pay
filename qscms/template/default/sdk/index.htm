@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title>$webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<link rel="shortcut icon" href="{r}/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="https://template.down.swap.wang/ui/angulr_2.0.1/bower_components/bootstrap/dist/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/app.css" type="text/css" />
+<style>
+input:-webkit-autofill {
+-webkit-box-shadow:0 0 0px 1000px white inset;
+-webkit-text-fill-color:#333;
+}
+</style>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</head><body style="background: #f1f1f1;">
+<div class="app app-header-fixed  ">
+  <div class="container w-xxl w-auto-xs" ng-controller="SigninFormController" ng-init="app.settings.container = false;"> <span class="navbar-brand block m-t">接口演示</span>
+    <div class="m-b-lg">
+      <div class="wrapper text-center"> <strong>步骤：1、输入信息 →2、立即付款 →3、完成</strong> </div>
+      
+      <!----支付开始--->
+      <div class="panel panel-info">
+        <div class="list-group-item reed" style="background:#337AB7;">
+          <h3 class="panel-title"><font color="#fff"><i class="fa fa-shopping-cart"></i>&nbsp;&nbsp;<b>支付接口演示</b></font></h3>
+        </div>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#onlinebuy" data-toggle="tab" aria-expanded="true">订单</a></li>
+          <li ><a href="{r}/user/reg"  aria-expanded="true" onclick="return confirm('提示：没有注册过风暴云支付商户的客户，可以申请接入。若已经注册可以直接登录');">商户申请</a></li>
+          <li ><a href="{r}/user/login" aria-expanded="true" onclick="return confirm('提示：已经注册过风暴云支付商户的客户，可以登录商户，没有注册的请先注册。');">登录</a></li>
+          <li ><a href="{r}/" aria-expanded="true" onclick="return confirm('提示：您现在返回首页吗？');">返回首页</a></li>
+        </ul>
+        <form name="alipayment" action="" method="post">
+        {v sys_hash_code}
+          <div class="list-group-item">
+          <div id="myTabContent" class="tab-content">
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon">订单号</div>
+                <input type="text" name="out_trade_no" value="{echo date('YmdHis').mt_rand(100,999);}" class="form-control" data-toggle="tooltip" title="" data-placement="top" data-original-title="必填：订单号是数字或字母，不能有相同订单号">
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group">
+                <div class="input-group-addon" >商品名</div>
+                <input type="text" name="subject" value="测试商品" class="form-control"  data-toggle="tooltip" title="" data-placement="top" data-original-title="必填：可以是字母数字或汉字">
+              </div>
+            </div>
+            <div id="pay_frame" class="form-group text-center">
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-addon">付款金额</div>
+                  <input class="form-control" name="total_fee" value="0.01"  data-toggle="tooltip" title="" data-placement="top" data-original-title="必填：测试金额，必须大于0.01">
+                </div>
+              </div>
+              <div class="alert alert-danger">多次测试请【刷新本页面】。以免【订单号重复】无法正常测试支付！</div>
+              
+              <label>
+              <input type="radio" name="type" class="btn btn-default" value="alipay" checked>
+              <img src="{su}images/pay/alipay.ico" class="logo" style="width:16px;">支付宝
+              </input>
+              </label>
+              &nbsp;&nbsp;
+              <label>
+              <input type="radio" name="type"class="btn btn-default" value="qqpay" >
+              <img src="{su}images/pay/qqpay.ico" class="logo" style="width:16px;">QQ钱包
+              </input>
+              </label>
+              &nbsp;&nbsp;
+              <label>
+              <input type="radio" name="type" class="btn btn-default" value="wxpay">
+              <img src="{su}images/pay/wechat.ico" class="logo"style="width:16px;">微信支付
+              </input>
+              </label>
+              &nbsp; <br/><br/>
+              <label>
+              <input type="radio" name="type"class="btn btn-default" value="301" disabled="disabled">
+              <img src="{su}images/pay/ka.ico" class="logo" style="width:15px;">建设银行
+              </input>
+              </label>
+              &nbsp;
+              <label>
+              <input type="radio" name="type"class="btn btn-default" value="401" disabled="disabled">
+              <img src="{su}images/pay/ka.ico" class="logo" style="width:15px;">农业银行
+              </input>
+              </label>
+              &nbsp;
+              <label>
+              <input type="radio" name="type"class="btn btn-default" value="101" disabled="disabled">
+              <img src="{su}images/pay/ka.ico" class="logo" style="width:15px;">工商银行
+              </input>
+              </label>
+              &nbsp; </div>
+            <button type="submit" class="btn btn-primary btn-block" >立即付款</button>
+          </div>
+        </form>
+        <div class="tab-pane fade in" id="lqq">
+          <div id="result3" class="form-group text-center" style="display:none;"></div>
+        </div>
+      </div>
+    </div>
+    <!--支付结束--> 
+    
+  </div>
+  <div class="text-center">
+    <p> <small class="text-muted">{$webName}<br>
+      Copyright &copy; 2013-{echo date('Y');} </small> </p>
+	{cfg web,webStatcode}
+  </div>
+</div>
+</div>
+</body>
+</html>

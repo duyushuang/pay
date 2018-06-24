@@ -1,0 +1,455 @@
+*{padding:0;margin:0;border: none;font-family: microsoft yahei;}
+html{
+    min-width: 1200px;
+}
+body{
+    font-family: microsoft yahei;
+}
+a{
+	cursor:pointer;
+     text-decoration:none;
+}
+a{
+    transition: all 0.5s ease-in-out 0s;
+    -moz-transition: all 0.5s ease-in-out 0s; 
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+}
+a:hover{
+    transition: all 0.5s ease-in-out 0s;
+    -moz-transition: all 0.5s ease-in-out 0s; 
+    -webkit-transition: all 0.5s ease-in-out 0s;
+    -o-transition: all 0.5s ease-in-out 0s;
+}
+
+
+
+@font-face {
+  font-family: "iconfont";
+  src: url('../iconfont/iconfont.eot');
+  src: url('../iconfont/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../iconfont/iconfont.woff') format('woff'), /* chrome、firefox */ url('../iconfont/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('../iconfont/iconfont.svg#iconfont') format('svg');
+  
+  /* IE9*/
+  /* iOS 4.1- */
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+}
+#accordion1 li{
+    display:block;
+}
+
+.float-box .blank{
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+.blank{
+	height: 10px;
+	clear: both;
+	visibility: hidden;
+}
+.blank30{
+    height: 30px;
+    clear: both;
+    visibility: hidden;
+}
+.blank15{
+    height: 15px;
+    clear: both;
+    visibility: hidden;
+}
+.clear {
+    height: 0px;
+    clear: both;
+    visibility: hidden;
+}
+.fl{
+    float:left;
+}
+.fr{
+    float: right;
+}
+/*页面整体宽度为1000px*/
+.warpper{width: 1200px;margin: 0 auto;}
+
+#header1{
+    width: 100%;
+    height: 70px;
+    z-index: 999;
+    min-width: 1200px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+#header1 .erweima{height: 80px;}
+.erweima {
+width: 100%;
+height: 100%;
+position: absolute;
+top: 0;
+left: 0;
+z-index: 1;
+background-color: #101117;
+filter: alpha(opacity=50);
+-moz-opacity: 0.5;
+-khtml-opacity: 0.5;
+opacity: 0.5;
+filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+}
+.menu {
+width: 100%;
+position: absolute;
+top: 0px;
+left: 0px;
+z-index: 3;
+box-shadow:none;
+}
+.logo{
+    float: left;
+    height: 100%;
+}
+.logo img{
+    margin-top: 20px;
+}
+
+
+
+.lavaLampBottomStyle {
+   /* position: relative;*/
+    background-color: white;
+}
+.lavaLampBottomStyle li {
+    float:right;
+    list-style: none;
+    height: 70px;
+    line-height: 70px;
+    margin: 0px 15px;
+}
+
+.lavaLampBottomStyle li.current {
+    border-top: 2px solid #ff921a;
+    height: 68px;
+    line-height: 68px;
+    z-index: 8;
+}
+.lavaLampBottomStyle li a {
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: none;
+    color:#aaa9b9;
+    outline: none;
+    text-align: center; 
+    line-height: 68px;
+    padding: 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0;
+    z-index: 10;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    font-family: microsoft yahei;
+}   
+li.current a{
+    color: #fff;
+}
+.lavaLampBottomStyle li a:hover, .lavaLampBottomStyle li a:active{
+    border: none;
+    color: #fff;
+}                     
+
+
+
+.nav{
+    position: relative;
+    float: right;
+    right:0px;
+    z-index: 1;
+    margin: 0;
+}
+.nav ul li
+{
+    border-top: 2px solid transition;
+    float:left;
+    color: #aaa9b9;
+} 
+.nav ul li span {
+    display: inline-block;
+    line-height: 68px;
+    height: 68px;
+    color: #fa7800;
+    font-size: 20px;
+}
+.nav ul li i.iconfont{
+    margin-right: 5px;
+    font-size: 28px;
+}
+.aqln_menu{
+    position: relative;
+}
+.nav2menu{
+    display: none;
+    width: 126px;
+    height: 80px;
+    z-index: 999;
+    position: absolute;
+    left: -25px;
+    top:65px;
+    padding: 13px 5px 0 5px;
+     background: url(../images/nav_bj.png) no-repeat top ;
+}
+.lavaLampBottomStyle li  .nav2menu a{
+    display: block;
+    width:122px;
+    margin: 0 2px;
+    height: 36px;
+    line-height: 36px;
+    color: #707070;
+    font-size: 14px;
+    text-align: center;
+    padding: 0;
+    z-index: 999;
+}
+.lavaLampBottomStyle li .nav2menu a:hover{
+    background: #f3eaea;
+    color: #1575ba;
+    padding: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.footer{
+	min-width: 1000px;
+    height: 70px;
+    width: auto;
+    background-color: #2f3045;
+}
+
+.footer_link{
+    color: #fff;
+}
+.footer_link a{
+    color: #fff;
+    font-size: 14px;
+    line-height: 70px;
+    display: inline-block;
+}
+.footer_link em{
+    color: #565667;
+    font-size: 10px;
+    line-height: 70px;
+    font-weight: bold;
+    display: inline-block;
+    padding: 0 8px;
+
+}
+
+.footadd,.footline{
+    display: inline-block;
+    color: #c9c4c4;
+    font-size: 13px;
+    line-height: 70px;
+    padding-left: 24px;
+    float: left;
+}
+.footadd{
+background-image: url(../images/footadd.png);
+background-repeat: no-repeat;
+background-position: left;
+margin-right: 20px;
+}
+.footline{
+background-image: url(../images/footline.png);
+background-repeat: no-repeat;
+background-position: left;
+}
+.footer_remarks{
+    text-align: right;
+    line-height: 20px;
+    font-size: 12px;
+    padding: 15px 0;
+}
+.footer_remarks span {
+    display: block;
+    color: #c9c4c4;
+}
+
+.top{
+    position: fixed;
+    bottom:80px; 
+    right:0px; 
+    cursor: pointer;  
+}
+/*侧边栏*/
+
+.topcontent{
+    position: fixed;
+bottom: 66px;
+right: 0px;
+z-index: 9999;
+}
+.topcontent .blank {
+height: 0px;
+line-height: 0px;
+clear: both;
+visibility: hidden;
+}
+.topcontent .right_box{
+    display: block;
+     position:relative;
+    color: #9e9d9e;
+    font-size:22px;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    float: right;
+    width: 50px;
+    height: 50px; 
+    overflow: hidden;
+    cursor: pointer;
+}
+.right_box1{
+    display: block;
+    position:relative;
+    color: #9e9d9e;
+    font-size:22px;
+    text-align: center;
+    line-height: 50px;
+    height: 50px;
+    float: right;
+    width: 50px;
+    height: 50px; 
+    overflow: hidden;
+    cursor: pointer;
+}
+.gotop{
+   background:url(../images/gotop.png) no-repeat center; 
+}
+.gobottom{
+   background:url(../images/gobottom.png) no-repeat center; 
+}
+.topcontent .ewm{
+    background:url(../images/ewm.png) no-repeat center; 
+}
+.topcontent .phone{
+    background:url(../images/phone.png) no-repeat center; 
+}
+.topcontent .right_box:hover{
+    width: 200px;
+    transition:width 0.8s,background-color 0.8s;
+    -moz-transition:width 0.8s,background-color 0.8s;
+    -webkit-transition:width 0.8s,background-color 0.8s;
+    -o-transition:width 0.8s,background-color 0.8s;
+}
+
+.topcontent .right_box:last-child:hover{
+     width: 34px;
+}
+
+.topcontent .right_box:hover .consult_b{
+    width: 150px;
+    color: #fff;
+    transition:width 0.8s;
+    -moz-transition:width 0.8s;  
+    -webkit-transition:width 0.8s;   
+    -o-transition:width 0.8s;
+}
+
+
+.consult_a{
+    width: 50px;
+    height: 50px;  
+    line-height: 50px;
+   display: inline-block; 
+   float: left; 
+   z-index: 3;
+}
+.consult_a i{
+
+}
+.cb{
+    position: absolute;
+    z-index: 3;
+}
+.consult_b{
+    z-index: 3;
+    float: right;
+    display: inline-block;
+    height: 50px;
+    line-height: 50px;
+    width: 0;
+    overflow: hidden;
+    text-align: center;
+    color: #9e9d9e;
+    font-size: 16px;
+    white-space: nowrap;
+    display: inline-block;
+
+}
+#topcontrol{
+    z-index: 99;
+}
+.topscroll{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: none;
+    width: 100%;
+    height: 100%;
+    z-index: 199;
+    z-index:9;
+    cursor: pointer;
+    background:url(../images/top.png) no-repeat center;
+}
+.topscroll img{
+    z-index: 199;
+    width: 17px;
+    height: 26px;
+}
+.topscroll:hover{
+    transition:background-color 0.8s;
+    -moz-transition:background-color 0.8s;
+    -webkit-transition:wbackground-color 0.8s;
+    -o-transition:background-color 0.8s;
+}
+.right_boxQQ{
+    background:url(../images/QQ1.png) no-repeat center;
+}
+.right_boxX{
+    background:url(../images/X1.png) no-repeat center;
+}
+.right_boxcall{
+    background:url(../images/call1.png) no-repeat center;
+}
+.r_erweima{
+    background:url(../images/r_erweima1.png) no-repeat center;
+}
+.rlt{
+    position: relative;
+    width: 50px;
+    height: 0px;
+    float: right;
+}
+.ewmimg{
+    position: absolute;
+    right: 52px;
+    bottom: 0;
+    width: 0px;
+    height: 0px;
+    background: url(../images/kfewm.jpg) no-repeat center;
+}
+/*侧边栏*/

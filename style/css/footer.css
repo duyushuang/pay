@@ -1,0 +1,150 @@
+.bar-tab .tab-item.active, .bar-tab .tab-item:active{
+    color: #3e78bc;
+}
+.bar-tab {
+    bottom: 0;
+    width: 100%;
+    height: 1.5rem;
+    padding: 0;
+    table-layout: fixed;
+}
+.bar {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 10;
+    height: 1.7rem;
+    overflow: hidden;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    padding-top: 0.1rem;
+    border-top:2px solid #262626;
+    /*padding-bottom: 0.3rem;*/
+    backface-visibility: hidden;
+    background: #161618;
+}
+.bar-tab .tab-item .icon {
+    top: 0.05rem;
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.bar .icon {
+    position: relative;
+    z-index: 20;
+    padding: .5rem .1rem;
+    font-size: 1rem;
+    line-height: 1.2rem;
+}
+.icon {
+    font-style: normal;
+    display: inline-block;
+    vertical-align: middle;
+    background-size: 100% auto;
+    background-position: center;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icontu{
+    width: 2rem;
+    height: 0.93rem;
+}
+.icontu i{
+    width: 0.15rem;
+    height: 0.15rem;
+    border-radius: 50%;
+    background-color: #e4393a;
+    position:absolute;
+    top:0.1rem;
+    right:0.55rem;
+}
+/*.icon-index-active{
+    background: url("/style/img/shouye_y.png") no-repeat center center;
+    background-size: 0.8rem 0.8rem;
+}
+.icon-index{
+    background: url("/style/img/index.png") no-repeat center center;
+    background-size: 0.8rem 0.8rem;
+}
+.indext-active{
+    color: #f95302;
+}
+.indext{
+    color:#3e78bc;
+}*/
+.icon-jy-active{
+    background: url("/style/img/shouye_y.png") no-repeat center center;
+    background-size: 0.65rem 0.8rem;
+}
+.icon-jy{
+    background: url("/style/img/shouye_y.png") no-repeat center center;
+    background-size: 0.65rem 0.8rem;
+}
+.jy-active{
+    color: #f91800;
+}
+.jy{
+    color:#f91800;
+}
+.icon-cc{
+    background: url("/style/img/footer_12.png") no-repeat center center;
+    background-size: 0.65rem 0.75rem;
+}
+.icon-cc-active{
+    background: url("/style/img/ft_12z.png") no-repeat center center;
+    background-size: 0.65rem 0.75rem;
+}
+.cc-active{
+    color: #e8af17;
+}
+.cc{
+    color:#8e8e8e;
+}
+.icon-jt{
+    background: url("/style/img/footer_03.png") no-repeat center center;
+    background-size: 0.55rem 0.7rem;
+}
+.icon-jt-active{
+    background: url("/style/img/ft_03z.png") no-repeat center center;
+    background-size: 0.55rem 0.7rem;
+}
+.jt-active{
+    color: #C9A725;
+}
+.jt{
+    color:#8e8e8e;
+}
+.icon-me{
+    background: url("/style/img/footer_15.png") no-repeat center center;
+    background-size: 0.65rem 0.8rem;
+}
+.icon-me-active{
+    background: url("/style/img/ft_05z.png") no-repeat center center;
+    background-size: 0.65rem 0.8rem;
+}
+.me-active{
+    color: #C9A725;
+}
+.me{
+    color:#8e8e8e;
+}
+.bar-tab .tab-item .icon~.tab-label {
+    display: block;
+    font-size: .35rem;
+    position: relative;
+    letter-spacing: 0;
+}
+.bar-tab a.tab-label{
+    font-size:0.4rem;
+}
+.bar-tab .tab-item {
+    position: relative;
+    display: table-cell;
+    width: 1%;
+    /*padding-right: 2rem;*/
+    color: #8e8e8e;
+    text-align: center;
+    /*vertical-align: middle;*/
+}

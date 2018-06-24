@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<title>
+		<![CDATA[表单关键词过滤]]>
+	</title>
+	<description>
+		<![CDATA[表单关键词过滤]]>
+	</description>
+	<author>阿江(373718549)</author>
+	<support><![CDATA[<a href="http://www.qscms.com/" target="_blank">倾世CMS</a>]]></support>
+	<marker>header</marker>
+	<version>1.0.0</version>
+	<install>./install.php</install>
+	<uninstall>./uninstall.php</uninstall>
+</root>

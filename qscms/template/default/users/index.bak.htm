@@ -1,0 +1,602 @@
+{sub header}
+<style type="text/css">
+
+.main-content .right .content-box{padding:0}
+
+.index-content{padding:0 15px;}
+
+.index-content .left-border{border-left:1px solid #e1e1e1}
+
+.index-content>.row>.col-sm-6{border-bottom: 1px solid #e1e1e1;padding:50px 25px 40px 35px;min-height:150px;}
+
+.index-content>.row>.col-sm-6:hover{background: #fafafa}
+
+.bf{font-size: 4em;color:#76C379}
+
+.bf1{font-size: 1.4em;color:#999}
+
+.bf2{font-size: 1.8em;color:#E43D40}
+
+.bf3{font-size: 0.9em}
+
+.notice{border:1px solid #e1e1e1;border-bottom: 0;border-top:0}
+
+.notice dl dd{line-height: 45px;padding:0 10px;border-bottom: 1px solid #e1e1e1;background: #fff}
+
+.notice dl dd span{color:#999}
+
+.notice dl dd a{display: block}
+
+.set-h3{text-align: center;height: 37px;border-top: 3px solid #E0E0E0;background: #FCFCFC none repeat scroll 0% 0%;border-bottom: 1px dotted #E0E0E0;font-size: 14px;font-weight: bold;line-height: 37px;color: #12719D;
+
+}
+
+</style>
+
+<!-- page content -->
+
+<div class="right_col" role="main"> 
+  
+  <!-- top tiles -->
+ 
+  <div class="row tile_count">
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-user"></i> 账户ID</span>
+      <div class="count">{$member->m_id}</div>
+      <span class="count_bottom"><a href="javascript:;" id="api" onclick="{if $member->m_isApi}showContent('接入密钥','{r}/users/api/show');{else}layer.msg('您还未开通API支付接口权限，请联系客服'){/if}" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="已经开通收款功能的可点击查看商户KEY">查看API</a></span> </div>
+    <script type="text/javascript">
+
+
+
+$('#shvip').on('click', function(){
+
+  layer.open({
+
+  type: 2,
+
+  title: '商户套餐',
+
+  maxmin: true,
+
+  shadeClose: true, //点击遮罩关闭层
+
+  area : ['80%' , '620px'],
+
+  content: '{r}/vip?u'
+
+  });
+
+});
+
+</script>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-user"></i> 商户余额</span>
+      <div class="count green">{$member->m_money}</div>
+      <span class="count_bottom"><a href="{r}/users/takecash" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="提现账户余额到支付宝或银行卡">提现</a><span class="v-line"> | </span><a href="{r}/users/recharge?u" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="充值余额到账户,余额可提现">充值</a> </span> </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-user"></i> 结算总额</span>
+      <div class="count">$cashMoney</div>
+      <span class="count_bottom"> <a href="{r}/users/payments" title="" data-placement="bottom" data-original-title="查看自己提现计算记录">结算记录</a> </span> </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-user"></i>订单总数</span>
+      <div class="count">$dayTotal</div>
+      <span class="count_bottom"><a href="{r}/users/orders?startDate={echo date('Y-m-d');}" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="查看今天的通道交易记录">查看订单</a> </span> </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-user"></i>今日收入</span>
+      <div class="count">$dayMoney</div>
+      <span class="count_bottom"><a href="{r}/users/orders?fdate={echo date('Y-m-d');}" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="查看今天的通道交易记录金额">查看交易</a> </span> </div>
+    <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count"> <span class="count_top"><i class="fa fa-clock-o"></i> 商户等级</span>
+      <div class="count" style="font-family:微软雅黑;"> {if $member->m_vip == 0}注册会员{else}{echo db::one_one('pay_bl', 'name', "id='$member->m_vip'");}{/if} </div>
+      <span class="count_bottom"><a href="#" id="shvip" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="购买会员套餐可以获得更低的费率">商户套餐</a> </span> </div>
+  </div>
+  
+  <!-- /top tiles --> 
+   {if !$member->m_isApi}
+<!--未开通支付权限提示开始-->
+<style type="text/css">
+.jmp_notice{width:100%;padding:15px;text-align:center;color:#fff;background:#ff8a00;line-height:24px;}
+.jmp_notice-unactive{display:none;}
+.jmp_notice.notice-top-banner {
+    background: #ff8a00;
+    font-family: PingFangSC-Regular;
+    font-size: 14px;
+    color: #fff;
+    letter-spacing: 0;
+    position: relative;
+}
+.jmp_notice.notice-top-banner .close-banner {
+    width: 14px;
+    height: 14px;
+    background-size: cover;
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.jinmipay.com/img/usercodeimg/x28-28.png',sizingMethod='scale')";
+    background-image: url(//www.jinmipay.com/img/usercodeimg/x28-28.png);
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    margin-top: -7px;
+    cursor: pointer;
+}
+
+</style>
+
+<script type="text/javascript">
+    var $close = document.getElementById('J_closeNotice');
+    $close.onclick = function() {
+        $close.parentNode.setAttribute('class', 'jmp_notice notice-active notice-top-banner');
+        document.getElementById('J_navigation').style.top = '0';
+    }
+</script>
+
+
+<div id="J_closeNotice" class="jmp_notice notice-active notice-top-banner">
+<span class="glyphicon glyphicon-alert"></span>
+系统提示：您还未开通API支付接口收款权限，请完善账户资料后联系客服免费开通。
+    <div class="close-banner" id="J_navigation"></div>
+</div>
+<!--未开通支付权限提示结束-->
+  {/if} 
+
+  <!-- 通入总览开始-->
+  {eval
+            	$alipay_b = db::dataCount('pay_payment', "uid='$member->m_id' AND types=0 AND status=1 AND type='alipay'");
+                $wxpay_b  = db::dataCount('pay_payment', "uid='$member->m_id' AND types=0 AND status=1 AND type='wxpay'");
+            	$qqpay_b  = db::dataCount('pay_payment', "uid='$member->m_id' AND types=0 AND status=1 AND type='qqpay'");
+            	$bdpay_b  = db::dataCount('pay_payment', "uid='$member->m_id' AND types=0 AND status=1 AND type='bdpay'");
+               	$all_b    = $alipay_b + $wxpay_b + $qqpay_b + $bdpay_b;
+                $alipay_c = round($alipay_b / $all_b, 2);
+               	$wxpay_c  = round($wxpay_c / $all_b, 2);
+               	$qqpay_c  = round($qqpay_c / $all_b, 2);
+               	$bdpay_c  = round($bdpay_c / $all_b, 2);
+                $todayStart = time::$todayStart;
+                $todayEnd = time::$todayEnd;
+                $list_data = array();
+                for($i = 0; $i < 30; $i++){
+                	$timesStart = $todayStart - ($i * 86400);
+                	$timesEnd   = $todayEnd - ($i * 86400);
+                    $ones  = db::one_one('pay_payment', 'SUM(money)',"uid='$member->m_id' AND types=0 AND status=1 AND addTime>$timesStart AND addTime< $timesEnd");
+                	$list_data[]  = array($timesStart.'000', (int)$ones);
+                }
+               //$list_data = string::json_encode($list_data);
+            }
+            
+   
+   
+<script>
+var list_data = [];
+
+{if $list_data}
+{loopQuick $list_data}
+list_data.push("$v[0]", $v[1]);
+{/loopQuick}
+{/if}
+
+
+//alert(list_data[0]);
+//var list_data = {echo $data ? $data : ''};
+</script>       
+  <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="dashboard_graph">
+        <div class="row x_title">
+          <div class="col-md-6">
+            <h3>通入总览<small>每日收入起伏状况</small></h3>
+          </div>
+          <div class="col-md-6">
+            <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc"> <i class="glyphicon glyphicon-calendar fa fa-calendar"></i> <span></span> <b class="caret"></b> </div>
+          </div>
+        </div>
+        <div class="col-md-9 col-sm-9 col-xs-12">
+          <div id="chart_plot_03" class="demo-placeholder"></div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-12 bg-white">
+          <div class="x_title">
+            <h2>收入渠道统计</h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-6">
+            <div>
+              <p>支付宝通道 </p>
+              <div class="">
+                <div class="progress progress_sm" style="width: {echo $alipay_c * 100;}%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="80"></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>微信通道</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: {echo $wxpay_c * 100;}%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="60"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12 col-xs-6">
+            <div>
+              <p>QQ钱包通道</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: {echo $qqpay_c * 100;}%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="40"></div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <p>网银通道</p>
+              <div class="">
+                <div class="progress progress_sm" style="width: {echo $bdpay_c * 100;}%;">
+                  <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  {if false}
+  <div class="row"> 
+    
+    <!--已付订单统计-->
+    
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320 overflow_hidden">
+        <div class="x_title">
+          <h2>已付订单统计</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{r}/users/orders">查看订单</a> </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="" style="width:100%">
+            <tr>
+              <th style="width:37%;"> <p>Top 5</p>
+              </th>
+              <th> <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                  <p class="">通道</p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <p class="">百分比</p>
+                </div>
+              </th>
+            </tr>
+            
+            
+            
+            <tr>
+              <td><canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas></td>
+              <td><table class="tile_info">
+                  <tr>
+                    <td><p><i class="fa fa-square blue"></i>支付宝 </p></td>
+                    <td>{$alipay_c}%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square green"></i>微信</p></td>
+                    <td>{$wxpay_c}%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square purple"></i>QQ钱包</p></td>
+                    <td>{$qqpay_c}%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square aero"></i>网银</p></td>
+                    <td>{$bdpay_c}%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square red"></i>其他</p></td>
+                    <td>30%</td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <!--已付资金统计开始-->
+    
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320 overflow_hidden">
+        <div class="x_title">
+          <h2>已付资金统计</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{r}/users/count">收入统计</a> </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="" style="width:100%">
+            <tr>
+              <th style="width:37%;"> <p>Top 5</p>
+              </th>
+              <th> <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                  <p class="">通道</p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <p class="">百分比</p>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <td><canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas></td>
+              <td><table class="tile_info">
+                  <tr>
+                    <td><p><i class="fa fa-square blue"></i>支付宝 </p></td>
+                    <td>30%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square green"></i>微信</p></td>
+                    <td>10%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square purple"></i>QQ钱包</p></td>
+                    <td>20%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square aero"></i>网银</p></td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square red"></i>其他</p></td>
+                    <td>30%</td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <!--提现渠道统计开始-->
+    
+    <div class="col-md-4 col-sm-4 col-xs-12">
+      <div class="x_panel tile fixed_height_320 overflow_hidden">
+        <div class="x_title">
+          <h2>提现渠道统计</h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="{r}/users/payments">提现记录</a> </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <table class="" style="width:100%">
+            <tr>
+              <th style="width:37%;"> <p>Top 5</p>
+              </th>
+              <th> <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                  <p class="">通道</p>
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                  <p class="">百分比</p>
+                </div>
+              </th>
+            </tr>
+            <tr>
+              <td><canvas class="canvasDoughnut" height="140" width="140" style="margin: 15px 10px 10px 0"></canvas></td>
+              <td><table class="tile_info">
+                  <tr>
+                    <td><p><i class="fa fa-square blue"></i>支付宝 </p></td>
+                    <td>30%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square green"></i>微信</p></td>
+                    <td>10%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square purple"></i>QQ钱包</p></td>
+                    <td>20%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square aero"></i>网银</p></td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td><p><i class="fa fa-square red"></i>其他</p></td>
+                    <td>30%</td>
+                  </tr>
+                </table></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"> 
+  {/if}
+    <!-- 公告开始 -->
+    
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>公告列表<small>Announcement</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a> </li>
+                <li><a href="#">Settings 2</a> </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <style type="text/css">
+
+	.jmy_index_gg{ background: #fff; border-radius: 3px; position: relative; padding: 7px; margin-bottom: 5px; list-style: none;font-size: 14px;}
+
+	.jmy_top_users{ width: 70%; background: #fff; margin-left: 15%; z-index: 1000; position: inherit; border: 1px solid rgba(52,73,94,.44); padding: 4px; border-radius: 50%;height: 70%;}
+
+	.jmy_gg_li{border-radius: 3px; position: relative; margin-bottom: 5px; list-style: none; float: left; clear: both; margin-top: 5px;}
+
+	</style>
+        <div class="x_content" >
+          <ul class="to_do">
+            <li> {eval $list = db::select('cms_notice', '*', '', "sort,id DESC", 10);}
+              
+              {if $list}
+              
+              {loopQuick $list}
+              <p class="jmy_index_gg">
+                <input type="checkbox" class="flat">
+                <a href="javascript:;" onclick="showContent('系统公告','{r}/users/notice/$v[id]')"><span>[{date3 $v[addTime]}]</span> $v[title]</a></p>
+              {/loopQuick}
+              
+              {/if} </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- End to do list --> 
+    
+    <!-- start of weather widget -->
+    
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>推广代理 <small>Partner</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+          <div class="row">
+            <div class="col-sm-12"> 
+              
+              <!--div class="temperature"><b>不积小流</b>, 无以成
+
+                            <span>江</span>
+
+                            <span><b>海。</b></span>
+
+                          </div--> 
+              
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="weather-icon">
+                <canvas height="58" width="58"  id="clear-day"></canvas>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="weather-text">
+                <h2>只要努力 <br>
+                  <i>Everything is possible！</i></h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12">
+            <div class="weather-text">
+              <div class="input-group" style="margin-top:10px;"> <span class=" input-group-addon" id="basic-addon3"><em class="glyphicon glyphicon-jpy hidden-xs"></em>推广链接</span>
+                <input class="form-control"  aria-describedby="basic-addon3" value="{echo WEB_URL;}/users/reg/{echo base64_encode($member->m_id);}" data-toggle="tooltip" title="" data-placement="top" data-original-title="推广下线将可以获取27%提成，在一级二级三级下线处可提成的份额分别为20%，5%，2%。" >
+                <!--span class="input-group-addon hidden-xs" id="basic-addon3"><a href="javascript:;" style="margin-left:10px;" class="zclipCopy" title="点击复制" data="网站即时到账免签接口，强烈推荐{echo $webTitle;}！小伙伴们，求围观，网址：{echo WEB_URL;}/users/reg/{echo base64_encode($member->m_id);}" >点击复制</a></span--> </div>
+            </div>
+          </div>
+          <script>$('.zclipCopy').zclip({path: '{su}swf/copy.swf',copy: function(){return $(this).attr('data');},afterCopy: function(){layer.msg('复制成功');}});</script>
+          <div class="clearfix"></div>
+          <div class="row weather-days">
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.1</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>19802</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>**明</h5>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.2</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>13851</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>**天</h5>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.3</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>11826</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>**敏</h5>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.4</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>9510</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>*89</h5>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.5</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>7127.1</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>*达</h5>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="daily-weather">
+                <h2 class="day">NO.6</h2>
+                <h5><span class="glyphicon glyphicon-yen"></span><i>5785</i></h5>
+                <h5><span class="glyphicon glyphicon-user"></span>**88</h5>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- end of weather widget --> 
+    
+  </div>
+</div>
+</div>
+</div>
+
+<!-- /page content -->
+
+<div class="modal" id="waModal" role="dialog" aria-labelledby="waModalLable">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+<script>
+
+function showContent(title,url){
+
+    $('#waModal').modal('show');
+
+    $('#waModal .modal-title').text(title);
+
+    $.get(url,{t:new Date().getTime()},function(data){
+
+        $('#waModal .modal-body').html(data);
+
+    });
+
+}
+</script> 
+{sub footer} 

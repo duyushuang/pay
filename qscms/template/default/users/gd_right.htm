@@ -1,0 +1,44 @@
+<div class="col-md-3 col-sm-5 col-xs-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-content mailbox-content">
+                        <div class="file-manager">
+                            <a class="btn btn-block btn-primary compose-mail" href="{r}/users/gdgo">提交工单</a>
+                            <div class="space-25"></div>
+                            <h5></h5>
+                            <ul class="folder-list m-b-md" style="padding: 0">
+                                <li>
+                                    <a href="{r}/users/gdlist"> <i class="fa fa-inbox "></i>全部工单 <span class="label label-warning pull-right">{echo db::dataCount('gdlist', "uid='$member->m_id'");}</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{r}/users/gdlist?status=0"> <i class="fa fa-envelope-o"></i>等待处理<span class="label label-primary pull-right">{echo db::dataCount('gdlist', "uid='$member->m_id' AND type=0");}</span>  </a>
+                                </li>
+                                <li>
+                                    <a href="{r}/users/gdlist?status=1"> <i class="fa fa-envelope-o"></i>处理中<span class="label label-primary pull-right">{echo db::dataCount('gdlist', "uid='$member->m_id' AND type=1");}</span>  </a>
+                                </li>
+                                <li>
+                                    <a href="{r}/users/gdlist?status=2"> <i class="fa fa-certificate"></i>已结束<span class="label label-danger pull-right">{echo db::dataCount('gdlist', "uid='$member->m_id' AND type=2");}</span>  </a>
+                                </li>
+                               
+                            </ul>
+                            <h5>工单分类</h5>
+                            {eval
+                            	$types = db::select('gdtype', 'id,name');
+                            }
+                            <ul class="category-list" style="padding: 0">
+                            	{if $types}
+                                {loopQuick $types}
+                                <li>
+                                    <a href="{r}/users/gdlist/?type=$v[id]"> <i class="fa fa-circle text-navy"></i>$v[name]</a>
+                                </li>
+                                {/loopQuick}
+                                {/if}
+                              
+                            </ul>
+
+                            
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>

@@ -1,0 +1,172 @@
+{sub header}
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <!--div class="title_left">
+                <h3>Users <small>Some examples to get you started</small></h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div-->
+            </div>
+
+    <div class="clearfix"></div>
+
+            <div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>更换手机<small>账户手机换绑</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  
+                   <!--内容开始-->
+		    <form class="form-ajax form-horizontal" action="" method="post">
+      {v sys_hash_code}
+      <div class="form-group" >
+        <label class="col-md-2 control-label">旧手机验证码：</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="text" name="code" id="code" class="form-control" placeholder="您账户已绑定的手机号为{echo string::getXin($member->m_mobile, 6, 4);}" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户旧手机号所收到的6位数验证码" required>
+            <span class="input-group-btn">
+            <button class="btn btn-default" id="yzm" onClick="getYZM()" type="button">获取验证码</button>
+            </span> </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">新手机号：</label>
+        <div class="col-md-4">
+          <input type="text" class="form-control" name="mobile" id="mobile" value=""  placeholder="您的新手机号">
+        </div>
+      </div>
+      <div class="form-group" >
+        <label class="col-md-2 control-label">新手机验证码：</label>
+        <div class="col-md-4">
+          <div class="input-group">
+            <input type="text" name="code1" id="code1" class="form-control" placeholder="您的新手机验证码" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户新绑定手机号所收到的6位数验证码" required>
+            <span class="input-group-btn">
+            <button class="btn btn-default" id="yzm1" onClick="getYZM1()" type="button">获取验证码</button>
+            </span> </div>
+        </div>
+      </div>
+      <div class="form-group">
+         <div class="col-md-offset-2 col-md-6">
+           <button type="submit" class="btn btn-success" data-toggle="tooltip" title="" data-placement="bottom">&nbsp;点击修改&nbsp;</button>
+         </div>
+      </div>
+    </form>
+	<script>
+var wait = '{echo message::sms_time();}';
+$('#yzm').attr('disabled', false);
+$('#yzm1').attr('disabled', false);
+var time = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm').html('获取验证码');
+		$('#yzm').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm').html('获取验证码(' + wait + ')');
+		$('#yzm').attr('disabled', true);
+		wait--;
+		setTimeout('time()', 1000);
+	}
+}
+
+function getYZM(){
+	$.post('{r}/user/mobilecode', {hash:hash}, function(rs){
+		if (rs.status == true){
+			showError('旧手机号验证码发送成功');
+			time();	
+		}else{
+			showError(rs.msg);
+			return false;	
+		}
+	},'json');
+	return false;	
+}
+
+var time1 = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm1').html('获取验证码');
+		$('#yzm1').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm1').html('获取验证码(' + wait + ')');
+		$('#yzm1').attr('disabled', true);
+		wait--;
+		setTimeout('time1()', 1000);
+	}
+}
+
+function getYZM1(){
+	var rs = checkForm();
+	if (rs == true){
+		$.post('{r}/user/mobilecode1', {hash:hash, mobile:$('#mobile').val()}, function(rs){
+			if (rs.status == true){
+				showError('新手机号验证码发送成功');
+				time();	
+			}else{
+				showError(rs.msg);
+				return false;	
+			}
+		},'json');	
+	}
+	return false;	
+}
+function checkForm(){
+	
+	mobile = $('#mobile').val();
+	code = $('#code').val();
+	if (!mobile){
+		$('#mobile').focus();
+		showError('请填写手机号');
+		return false;
+	}
+	if (!code) {
+		$('#code').focus();
+		showError('请填写旧手机验证码');
+		return false;
+	}
+	return true;
+}
+</script> 
+	<!--内容结束-->
+                  </div>
+                </div>
+              </div></div>
+
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+</script>
+        <!-- /page content -->
+
+        <!-- footer content -->
+       {sub footer}
+
+    

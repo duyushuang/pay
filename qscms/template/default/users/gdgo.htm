@@ -1,0 +1,159 @@
+{sub header}
+
+<link rel="stylesheet" href="{su}layui/css/layui.css">
+<script src="{su}layui/layui.js"></script>
+
+        <div class="right_col" role="main">
+
+	<style type="text/css">
+	.body{background: #f7f7f7;}
+	.jmydgcss{position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;}
+
+	</style>
+
+<!----gdlist start---->
+<link href="{r}/style/newuser/jmyplugin/gdstyle/gdstyle.css?spm=1.192s" rel="stylesheet">
+<div class="wrapper wrapper-content">
+       <div class="title_right">
+            {sub gd_right}
+
+<!--view start-->
+           <div class="col-sm-9 animated fadeInRight">
+		
+<form action="" method="post" class="form-ajax1">
+                <div class="mail-box-header">
+                    
+                    <h2>
+                    提交工单
+                </h2>
+                  
+<!--提交新工单输入框开始-->
+        {v sys_hash_code}
+<div class="mail-attachment">
+                        <p>
+                            <span><i class="fa fa-inbox"></i>工单分类</span>
+                                        {if $types}
+                                        {loopQuick $types}
+                                        <input name="type" type="radio" id="inlineCheckbox_$v[id]" value="$v[id]">
+                                        <label for="inlineCheckbox_$v[id]">$v[name]</label>
+                                        {/loopQuick}
+                                        {/if}
+                        </p>
+
+                        <div class="attachment">
+                            <div class="layui-form-item layui-form-text">
+                                <div class="layui-input-block">
+                                  <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="add_editor"></textarea>
+                                </div>
+                              </div>
+
+                            </div>
+                           
+                            <div class="clearfix"></div>
+                        </div>
+
+
+<!--提交结束-->
+
+                    <div class="mail-body text-right tooltip-demo">
+                        <button class="btn btn-sm btn-info" lay-filter="*" lay-submit="" >提交工单</button>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                </div>
+</form>
+
+            </div>
+<!--View end-->
+        </div>
+    </div>
+<!----gdlist end---->
+
+ </div>
+
+</div>
+
+<script>
+
+function showError(tip) {
+	layer.msg(tip);
+}
+layui.use(['layer','layedit', 'element'], function(){
+	
+  var layer = layui.layer
+  	,layedit = layui.layedit
+  	,element = layui.element;
+  var msg_editor = layedit.build('msg_editor');
+  var add_editor = layedit.build('add_editor');
+  var active = {
+    content: function(){
+	  val = layedit.getContent(msg_editor);
+      return val ? val : '' //获取编辑器内容
+    }
+    ,text: function(){
+      return layedit.getText(msg_editor); //获取编辑器纯文本内容
+    }
+    ,selection: function(){
+      return layedit.getSelection(msg_editor);//选中的内容
+    }
+  };
+  var active1 = {
+    content: function(){
+      return layedit.getContent(add_editor); //获取编辑器内容
+    }
+    ,text: function(){
+      return layedit.getText(add_editor); //获取编辑器纯文本内容
+    }
+    ,selection: function(){
+      return layedit.getSelection(add_editor);//选中的内容
+    }
+  };
+  
+  
+  
+  $('.form-ajax1').submit(function(e){
+		layedit.sync(msg_editor);
+		layedit.sync(add_editor);
+        e.preventDefault();
+        $.ajax({
+            url : $(this).attr('action'),
+            type : 'POST',
+            dataType : 'json',
+			cache:false,
+            data: $(this).serializeArray(),
+            success : function(result){
+				//$("iframe").contents().find("body").html('');
+				//$('#msg_editor').val('');
+				//$('#add_editor').val('');
+				
+				
+                if(result.status==false){
+					showError(result.msg);
+					return false;
+                }
+                if(result.status==true){
+					if (result.msg){
+						showError(result.msg);
+					}else{
+						showError('操作成功');	
+					}
+                    if(result.url){
+						window.location.href = result.url;
+                    }else{
+						history.go(-1);
+					}
+                }
+            },error: function(){
+			}
+
+        });
+		return false;
+    });
+  
+});
+</script>
+        <!-- /page content -->
+
+        <!-- footer content -->
+       {sub footer}

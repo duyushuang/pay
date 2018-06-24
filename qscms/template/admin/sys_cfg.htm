@@ -1,0 +1,38 @@
+{sub h}
+{if $tab == 'cate'}
+{if $method == 'cateList'}
+	{adminList
+		删？|id|del
+		名称|name
+		备注|remark
+		    |id|link2,修改,method=editCate&id=$v[id];link2,管理配置,view=$v[id]
+	}
+{elseif $method == 'addCate' || $method == 'editCate'}
+	{adminForm
+		分类名称,null=请输入分类名称|name|text|240|32
+		分类备注,null=请输入分类备注,false|remark|text|240|64
+	}
+{/if}
+{elseif $tab == 'cfg'}
+	{if $method == 'cfgList'}
+		{adminList
+			删？|id|del
+			排序|sort|sort
+			配置名|name
+			类型  |type
+			备注|remark
+			    |id|link2,编辑,method=editCfg&id=$v[id]
+		}
+	{elseif $method == 'cfgListInfo'}
+		{sub sub/cfgListInfo}
+	{elseif $method == 'addCfg' || $method == 'editCfg'}
+		{adminForm
+			配置名称,null=请输入配置名称|name|text|240|32
+			配置类型                    |type|select,text=单行字符,textarea=多行字符,select=下拉,radio=单选,radio2=单选自定义,checkbox=多选,image=图片,link=链接
+			配置参数,null=多选、单选、下拉使用,false|attach|textarea
+			执行代码,null=当设置参数提交时执行,false|run|textarea
+			配置备注,null=请输入配置备注,false|remark|text|240|64
+		}
+	{/if}
+{/if}
+{sub f}

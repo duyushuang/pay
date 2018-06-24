@@ -1,0 +1,242 @@
+{sub h}
+{jsFile ../jquery-ui.min}
+{css_select jquery_ui}
+{js_select jquery_ui}
+{jsFile datepicker,}
+{if $method == 'paylist'}
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+<table class="table table-bordered table-striped">
+<input name="operation" value="$operation" type="hidden"/>
+<input name="action" value="$action" type="hidden" />
+<input name="method" value="$method" type="hidden" />
+
+<tr class="hover">
+<td  align="left" colspan="3" >
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提交订单数：$allTotal<br/><br/>--</span>
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已付订单数：$payTotal<br/><br/>--</span>
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>未付订单数：$notTotal<br/><br/>--</span>
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未付总金额：&yen; $notMoney<br/><br/>--</span>
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>订单总金额：&yen; $allMoney<br/><br/>--</span>
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>已付总金额：&yen; $payMoney<br/><br/>--</span>
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>商户得金额：&yen; $memberMoney<br/><br/>--</span>
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+</span>
+</td>
+</tr>
+
+<tr class="hover">
+<td  align="left" colspan="3" >
+<h3>搜索：</h3>
+<!--span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+          &nbsp;&nbsp;提交订单数：<span style=" color:blue">$allTotal</span>
+          &nbsp;&nbsp;已付总金额：<span style=" color:blue">&yen; $payMoney</span>
+          &nbsp;&nbsp;未付订单数：<span style=" color:red">$notTotal</span>
+          &nbsp;&nbsp;未付总金额：<span style=" color:red">&yen; $notMoney</span>
+          &nbsp;&nbsp;已付订单数：<span style=" color:green">$payTotal</span>
+          &nbsp;&nbsp;订单总金额：<span style=" color:green">&yen; $allMoney</span>
+          &nbsp;&nbsp;商户得金额：<span style=" color:red">&yen; $memberMoney</span>
+</span-->
+<br />
+<br />
+
+<select class="form-control input-inline" name="status">
+	<option value="-1"{if $status == -1} selected{/if}>全部</option>
+	<option value="0"{if $status == 0} selected{/if}>待付款</option>
+	<option value="1"{if $status == 1} selected{/if}>已付款</option>
+</select>
+<select class="form-control input-inline" name="type">
+	<option value=""{if !$type} selected{/if}>全部通道</option>
+	{loopQuick pay::$array}
+	<option value="$k"{if $type == $k} selected{/if}>$v</option>
+	{/loopQuick}
+</select>
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+系统订单：<input type="text" class="form-control input-inline" name="sn" value="{var $sn}" />
+
+时间搜索
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+
+<br />
+<br />
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+{if false}
+积分：<input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+{/if}
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+<input type="submit" value="提交" class="btn green" /></td>
+	</tr>
+</table>
+</form>
+{adminList
+        用户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+        系统订单|sn
+        接口类型||code,{echo pay::ename($v[type])}
+        支付类型||code,{if $v[types] == 0}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="API接口充值">API充值</font>{elseif $v[types] == 1}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台商户充值">商户充值</font>{elseif $v[types] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台测数据">平台测数据</font>{/if}
+		支付状态||code,{if $v[status] == 0}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="该订单还未支付">待支付</font>{elseif $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已支付">已支付</font>{elseif $v[status] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已超时">超时</font>{/if}
+		充值金额||code,<font color="green" data-toggle="tooltip" title="" data-original-title="充值金额：$v[money]元"> $v[money]</font>
+        提交时间|addTime |flag,date2   
+        支付时间|payTime |flag,date2
+}
+{elseif $method == 'cashlist'}
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+<table class="table table-bordered table-striped">
+<input name="operation" value="$operation" type="hidden"/>
+<input name="action" value="$action" type="hidden" />
+<input name="method" value="$method" type="hidden" />
+
+<tr class="hover">
+<td  align="left" colspan="3" >
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"  data-toggle="tooltip" title="" data-original-title="提现总金额,包括已经打款和没有打款的 (没扣费率)"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提现总金额：$allMoney<br/><br/>--</span>
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"  data-toggle="tooltip" title="" data-original-title="已经打款给商户的总金额 (实际打款金额)"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已处理金额：&yen; $cashMoney<br/><br/>--</span>
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px" data-toggle="tooltip" title="" data-original-title="未提现给商户已经返回商户账户的总金额 (没扣费率)"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已返回总金额：$backMoney<br/><br/>--</span>
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px" data-toggle="tooltip" title="" data-original-title="商户申请提现,平台未处理没返回账户的总金额 "><br/><br/><em class="glyphicon glyphicon-yen"></em>未返回总金额：$notMoney<br/><br/>--</span>
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>待提现金额：&yen; $loadMoney<br/><br/>--</span>
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px" ><br/><br/><em class="glyphicon glyphicon-yen"></em>未定义：0<br/><br/>--</span>
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未定义：0<br/><br/>--</span>
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+</span>
+</td>
+</tr>
+
+<tr class="hover">
+<td  align="left" colspan="3" >
+<h3>搜索：</h3>
+<!--span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+          &nbsp;&nbsp;提现总金额（提现金额）：<span style=" color:red">$allMoney</span>
+          &nbsp;&nbsp;已提现金额(实际转账)：<span style=" color:red">&yen; $cashMoney</span>
+          &nbsp;&nbsp;已返回总金额(返回的实际转账)：<span style=" color:red">$backMoney</span>
+          &nbsp;&nbsp;待提现金额(实际转账)：<span style=" color:red">&yen; $loadMoney</span>
+          &nbsp;&nbsp;未返回总金额(提现金额系统赚)：<span style=" color:green">$notMoney</span>
+</span-->
+<br />
+<br />
+<select class="form-control input-inline" name="status">
+	<option value="-1"{if $status == -1} selected{/if}>全部</option>
+	<option value="0"{if $status == 0} selected{/if}>等待打款</option>
+	<option value="1"{if $status == 1} selected{/if}>已打款</option>
+	<option value="2"{if $status == 2} selected{/if}>取消打款（返回提现金额）</option>
+	<option value="3"{if $status == 3} selected{/if}>取消打款（没返回提现金额）</option>
+</select>
+<select class="form-control input-inline" name="type">
+	<option value="-1"{if $type == -1} selected{/if}>全部通道</option>
+	<option value="0" {if $type == 0} selected{/if}>支付宝</option>
+	<option value="1" {if $type == 1} selected{/if}>银行卡</option>
+	<option value="2" {if $type == 2} selected{/if}>微信</option>
+</select>
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+身份证：<input type="text" class="form-control input-inline" name="card" value="{var $card}" />
+T + ？（-1是T0）：<input type="text" class="form-control input-inline" name="t" value="{var $t}" />
+
+时间搜索
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+<br /><br />
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+<input type="submit" value="提交" class="btn green" /></td>
+	</tr>
+</table>
+</form>
+	{adminList
+		用户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+        提现金额|cashMoney
+		手续费||code,<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="商户费率：{echo $v[sxf] * 100}%">{echo $v[sxf] * 100}%</font>
+		实际转账|money
+        姓名身份证||code,$v[name] <a onclick="return layer.alert('身份证号码为：$v[card]')" class="btn btn-xs green ajaxify"  data-toggle="tooltip" title="" data-original-title="身份证号码：$v[card]" style="float: right;">证</a>
+        提现方式||code,{if $v[type] == 0}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="支付宝提现">支</font>{elseif $v[type] == 1}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="银行卡提现">银</font>{elseif $v[type] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="微信提现" data-original-title="">微</font>{else}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="未知提现">未知</font>{/if}{eval $cashT = db::one_one('member', 'cashT', "id='$v[uid]'");} <a target="_blank" class="btn btn-xs blue ajaxify" data-type="show" title="" >T{if $cashT}{if $cashT == -1}0{else}$cashT{/if}{else}{cfg web,cashT}{/if}</a>
+        支付宝|alipay
+        微信信息||code,{if $v[type] == 2}<a onclick="return layer.alert('<img src=\'$v[wximg]\' style=\'width:220px; height:220px;\'>')"><img src="$v[wximg]" style="width:20px; height:20px;"></a>&nbsp;<a onclick="return layer.alert('微信ID：$v[wxid]<br/>微信昵称：$v[wxname]')" class="btn btn-xs green ajaxify"  data-toggle="tooltip" title="" data-original-title="微信昵称：$v[wxname]" stylee="float:right;">微信详情</a>{else}<font class="btn btn-xs blue ajaxify"  data-toggle="tooltip" title="" data-original-title="提现方式不是使用的微信">未用微信提现<font>{/if}
+	
+        银行|back_name
+        银行卡||code,<a onclick="return layer.alert('银行卡卡号为：$v[back_card]')" class="btn btn-xs blue ajaxify"  data-toggle="tooltip" title="" data-original-title="点击查看银行卡卡号">卡号</a>
+        开户地址||code,<a onclick="return layer.alert('银行卡开户地址为：$v[back_add]')" class="btn btn-xs blue ajaxify"  data-toggle="tooltip" title="" data-original-title="点击查看银行卡开户地址">址</a>
+        提现状态||code,{if $v[status] == 0}<font class="btn btn-xs blue ajaxify">待审</font>{if $v[type] == 2}<a href="$baseUrl&method=$method&page=$page&wx=$v[id]" target="_parent" class="btn btn-xs green ajaxify" data-type="show"><font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="微信企业自动打款">微信企业打款</font></a>{/if}<a href="$baseUrl&method=$method&page=$page&sh=$v[id]" target="_parent" class="btn btn-xs green ajaxify" data-type="show"><font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="已打款给商户,点击这里">已打款</font></a><a href="$baseUrl&method=$method&page=$page&qx=$v[id]" target="_parent" data-type="show"><font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="驳回提现(金额退回用户账户)">退(返款)</font></a><a href="$baseUrl&method=$method&page=$page&qx1=$v[id]" target="_parent" data-type="show"><font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="驳回提现(不会退回提现金额,系统将扣除提现金额)">退(不返)</font></a>{elseif $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="提现成功">提现成功</font>{elseif $v[status] == 2}<font class="btn btn-xs red ajaxify">失败{if $v[isT] == 1} <font style="color:#25d0e6;">未返款</font>{else}已返款</font>{/if}{/if}
+        提现时间|addTime |flag,date2
+	}
+{elseif $method == 'f_view'}
+<table class="tab_view">
+	<tr>
+		<th>总体盈亏</th>
+   </tr>
+	<tr>
+		<td>
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px;margin-left:5px;"><br/><br/><em class="glyphicon glyphicon-list-alt"></em
+><a href="$baseUrl&operation=order&action=info&method=list&status=1" target="_blank" style="color:#fff;" data-toggle="tooltip" title="" data-original-title="商户使用平台通道费率的总额">api费率所得金额
+</a> ￥{$sysMoney} <br/><br/>--</span>
+
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>
+ <a href="$baseUrl&action=info&operation=order&method=list2" target="_blank" style="color:#fff;">前台测试金额</a> ￥{$testMoney} 
+<br/><br/>--</span>
+
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>
+<a href="$baseUrl&operation=finance&action=log&method=cashlist&status=3" target="_blank" style="color:#fff;" data-toggle="tooltip" title="" data-original-title="提现失败系统扣款未返回给商户的金额">提现没返回金额</a> ￥{$noMoney} <br/><br/>--</span>
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>
+<a href="$baseUrl&operation=finance&action=log&method=cashlist&status=1" target="_blank" style="color:#fff;" data-toggle="tooltip" title="" data-original-title="用户提现扣除的总额">提现成功提现总扣税费用</a> ￥{$yesMoney} 
+<br/><br/>--</span>
+
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px;margin-left:5px;"><br/><br/><em class="glyphicon glyphicon-list-alt"></em
+><a href="$baseUrl&operation=order&action=info&method=list1&status=1" target="_blank" style="color:#fff;" data-toggle="tooltip" title="" data-original-title="商户使用平台通线下二维码的充值总额">线下二维码费率所得金额
+</a> ￥{$qrcodeMoney} <br/><br/>--</span>
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>
+<a href="$baseUrl&operation=member&action=info&method=info&type=0" target="_blank" style="color:#fff;" data-toggle="tooltip" title="" data-original-title="系统给用户增加减少的金额总和">系统操作金额</a> ￥{$outMoney} <br/><br/>--</span>
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>
+总利润 ￥{$allMoney}
+<br/><br/>--</span>
+
+</span>
+        </td>
+	</tr>
+</table>
+{elseif $method == 'f_add' || $method == 'f_edit'}
+	{adminForm
+		如有特殊用途请自行添加数据库事件触发器|tip
+		财务名称,null=请输入财务名称|name|text|240|16
+		标记,null=请输入标记，用于数据库调用|key|text|240|16
+		备注,null=备注用于说明用途,false|remark|text|240|32
+	}
+{/if}
+<script type="text/javascript">
+function resets(){
+	document.getElementById('list_serach').reset();
+	$('#addTime1').val('');
+	$('#addTime2').val('');
+	$('#addTime2').val('');
+	$('[name=status]').val(-1);
+	$('[name=type]').val('');	
+}
+$(function(){
+	$('[name=addTime1]').datepicker();
+	$('[name=addTime2]').datepicker();
+})
+</script>
+{sub f}

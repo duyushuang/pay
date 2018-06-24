@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>{$webName}收银</title>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no"/>
+	<link href="{su}pay/base.css" rel="stylesheet">
+	<style type="text/css">
+    /* pos-wrap */
+    body {font-family: Helvetica, STHeiti STXihei, Microsoft JhengHei, Microsoft YaHei, Arial; }
+    .pos-wrap { background-color: #efefef;}
+    .pos-wrap .pos-header { height: 55px; margin: 20px auto; width: 245px; overflow: hidden; }
+    .pos-wrap .pos-header .avatar { float: left; width: 55px; height: 55px; border-radius: 50%; overflow: hidden; }
+    .pos-wrap .pos-header .avatar img { width: 100%; height: 100%; }
+    .pos-wrap .pos-header .info { margin-left: 70px; }
+    .pos-wrap .pos-header .info h3 { margin: 7px 0 0; font-size: 16px; font-weight: normal; color: #5e5f64; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pos-wrap .pos-header .info p { margin: 0; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pos-wrap .pos-val { margin: 0 15px; height: 60px; border: 1px solid #a6a5aa; border-radius: 5px; background-color: #FFF; }
+    .pos-wrap .pos-val .money { float: left; width: 60px; text-align: center; line-height: 60px; font-size: 20px; color: #646368; }
+    .pos-wrap .pos-val div { margin-left: 70px; height: 60px; color: #383840; line-height: 60px; margin-right: 10px; text-align: right; font-size: 22px; }
+    .pos-wrap .pos-val div span { font-size: 32px; margin-left: 5px; }
+	.pos-wrap .list-block { margin: 0.75rem 0; }
+	.pos-wrap .list-block .item-media+.item-inner { margin-left: 0; }
+
+    /* divider */
+    .divider { position: relative; width: 100%; margin-top: 10px; }
+    .divider > div { position: relative; margin: 0 15px; text-align: center; }
+    .divider > div:after { content: ''; z-index: 1; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background-color: #c8c7cc; -webkit-transform: scaleY(0.5); transform: scaleY(0.5); }
+    .divider > div a { display: inline-block; z-index: 2; position: relative; padding: 0 15px; background-color: #efefef; color: #c4c4c4; }
+
+    /* pay-keyboard */
+    .icons { display: inline-block; background: url("{su}images/pay/qrcode.png") no-repeat -9999px -9999px; background-size: 150px 350px; }
+    .icons-pos { background-position: 0 -35px; }
+    .pay-keyboard { position: fixed; z-index: 3000; width: 100%; height: 250px; left: 0; bottom: 0; overflow: hidden; background-color: #FFF; -webkit-transform: translate3d(0px, 100%, 0px); transform: translate3d(0px, 100%, 0px); -webkit-transition: all 500ms ease; transition: all 500ms ease; }
+    .pay-keyboard.show { -webkit-transform: translate3d(0px, 0px, 0px); transform: translate3d(0px, 0px, 0px); }
+    .pay-keyboard table { width: 100%; height: 100%; background-color: #FFF; border-collapse: collapse; vertical-align: bottom; -webkit-user-select: none; -moz-user-select: none; user-select: none; }
+    .pay-keyboard table > tbody > tr { height: 26%; }
+    .pay-keyboard table > tbody > tr > td { position: relative; color: #888; position: relative; width: 25%; height: 62px; text-align: center; border-collapse: collapse; border: 1px solid #e2e2e2; font-size: 24px; }
+    .pay-keyboard table > tbody > tr > td:active { background-color: #eee; }
+    .pay-keyboard table .top > td { border-top: 0; }
+    .pay-keyboard table .bottom > td { border-bottom: 0; }
+
+	.pay-keyboard .alipay,
+    .pay-keyboard .weixinpay { font-size: 13px; color: #888; background-color: #f2f2f2; border: 0; border-bottom: 1px solid #e2e2e2; }
+	.pay-keyboard .alipay,
+    .pay-keyboard .weixinpay { border-bottom: 1px solid #09bb07; background-color: #09bb07; color: #FFF; }
+	
+	.pay-keyboard .alipay { border-bottom: 1px solid #e2e2e2; background-color: #f2f2f2; color: #888; }
+	
+    .pay-keyboard .weixinpay:active { background-color: #0ad008; }
+	
+	.pay-keyboard .alipay span,
+    .pay-keyboard .weixinpay span { display: block; width: 20px; font-size: 20px; margin: 0 auto;  }
+	.pay-keyboard .alipay span { line-height: 1.4; font-size: 18px; }
+	
+	.pay-keyboard .alipay.disabled,
+    .pay-keyboard .weixinpay.disabled { background-color: #bcbcbc; }
+	.pay-keyboard .alipay.disabled { background-color: #dadada; color: #FFF; }
+	
+    .pay-keyboard .icon-pay-close { width: 29px; height: 24px; background-position: -121px -305px; margin-top: 11px; }
+	
+	.pay-keyboard .icon-alipay { width: 28px; height: 21px; background-position: 0 -130px; }
+    .pay-keyboard .icon-weixinpay { width: 28px; height: 25px; background-position: -77px -102px; }
+	
+	.pay-keyboard .alipay.disabled .icon-alipay { background-position: 0 -102px; }
+    .pay-keyboard .weixinpay.disabled .icon-weixinpay {  background-position: -77px -102px; }
+	
+    .pay-keyboard .point { position: absolute; top: 50%; left: 50%; margin: -3px -3px; display: block; width: 6px; height: 6px; background-color: #888; }
+    .pay-keyboard .icon-pay-delete { width: 26px; height: 19px; background-position: -39px 0px; }
+	
+	.radio, .checkbox { position: relative; display: inline-block; width: 17px; height: 24px; margin-right: 8px; line-height: 24px; font-size: 14px; color: gray; border: 0; background-color: transparent; }
+	.radio input, .checkbox input { position: absolute; top: 0; left: 0; opacity: 0; width: 100%; height: 100%; z-index: 2; border: 0 none; -webkit-appearance: none; }
+	.radio i, .checkbox i { position: absolute; top: 4px; left: 0; z-index: 1; width: 15px; height: 15px; border: 1px solid #999; -webkit-background-clip: padding-box; }
+	.radio i { border-radius: 15px; }
+	.radio i:after, .checkbox i:after { position: absolute; top: 2px; right: 7px; z-index: 999; width: 9px; height: 15px; border: solid 3px #b2b2b2; border-width: 0 3px 3px 0; content: "\0020"; -webkit-transform: rotate(45deg); }
+	.radio i:after, .checkbox i:after { display: none; top: 1px; right: 4px; width: 4px; height: 8px; border-width: 0 2px 2px 0; border-color: #fff; }
+	.radio input:checked + i:after, .checkbox input:checked + i:after { border-color: #fff; }
+	.radio input:checked + i, .checkbox input:checked + i { border-color: #52d961; background-color: #52d961; }
+	.radio input:checked + i, .checkbox input:checked + i,
+	.radio input:checked + i:after, .checkbox input:checked + i:after { display: inline-block; }
+	.radio input[disabled] + i, .checkbox input[disabled] + i { background: #EEE; border-color: #EEE; }
+	
+	.coupon-list-wrap { position: absolute; top: 0; left: 0; right: 0; bottom: 0; overflow: hidden; z-index: 5000; display: none; }
+    .coupon-list-wrap .coupon-shadow { width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5); }
+    .coupon-list-wrap .coupon-select { position: absolute; width: 100%; left: 0; bottom: 0; max-height: 300px; background-color: #eee; overflow-y: auto; -webkit-overflow-scrolling: touch; -webkit-transform: translate3d(0, 100%, 0); transform: translate3d(0, 100%, 0); -webkit-transition: -webkit-transform .5s ease-in-out; transition: transform .5s ease-in-out; }
+    .coupon-list-wrap ul { padding: 15px 10px; margin: 0; list-style: none; }
+    .coupon-list-wrap ul li { position: relative; border: 1px solid #DDD; border-radius: 5px; padding: 10px 0; background-color: #FFF; }
+    .coupon-list-wrap ul li + li { margin-top: 10px; }
+    .coupon-list-wrap ul li .price { float: left; box-sizing: border-box; border-right: 1px dashed #DDD;  width: 40%; text-align: center; height: 60px; line-height: 60px; font-size: 36px; color: #f45832; }
+	.coupon-list-wrap ul li .price i { font-style: normal; }
+    .coupon-list-wrap ul li span { font-size: 16px; }
+    .coupon-list-wrap ul li .content { position: static; width: 60%; float: left; box-sizing: border-box; padding: 0px 10px 0 15px; }
+    .coupon-list-wrap ul li .content h4 { margin: 0; color: #676767; }
+    .coupon-list-wrap ul li .content p { margin: 0; font-size: 12px; color: #bbb; }
+    .coupon-list-wrap ul li .select-box { position: absolute; top: 50%; right: 3px; margin-top: -15px; }
+    .coupon-list-wrap.show .coupon-select { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+
+    /* Update 2017-05-03 */
+	.pos-wrap .pos-remark { margin: 10px 15px; }
+	.pos-wrap .pos-remark input { -webkit-appearance: none ; font-size: 14px; width: 100%; border: 1px solid #DDD; border-radius: 5px; background: #FFF; padding: 13px 10px; }
+	.pos-wrap .pos-remark input:focus { border: 1px solid #66afe9; }
+    </style>
+</head>
+<body>
+    <div class="page-group">
+        <div class="page page-current">
+            <div class="content pos-wrap">
+                <div class="pos-header clearfix">
+                    <div class="avatar"><img width="55" height="55" src="{r}/{cfg web,qrcodelogo}" alt="" /></div>
+                    <div class="info">
+                        <h3>{$webName}收银</h3>
+                        <p>{$uid}</p>
+                    </div>
+                </div>
+                <div class="pos-val clearfix" id="pos-val">
+                    <span class="money">金额</span>
+                    <div>&yen;<span>0.00</span></div>
+                </div>
+				<div class="pos-remark">
+					<input type="text" name="remark" id="remark" placeholder="付款备注" />
+                </div>
+                <div class="divider">
+                    <div><a href="javascript:;">{$webName}收款 | 就该如此</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	
+    <div class="pay-keyboard">
+        <table class="pay-table">
+            <tbody>
+                <tr class="top">
+                    <td class="number">1</td>
+                    <td class="number">2</td>
+                    <td class="number">3</td>
+                    <td class="backspace">
+                        <i class="icons icon-pay-delete"></i>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="number">4</td>
+                    <td class="number">5</td>
+                    <td class="number">6</td>
+		                        <td class="weixinpay disabled" rowspan="3" id="pay-btn">
+                        {if qscms::is_weixin()}<i class="icons icon-weixinpay"></i>{elseif qscms::is_alipay()}<i class="icons icon-alipay"></i>{/if}
+                        <span>{if qscms::is_weixin()}微信支付{elseif qscms::is_alipay()}支付宝{elseif qscms::is_qqpay()}Q<br>Q支付{/if}</span>
+                    </td>
+                                    </tr>
+                <tr>
+                    <td class="number">7</td>
+                    <td class="number">8</td>
+                    <td class="number">9</td>
+                </tr>
+                <tr class="bottom">
+                    <td class="keyboard-close"><i class="icons icon-pay-close"></i></td>
+                    <td class="number">0</td>
+                    <td class="point-events"><span class="point"></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+	
+	<!-- -->
+    <script type="text/javascript" src="{su}pay/base.js?{echo mt_rand(10,9999);}"></script>
+    <!--<script type="text/javascript" src="http://b.vyicoo.com/js/lib/base.js"></script>-->
+    
+    
+    <script type="text/javascript">
+    (function($) {
+	var _ = navigator.userAgent,
+    	is_weixin = /MicroMessenger/.test(_),
+    	is_alipay = /Alipay/.test(_),
+    	is_qq = /QQ/.test(_);
+    	if (is_qq && !is_weixin) {
+    		var w = document.createElement("script");
+    		w.src = "//open.mobile.qq.com/sdk/qqapi.js?_bid=152",document.getElementsByTagName("head")[0].appendChild(w)
+    	}
+    	var user_type = "weixin";
+        var pos = {
+		qqpay: function(d, cb) {
+           		var _this = this;
+          		    mqq.tenpay.pay({tokenId: d.prepayId}, function (result) {
+          		        process = false;
+          		        if(result['resultCode'] == 0) {
+          		        	$.toast('支付成功！');
+          					_this.render();
+          					cb && cb();
+          		        } else {
+          		        	$.toast(result['retmsg'] || '支付失败');
+          		        }
+          		    });
+           	},
+       		alipay: function(d, cb) {
+       			if (typeof AlipayJSBridge == "undefined")
+       				return;
+       			var options = {
+       				"tradeNO" : d.tradeNO
+       			};
+				
+				
+       			var _this = this;
+       			AlipayJSBridge.call('tradePay',
+       				options,
+       				function (result) {
+       					_this.btn.removeClass('disabled');
+       					if (result.resultCode == '9000') {
+       						$.toast('支付成功！');
+							cb && cb();
+       					} else if(result.resultCode == '6001') {
+       						$.toast('取消支付！');
+       				}
+       				_this.count.text('0.00');
+      	        	_this.render();
+       			});
+       		},
+           	wxpay: function(d, cb) {
+                var _this = this;                
+           		function onBridgeReady(){
+               	   WeixinJSBridge.invoke(
+               	       'getBrandWCPayRequest', {
+               	           "appId": d.appId,
+               	           "timeStamp":d.timeStamp,
+               	           "nonceStr": d.nonceStr,
+               	           "package": d.package,  
+               	           "signType":d.signType,
+               	           "paySign": d.paySign
+               	       },
+               	       function(res){    
+               	           if(res.err_msg == 'get_brand_wcpay_request:ok') {
+               	        	 $.toast('支付成功！');
+               	        	 _this.count.text('0.00');
+               	        	 _this.render();
+				 cb && cb();
+               	           } else if(res.err_msg == 'get_brand_wcpay_request:cancel') {
+               	        	 $.toast(res.err_desc||'取消支付！');
+               	           } else if(res.err_msg == 'get_brand_wcpay_request:fail'){    // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+               	        	 $.toast(res.err_desc||'支付失败！');
+               	           }
+               	           _this.btn.removeClass('disabled');
+               	       }
+               	   ); 
+               	}
+               	if (typeof WeixinJSBridge == "undefined"){
+               	   if( document.addEventListener ){
+               	       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+               	   }else if (document.attachEvent){
+               	       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+               	       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+               	   }
+               	}else{
+               	   onBridgeReady();
+               	}
+           	},
+            render: function() {
+                this.btn[(this.val.length || this.point.length) ? 'removeClass' : 'addClass']('disabled');
+                this.count.text(Number(this.val.join('')) + '.' + (this.isPoint ? (this.point.length === 1 ? (this.point.join('') + 0) : this.point.join('')) : '00'));
+                return this;
+            },
+            keydown: function(elem) {
+                var target = $(elem),
+                    val = Number(target.text());
+
+                if ((this.isPoint && this.point.length === 2) || (!this.isPoint && this.val.length > 5)) {
+                    return this;
+                }
+
+                this[this.isPoint ? 'point' : 'val'].push(val);
+                this.index++;
+                this.render();
+
+                return this;
+            },
+            cancel: function() {
+                if (this.index < 0) {
+                    this.index = 0;
+                    this.point = [];
+                    this.val = [];
+                    this.isPoint = false;
+                    this.render();
+                    return this;
+                }
+
+                this.index--;
+                if (this.isPoint) {
+					if (this.point.length) {
+						this.point.splice(this.point.length-1, 1);
+					}
+                    if (!this.point.length) {
+						this.val.splice(this.index, 1);
+						this.isPoint = false;
+					}
+                } else {
+                    this.val.splice(this.index, 1);
+                }
+
+                this.render();
+
+                return this;
+            },
+
+            events: function() {
+                var _this = this;
+
+                this.elem.on('click', '.number', function() {
+                    _this.keydown(this);
+                });
+
+                this.elem.on('click', '.point-events', function() {
+                    _this.isPoint = true;
+                });
+
+                this.elem.on('click', '.backspace', function() {
+                    _this.cancel();
+                });
+
+                this.btn.on('click', function() { 
+					
+                    var that = $(this);
+                	if (that.hasClass('disabled')) {
+						return this;
+					}
+                	that.addClass('disabled');
+                    var val = Number(_this.val.join("") + '.' + _this.point.join(""));
+                    $.post('{r}/recharge/qrcode/$uid', {
+						'hash': '{$var->sys_hash}',
+                    	'code': $uid,
+                    	'money': val,
+                    	'title': $('#remark').val(),
+						{if !empty($openid)}'openid': '$openid',{/if}
+						{if !empty($auth_code)}'auth_code': '$auth_code',{/if}
+                    }, function(ret) {
+    					_this.is = false;
+    					$.hideIndicator();
+    					if (ret.msg && ret.status == false) {
+    						$.toast(ret.msg);
+    					} else {
+							var pay_info = ret.data;
+    						if(typeof pay_info === 'string') {
+    							pay_info = JSON.parse(pay_info);
+    						} 
+    						var cb = function() {
+						 		$.get('{r}/mch/order/status?billno=' + ret.data.billno);
+                 	        	 if(ret.data.return_url) {
+                 	        		 location.replace(ret.data.return_url);
+                 	        	 }
+	   						};
+	   						if(pay_info['tradeNO']) {
+	   							_this.alipay(pay_info, cb);
+	   						} else if(pay_info['appId']) {
+								
+	   							_this.wxpay(pay_info, cb);
+	   						} else if(pay_info['prepayId']) {
+	   							_this.qqpay(pay_info, cb);
+	   						}
+    					}
+    				}, 'json');
+                    
+                });
+
+                this.elem.on('click', '.keyboard-close', function() {
+                    _this.elem.parent().removeClass('show');
+                });
+
+                $('#pos-val').on('click', function() {
+                    _this.elem.parent().addClass('show');
+                });
+
+				
+				// 备注：update 2017-05-03
+				$('#remark').on('focus', function() {
+					_this.elem.parent().removeClass('show');
+				});
+				
+				$('#remark').on('blur', function() {
+					_this.elem.parent().addClass('show');
+				});
+				
+                return this;
+            },
+
+            init: function() {
+                var _this = this;
+
+                this.elem = $('.pay-table');
+                this.count = $('.pos-val > div > span');
+                this.btn = $('#pay-btn');
+                this.isPoint = false;
+                this.index = 0;
+                this.val = [];
+                this.point = [];
+
+                this.events();
+                setTimeout(function() {
+                    _this.elem.parent().addClass('show');
+                }, 600);
+
+                return this;
+            }
+        };
+
+        pos.init();
+    }(Zepto));
+	
+	
+	
+    </script>
+</body>
+</html>

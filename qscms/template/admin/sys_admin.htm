@@ -1,0 +1,98 @@
+{sub h}
+	{if $method == 'index'}
+		{adminList
+			删？        |id                |del
+			用户名      |username
+			创建时间    |regTimestamp      |flag,date
+			最后登陆时间|lastLoginTimestamp|code,{if $v[loginTimes] > 0}{date $v[lastLoginTimestamp]}{else}从未登陆过{/if}
+			登陆次数    |loginTimes
+			            |id                |link,edit=编辑/查看
+		}
+	{elseif $method == 'add' || $method == 'edit'}
+<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal ajaxForm">
+{v sys_hash_code}
+	<div class="portlet box green">
+		<div class="portlet-title">
+			<div class="caption"> <i class="fa fa-gift"></i>管理员{$username}修改 </div>
+			<ul class="nav nav-tabs">
+				<li class="active"> <a data-toggle="tab" href="#portlet_tab2_1" aria-expanded="true">帐号密码</a> </li>
+				<li class=""> <a data-toggle="tab" href="#portlet_tab2_2" aria-expanded="false">权限管理</a> </li>
+			</ul>
+		</div>
+		
+		<div class="portlet-body">
+			<div class="col-md-1"></div>
+			<div class="col-md-8">
+				<div class="tab-content">
+					<div id="portlet_tab2_1" class="tab-pane active">
+						<div class="form-body">
+							<div class="form-group">
+								<label class="control-label col-md-3">帐号</label>
+								<div class="input-group col-md-9">
+									<span class="input-group-addon"><i class="fa fa-user"></i></span>
+									<input type="text" placeholder="管理员帐号" class="form-control" name="username" value="$username" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="control-label col-md-3">密码</label>
+								<div class="input-group col-md-9">
+									<span class="input-group-addon"><i class="fa fa-key"></i></span>
+									<input type="password" placeholder="管理员密码" class="form-control" name="password" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="portlet_tab2_2" class="tab-pane">
+						<div class="form-body">
+							{loop $menus $k $v}
+							<h3 class="form-section">$v[name]</h3>
+							{loop $v[sub] $k2 $v2}
+							<div class="form-group">
+								<label class="control-label col-md-3">{echo is_array($v2)?$v2[name]:$v2}</label>
+								<div class="col-md-9">
+									<div class="checkbox-list">
+										<label class="checkbox-inline"><input type="checkbox" name="keys[{$k}_$k2][]" id="{$k}_$k2" value="1"{if !empty($keys[$k.'_'.$k2][0]) && $keys[$k.'_'.$k2][0] ==1} checked{/if} />读</label>
+										<label class="checkbox-inline"><input type="checkbox" name="keys[{$k}_$k2][]" id="{$k}_$k2" value="2"{if !empty($keys[$k.'_'.$k2][1]) && $keys[$k.'_'.$k2][1] ==2} checked{/if} />写</label>
+									</div>
+								</div>
+							</div>
+							{/loop}
+							
+							<div class="form-group">
+								<label class="control-label col-md-3"></label>
+								<div class="col-md-9">
+									<div class="checkbox-list">
+										<label class="checkbox-inline"><input type="checkbox" id="checkRead$k" onclick="$('[name*=keys][id^=$k][value=1]').checkAll(this)" class="checkbox" />全读</label>
+										<label class="checkbox-inline"><input type="checkbox" id="checkWrite$k" onclick="$('[name*=keys][id^=$k][value=2]').checkAll(this)" class="checkbox" />
+							<label for="checkWrite$k">全写</label>
+									</div>
+								</div>
+							</div>
+							{/loop}
+							<div class="form-group">
+								<label class="control-label col-md-3"></label>
+								<div class="col-md-9">
+									<div class="checkbox-list">
+										<label class="checkbox-inline"><input type="checkbox" id="checkRead$k" onclick="$('[name*=keys][value=1]').checkAll(this)" class="checkbox" />全读</label>
+										<label class="checkbox-inline"><input type="checkbox" id="checkRead$k" onclick="$('[name*=keys][value=2]').checkAll(this)" class="checkbox" />
+							<label for="checkWrite$k">全写</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-actions">
+						<div class="col-md-offset-3">
+							<button class="btn green" type="submit">提交</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+</form>
+{/if}
+{sub f}

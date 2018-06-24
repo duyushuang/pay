@@ -1,0 +1,2202 @@
+[2017-07-17 14:39:17] [order_no: ] : invalid url[https://www.baifubao.com/api/0/pay/0/direct/0], bfb just provide three kind of pay url
+[2017-07-17 14:39:17] [order_no: ] : create the url for baifubao pay interface failed
+[2017-07-28 15:31:08] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170728153108
+    [bfb_order_no] => 2017072810026663631112902623971
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 金米计费 测试数据：20170728152658811045
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20170728152658811045
+    [pay_result] => 1
+    [pay_time] => 20170728153107
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 48cf26ee1625078eb9f7d16d92a3df7c
+)
+]
+[2017-07-28 15:31:08] [order_no: 20170728152658811045] : baifubao notify sign success
+[2017-07-28 15:31:08] [order_no: 20170728152658811045] : order state in sp server is [2]
+[2017-07-28 15:31:08] [order_no: 20170728152658811045] : the order state is right, the order is waiting for pay
+[2017-07-28 15:31:08] [order_no: 20170728152658811045] : get the notify from baifubao and the check work success
+[2017-07-28 15:31:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170728153108
+    [bfb_order_no] => 2017072810026663631112902623971
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 金米计费 测试数据：20170728152658811045
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20170728152658811045
+    [pay_result] => 1
+    [pay_time] => 20170728153107
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 48cf26ee1625078eb9f7d16d92a3df7c
+)
+]
+[2017-07-28 15:31:09] [order_no: 20170728152658811045] : baifubao notify sign success
+[2017-07-28 15:31:09] [order_no: 20170728152658811045] : order state in sp server is [2]
+[2017-07-28 15:31:09] [order_no: 20170728152658811045] : the order state is right, the order is waiting for pay
+[2017-07-28 15:31:09] [order_no: 20170728152658811045] : get the notify from baifubao and the check work success
+[2017-09-12 09:47:51] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170912094751
+    [bfb_order_no] => 2017091210026663631112954410596
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 12
+    [input_charset] => 1
+    [order_no] => 20170912094627565370
+    [pay_result] => 1
+    [pay_time] => 20170912094751
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 2000
+    [transport_amount] => 0
+    [unit_amount] => 2000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 559d85096f1f1963cbcfeff58e6efe3e
+)
+]
+[2017-09-12 09:47:51] [order_no: 20170912094627565370] : baifubao notify sign success
+[2017-09-12 09:47:51] [order_no: 20170912094627565370] : order state in sp server is [2]
+[2017-09-12 09:47:51] [order_no: 20170912094627565370] : the order state is right, the order is waiting for pay
+[2017-09-12 09:47:51] [order_no: 20170912094627565370] : get the notify from baifubao and the check work success
+[2017-09-12 09:48:15] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170912094751
+    [bfb_order_no] => 2017091210026663631112954410596
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 12
+    [input_charset] => 1
+    [order_no] => 20170912094627565370
+    [pay_result] => 1
+    [pay_time] => 20170912094751
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 2000
+    [transport_amount] => 0
+    [unit_amount] => 2000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 559d85096f1f1963cbcfeff58e6efe3e
+)
+]
+[2017-09-12 09:48:15] [order_no: 20170912094627565370] : baifubao notify sign success
+[2017-09-12 09:48:15] [order_no: 20170912094627565370] : order state in sp server is [2]
+[2017-09-12 09:48:15] [order_no: 20170912094627565370] : the order state is right, the order is waiting for pay
+[2017-09-12 09:48:15] [order_no: 20170912094627565370] : get the notify from baifubao and the check work success
+[2017-09-12 09:48:21] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170912094751
+    [bfb_order_no] => 2017091210026663631112954410596
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 12
+    [input_charset] => 1
+    [order_no] => 20170912094627565370
+    [pay_result] => 1
+    [pay_time] => 20170912094751
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 2000
+    [transport_amount] => 0
+    [unit_amount] => 2000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 559d85096f1f1963cbcfeff58e6efe3e
+)
+]
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : baifubao notify sign success
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : order state in sp server is [2]
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : the order state is right, the order is waiting for pay
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : get the notify from baifubao and the check work success
+[2017-09-12 09:48:21] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20170912094751
+    [bfb_order_no] => 2017091210026663631112954410596
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 12
+    [input_charset] => 1
+    [order_no] => 20170912094627565370
+    [pay_result] => 1
+    [pay_time] => 20170912094751
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 2000
+    [transport_amount] => 0
+    [unit_amount] => 2000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 559d85096f1f1963cbcfeff58e6efe3e
+)
+]
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : baifubao notify sign success
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : order state in sp server is [2]
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : the order state is right, the order is waiting for pay
+[2017-09-12 09:48:21] [order_no: 20170912094627565370] : get the notify from baifubao and the check work success
+[2017-10-26 16:07:39] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026160738
+    [bfb_order_no] => 2017102610026663631112999023618
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026160707148753
+    [pay_result] => 1
+    [pay_time] => 20171026160737
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => e1f927a2da10ed5e12ef602b16709245
+)
+]
+[2017-10-26 16:07:39] [order_no: 20171026160707148753] : baifubao notify sign success
+[2017-10-26 16:07:39] [order_no: 20171026160707148753] : order state in sp server is [2]
+[2017-10-26 16:07:39] [order_no: 20171026160707148753] : the order state is right, the order is waiting for pay
+[2017-10-26 16:07:39] [order_no: 20171026160707148753] : get the notify from baifubao and the check work success
+[2017-10-26 16:08:01] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026160708
+    [bfb_order_no] => 2017102610026663631112999023618
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026160707148753
+    [pay_result] => 1
+    [pay_time] => 20171026160737
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 1b65207457883fc1c4b29024bb035dc3
+)
+]
+[2017-10-26 16:08:01] [order_no: 20171026160707148753] : baifubao notify sign success
+[2017-10-26 16:08:01] [order_no: 20171026160707148753] : order state in sp server is [2]
+[2017-10-26 16:08:01] [order_no: 20171026160707148753] : the order state is right, the order is waiting for pay
+[2017-10-26 16:08:01] [order_no: 20171026160707148753] : get the notify from baifubao and the check work success
+[2017-10-26 16:13:37] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026161336
+    [bfb_order_no] => 2017102610026663631112999028707
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026161315208629
+    [pay_result] => 1
+    [pay_time] => 20171026161335
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 2c538b3958add2141c6f58e0659119c8
+)
+]
+[2017-10-26 16:13:37] [order_no: 20171026161315208629] : baifubao notify sign success
+[2017-10-26 16:13:37] [order_no: 20171026161315208629] : order state in sp server is [2]
+[2017-10-26 16:13:37] [order_no: 20171026161315208629] : the order state is right, the order is waiting for pay
+[2017-10-26 16:13:37] [order_no: 20171026161315208629] : get the notify from baifubao and the check work success
+[2017-10-26 16:13:50] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026161316
+    [bfb_order_no] => 2017102610026663631112999028707
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026161315208629
+    [pay_result] => 1
+    [pay_time] => 20171026161335
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 96c9dec4517969c62a975e86968385e7
+)
+]
+[2017-10-26 16:13:50] [order_no: 20171026161315208629] : baifubao notify sign success
+[2017-10-26 16:13:50] [order_no: 20171026161315208629] : order state in sp server is [2]
+[2017-10-26 16:13:50] [order_no: 20171026161315208629] : the order state is right, the order is waiting for pay
+[2017-10-26 16:13:50] [order_no: 20171026161315208629] : get the notify from baifubao and the check work success
+[2017-10-26 16:18:56] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026161855
+    [bfb_order_no] => 2017102610026663631112999022232
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026161834841438
+    [pay_result] => 1
+    [pay_time] => 20171026161855
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 5fb44ba99b0ce79c4600220a7adb0f84
+)
+]
+[2017-10-26 16:18:56] [order_no: 20171026161834841438] : baifubao notify sign success
+[2017-10-26 16:18:56] [order_no: 20171026161834841438] : order state in sp server is [2]
+[2017-10-26 16:18:56] [order_no: 20171026161834841438] : the order state is right, the order is waiting for pay
+[2017-10-26 16:18:56] [order_no: 20171026161834841438] : get the notify from baifubao and the check work success
+[2017-10-26 16:19:10] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026161835
+    [bfb_order_no] => 2017102610026663631112999022232
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026161834841438
+    [pay_result] => 1
+    [pay_time] => 20171026161855
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => d0b800e7768961617ecaaa6da9338e7e
+)
+]
+[2017-10-26 16:19:10] [order_no: 20171026161834841438] : baifubao notify sign success
+[2017-10-26 16:19:10] [order_no: 20171026161834841438] : order state in sp server is [2]
+[2017-10-26 16:19:10] [order_no: 20171026161834841438] : the order state is right, the order is waiting for pay
+[2017-10-26 16:19:10] [order_no: 20171026161834841438] : get the notify from baifubao and the check work success
+[2017-10-26 16:57:04] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026165703
+    [bfb_order_no] => 2017102610026663631112999057946
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165640960891
+    [pay_result] => 1
+    [pay_time] => 20171026165703
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 0f3147c6cf28176a338b2c71539b497e
+)
+]
+[2017-10-26 16:57:04] [order_no: 20171026165640960891] : baifubao notify sign success
+[2017-10-26 16:57:04] [order_no: 20171026165640960891] : order state in sp server is [2]
+[2017-10-26 16:57:04] [order_no: 20171026165640960891] : the order state is right, the order is waiting for pay
+[2017-10-26 16:57:04] [order_no: 20171026165640960891] : get the notify from baifubao and the check work success
+[2017-10-26 16:57:11] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026165641
+    [bfb_order_no] => 2017102610026663631112999057946
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165640960891
+    [pay_result] => 1
+    [pay_time] => 20171026165703
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 23f7d44e3ed269e1d6498a7c0d8ca260
+)
+]
+[2017-10-26 16:57:11] [order_no: 20171026165640960891] : baifubao notify sign success
+[2017-10-26 16:57:11] [order_no: 20171026165640960891] : order state in sp server is [2]
+[2017-10-26 16:57:11] [order_no: 20171026165640960891] : the order state is right, the order is waiting for pay
+[2017-10-26 16:57:11] [order_no: 20171026165640960891] : get the notify from baifubao and the check work success
+[2017-10-26 16:57:24] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026165641
+    [bfb_order_no] => 2017102610026663631112999057946
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165640960891
+    [pay_result] => 1
+    [pay_time] => 20171026165703
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 23f7d44e3ed269e1d6498a7c0d8ca260
+)
+]
+[2017-10-26 16:57:24] [order_no: 20171026165640960891] : baifubao notify sign success
+[2017-10-26 16:57:24] [order_no: 20171026165640960891] : order state in sp server is [2]
+[2017-10-26 16:57:24] [order_no: 20171026165640960891] : the order state is right, the order is waiting for pay
+[2017-10-26 16:57:24] [order_no: 20171026165640960891] : get the notify from baifubao and the check work success
+[2017-10-26 17:00:48] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026170047
+    [bfb_order_no] => 2017102610026663631112999058125
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165955820581
+    [pay_result] => 1
+    [pay_time] => 20171026170047
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => d8263ec723ea8674e593f9b457bc541b
+)
+]
+[2017-10-26 17:00:48] [order_no: 20171026165955820581] : baifubao notify sign success
+[2017-10-26 17:00:48] [order_no: 20171026165955820581] : order state in sp server is [2]
+[2017-10-26 17:00:48] [order_no: 20171026165955820581] : the order state is right, the order is waiting for pay
+[2017-10-26 17:00:48] [order_no: 20171026165955820581] : get the notify from baifubao and the check work success
+[2017-10-26 17:00:54] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026165956
+    [bfb_order_no] => 2017102610026663631112999058125
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165955820581
+    [pay_result] => 1
+    [pay_time] => 20171026170047
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => b0f37def97d48a64157809aaac568da0
+)
+]
+[2017-10-26 17:00:54] [order_no: 20171026165955820581] : baifubao notify sign success
+[2017-10-26 17:00:54] [order_no: 20171026165955820581] : order state in sp server is [2]
+[2017-10-26 17:00:54] [order_no: 20171026165955820581] : the order state is right, the order is waiting for pay
+[2017-10-26 17:00:54] [order_no: 20171026165955820581] : get the notify from baifubao and the check work success
+[2017-10-26 17:01:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171026165956
+    [bfb_order_no] => 2017102610026663631112999058125
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171026165955820581
+    [pay_result] => 1
+    [pay_time] => 20171026170047
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => b0f37def97d48a64157809aaac568da0
+)
+]
+[2017-10-26 17:01:09] [order_no: 20171026165955820581] : baifubao notify sign success
+[2017-10-26 17:01:09] [order_no: 20171026165955820581] : order state in sp server is [2]
+[2017-10-26 17:01:09] [order_no: 20171026165955820581] : the order state is right, the order is waiting for pay
+[2017-10-26 17:01:09] [order_no: 20171026165955820581] : get the notify from baifubao and the check work success
+[2017-10-26 19:13:45] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20171026160738&bfb_order_no=2017102610026663631112999023618&buyer_sp_username=&currency=1&extra=123123&fee_amount=0&input_charset=1&order_no=20171026160707148753&pay_result=1&pay_time=20171026160737&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=1&transport_amount=0&unit_amount=1&unit_count=1&version=2&sign=e1f927a2da10ed5e12ef602b16709245] => 
+)
+]
+[2017-10-26 19:13:45] [order_no: ] : missing the params of return_url page, params[1]
+[2017-10-26 19:13:45] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2017-10-26 19:13:45] [order_no: ] : get the notify from baifubao, but the check work failed
+[2017-11-02 16:17:19] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171102161718
+    [bfb_order_no] => 2017110210026663631113004958945
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171102161643100474
+    [pay_result] => 1
+    [pay_time] => 20171102161717
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 4aa79babe5a60786c0d8aec1335b5855
+)
+]
+[2017-11-02 16:17:19] [order_no: 20171102161643100474] : baifubao notify sign success
+[2017-11-02 16:17:19] [order_no: 20171102161643100474] : order state in sp server is [2]
+[2017-11-02 16:17:19] [order_no: 20171102161643100474] : the order state is right, the order is waiting for pay
+[2017-11-02 16:17:19] [order_no: 20171102161643100474] : get the notify from baifubao and the check work success
+[2017-11-02 16:17:25] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171102161644
+    [bfb_order_no] => 2017110210026663631113004958945
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171102161643100474
+    [pay_result] => 1
+    [pay_time] => 20171102161717
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 0b5a47fae9039298b03f77b4132c730d
+)
+]
+[2017-11-02 16:17:25] [order_no: 20171102161643100474] : baifubao notify sign success
+[2017-11-02 16:17:25] [order_no: 20171102161643100474] : order state in sp server is [2]
+[2017-11-02 16:17:25] [order_no: 20171102161643100474] : the order state is right, the order is waiting for pay
+[2017-11-02 16:17:25] [order_no: 20171102161643100474] : get the notify from baifubao and the check work success
+[2017-11-02 16:17:35] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171102161644
+    [bfb_order_no] => 2017110210026663631113004958945
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171102161643100474
+    [pay_result] => 1
+    [pay_time] => 20171102161717
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1
+    [transport_amount] => 0
+    [unit_amount] => 1
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 0b5a47fae9039298b03f77b4132c730d
+)
+]
+[2017-11-02 16:17:35] [order_no: 20171102161643100474] : baifubao notify sign success
+[2017-11-02 16:17:35] [order_no: 20171102161643100474] : order state in sp server is [2]
+[2017-11-02 16:17:35] [order_no: 20171102161643100474] : the order state is right, the order is waiting for pay
+[2017-11-02 16:17:35] [order_no: 20171102161643100474] : get the notify from baifubao and the check work success
+[2017-12-05 20:33:27] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205203326
+    [bfb_order_no] => 2017120510026663631113035600861
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205203243336921
+    [pay_result] => 1
+    [pay_time] => 20171205203326
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 5e317fa9b62bf2ca24a894562521b03a
+)
+]
+[2017-12-05 20:33:27] [order_no: 20171205203243336921] : baifubao notify sign success
+[2017-12-05 20:33:27] [order_no: 20171205203243336921] : order state in sp server is [2]
+[2017-12-05 20:33:27] [order_no: 20171205203243336921] : the order state is right, the order is waiting for pay
+[2017-12-05 20:33:27] [order_no: 20171205203243336921] : get the notify from baifubao and the check work success
+[2017-12-05 20:33:28] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205203244
+    [bfb_order_no] => 2017120510026663631113035600861
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205203243336921
+    [pay_result] => 1
+    [pay_time] => 20171205203326
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => f8716f323251aa2c437198aa8fdbc332
+)
+]
+[2017-12-05 20:33:28] [order_no: 20171205203243336921] : baifubao notify sign success
+[2017-12-05 20:33:28] [order_no: 20171205203243336921] : order state in sp server is [2]
+[2017-12-05 20:33:28] [order_no: 20171205203243336921] : the order state is right, the order is waiting for pay
+[2017-12-05 20:33:28] [order_no: 20171205203243336921] : get the notify from baifubao and the check work success
+[2017-12-05 20:36:27] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205203626
+    [bfb_order_no] => 2017120510026663631113035606692
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205203553259186
+    [pay_result] => 1
+    [pay_time] => 20171205203626
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => fe33af5c6a0b6a8716e8e2efdee862a6
+)
+]
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : baifubao notify sign success
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : order state in sp server is [2]
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : the order state is right, the order is waiting for pay
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : get the notify from baifubao and the check work success
+[2017-12-05 20:36:27] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205203553
+    [bfb_order_no] => 2017120510026663631113035606692
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205203553259186
+    [pay_result] => 1
+    [pay_time] => 20171205203626
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 507109fe6d3b5aed82ee007cfec065fc
+)
+]
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : baifubao notify sign success
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : order state in sp server is [2]
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : the order state is right, the order is waiting for pay
+[2017-12-05 20:36:27] [order_no: 20171205203553259186] : get the notify from baifubao and the check work success
+[2017-12-05 20:36:45] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205203553
+    [bfb_order_no] => 2017120510026663631113035606692
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205203553259186
+    [pay_result] => 1
+    [pay_time] => 20171205203626
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 507109fe6d3b5aed82ee007cfec065fc
+)
+]
+[2017-12-05 20:36:45] [order_no: 20171205203553259186] : baifubao notify sign success
+[2017-12-05 20:36:45] [order_no: 20171205203553259186] : order state in sp server is [2]
+[2017-12-05 20:36:45] [order_no: 20171205203553259186] : the order state is right, the order is waiting for pay
+[2017-12-05 20:36:45] [order_no: 20171205203553259186] : get the notify from baifubao and the check work success
+[2017-12-05 20:42:12] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205204211
+    [bfb_order_no] => 2017120510026663631113035611586
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205204131898087
+    [pay_result] => 1
+    [pay_time] => 20171205204211
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => ad15c94a1120d930d70da269cd1999e2
+)
+]
+[2017-12-05 20:42:12] [order_no: 20171205204131898087] : baifubao notify sign success
+[2017-12-05 20:42:12] [order_no: 20171205204131898087] : order state in sp server is [2]
+[2017-12-05 20:42:12] [order_no: 20171205204131898087] : the order state is right, the order is waiting for pay
+[2017-12-05 20:42:12] [order_no: 20171205204131898087] : get the notify from baifubao and the check work success
+[2017-12-05 20:42:13] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205204132
+    [bfb_order_no] => 2017120510026663631113035611586
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205204131898087
+    [pay_result] => 1
+    [pay_time] => 20171205204211
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 3de00730ec98ef352711d5fa4c7c9e89
+)
+]
+[2017-12-05 20:42:13] [order_no: 20171205204131898087] : baifubao notify sign success
+[2017-12-05 20:42:13] [order_no: 20171205204131898087] : order state in sp server is [2]
+[2017-12-05 20:42:13] [order_no: 20171205204131898087] : the order state is right, the order is waiting for pay
+[2017-12-05 20:42:13] [order_no: 20171205204131898087] : get the notify from baifubao and the check work success
+[2017-12-05 20:42:31] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171205204132
+    [bfb_order_no] => 2017120510026663631113035611586
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20171205204131898087
+    [pay_result] => 1
+    [pay_time] => 20171205204211
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 3de00730ec98ef352711d5fa4c7c9e89
+)
+]
+[2017-12-05 20:42:31] [order_no: 20171205204131898087] : baifubao notify sign success
+[2017-12-05 20:42:31] [order_no: 20171205204131898087] : order state in sp server is [2]
+[2017-12-05 20:42:31] [order_no: 20171205204131898087] : the order state is right, the order is waiting for pay
+[2017-12-05 20:42:31] [order_no: 20171205204131898087] : get the notify from baifubao and the check work success
+[2017-12-08 11:32:53] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171208113252
+    [bfb_order_no] => 2017120810026663631113037790874
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 0
+    [input_charset] => 1
+    [order_no] => 20171208113209814281
+    [pay_result] => 1
+    [pay_time] => 20171208113252
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20
+    [transport_amount] => 0
+    [unit_amount] => 20
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 1d8cb0fcffb192ff93469679167b2f8b
+)
+]
+[2017-12-08 11:32:53] [order_no: 20171208113209814281] : baifubao notify sign success
+[2017-12-08 11:32:53] [order_no: 20171208113209814281] : order state in sp server is [2]
+[2017-12-08 11:32:53] [order_no: 20171208113209814281] : the order state is right, the order is waiting for pay
+[2017-12-08 11:32:53] [order_no: 20171208113209814281] : get the notify from baifubao and the check work success
+[2017-12-08 13:49:24] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20171208113252&bfb_order_no=2017120810026663631113037790874&buyer_sp_username=&currency=1&extra=123123&fee_amount=0&input_charset=1&order_no=20171208113209814281&pay_result=1&pay_time=20171208113252&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=20&transport_amount=0&unit_amount=20&unit_count=1&version=2&sign=1d8cb0fcffb192ff93469679167b2f8b] => 
+)
+]
+[2017-12-08 13:49:24] [order_no: ] : missing the params of return_url page, params[1]
+[2017-12-08 13:49:24] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2017-12-08 13:49:24] [order_no: ] : get the notify from baifubao, but the check work failed
+[2017-12-22 21:24:48] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171222212359
+    [bfb_order_no] => 2017122210026663631113051873004
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20171222212358798627
+    [pay_result] => 1
+    [pay_time] => 20171222212447
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 810
+    [transport_amount] => 0
+    [unit_amount] => 810
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 7c8de19e169e09e7ad314b63ba298f1d
+)
+]
+[2017-12-22 21:24:48] [order_no: 20171222212358798627] : baifubao notify sign success
+[2017-12-22 21:24:48] [order_no: 20171222212358798627] : order state in sp server is [2]
+[2017-12-22 21:24:48] [order_no: 20171222212358798627] : the order state is right, the order is waiting for pay
+[2017-12-22 21:24:48] [order_no: 20171222212358798627] : get the notify from baifubao and the check work success
+[2017-12-23 00:18:13] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20171222212359&bfb_order_no=2017122210026663631113051873004&buyer_sp_username=&currency=1&extra=123123&fee_amount=5&input_charset=1&order_no=20171222212358798627&pay_result=1&pay_time=20171222212447&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=810&transport_amount=0&unit_amount=810&unit_count=1&version=2&sign=7c8de19e169e09e7ad314b63ba298f1d] => 
+)
+]
+[2017-12-23 00:18:13] [order_no: ] : missing the params of return_url page, params[1]
+[2017-12-23 00:18:13] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2017-12-23 00:18:13] [order_no: ] : get the notify from baifubao, but the check work failed
+[2017-12-24 16:03:39] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171224160339
+    [bfb_order_no] => 2017122410026663631113053585523
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 120
+    [input_charset] => 1
+    [order_no] => 20171224160020891026
+    [pay_result] => 1
+    [pay_time] => 20171224160339
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20000
+    [transport_amount] => 0
+    [unit_amount] => 20000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => cf22ba8af5503ac11b39f2f10d4f499b
+)
+]
+[2017-12-24 16:03:39] [order_no: 20171224160020891026] : baifubao notify sign success
+[2017-12-24 16:03:39] [order_no: 20171224160020891026] : order state in sp server is [2]
+[2017-12-24 16:03:39] [order_no: 20171224160020891026] : the order state is right, the order is waiting for pay
+[2017-12-24 16:03:39] [order_no: 20171224160020891026] : get the notify from baifubao and the check work success
+[2017-12-24 17:53:13] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171224174957
+    [bfb_order_no] => 2017122410026663631113053667161
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20171224174957015827
+    [pay_result] => 1
+    [pay_time] => 20171224175312
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 22dc0a8900277c0d967a74eeda0ce236
+)
+]
+[2017-12-24 17:53:13] [order_no: 20171224174957015827] : baifubao notify sign success
+[2017-12-24 17:53:13] [order_no: 20171224174957015827] : order state in sp server is [2]
+[2017-12-24 17:53:13] [order_no: 20171224174957015827] : the order state is right, the order is waiting for pay
+[2017-12-24 17:53:13] [order_no: 20171224174957015827] : get the notify from baifubao and the check work success
+[2017-12-24 18:40:47] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20171224160339&bfb_order_no=2017122410026663631113053585523&buyer_sp_username=&currency=1&extra=123123&fee_amount=120&input_charset=1&order_no=20171224160020891026&pay_result=1&pay_time=20171224160339&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=20000&transport_amount=0&unit_amount=20000&unit_count=1&version=2&sign=cf22ba8af5503ac11b39f2f10d4f499b] => 
+)
+]
+[2017-12-24 18:40:47] [order_no: ] : missing the params of return_url page, params[1]
+[2017-12-24 18:40:47] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2017-12-24 18:40:47] [order_no: ] : get the notify from baifubao, but the check work failed
+[2017-12-24 21:04:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no%3D%26bfb_order_create_time%3D20171224160339%26bfb_order_no%3D2017122410026663631113053585523%26buyer_sp_username%3D%26currency%3D1%26extra%3D123123%26fee_amount%3D120%26input_charset%3D1%26order_no%3D20171224160020891026%26pay_result%3D1%26pay_time%3D20171224160339%26pay_type%3D2%26sign_method%3D1%26sp_no%3D1002666363%26total_amount%3D20000%26transport_amount%3D0%26unit_amount%3D20000%26unit_count%3D1%26version%3D2%26sign%3Dcf22ba8af5503ac11b39f2f10d4f499b] => 
+)
+]
+[2017-12-24 21:04:09] [order_no: ] : missing the params of return_url page, params[1]
+[2017-12-24 21:04:09] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2017-12-24 21:04:09] [order_no: ] : get the notify from baifubao, but the check work failed
+[2017-12-26 20:08:17] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171226200720
+    [bfb_order_no] => 2017122610026663631113055579742
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20171226200720122955
+    [pay_result] => 1
+    [pay_time] => 20171226200816
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 084dbcc13fa8e1f31c9f36d41f653810
+)
+]
+[2017-12-26 20:08:17] [order_no: 20171226200720122955] : baifubao notify sign success
+[2017-12-26 20:08:17] [order_no: 20171226200720122955] : order state in sp server is [2]
+[2017-12-26 20:08:17] [order_no: 20171226200720122955] : the order state is right, the order is waiting for pay
+[2017-12-26 20:08:17] [order_no: 20171226200720122955] : get the notify from baifubao and the check work success
+[2017-12-27 21:33:35] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171227213257
+    [bfb_order_no] => 2017122710026663631113056639527
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20171227213255812649
+    [pay_result] => 1
+    [pay_time] => 20171227213334
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 143dea71835f746447fda8d67bc56885
+)
+]
+[2017-12-27 21:33:35] [order_no: 20171227213255812649] : baifubao notify sign success
+[2017-12-27 21:33:35] [order_no: 20171227213255812649] : order state in sp server is [2]
+[2017-12-27 21:33:35] [order_no: 20171227213255812649] : the order state is right, the order is waiting for pay
+[2017-12-27 21:33:35] [order_no: 20171227213255812649] : get the notify from baifubao and the check work success
+[2017-12-28 21:42:04] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171228214107
+    [bfb_order_no] => 2017122810026663631113057644802
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 90
+    [input_charset] => 1
+    [order_no] => 20171228214107314214
+    [pay_result] => 1
+    [pay_time] => 20171228214204
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 15000
+    [transport_amount] => 0
+    [unit_amount] => 15000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => a5ca1aa1d7af3bb8da4dfccfe8107a43
+)
+]
+[2017-12-28 21:42:04] [order_no: 20171228214107314214] : baifubao notify sign success
+[2017-12-28 21:42:04] [order_no: 20171228214107314214] : order state in sp server is [2]
+[2017-12-28 21:42:04] [order_no: 20171228214107314214] : the order state is right, the order is waiting for pay
+[2017-12-28 21:42:04] [order_no: 20171228214107314214] : get the notify from baifubao and the check work success
+[2017-12-28 21:42:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171228214107
+    [bfb_order_no] => 2017122810026663631113057644802
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 90
+    [input_charset] => 1
+    [order_no] => 20171228214107314214
+    [pay_result] => 1
+    [pay_time] => 20171228214204
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 15000
+    [transport_amount] => 0
+    [unit_amount] => 15000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => a5ca1aa1d7af3bb8da4dfccfe8107a43
+)
+]
+[2017-12-28 21:42:09] [order_no: 20171228214107314214] : baifubao notify sign success
+[2017-12-28 21:42:09] [order_no: 20171228214107314214] : order state in sp server is [2]
+[2017-12-28 21:42:09] [order_no: 20171228214107314214] : the order state is right, the order is waiting for pay
+[2017-12-28 21:42:09] [order_no: 20171228214107314214] : get the notify from baifubao and the check work success
+[2017-12-28 21:42:27] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171228214107
+    [bfb_order_no] => 2017122810026663631113057644802
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 90
+    [input_charset] => 1
+    [order_no] => 20171228214107314214
+    [pay_result] => 1
+    [pay_time] => 20171228214204
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 15000
+    [transport_amount] => 0
+    [unit_amount] => 15000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => a5ca1aa1d7af3bb8da4dfccfe8107a43
+)
+]
+[2017-12-28 21:42:27] [order_no: 20171228214107314214] : baifubao notify sign success
+[2017-12-28 21:42:27] [order_no: 20171228214107314214] : order state in sp server is [2]
+[2017-12-28 21:42:27] [order_no: 20171228214107314214] : the order state is right, the order is waiting for pay
+[2017-12-28 21:42:27] [order_no: 20171228214107314214] : get the notify from baifubao and the check work success
+[2017-12-29 17:16:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171229171509
+    [bfb_order_no] => 2017122910026663631113058358625
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 7
+    [input_charset] => 1
+    [order_no] => 20171229171508424923
+    [pay_result] => 1
+    [pay_time] => 20171229171609
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1200
+    [transport_amount] => 0
+    [unit_amount] => 1200
+    [unit_count] => 1
+    [version] => 2
+    [sign] => cbd9060bd11f85d74b1e1666a0b360c0
+)
+]
+[2017-12-29 17:16:09] [order_no: 20171229171508424923] : baifubao notify sign success
+[2017-12-29 17:16:09] [order_no: 20171229171508424923] : order state in sp server is [2]
+[2017-12-29 17:16:09] [order_no: 20171229171508424923] : the order state is right, the order is waiting for pay
+[2017-12-29 17:16:09] [order_no: 20171229171508424923] : get the notify from baifubao and the check work success
+[2017-12-29 17:16:10] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171229171509
+    [bfb_order_no] => 2017122910026663631113058358625
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 7
+    [input_charset] => 1
+    [order_no] => 20171229171508424923
+    [pay_result] => 1
+    [pay_time] => 20171229171609
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 1200
+    [transport_amount] => 0
+    [unit_amount] => 1200
+    [unit_count] => 1
+    [version] => 2
+    [sign] => cbd9060bd11f85d74b1e1666a0b360c0
+)
+]
+[2017-12-29 17:16:10] [order_no: 20171229171508424923] : baifubao notify sign success
+[2017-12-29 17:16:10] [order_no: 20171229171508424923] : order state in sp server is [2]
+[2017-12-29 17:16:10] [order_no: 20171229171508424923] : the order state is right, the order is waiting for pay
+[2017-12-29 17:16:10] [order_no: 20171229171508424923] : get the notify from baifubao and the check work success
+[2017-12-30 11:22:27] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171230112159
+    [bfb_order_no] => 2017123010026663631113058883237
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 120
+    [input_charset] => 1
+    [order_no] => 20171230112158399225
+    [pay_result] => 1
+    [pay_time] => 20171230112226
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20000
+    [transport_amount] => 0
+    [unit_amount] => 20000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 78ddd595758ce281b23d636e8f1774e2
+)
+]
+[2017-12-30 11:22:27] [order_no: 20171230112158399225] : baifubao notify sign success
+[2017-12-30 11:22:27] [order_no: 20171230112158399225] : order state in sp server is [2]
+[2017-12-30 11:22:27] [order_no: 20171230112158399225] : the order state is right, the order is waiting for pay
+[2017-12-30 11:22:27] [order_no: 20171230112158399225] : get the notify from baifubao and the check work success
+[2017-12-31 13:51:50] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171231135112
+    [bfb_order_no] => 2017123110026663631113059747152
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20171231135111483900
+    [pay_result] => 1
+    [pay_time] => 20171231135150
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 65dc7bc65bac365664ccbd467560e83c
+)
+]
+[2017-12-31 13:51:50] [order_no: 20171231135111483900] : baifubao notify sign success
+[2017-12-31 13:51:50] [order_no: 20171231135111483900] : order state in sp server is [2]
+[2017-12-31 13:51:50] [order_no: 20171231135111483900] : the order state is right, the order is waiting for pay
+[2017-12-31 13:51:50] [order_no: 20171231135111483900] : get the notify from baifubao and the check work success
+[2017-12-31 18:30:11] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171231182828
+    [bfb_order_no] => 2017123110026663631113059958966
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 12
+    [input_charset] => 1
+    [order_no] => 20171231182827932382
+    [pay_result] => 1
+    [pay_time] => 20171231183010
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 2000
+    [transport_amount] => 0
+    [unit_amount] => 2000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 49218f2393d5a1cb35cfaea47e79b17f
+)
+]
+[2017-12-31 18:30:11] [order_no: 20171231182827932382] : baifubao notify sign success
+[2017-12-31 18:30:11] [order_no: 20171231182827932382] : order state in sp server is [2]
+[2017-12-31 18:30:11] [order_no: 20171231182827932382] : the order state is right, the order is waiting for pay
+[2017-12-31 18:30:11] [order_no: 20171231182827932382] : get the notify from baifubao and the check work success
+[2017-12-31 20:31:13] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20171231203004
+    [bfb_order_no] => 2017123110026663631113060053930
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 4
+    [input_charset] => 1
+    [order_no] => 20171231203003497429
+    [pay_result] => 1
+    [pay_time] => 20171231203112
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 700
+    [transport_amount] => 0
+    [unit_amount] => 700
+    [unit_count] => 1
+    [version] => 2
+    [sign] => fe77b8d15acfaf75b11dd26a2dd814e3
+)
+]
+[2017-12-31 20:31:13] [order_no: 20171231203003497429] : baifubao notify sign success
+[2017-12-31 20:31:13] [order_no: 20171231203003497429] : order state in sp server is [2]
+[2017-12-31 20:31:13] [order_no: 20171231203003497429] : the order state is right, the order is waiting for pay
+[2017-12-31 20:31:13] [order_no: 20171231203003497429] : get the notify from baifubao and the check work success
+[2018-01-01 15:48:06] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180101154726
+    [bfb_order_no] => 2018010110026663631113060703626
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20180101154725628437
+    [pay_result] => 1
+    [pay_time] => 20180101154805
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => c72ff9468a0adf3f60b2dd35e83a6dda
+)
+]
+[2018-01-01 15:48:06] [order_no: 20180101154725628437] : baifubao notify sign success
+[2018-01-01 15:48:06] [order_no: 20180101154725628437] : order state in sp server is [2]
+[2018-01-01 15:48:06] [order_no: 20180101154725628437] : the order state is right, the order is waiting for pay
+[2018-01-01 15:48:06] [order_no: 20180101154725628437] : get the notify from baifubao and the check work success
+[2018-01-01 20:00:11] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180101195908
+    [bfb_order_no] => 2018010110026663631113060903386
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 60
+    [input_charset] => 1
+    [order_no] => 20180101195908308628
+    [pay_result] => 1
+    [pay_time] => 20180101200011
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 10000
+    [transport_amount] => 0
+    [unit_amount] => 10000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => bbe14d3ade3365bff27108188664b09c
+)
+]
+[2018-01-01 20:00:11] [order_no: 20180101195908308628] : baifubao notify sign success
+[2018-01-01 20:00:11] [order_no: 20180101195908308628] : order state in sp server is [2]
+[2018-01-01 20:00:11] [order_no: 20180101195908308628] : the order state is right, the order is waiting for pay
+[2018-01-01 20:00:11] [order_no: 20180101195908308628] : get the notify from baifubao and the check work success
+[2018-01-01 22:54:36] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180101225339
+    [bfb_order_no] => 2018010110026663631113061039730
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 60
+    [input_charset] => 1
+    [order_no] => 20180101225337446599
+    [pay_result] => 1
+    [pay_time] => 20180101225435
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 10000
+    [transport_amount] => 0
+    [unit_amount] => 10000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 983974d60db89860fa9e426affcb412d
+)
+]
+[2018-01-01 22:54:36] [order_no: 20180101225337446599] : baifubao notify sign success
+[2018-01-01 22:54:36] [order_no: 20180101225337446599] : order state in sp server is [2]
+[2018-01-01 22:54:36] [order_no: 20180101225337446599] : the order state is right, the order is waiting for pay
+[2018-01-01 22:54:36] [order_no: 20180101225337446599] : get the notify from baifubao and the check work success
+[2018-01-01 22:54:37] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180101225339
+    [bfb_order_no] => 2018010110026663631113061039730
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 60
+    [input_charset] => 1
+    [order_no] => 20180101225337446599
+    [pay_result] => 1
+    [pay_time] => 20180101225435
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 10000
+    [transport_amount] => 0
+    [unit_amount] => 10000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 983974d60db89860fa9e426affcb412d
+)
+]
+[2018-01-01 22:54:37] [order_no: 20180101225337446599] : baifubao notify sign success
+[2018-01-01 22:54:37] [order_no: 20180101225337446599] : order state in sp server is [2]
+[2018-01-01 22:54:37] [order_no: 20180101225337446599] : the order state is right, the order is waiting for pay
+[2018-01-01 22:54:37] [order_no: 20180101225337446599] : get the notify from baifubao and the check work success
+[2018-01-02 01:37:41] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180101225339&bfb_order_no=2018010110026663631113061039730&buyer_sp_username=&currency=1&extra=123123&fee_amount=60&input_charset=1&order_no=20180101225337446599&pay_result=1&pay_time=20180101225435&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=10000&transport_amount=0&unit_amount=10000&unit_count=1&version=2&sign=983974d60db89860fa9e426affcb412d] => 
+)
+]
+[2018-01-02 01:37:41] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-02 01:37:41] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-02 01:37:41] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-09 08:22:23] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180109082053
+    [bfb_order_no] => 2018010910026663631113067245695
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20180109082051683574
+    [pay_result] => 1
+    [pay_time] => 20180109082223
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 100
+    [transport_amount] => 0
+    [unit_amount] => 100
+    [unit_count] => 1
+    [version] => 2
+    [sign] => dbb7eff44bb9e9ff5b3775f98f531c5a
+)
+]
+[2018-01-09 08:22:23] [order_no: 20180109082051683574] : baifubao notify sign success
+[2018-01-09 08:22:23] [order_no: 20180109082051683574] : order state in sp server is [2]
+[2018-01-09 08:22:23] [order_no: 20180109082051683574] : the order state is right, the order is waiting for pay
+[2018-01-09 08:22:23] [order_no: 20180109082051683574] : get the notify from baifubao and the check work success
+[2018-01-09 10:47:20] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180109082053&bfb_order_no=2018010910026663631113067245695&buyer_sp_username=&currency=1&extra=123123&fee_amount=1&input_charset=1&order_no=20180109082051683574&pay_result=1&pay_time=20180109082223&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=100&transport_amount=0&unit_amount=100&unit_count=1&version=2&sign=dbb7eff44bb9e9ff5b3775f98f531c5a] => 
+)
+]
+[2018-01-09 10:47:20] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-09 10:47:20] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-09 10:47:20] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-09 11:10:16] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180109110916
+    [bfb_order_no] => 2018010910026663631113067457805
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20180109110915444727
+    [pay_result] => 1
+    [pay_time] => 20180109111015
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => b4b9e300b849efbc2f16e457056285e9
+)
+]
+[2018-01-09 11:10:16] [order_no: 20180109110915444727] : baifubao notify sign success
+[2018-01-09 11:10:16] [order_no: 20180109110915444727] : order state in sp server is [2]
+[2018-01-09 11:10:16] [order_no: 20180109110915444727] : the order state is right, the order is waiting for pay
+[2018-01-09 11:10:16] [order_no: 20180109110915444727] : get the notify from baifubao and the check work success
+[2018-01-09 11:45:34] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180109114416
+    [bfb_order_no] => 2018010910026663631113067496566
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20180109114416233364
+    [pay_result] => 1
+    [pay_time] => 20180109114533
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => c91505a02d9556e8492168cfdee6c8d5
+)
+]
+[2018-01-09 11:45:34] [order_no: 20180109114416233364] : baifubao notify sign success
+[2018-01-09 11:45:34] [order_no: 20180109114416233364] : order state in sp server is [2]
+[2018-01-09 11:45:34] [order_no: 20180109114416233364] : the order state is right, the order is waiting for pay
+[2018-01-09 11:45:34] [order_no: 20180109114416233364] : get the notify from baifubao and the check work success
+[2018-01-09 16:56:16] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180109165549
+    [bfb_order_no] => 2018010910026663631113067735385
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20180109165548257985
+    [pay_result] => 1
+    [pay_time] => 20180109165615
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 800
+    [transport_amount] => 0
+    [unit_amount] => 800
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 638f8a75b87134b7327aaa81c04acdd8
+)
+]
+[2018-01-09 16:56:16] [order_no: 20180109165548257985] : baifubao notify sign success
+[2018-01-09 16:56:16] [order_no: 20180109165548257985] : order state in sp server is [2]
+[2018-01-09 16:56:16] [order_no: 20180109165548257985] : the order state is right, the order is waiting for pay
+[2018-01-09 16:56:16] [order_no: 20180109165548257985] : get the notify from baifubao and the check work success
+[2018-01-10 01:29:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180110012728
+    [bfb_order_no] => 2018011010026663631113068082871
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 35
+    [input_charset] => 1
+    [order_no] => 20180110012727778755
+    [pay_result] => 1
+    [pay_time] => 20180110012909
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5810
+    [transport_amount] => 0
+    [unit_amount] => 5810
+    [unit_count] => 1
+    [version] => 2
+    [sign] => c9c066ca42601c4891f518701cd9726d
+)
+]
+[2018-01-10 01:29:09] [order_no: 20180110012727778755] : baifubao notify sign success
+[2018-01-10 01:29:09] [order_no: 20180110012727778755] : order state in sp server is [2]
+[2018-01-10 01:29:09] [order_no: 20180110012727778755] : the order state is right, the order is waiting for pay
+[2018-01-10 01:29:09] [order_no: 20180110012727778755] : get the notify from baifubao and the check work success
+[2018-01-10 01:29:10] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180110012728
+    [bfb_order_no] => 2018011010026663631113068082871
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 35
+    [input_charset] => 1
+    [order_no] => 20180110012727778755
+    [pay_result] => 1
+    [pay_time] => 20180110012909
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5810
+    [transport_amount] => 0
+    [unit_amount] => 5810
+    [unit_count] => 1
+    [version] => 2
+    [sign] => c9c066ca42601c4891f518701cd9726d
+)
+]
+[2018-01-10 01:29:10] [order_no: 20180110012727778755] : baifubao notify sign success
+[2018-01-10 01:29:10] [order_no: 20180110012727778755] : order state in sp server is [2]
+[2018-01-10 01:29:10] [order_no: 20180110012727778755] : the order state is right, the order is waiting for pay
+[2018-01-10 01:29:10] [order_no: 20180110012727778755] : get the notify from baifubao and the check work success
+[2018-01-10 01:29:19] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180110012728
+    [bfb_order_no] => 2018011010026663631113068082871
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 35
+    [input_charset] => 1
+    [order_no] => 20180110012727778755
+    [pay_result] => 1
+    [pay_time] => 20180110012909
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5810
+    [transport_amount] => 0
+    [unit_amount] => 5810
+    [unit_count] => 1
+    [version] => 2
+    [sign] => c9c066ca42601c4891f518701cd9726d
+)
+]
+[2018-01-10 01:29:19] [order_no: 20180110012727778755] : baifubao notify sign success
+[2018-01-10 01:29:19] [order_no: 20180110012727778755] : order state in sp server is [2]
+[2018-01-10 01:29:19] [order_no: 20180110012727778755] : the order state is right, the order is waiting for pay
+[2018-01-10 01:29:19] [order_no: 20180110012727778755] : get the notify from baifubao and the check work success
+[2018-01-12 17:03:43] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180112170303
+    [bfb_order_no] => 2018011210026663631113070571974
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20180112170302812616
+    [pay_result] => 1
+    [pay_time] => 20180112170342
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 800
+    [transport_amount] => 0
+    [unit_amount] => 800
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 79274a9825a23cf2c10b195536bec187
+)
+]
+[2018-01-12 17:03:43] [order_no: 20180112170302812616] : baifubao notify sign success
+[2018-01-12 17:03:43] [order_no: 20180112170302812616] : order state in sp server is [2]
+[2018-01-12 17:03:43] [order_no: 20180112170302812616] : the order state is right, the order is waiting for pay
+[2018-01-12 17:03:43] [order_no: 20180112170302812616] : get the notify from baifubao and the check work success
+[2018-01-12 20:13:40] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180112170303&bfb_order_no=2018011210026663631113070571974&buyer_sp_username=&currency=1&extra=123123&fee_amount=5&input_charset=1&order_no=20180112170302812616&pay_result=1&pay_time=20180112170342&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=800&transport_amount=0&unit_amount=800&unit_count=1&version=2&sign=79274a9825a23cf2c10b195536bec187] => 
+)
+]
+[2018-01-12 20:13:40] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-12 20:13:40] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-12 20:13:40] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-19 17:58:53] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180119175816
+    [bfb_order_no] => 2018011910026663631113078189430
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 30
+    [input_charset] => 1
+    [order_no] => 20180119175815553584
+    [pay_result] => 1
+    [pay_time] => 20180119175852
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 5000
+    [transport_amount] => 0
+    [unit_amount] => 5000
+    [unit_count] => 1
+    [version] => 2
+    [sign] => a7b82a8532413828d447227543aab0a0
+)
+]
+[2018-01-19 17:58:53] [order_no: 20180119175815553584] : baifubao notify sign success
+[2018-01-19 17:58:53] [order_no: 20180119175815553584] : order state in sp server is [2]
+[2018-01-19 17:58:53] [order_no: 20180119175815553584] : the order state is right, the order is waiting for pay
+[2018-01-19 17:58:53] [order_no: 20180119175815553584] : get the notify from baifubao and the check work success
+[2018-01-20 22:02:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180120215854
+    [bfb_order_no] => 2018012010026663631113079357570
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20180120215852170919
+    [pay_result] => 1
+    [pay_time] => 20180120220207
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 110
+    [transport_amount] => 0
+    [unit_amount] => 110
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 757125f52c5d2dd124f1ca638f7fd6a3
+)
+]
+[2018-01-20 22:02:09] [order_no: 20180120215852170919] : baifubao notify sign success
+[2018-01-20 22:02:09] [order_no: 20180120215852170919] : order state in sp server is [2]
+[2018-01-20 22:02:09] [order_no: 20180120215852170919] : the order state is right, the order is waiting for pay
+[2018-01-20 22:02:09] [order_no: 20180120215852170919] : get the notify from baifubao and the check work success
+[2018-01-20 22:02:15] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180120215854
+    [bfb_order_no] => 2018012010026663631113079357570
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20180120215852170919
+    [pay_result] => 1
+    [pay_time] => 20180120220207
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 110
+    [transport_amount] => 0
+    [unit_amount] => 110
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 757125f52c5d2dd124f1ca638f7fd6a3
+)
+]
+[2018-01-20 22:02:15] [order_no: 20180120215852170919] : baifubao notify sign success
+[2018-01-20 22:02:15] [order_no: 20180120215852170919] : order state in sp server is [2]
+[2018-01-20 22:02:15] [order_no: 20180120215852170919] : the order state is right, the order is waiting for pay
+[2018-01-20 22:02:15] [order_no: 20180120215852170919] : get the notify from baifubao and the check work success
+[2018-01-21 00:25:28] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180120215854&bfb_order_no=2018012010026663631113079357570&buyer_sp_username=&currency=1&extra=123123&fee_amount=1&input_charset=1&order_no=20180120215852170919&pay_result=1&pay_time=20180120220207&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=110&transport_amount=0&unit_amount=110&unit_count=1&version=2&sign=757125f52c5d2dd124f1ca638f7fd6a3] => 
+)
+]
+[2018-01-21 00:25:28] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-21 00:25:28] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-21 00:25:28] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-22 20:44:06] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180122204405
+    [bfb_order_no] => 2018012210026663631113081292636
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 3
+    [input_charset] => 1
+    [order_no] => 20180122204234166953
+    [pay_result] => 1
+    [pay_time] => 20180122204405
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 500
+    [transport_amount] => 0
+    [unit_amount] => 500
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 7c724b308760fbf29730c4d65898fb1f
+)
+]
+[2018-01-22 20:44:06] [order_no: 20180122204234166953] : baifubao notify sign success
+[2018-01-22 20:44:06] [order_no: 20180122204234166953] : order state in sp server is [2]
+[2018-01-22 20:44:06] [order_no: 20180122204234166953] : the order state is right, the order is waiting for pay
+[2018-01-22 20:44:06] [order_no: 20180122204234166953] : get the notify from baifubao and the check work success
+[2018-01-22 21:09:26] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180122210926
+    [bfb_order_no] => 2018012210026663631113081314598
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 6
+    [input_charset] => 1
+    [order_no] => 20180122210754242523
+    [pay_result] => 1
+    [pay_time] => 20180122210925
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 960
+    [transport_amount] => 0
+    [unit_amount] => 960
+    [unit_count] => 1
+    [version] => 2
+    [sign] => f7c1f759ff7f8c970d929f7d3b8e4c04
+)
+]
+[2018-01-22 21:09:26] [order_no: 20180122210754242523] : baifubao notify sign success
+[2018-01-22 21:09:26] [order_no: 20180122210754242523] : order state in sp server is [2]
+[2018-01-22 21:09:26] [order_no: 20180122210754242523] : the order state is right, the order is waiting for pay
+[2018-01-22 21:09:26] [order_no: 20180122210754242523] : get the notify from baifubao and the check work success
+[2018-01-24 18:25:50] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180124182454
+    [bfb_order_no] => 2018012410026663631113083455576
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 40
+    [input_charset] => 1
+    [order_no] => 20180124182453275797
+    [pay_result] => 1
+    [pay_time] => 20180124182550
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 6600
+    [transport_amount] => 0
+    [unit_amount] => 6600
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 4d94bc4661c8688aa946d0aef8a31421
+)
+]
+[2018-01-24 18:25:50] [order_no: 20180124182453275797] : baifubao notify sign success
+[2018-01-24 18:25:50] [order_no: 20180124182453275797] : order state in sp server is [2]
+[2018-01-24 18:25:50] [order_no: 20180124182453275797] : the order state is right, the order is waiting for pay
+[2018-01-24 18:25:50] [order_no: 20180124182453275797] : get the notify from baifubao and the check work success
+[2018-01-24 18:25:52] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180124182454
+    [bfb_order_no] => 2018012410026663631113083455576
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 40
+    [input_charset] => 1
+    [order_no] => 20180124182453275797
+    [pay_result] => 1
+    [pay_time] => 20180124182550
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 6600
+    [transport_amount] => 0
+    [unit_amount] => 6600
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 4d94bc4661c8688aa946d0aef8a31421
+)
+]
+[2018-01-24 18:25:52] [order_no: 20180124182453275797] : baifubao notify sign success
+[2018-01-24 18:25:52] [order_no: 20180124182453275797] : order state in sp server is [2]
+[2018-01-24 18:25:52] [order_no: 20180124182453275797] : the order state is right, the order is waiting for pay
+[2018-01-24 18:25:52] [order_no: 20180124182453275797] : get the notify from baifubao and the check work success
+[2018-01-24 18:26:09] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180124182454
+    [bfb_order_no] => 2018012410026663631113083455576
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 40
+    [input_charset] => 1
+    [order_no] => 20180124182453275797
+    [pay_result] => 1
+    [pay_time] => 20180124182550
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 6600
+    [transport_amount] => 0
+    [unit_amount] => 6600
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 4d94bc4661c8688aa946d0aef8a31421
+)
+]
+[2018-01-24 18:26:09] [order_no: 20180124182453275797] : baifubao notify sign success
+[2018-01-24 18:26:09] [order_no: 20180124182453275797] : order state in sp server is [2]
+[2018-01-24 18:26:09] [order_no: 20180124182453275797] : the order state is right, the order is waiting for pay
+[2018-01-24 18:26:09] [order_no: 20180124182453275797] : get the notify from baifubao and the check work success
+[2018-01-24 20:50:58] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180124182454&bfb_order_no=2018012410026663631113083455576&buyer_sp_username=&currency=1&extra=123123&fee_amount=40&input_charset=1&order_no=20180124182453275797&pay_result=1&pay_time=20180124182550&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=6600&transport_amount=0&unit_amount=6600&unit_count=1&version=2&sign=4d94bc4661c8688aa946d0aef8a31421] => 
+)
+]
+[2018-01-24 20:50:58] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-24 20:50:58] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-24 20:50:58] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-25 16:17:02] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180125161634
+    [bfb_order_no] => 2018012510026663631113084334448
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 40
+    [input_charset] => 1
+    [order_no] => 20180125161634300651
+    [pay_result] => 1
+    [pay_time] => 20180125161702
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 6610
+    [transport_amount] => 0
+    [unit_amount] => 6610
+    [unit_count] => 1
+    [version] => 2
+    [sign] => b2839273f2e20b5b09e284e5f604cfb5
+)
+]
+[2018-01-25 16:17:02] [order_no: 20180125161634300651] : baifubao notify sign success
+[2018-01-25 16:17:02] [order_no: 20180125161634300651] : order state in sp server is [2]
+[2018-01-25 16:17:02] [order_no: 20180125161634300651] : the order state is right, the order is waiting for pay
+[2018-01-25 16:17:02] [order_no: 20180125161634300651] : get the notify from baifubao and the check work success
+[2018-01-27 04:17:06] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180127041636
+    [bfb_order_no] => 2018012710026663631113085678757
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20180127041635178339
+    [pay_result] => 1
+    [pay_time] => 20180127041706
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 800
+    [transport_amount] => 0
+    [unit_amount] => 800
+    [unit_count] => 1
+    [version] => 2
+    [sign] => ab6e31509cde467d157a8560bf309c21
+)
+]
+[2018-01-27 04:17:06] [order_no: 20180127041635178339] : baifubao notify sign success
+[2018-01-27 04:17:06] [order_no: 20180127041635178339] : order state in sp server is [2]
+[2018-01-27 04:17:06] [order_no: 20180127041635178339] : the order state is right, the order is waiting for pay
+[2018-01-27 04:17:06] [order_no: 20180127041635178339] : get the notify from baifubao and the check work success
+[2018-01-27 06:35:15] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180127041636&bfb_order_no=2018012710026663631113085678757&buyer_sp_username=&currency=1&extra=123123&fee_amount=5&input_charset=1&order_no=20180127041635178339&pay_result=1&pay_time=20180127041706&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=800&transport_amount=0&unit_amount=800&unit_count=1&version=2&sign=ab6e31509cde467d157a8560bf309c21] => 
+)
+]
+[2018-01-27 06:35:15] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-27 06:35:15] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-27 06:35:15] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-28 21:59:12] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180128215649
+    [bfb_order_no] => 2018012810026663631113087344101
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20180128215648842873
+    [pay_result] => 1
+    [pay_time] => 20180128215911
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 800
+    [transport_amount] => 0
+    [unit_amount] => 800
+    [unit_count] => 1
+    [version] => 2
+    [sign] => e6a3d6634a7ab73e5e6f54e09c514f31
+)
+]
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : baifubao notify sign success
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : order state in sp server is [2]
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : the order state is right, the order is waiting for pay
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : get the notify from baifubao and the check work success
+[2018-01-28 21:59:12] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180128215649
+    [bfb_order_no] => 2018012810026663631113087344101
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 5
+    [input_charset] => 1
+    [order_no] => 20180128215648842873
+    [pay_result] => 1
+    [pay_time] => 20180128215911
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 800
+    [transport_amount] => 0
+    [unit_amount] => 800
+    [unit_count] => 1
+    [version] => 2
+    [sign] => e6a3d6634a7ab73e5e6f54e09c514f31
+)
+]
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : baifubao notify sign success
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : order state in sp server is [2]
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : the order state is right, the order is waiting for pay
+[2018-01-28 21:59:12] [order_no: 20180128215648842873] : get the notify from baifubao and the check work success
+[2018-01-29 00:52:30] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180128215649&bfb_order_no=2018012810026663631113087344101&buyer_sp_username=&currency=1&extra=123123&fee_amount=5&input_charset=1&order_no=20180128215648842873&pay_result=1&pay_time=20180128215911&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=800&transport_amount=0&unit_amount=800&unit_count=1&version=2&sign=e6a3d6634a7ab73e5e6f54e09c514f31] => 
+)
+]
+[2018-01-29 00:52:30] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-29 00:52:30] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-29 00:52:30] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-29 02:50:49] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no%3D%26bfb_order_create_time%3D20180128215649%26bfb_order_no%3D2018012810026663631113087344101%26buyer_sp_username%3D%26currency%3D1%26extra%3D123123%26fee_amount%3D5%26input_charset%3D1%26order_no%3D20180128215648842873%26pay_result%3D1%26pay_time%3D20180128215911%26pay_type%3D2%26sign_method%3D1%26sp_no%3D1002666363%26total_amount%3D800%26transport_amount%3D0%26unit_amount%3D800%26unit_count%3D1%26version%3D2%26sign%3De6a3d6634a7ab73e5e6f54e09c514f31] => 
+)
+]
+[2018-01-29 02:50:49] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-29 02:50:49] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-29 02:50:49] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-29 05:08:21] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no%253D%2526bfb_order_create_time%253D20180128215649%2526bfb_order_no%253D2018012810026663631113087344101%2526buyer_sp_username%253D%2526currency%253D1%2526extra%253D123123%2526fee_amount%253D5%2526input_charset%253D1%2526order_no%253D20180128215648842873%2526pay_result%253D1%2526pay_time%253D20180128215911%2526pay_type%253D2%2526sign_method%253D1%2526sp_no%253D1002666363%2526total_amount%253D800%2526transport_amount%253D0%2526unit_amount%253D800%2526unit_count%253D1%2526version%253D2%2526sign%253De6a3d6634a7ab73e5e6f54e09c514f31] => 
+)
+]
+[2018-01-29 05:08:21] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-29 05:08:21] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-29 05:08:21] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-01-29 09:39:51] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180129093845
+    [bfb_order_no] => 2018012910026663631113087518885
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 29
+    [input_charset] => 1
+    [order_no] => 20180129093844798878
+    [pay_result] => 1
+    [pay_time] => 20180129093951
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 4820
+    [transport_amount] => 0
+    [unit_amount] => 4820
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 817954a9e2e397c94e85d6cfc35a6b86
+)
+]
+[2018-01-29 09:39:51] [order_no: 20180129093844798878] : baifubao notify sign success
+[2018-01-29 09:39:51] [order_no: 20180129093844798878] : order state in sp server is [2]
+[2018-01-29 09:39:51] [order_no: 20180129093844798878] : the order state is right, the order is waiting for pay
+[2018-01-29 09:39:51] [order_no: 20180129093844798878] : get the notify from baifubao and the check work success
+[2018-01-29 20:19:02] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180129201806
+    [bfb_order_no] => 2018012910026663631113088026496
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20180129201804662043
+    [pay_result] => 1
+    [pay_time] => 20180129201901
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 200
+    [transport_amount] => 0
+    [unit_amount] => 200
+    [unit_count] => 1
+    [version] => 2
+    [sign] => e88eef09cf917f21b0779c84517519a0
+)
+]
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : baifubao notify sign success
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : order state in sp server is [2]
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : the order state is right, the order is waiting for pay
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : get the notify from baifubao and the check work success
+[2018-01-29 20:19:02] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180129201806
+    [bfb_order_no] => 2018012910026663631113088026496
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 1
+    [input_charset] => 1
+    [order_no] => 20180129201804662043
+    [pay_result] => 1
+    [pay_time] => 20180129201901
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 200
+    [transport_amount] => 0
+    [unit_amount] => 200
+    [unit_count] => 1
+    [version] => 2
+    [sign] => e88eef09cf917f21b0779c84517519a0
+)
+]
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : baifubao notify sign success
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : order state in sp server is [2]
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : the order state is right, the order is waiting for pay
+[2018-01-29 20:19:02] [order_no: 20180129201804662043] : get the notify from baifubao and the check work success
+[2018-01-29 22:49:44] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180129201806&bfb_order_no=2018012910026663631113088026496&buyer_sp_username=&currency=1&extra=123123&fee_amount=1&input_charset=1&order_no=20180129201804662043&pay_result=1&pay_time=20180129201901&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=200&transport_amount=0&unit_amount=200&unit_count=1&version=2&sign=e88eef09cf917f21b0779c84517519a0] => 
+)
+]
+[2018-01-29 22:49:44] [order_no: ] : missing the params of return_url page, params[1]
+[2018-01-29 22:49:44] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-01-29 22:49:44] [order_no: ] : get the notify from baifubao, but the check work failed
+[2018-02-02 00:17:48] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180202001515
+    [bfb_order_no] => 2018020210026663631113090687199
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 121
+    [input_charset] => 1
+    [order_no] => 20180202001514846010
+    [pay_result] => 1
+    [pay_time] => 20180202001747
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20160
+    [transport_amount] => 0
+    [unit_amount] => 20160
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 07fe6c09ee0a54bfc1182a08e24e61e2
+)
+]
+[2018-02-02 00:17:48] [order_no: 20180202001514846010] : baifubao notify sign success
+[2018-02-02 00:17:48] [order_no: 20180202001514846010] : order state in sp server is [2]
+[2018-02-02 00:17:48] [order_no: 20180202001514846010] : the order state is right, the order is waiting for pay
+[2018-02-02 00:17:48] [order_no: 20180202001514846010] : get the notify from baifubao and the check work success
+[2018-02-02 00:17:49] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180202001515
+    [bfb_order_no] => 2018020210026663631113090687199
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 121
+    [input_charset] => 1
+    [order_no] => 20180202001514846010
+    [pay_result] => 1
+    [pay_time] => 20180202001747
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20160
+    [transport_amount] => 0
+    [unit_amount] => 20160
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 07fe6c09ee0a54bfc1182a08e24e61e2
+)
+]
+[2018-02-02 00:17:49] [order_no: 20180202001514846010] : baifubao notify sign success
+[2018-02-02 00:17:49] [order_no: 20180202001514846010] : order state in sp server is [2]
+[2018-02-02 00:17:49] [order_no: 20180202001514846010] : the order state is right, the order is waiting for pay
+[2018-02-02 00:17:49] [order_no: 20180202001514846010] : get the notify from baifubao and the check work success
+[2018-02-02 00:17:57] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no] => 
+    [bfb_order_create_time] => 20180202001515
+    [bfb_order_no] => 2018020210026663631113090687199
+    [buyer_sp_username] => 
+    [currency] => 1
+    [extra] => 123123
+    [fee_amount] => 121
+    [input_charset] => 1
+    [order_no] => 20180202001514846010
+    [pay_result] => 1
+    [pay_time] => 20180202001747
+    [pay_type] => 2
+    [sign_method] => 1
+    [sp_no] => 1002666363
+    [total_amount] => 20160
+    [transport_amount] => 0
+    [unit_amount] => 20160
+    [unit_count] => 1
+    [version] => 2
+    [sign] => 07fe6c09ee0a54bfc1182a08e24e61e2
+)
+]
+[2018-02-02 00:17:57] [order_no: 20180202001514846010] : baifubao notify sign success
+[2018-02-02 00:17:57] [order_no: 20180202001514846010] : order state in sp server is [2]
+[2018-02-02 00:17:57] [order_no: 20180202001514846010] : the order state is right, the order is waiting for pay
+[2018-02-02 00:17:57] [order_no: 20180202001514846010] : get the notify from baifubao and the check work success
+[2018-02-02 02:39:11] [order_no: ] : get the notify from baifubao, the request is [Array
+(
+    [bank_no=&bfb_order_create_time=20180202001515&bfb_order_no=2018020210026663631113090687199&buyer_sp_username=&currency=1&extra=123123&fee_amount=121&input_charset=1&order_no=20180202001514846010&pay_result=1&pay_time=20180202001747&pay_type=2&sign_method=1&sp_no=1002666363&total_amount=20160&transport_amount=0&unit_amount=20160&unit_count=1&version=2&sign=07fe6c09ee0a54bfc1182a08e24e61e2] => 
+)
+]
+[2018-02-02 02:39:11] [order_no: ] : missing the params of return_url page, params[1]
+[2018-02-02 02:39:11] [order_no: ] : the id in baifubao notify is wrong, this notify is invaild
+[2018-02-02 02:39:11] [order_no: ] : get the notify from baifubao, but the check work failed

@@ -1,0 +1,128 @@
+{sub h}
+{if $method == 'list'}
+{css_select jquery_ui}
+{js_select jquery_ui}
+{jsFile datepicker,}
+{jsFile WdatePicker,index/My97DatePicker}
+<form action="$baseUrl&method=$method" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+<table class="table table-bordered table-striped">
+<input name="operation" value="fc" type="hidden"/>
+<input name="action" value="$action" type="hidden" />
+<input name="method" value="$method" type="hidden" />
+<tr class="hover">
+<td  align="left" colspan="3" >
+<h3>搜索：</h3> 
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{$var->gp_uid}" />
+商户API订单：<input type="text" class="form-control input-inline" name="out_trade_no" value="{var $out_trade_no}" />
+系统订单：<input type="text" class="form-control input-inline" name="sn" value="{var $sn}" />
+
+时间搜索
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+<br />
+<br />
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+{if false}积分：<input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+{/if}
+
+<input type="button" value="重置" class="btn" onclick="document.getElementById('list_serach').reset();$('#addTime1').val('');$('#addTime2').val('');" />
+<input type="submit" value="提交" class="btn green" /></td>
+	</tr>
+</table>
+</form>
+{adminList
+    提成商户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+    来自API商户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[fuid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[fuid]</a>
+	提成金额||code,<font class="btn btn-xs red ajaxify" title="提成金额：$v[money]元">$v[money]元</font>
+    订单|sn
+    商户API订单||code,<font color="green">$v[out_trade_no]</font>
+    充值金额||code,<font color="red" title="充值金额：$v[payMoney]元">$v[payMoney]元</font>
+    费率总金额||code,<font class="btn btn-xs yellow ajaxify" title="商户费率：$v[blMoney]元">$v[blMoney]元</font>
+    提成时间|addTime |flag,date2
+}
+<script>
+$('[name=addTime1]').datepicker();
+$('[name=addTime2]').datepicker();
+</script>
+{elseif $method == 'index'}
+<h4>计算公式：已有级别提成 = 费率总金额 * 分成总额比例 *  层次提成比例</h4>
+<h4>计算公式：无限级别提成 = 费率总金额 * 分成总额比例 *  无限提成比例</h4>
+
+{cfgCate fc}
+<br />
+<br />
+<h3>设置层次 级别依次向下</h3>
+<form onsubmit="shopFrom()"  method="post" enctype="multipart/form-data" class="form-horizontal ajaxForm" data-box="default">
+  {v sys_hash_code}
+  <input name="operation" value="fc" type="hidden"/>
+  <input name="action" value="$action" type="hidden" />
+  <input name="method" value="$method" type="hidden" />
+  
+  <table class="table table-bordered table-striped shop" id="shop1">
+    <tr class="hover" style="text-align:center">
+      <td> {if !empty($fc) && is_array($fc)}
+           {loopQuick $fc}
+           <div id="Blen$k" class="Blen">
+           {if $k == 0}
+           <input type="button" class="btn green addBenefit" value="添加"/>
+           {else}
+           <input type="button" class="btn green delBenefit" onclick="$(this).parent().remove();" value="删除"/>
+           {/if}
+           金额提成比例
+           <input name="m[$k]" data-key="$k" type="text" class="form-control Bm" onchange="Bm(this)" value="{var $v[m]}" style="width:100px;display:inline"/> 
+           <input id="m_$k" disabled="disabled" value="{echo $v[m] * 100}%" type="text" class="form-control Bm" style="width:100px; display:inline"/>
+           积分提成比例
+           <input name="c[$k]" data-key="$k" type="text" class="form-control Bc" onchange="Bc(this)" value="{var $v[c]}" style="width:100px;display:inline"/>
+           <input id="c_$k" disabled="disabled" value="{echo $v[c] * 100}%" type="text" class="form-control Bm" style="width:100px; display:inline"/>
+           </div>
+           {/loopQuick}
+           {else}
+           <div id="Blen0" class="Blen">
+           <input type="button" class="btn green addBenefit" value="添加"/>
+           金额提成比例
+           <input name="m[0]" data-key="0" type="text" class="form-control Bm" onchange="Bm(this)" style="width:100px;display:inline"/>
+           <input id="m_0" disabled="disabled" value="0%" type="text" class="form-control Bm" style="width:100px; display:inline"/>
+           积分提成比例
+           <input name="c[0]" data-key="0" type="text" class="form-control Bc" onchange="Bc(this)" style="width:100px;display:inline"/>
+           <input id="c_0" disabled="disabled" value="0%" type="text" class="form-control Bm" style="width:100px; display:inline"/>
+        </div>
+                    {/if} </td>
+    </tr>
+              </table>
+  
+  <table class="table table-bordered table-striped">
+                <tr >
+      <td class="text-center" colspan="2"><input type="submit"  class="btn green" value="保存" /></td>
+    </tr>
+              </table>
+</form>
+<script>
+function Bm(o){
+	var key = $(o).data('key');
+	$('#m_'+key).val($(o).val() * 100+'%');
+}
+function Bc(o){
+	var key = $(o).data('key');
+	$('#c_'+key).val($(o).val() * 100+'%');
+}
+$('.addBenefit').click(function(){
+	var len = $('.Blen').length;
+	var Bm = $("input[name='m["+(len - 1)+"]']");
+	var Bc = $("input[name='c["+(len - 1)+"]']");
+		/*
+		if (Bm.val() < 0){
+			alert('金额比例不能为负数');
+			Bm.focus();
+			return false;
+		}
+		if (Bc.val() < 0){
+			alert('积分比例不能为负数');
+			Bc.focus();
+			return false;	
+		}
+		*/
+$('#Blen'+(len - 1)).after('<div id="Blen'+len+'" class="Blen"><input type="button" class="btn green delBenefit" onclick="$(this).parent().remove();" value="删除"/> 金额提成比例 <input name="m['+len+']" data-key="'+len+'" type="text" class="form-control Bm" onchange="Bm(this)" style="width:100px;display:inline"/> <input id="m_'+len+'" disabled="disabled" value="0%" type="text" class="form-control Bm" style="width:100px; display:inline"/> 积分提成比例 <input name="c['+len+']" data-key="'+len+'" type="text" class="form-control Bc" onchange="Bc(this)" style="width:100px;display:inline"/> <input id="c_'+len+'" disabled="disabled" value="0%" type="text" class="form-control Bm" style="width:100px; display:inline"/></div>');
+	return true;
+})
+</script>
+{/if}
+{sub f}

@@ -1,0 +1,223 @@
+{if !$var->ajax}<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8"/>
+<title>后台管理系统</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+
+<!-- 必要CSS -->
+<link href="{su}style/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/uniform.default.min.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/jquery-confirm.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
+{css}
+<!-- 主题风格 -->
+<link href="{su}style/css/components-rounded.css" rel="stylesheet" type="text/css">
+<link href="{su}style/css/plugins.css" rel="stylesheet" type="text/css">
+<link href="{su}style/css/layout.css" rel="stylesheet" type="text/css"/>
+<link href="{su}style/css/darkblue.css" rel="stylesheet" type="text/css"/>
+
+<link rel="shortcut icon" href="favicon.ico"/>
+<script src="{su}style/js/jquery.min.js" type="text/javascript"></script>
+
+<!--script src="//cdn.bootcss.com/jquery/1.12.3/jquery.min.js" type="text/javascript"></script-->
+
+<script src="{su}style/js/jquery-confirm.js" type="text/javascript"></script>
+<script src="/qscms/static/layer/layer.js" type="text/javascript"></script>
+
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
+<script type="text/javascript">
+var themePath = '{su}style/';
+var useAjax = {echo $var->menuAjax ? 'true' : 'false'};
+var nowUrl = '{echo NOW_URL}';
+var webName = '{cfg sys,webName}';
+</script>
+</head>
+<body class="page-header-fixed page-quick-sidebar-over-content ">
+<!-- 头部开始 -->
+<div class="page-header navbar navbar-fixed-top">
+	<!-- BEGIN HEADER INNER -->
+	<div class="page-header-inner">
+		<!-- BEGIN LOGO -->
+		<div class="page-logo">
+			<a href="index.html">
+			<img src="{su}style/images/logo.png" alt="logo" />
+			</a>
+			<div class="menu-toggler sidebar-toggler hide">
+				<!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+			</div>
+		</div>
+		<!-- END LOGO -->
+		<div class="hor-menu hor-menu-light hidden-sm hidden-xs" id="topMenu">
+        	{if isset($top_menu)}
+			<ul class="nav navbar-nav">
+				{loop $top_menu $k $v}
+				{if !is_array($v) || !isset($v[hide]) || $v[hide] !== true}
+				<li class="classic-menu-dropdown{if $k == $method} active{/if}">
+					{if is_array($v)}
+						{if !empty($v[url])}
+						<a {if !empty($v[blank])} target="_blank" {/if} href="$v[url]">$v[name]<span class="selected"></span></a>
+						{else}
+						<a {if !empty($v[blank])} target="_blank" {/if}  href="{if isset($v[hide]) && $v[hide] === true}{echo NOW_URL}{else}$baseUrl&method=$k{if !empty($v[attach])}$v[attach]{/if}{/if}">$v[name]<span class="selected"></span></a>
+						{/if}
+					{else}
+						<a {if !empty($v[blank])} target="_blank" {/if}  href="$baseUrl&method=$k">$v<span class="selected"></span></a>
+					{/if}
+				</li>
+				{/if}
+				{/loop}
+			</ul>
+			{/if}
+		</div>
+		<a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+		</a>
+		<div class="top-menu">
+			<ul class="nav navbar-nav pull-right">
+				<li class="dropdown dropdown-user">
+					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+					<img alt="" class="img-circle" src="{su}style/images/avatar3_small.jpg"/>
+					<span class="username username-hide-on-mobile">$var->admin[username] </span>
+					<i class="fa fa-angle-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-menu-default">
+						<li>
+							<a href="$adminUrl{?}action=logout">
+							<i class="icon-key"></i> 注销登录 </a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<!-- END TOP NAVIGATION MENU -->
+	</div>
+	<!-- END HEADER INNER -->
+</div>
+<!-- 头部结束 -->
+<div class="clearfix">
+</div>
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar-wrapper">
+		<!--菜单栏开始-->
+		<div class="page-sidebar navbar-collapse collapse">
+			<!-- BEGIN SIDEBAR MENU -->
+			<ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+				<!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+				<li class="sidebar-toggler-wrapper">
+					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					<div class="sidebar-toggler">
+					</div>
+					<!-- END SIDEBAR TOGGLER BUTTON -->
+				</li>
+				<!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+				<li class="sidebar-search-wrapper">
+					<!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+					<form class="sidebar-search " action="extra_search.html" method="POST">
+						<a href="javascript:;" class="remove">
+						<i class="icon-close"></i>
+						</a>
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search...">
+							<span class="input-group-btn">
+							<a href="javascript:;" class="btn submit"><i class="icon-magnifier"></i></a>
+							</span>
+						</div>
+					</form>
+					<!-- END RESPONSIVE QUICK SEARCH FORM -->
+				</li>{eval $menus = $var->menus; $i = 0;$menuCount = count($menus);}
+				{loopQuick $menus}
+				<li class="{if $i == 0}start{elseif $i +1 == $menuCount}last{/if}{if $action == $k} active open{/if}">
+					<a href="javascript:;">
+					<i class="{if !empty($v[ico])}$v[ico]{else}icon-link{/if}"></i>
+					<span class="title">$v[name]</span>
+					<span class="arrow "></span>
+					</a>
+					{if isset($v[sub])}
+					<ul class="sub-menu">
+						{loopQuick $v[sub] $k1 $v1}
+						{if !is_array($v1) || !isset($v1[hide]) || !$v1[hide]}
+						<li{if $action == $k && $operation == $k1} class="active"{/if}><a href="{if is_array($v1) && !empty($v1[url])}$v1[url]{else}$adminUrl{?}action=$k&operation=$k1{/if}"{if !empty($v1[blank])} target="_blank" {/if}{if $var->menuAjax} class="ajaxify"{/if}><i class="{if is_array($v1) && !empty($v1[ico])}$v1[ico]{else}icon-link{/if}"></i> {if is_array($v1)}$v1[name]{else}$v1{/if}</a></li>
+						{/if}
+						{/loopQuick}
+					</ul>
+					{/if}
+				</li>{eval $i++;}
+				{/loopQuick}
+				
+				
+				
+			</ul>
+			<!-- END SIDEBAR MENU -->
+		</div>
+		<!--菜单栏结束-->
+	</div>
+	<!-- END SIDEBAR -->
+	<!-- BEGIN CONTENT -->
+	<div class="page-content-wrapper" style="background-color:#364150">
+		<div class="page-content">
+			<div class="page-content-body">{else}
+            {if isset($top_menu)}
+			<script type="text/template" id="top_menu_tpl">
+			<ul class="nav navbar-nav">
+				{loop $top_menu $k $v}
+				{if !is_array($v) || !isset($v[hide]) || $v[hide] !== true}
+				<li class="classic-menu-dropdown{if $k == $method} active{/if}">
+					{if is_array($v)}
+						{if !empty($v[url])}
+						<a href="$v[url]" class="ajaxify">$v[name]<span class="selected"></span></a>
+						{else}
+						<a href="{if isset($v[hide]) && $v[hide] === true}{echo NOW_URL}{else}$baseUrl&method=$k{if !empty($v[attach])}$v[attach]{/if}{/if}" class="ajaxify">$v[name]<span class="selected"></span></a>
+						{/if}
+					{else}
+						<a href="$baseUrl&method=$k" class="ajaxify">$v<span class="selected"></span></a>
+					{/if}
+				</li>
+				{/if}
+				{/loop}
+			</ul>
+			</script>
+            <script type="text/javascript">
+            $('#topMenu').html($('#top_menu_tpl').html());
+            </script>
+            {else}
+            <script type="text/javascript">
+            $('#topMenu').html('');
+            </script>
+			{/if}
+            {/if}
+			<h3 class="page-title">
+			$menu_name <small>$menu_sub_name</small>
+			</h3>
+			<div class="page-bar">
+				<ul class="page-breadcrumb">
+					<li>
+						<i class="fa fa-home"></i>
+						<a href="$adminUrl{?}action=sys&operation=index">后台首页</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">$menu_name</a>
+						<i class="fa fa-angle-right"></i>
+					</li>
+					<li>
+						<a href="#">$menu_sub_name</a>
+					</li>
+				</ul>
+				<div class="page-toolbar">
+					
+				</div>
+			</div>
+			<!-- END PAGE HEADER-->
+			<!-- BEGIN PAGE CONTENT-->

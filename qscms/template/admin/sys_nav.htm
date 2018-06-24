@@ -1,0 +1,45 @@
+{sub h}
+{if $tab=='index'}
+	{if $method=='index'}
+		{adminList
+			删？    |id     |del
+			排序    |sort   |sort
+			菜单名称|name
+			菜单别名|ename
+			下级菜单|total
+					|id     |link,edit=编辑;link,view=查看下级菜单
+		}
+	{elseif $method=='add' || $method=='edit'}
+		{adminForm
+			菜单名称,null=请输入顶部菜单名称|f_name |text||32
+			菜单别名,null=请输入菜单别名    |f_ename|text||32
+		}
+	{/if}
+{elseif $tab=='sub'}
+	{if $method=='index'}
+	{adminList
+		删？|id      |del
+		排序|sort    |sort
+		菜单名称|name
+		菜单别名 |ename
+		自定义URL  |curl
+		    |id      |link,edit=编辑
+	}
+	{elseif $method=='add' || $method=='edit'}
+	{if empty($update) || !$update}
+	{adminForm
+		菜单名称,null=请输入子菜单名称|f_name |text||32
+		菜单别名                      |f_ename|text||32
+		自定义URL                     |f_curl |text||128
+		创建初始文件                  |f_create|radio,1=是,0=否
+	}
+	{else}
+	{adminForm
+		菜单名称,null=请输入子菜单名称|f_name |text||32
+		菜单别名                      |f_ename|text||32
+		自定义URL                     |f_curl |text||128
+	}
+	{/if}
+	{/if}
+{/if}
+{sub f}

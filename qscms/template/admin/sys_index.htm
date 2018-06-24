@@ -1,0 +1,96 @@
+{cssLoadStr assets/admin/pages/css/pricing-table.css}{sub header}
+{if $var->admin[type] == 'founder'}
+<style>
+.table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color:#FFF
+}
+.f25{
+	font-size:20px;
+}
+</style>
+{if false}
+<h3>系统快捷工具</h3>
+<table class="table table-bordered table-striped">
+<tr class="hover">
+	<td><a href="?action=info&operation=member" class="btn btn-xs green ajaxify f25" target="_blank" data-type="show">用户搜索</a></td>
+</tr>
+
+
+</table>
+<div style="margin-top:200px;"></div>
+{/if}
+{/if}
+
+<div class="row">
+	<div class="col-md-12"> 
+			<table class="table">
+
+						
+		</table>
+			<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-left:5px;margin-top:1px;"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>平台用户总数：{echo db::dataCount('member')}个<br/><br/>--</span>
+			
+			<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-user"></em>今日新增用户：{echo db::dataCount('member', "regTime>=$stat AND regTime<$end")}个<br/><br/>--</span>
+
+			<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>昨日新增用户：{echo db::dataCount('member', "regTime>=$stat1 AND regTime<$end1")}个<br/><br/>--</span>
+
+			<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-user"></em>禁用用户总数：{echo db::dataCount('member', 'status=1')}个<br/><br/>--</span>
+
+			<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>系统订单总数：{var $allTotal }个<br/><br/>--</span>
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-pencil"></em>未支付总数：{var $notTotal}个<br/><br/>--</span>
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>系统总金额：{var $allMoney}元<br/><br/>--</span>
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-pencil"></em>未支付总金额：{var $notMoney}元<br/><br/>--</span>
+
+			<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-left:5px;margin-top:1px;"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>用户总余额：{echo db::one_one('member', "SUM(money)")}<br/><br/>--</span>
+			
+			<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-user"></em>提现总金额：{echo db::dataCount('member', "regTime>=$stat AND regTime<$end")}<br/><br/>--</span>
+
+			<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>备用选项<br/><br/>--</span>
+
+			<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:1px"><br/><br/><em class="glyphicon glyphicon-user"></em>备用选项<br/><br/>--</span>
+
+
+		<table class="table">
+			<tr>
+				<th colspan="15" class="partition">系统信息</th>
+			</tr>
+			<tr>
+		
+				<td class="vtop td24 lineheight" style="margin-top:10px;">程序版本</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs yellow ajaxify">{lang system,description}</font></td>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">操作系统及 PHP</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs green ajaxify">$serverInfo</font></td>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">服务器软件</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs blue ajaxify">$serverSoft</font></td>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">MySQL 版本</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs red ajaxify">$dbVersion</font></td>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">上传许可</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs green ajaxify">$fileUpload</font></td>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">当前数据库尺寸</td>
+				<td class="lineheight smallfont"><font class="btn btn-xs blue ajaxify">$dbSize</font></td>
+			</tr>
+		</table>
+        <table class="table">
+			<tr>
+				<th colspan="15" class="partition">{lang system,ename}</th>
+			</tr>
+			<tr>
+				<td class="vtop td24 lineheight">版权所有</td>
+				<td><span class="bold">StormCloud Pay</span></td>
+			</tr>
+		</table>
+	</div>
+</div>
+{sub footer}

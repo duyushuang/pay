@@ -1,0 +1,77 @@
+﻿html, body, h1, h2, h3, h4, h5, h5, ul, dl, ol, div, span {
+	margin: 0;
+	padding: 0;
+}
+body {
+	font-family: 'Microsoft Yahei', 微软雅黑
+}
+ul, ol {
+	list-style: none;
+	overflow: hidden
+}
+a, a:hover {
+	text-decoration: none
+}
+a:focus {
+	outline: none
+}
+img {
+	border: none
+}
+.hide {
+	display: none
+}
+.woody-prompt {
+	display: none
+}
+body {
+	    background: #f1f1f1 url(/qscms/static/pay/static/default/images/F3Kn.jpg?spa=v2);
+}
+#login {
+	margin-top: 100px
+}
+.box {
+    padding: 1px;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.64);
+    box-shadow: #e4e4e4 2px 1px 3px;
+}
+.box .title {
+    line-height: 50px;
+    font-size: 1.3em;
+    font-weight: 700;
+    text-align: center;
+    margin-top: 15px;
+}
+.box .content {
+	padding: 30px 40px 20px 40px;
+}
+.logo {
+	margin: 20px
+}
+.btip {
+	padding: 20px 35px;
+	border-top: 1px dotted #ddd;
+	font-size: 0.9em;
+	color: #6B6D6E;
+}
+.btip dl dd {
+	line-height: 22px
+}
+.btip .arrow {
+	position: absolute;
+	margin-top: -28px;
+	width: 10px;
+	margin-left: 36.999999%
+}
+.ltip {
+	text-align: center;
+	margin: 20px auto
+}
+.ltip a {
+	color: #6B6D6E
+}
+.ltip a:hover {
+	color: #337AB7
+}
+.jmy_input_bcolor{border: 1px solid #f3f3f3!important;}

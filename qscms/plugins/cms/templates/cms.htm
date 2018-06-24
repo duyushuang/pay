@@ -1,0 +1,140 @@
+{sub h}
+	{if $method == 'cateList'}
+		{adminList
+			删？    |id      |del
+			排序    |sort    |sort
+			分类名  |name
+			别名    |ename
+			{modelAlias}总数  |total   |code,$v[total](<a href="$baseUrl&method=cmsList&cid=$v[id]" class="ajaxify">查看</a>)
+			创建时间|addTime |flag,date2
+			最后修改|editTime|flag,date2
+			        |id      |link,edit=编辑
+		}
+	{elseif $method == 'addCate' || $method == 'editCate'}
+		{adminForm
+			分类名,null=请输入分类名  |name |text|240|32
+			别名  ,null=请输入分类别名|ename|text|240|32
+		}
+	{elseif $method == 'cmsList'}
+		{eval @eval(parse_php::parse('{adminList
+			删？    |id      |del
+			排序    |sort    |sort
+			所属分类|name'.($showFieldAlias?"\n".$showFieldAlias:'').'
+			发布时间|addTime |flag,date2
+			最后修改|editTime|flag,date2
+			发布IP  |addIp   |flag,ip
+			点击数  |clicks
+			        |id      |link,editCms=编辑;link3,top=推荐/取消推荐
+		}'));}
+	{elseif $method == 'addCms' || $method == 'editCms'}
+{if $var->menuAjax}<script type="text/javascript">
+var setUpload = function(name, imgId){
+	$('[name='+name+']').val(imgId);
+	$('#'+name+'_img').html(/^\d+$/.test(imgId) ? '<a href="$adminUrl{?}action=sys&operation=ifShow&imgId='+imgId+'" target="_blank"><img src="$adminUrl{?}action=sys&operation=ifShow&imgId='+imgId+'" width="100" /></a>': '<a href="{u}$sys_dir_image'+imgId+'" target="_blank"><img src="{u}$sys_dir_image'+imgId+'" width="100" /></a>');
+};
+</script>{/if}
+		<form method="post" enctype="{if $formData}multipart/form-data{else}application/x-www-form-urlencoded{/if}" class="form-horizontal qsQuickForm ajaxForm" data-type="simple" id="qsQuickForm">
+		{v sys_hash_code}
+		<table class="table table-bordered table-striped">
+			<tr class="hover">
+				<td width="100" align="right" valign="top">所属分类</td>
+				<td width="800">
+					<select name="cid" id="cid" preg="null=请选择分类" class="form-control">
+						{loop $cates $k $v}
+						<option value="$v"{if !empty($datas) && $datas[cid] == $v || $var->gp_cid == $v} selected{/if}>$k</option>
+						{/loop}
+					</select></td>
+				<td id="cid_tip"></td>
+			</tr>
+			{loop $fields $v}
+			{if $v[htmlType] != 'hidden'}
+			<tr class="hover">
+				<td width="100" align="right" valign="top">$v[name]</td>
+				<td width="800">
+					{switch $v[htmlType] 'txt'}
+					<input type="text" name="$v[htmlName]" id="$v[htmlName]" value="{echo empty($datas) ? $v[htmlDefaultValue] : $datas[$v[htmlName]]}" class="form-control"{if $v[htmlWidth]} style="width:$v[htmlWidth]px"{/if}{if $v[htmlIsReg] && $v[htmlRegStr] && $v[tip]} RegStr="$v[htmlRegStr]" Message="$v[tip]"{/if} />
+					{case 'textarea'}
+					<textarea name="$v[htmlName]" id="$v[htmlName]" class="form-control"{if $v[htmlWidth] || $v[htmlHeight]} style="{if $v[htmlWidth]}width:$v[htmlWidth]px;{/if}{if $v[htmlHeight]}height:$v[htmlHeight]px{/if}"{/if}{if $v[htmlIsReg] && $v[htmlRegStr] && $v[tip]} RegStr="$v[htmlRegStr]" Message="$v[tip]"{/if}>{echo empty($datas) ? htmlspecialchars($v[htmlDefaultValue]) : htmlspecialchars($datas[$v[htmlName]])}</textarea>
+					{case 'radio'}
+						<div class="radio-list">
+							{loop $v[choose] $k1 $v1}
+								<label class="radio-inline"><input type="radio" name="$v[htmlName]" id="$v[htmlName]$k1" value="$v1[value]" class="radio"{if empty($datas[$v[htmlName]]) && isset($v[htmlDefaultValue]) && $v[htmlDefaultValue] == $v1[value] || !empty($datas[$v[htmlName]]) && $datas[$v[htmlName]] == $v1[value]} checked{/if} />$v1[key]</label>
+							{/loop}
+						</div>
+					{case 'checkbox'}
+						<div class="checkbox-list">
+						{loop $v[choose] $k1 $v1}
+							<label class="checkbox-inline"><input type="checkbox" name="{$v[htmlName]}[]" id="$v[htmlName]$k1" value="$v1[value]" class="checkbox"{if empty($datas[$v[htmlName]]) && isset($v[htmlDefaultValue]) && $v[htmlDefaultValue] & (1 << ($v1[value] - 1)) || !empty($datas[$v[htmlName]]) && $datas[$v[htmlName]] & (1 << ($v1[value] - 1))} checked{/if} />$v1[key]</label>
+						{/loop}
+						</div>
+					{case 'select'}
+						<select name="$v[htmlName]" id="$v[htmlName]" class="form-control">
+						{loop $v[choose] $k1 $v1}
+						<option value="$v1[value]"{if empty($datas[$v[htmlName]]) && isset($v[htmlDefaultValue]) && $v[htmlDefaultValue] == $v1[value] || !empty($datas[$v[htmlName]]) && $datas[$v[htmlName]] == $v1[value]} selected{/if}>$v1[key]</option>
+						{/loop}
+						</select>
+					{case 'file'}
+						<input type="file" name="$v[htmlName]" id="$v[htmlName]" value="" class="txt"{if $v[htmlWidth]} style="width:$v[htmlWidth]px"{/if}{if $v[htmlIsReg] && $v[htmlRegStr] && $v[tip]} RegStr="$v[htmlRegStr]" Message="$v[tip]"{if $update} emptyRunReg="false"{/if}{/if} />
+						{if empty($datas[$v[htmlName]])}
+							{if $v[htmlDefaultValue]}
+								<br />
+								<a href="{u}$sys_dir_file$v[htmlDefaultValue]" target="_blank">查看$v[name]</a>
+							{/if}
+						{else}
+						<br />
+						<a href="{u}$sys_dir_file$datas[$v[htmlName]]" target="_blank">查看$v[name]</a>
+						{/if}
+					{case 'image'}
+						{if $var->menuAjax}<input type="hidden" name="$v[htmlName]" value="{var $datas[$v[htmlName]]}" />
+                        <iframe src="$adminUrl{?}action=sys&operation=ifUp&upName=$v[htmlName]" style="border:0px;" id="$v[htmlName]_if"></iframe><label><input type="checkbox" name="$v[htmlName]GetPic" value="1" class="checkbox"{if !empty($update) && !$update} onclick="if ($(this).attr('checked')) {$('#$v[htmlName]').attr('emptyRunReg', 'false');} else {$('#$v[htmlName]').attr({'emptyRunReg' : 'true'});}"{/if} />选取编辑器第一张图片</label>
+                        <div id="$v[htmlName]_img"></div>
+						<script>
+                        $('#$v[htmlName]_if').load(function(){
+							var mainheight = $(this).contents().find("body").height();
+							$(this).height(mainheight);
+						});
+						{if !empty($datas[$v[htmlName]]) || $v[htmlDefaultValue]}
+						setUpload('$v[htmlName]', '{echo !empty($datas[$v[htmlName]]) ? $datas[$v[htmlName]] : $v[htmlDefaultValue] }');
+						{/if}
+                        </script>
+						{else}
+							<input type="file" name="$v[htmlName]" id="$v[htmlName]" value="" class="txt"{if $v[htmlWidth]} style="width:$v[htmlWidth]px"{/if}{if $v[htmlIsReg] && $v[htmlRegStr] && $v[tip]} RegStr="$v[htmlRegStr]" Message="$v[tip]"{if $update} emptyRunReg="false"{/if}{/if} />
+							{if empty($datas[$v[htmlName]])}
+								{if $v[htmlDefaultValue]}
+									<br />
+									<a href="{u}$sys_dir_image$v[htmlDefaultValue]" target="_blank"><img src="{u}$sys_dir_image$v[htmlDefaultValue]"{if $v[imageWidth]} width="$v[imageWidth]"{/if}{if $v[imageHeight]} height="$v[imageHeight]"{/if} align="查看$v[name]"/></a>
+								{/if}
+							{else}
+							<br />
+							<a href="{u}$sys_dir_image$datas[$v[htmlName]]" target="_blank"><img src="{u}$sys_dir_image$datas[$v[htmlName]]"{if $v[imageWidth]} width="$v[imageWidth]"{/if}{if $v[imageHeight]} height="$v[imageHeight]"{/if} align="查看$v[name]"/></a>
+							{/if}
+						{/if}
+					{case 'editor'}
+{eval
+	include(qd('./editor/ckeditor/ckeditor.php'));
+	include(qd('./editor/ckfinder/ckfinder.php'));
+	$CKEditor                   = new CKEditor();
+	$CKEditor->basePath         = qu('./editor/ckeditor/');
+	$CKEditor->config['width']  = $v[htmlWidth];
+	$CKEditor->config['height'] = $v[htmlHeight];
+	$CKEditor->config['skin']   = 'office2003';
+	$CKEditor->returnOutput     = true;
+	CKFinder::SetupCKeditor($CKEditor, qu('./editor/ckfinder/'));
+	$editor_html=$CKEditor->editor($v[htmlName], !empty($datas[$v[htmlName]]) ? $datas[$v[htmlName]] : '');
+	echo $editor_html;
+}
+					{/switch}
+				</td>
+				<td id="$v[htmlName]_tip"></td>
+			</tr>
+			{/if}
+			{/loop}
+			<tr>
+				<td></td>
+				<td><input type="submit" value="{if !empty($update) && $update}编辑{else}提交{/if}" class="btn green" /></td>
+			</tr>
+		</table>
+	</form>
+
+	{/if}
+{sub f}

@@ -1,0 +1,2 @@
+<?php exit;?>a:12:{s:15:"disperse_ticket";s:1:"0";s:14:"thumb_position";s:1:"5";s:16:"disperse_article";s:1:"0";s:8:"memcache";s:1:"0";s:7:"rewrite";s:1:"1";s:11:"rewriteRule";s:132:"/^((?:\/[^\/?]+)+\/?)\.html(?:\?(.*))?$/							/index.php?path=$1&$2
+/^((?:\/[^\/?]+)+\/?)(?:\?(.*))?$/							/index.php?path=$1&$2";s:9:"water_pos";s:1:"9";s:9:"water_img";s:25:"img/sys/1527765067194.png";s:11:"water_allow";s:1:"1";s:7:"webName";s:15:"风暴云支付";s:9:"tplFolder";s:8:"default/";s:7:"runTask";s:1:"1";}

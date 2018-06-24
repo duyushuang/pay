@@ -1,0 +1,89 @@
+{subtemplate header}
+	
+	{if $method=='index'}
+	{adminList
+		备注|name
+		    ||link2,创建,create=$v[id];link2,编辑,edit=$v[id];link2,删除,del=$v[id]
+	}
+	{elseif $method=='create'}
+	<script language="javascript">
+	$(function(){
+		var add_f=function(name){
+			$('#f').append('<tr class="hover"><td align="right">标记“'+name+'”的描述：</td><td><input type="text" name="'+name+'" /></td></tr>');
+		}
+		$('#btn_ini').click(function(){
+			$('#f').children().each(function(){$(this).remove();});
+			var matches=$('#sql').val().match(/\{([a-zA-Z0-9_]+)\}/g);
+			if(matches){
+				var tagLog = '';
+				for(var i=0;i<matches.length;i++){
+					if(matches[i]!=='{pre}') {
+						var tagName = matches[i].substring(1,matches[i].length-1);
+						if (tagLog.indexOf(tagName+'|') == -1){
+							add_f(tagName);
+							tagLog += tagName+'|';
+						}
+					}
+				}
+			}
+		});
+	})
+	</script>
+	<div class="row">
+	<div class="col-md-12">
+		<div class="note note-success">
+			<h4 class="block">友情提示</h4>
+			<p>
+				需要填写的名字用“{”+标记+“}”，如：{name}</br>
+				例：CREATE TABLE `{name}`(`id` int unsigned NOT NULL,`title` varchar(74),PRIMARY KEY(`id`))</br>
+				数据库表前缀为：“{echo PRE}”可以用{pre}代替</br>
+			</p>
+		</div>
+	</div>
+</div>
+	<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+		{v sys_hash_code}
+		{if $edit}<input type="hidden" name="is_edit" value="yes" />{/if}
+		<table class="table table-bordered table-striped">
+			<tr>
+				<td valign="top" align="right" width="150">备注：</td>
+				<td><input type="text" name="name" value="$item[name]" class="form-control" /></td>
+			</tr>
+			<tr>
+				<td valign="top" align="right" width="150">SQL语句：</td>
+				<td><textarea cols="120" rows="12" id="sql" name="sql" class="form-control">{html $item[sql]}</textarea></td>
+			</tr>
+			<tbody id="f">
+			{loop $args $k $v}
+				<tr class="hover">
+					<td align="right">标记“{$k}”的描述：</td><td><input type="text" name="$k" value="$v" class="form-control" /></td>
+				</tr>
+			{/loop}
+			</tbody>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="{if $edit}编辑{else}添加{/if}" class="btn green" /><input type="button" value="初始化" id="btn_ini" class="btn default" /></td>
+			</tr>
+		</table>
+	</form>
+	{elseif $method=='create2'}
+	<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+		{v sys_hash_code}
+		{if $edit}<input type="hidden" name="is_edit" value="yes" />{/if}
+		<table class="table table-bordered table-striped">
+			<tr>
+				<th colspan="4" class="partition">执行“{$item[name]}”</th>
+			</tr>
+			{loop $args $k $v}
+				<tr class="hover">
+					<td align="right">{$v}：</td><td><input type="text" name="$k" value="" class="form-control" /></td>
+				</tr>
+			{/loop}
+			<tr>
+				<td></td>
+				<td><input type="submit" value="执行" class="btn green" /></td>
+			</tr>
+		</table>
+	</form>
+	{/if}
+{subtemplate footer}

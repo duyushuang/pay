@@ -1,0 +1,2 @@
+"use strict";(function($){$(function(){var selectedLang=$.cookie('selected-lang')||$('[data-is-default-lang]').attr('data-lang-ident');if(selectedLang&&$('a[data-lang-ident='+selectedLang+']').length&&!window.IS_NO_JS_LANG_REDIRECT){window.location.href=$('a[data-lang-ident='+selectedLang+']').attr('href');return;}
+$('a[data-lang-ident]').click(function(){var href=$(this).attr('href');var lang=$(this).attr('data-lang-ident');$.cookie('selected-lang',lang,{path:'/',expires:3600});window.location.href=href;return false;});});})(jQuery);

@@ -1,0 +1,94 @@
+{sub h}
+{if $method == 'list1'}
+{adminList
+	删？|id  |del
+	排序|sort|sort
+	标记|marker
+	备注|remark|code,{html $v[remark]}
+	    |id    |link2,详细/编辑,method=edit&page=$page&id=$v[id]
+}
+{elseif $method == 'add' || $method == 'edit'}
+{adminForm
+	标记,null=请输入解析标记|marker|textarea
+	代码,null=请输入解析代码|code  |textarea
+	是否立即输出            |output|radio,1=是,0=否
+	参数                    |parameter|textarea
+	备注                    |remark|text||255
+}
+{elseif $method == 'list2'}
+<script language="javascript">
+$(function(){
+	var i={eval echo count($markerList);};
+	$('#btn_add').click(function(){
+		var html='<tr class="hover">'+$('#tb_tpl_b_m').html()+'</tr>';
+		html=html.replace(/o\[0\]/g,'o['+i+']');
+		$('#tb_tpl_b').append(html);
+		i++;
+	});
+});
+</script>
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-success">
+			<h4 class="block">友情提示</h4>
+			<p>
+				注：该操作仅适合熟手，请谨慎操作。<br />
+				修改模板解析标记，标记的开始和结束用{}表示，标记里面的数字代表该数字位置的数据，解析代码中的对应数字被替换成该数字对应的数据。<br />
+				立即输出代表在解析模板的时候就生成静态数据。<br />
+			</p>
+		</div>
+	</div>
+</div>
+<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+	{v sys_hash_code}
+		<table class="table table-bordered table-striped" id="tb_tpl">
+			<thead>
+				<tr class="header">
+					<th>模板标记</th>
+					<th>解析代码</th>
+					<th>立即输出</th>
+					<th>附加参数</th>
+					<th>备注</th>
+					<th>编辑</th>
+				</tr>
+			</thead>
+			<tbody id="tb_tpl_b">
+				<tr class="hover" style="display:none" id="tb_tpl_b_m">
+					<td valign="top"><textarea class="form-control" name="m[]"></textarea></td>
+					<td><textarea class="form-control" name="d[]"></textarea></td>
+					<td class="vtop rowform">
+						<div class="radio-list">
+							<label class="radio-inline"><input name="o[0]" type="radio" value="1" />是</label>
+							<label class="radio-inline"><input name="o[0]" type="radio" value="0" checked />否</label>
+						</div></td>
+					<td><textarea class="form-control" name="a[]"></textarea></td>
+					<td><input class="form-control" type="text" name="b[]" />
+					</td>
+					<td><a href="javascript:" onclick="$(this).parent().parent().remove()" class="btn default btn-xs blue">删除</a></td>
+				</tr>
+				{loop $markerList $k $v}
+				<tr class="hover">
+					<td valign="top"><textarea class="form-control" name="m[]">$v[marker]</textarea></td>
+					<td><textarea class="form-control" name="d[]">$v[code]</textarea></td>
+					<td class="vtop rowform">
+						<div class="radio-list">
+							<label class="radio-inline"><input name="o[{++ $k}]" type="radio" value="1"{if $v[output]} checked{/if} />是</label>
+							<label class="radio-inline"><input name="o[{++ $k}]" type="radio" value="0"{if !$v[output]} checked{/if} />否</label>
+						</div></td>
+					<td><textarea name="a[]" class="form-control">$v[parameter]</textarea></td>
+					<td><input type="text" name="b[]" value="$v[remark]" class="form-control" />
+					</td>
+					<td><a href="javascript:" onclick="$(this).parent().parent().remove()" class="btn default btn-xs blue">删除</a></td>
+				</tr>
+				{/loop}
+			</tbody>
+			<tr>
+				<td colspan="5"><div class="fixsel">
+						<input type="submit" class="btn green" id="submit_tasksubmit" name="tasksubmit" value="提交" />
+						<input type="button" class="btn red" value="添加" id="btn_add" />
+					</div></td>
+			</tr>
+		</table>
+	</form>
+{/if}
+{sub f}

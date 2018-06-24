@@ -1,0 +1,710 @@
+{sub h}
+	{if $method=='sql'}
+<script language="javascript">
+var sql_create_table=function(){
+	var sql=$('#sql').val();
+	if(sql!=''){
+		if(sql.substr(sql.length-1,1)!=';')sql+=';';
+		sql+='\n';
+	}
+	$('#sql').val(sql+'CREATE TABLE `{echo PRE}table_name` (\n\t`id` int unsigned not null auto_increment,\n\t`column_name` column_type,\n\tPRIMARY KEY (`id`)\n) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;');
+}
+var post_sql=function(sql){
+	if (sql != void(0))$('#sql').val(sql);
+	$('#form1').submit();
+}
+var sql_show_tables=function(){
+	$('#sql').val('show tables;');
+	post_sql();
+	
+}
+var sql_show_databases=function(){
+	$('#sql').val('show databases;');
+	post_sql();
+}
+var sql_create_user=function(){
+	$('#sql').val('grant all privileges on db_name.{echo PRE}table_name to \'username\'@\'localhost\' identified by \'password\'/*创建用户*/;');
+}
+var sql_drop_user=function(){
+	$('#sql').val('drop user \'username\'@\'localhost\'/*删除用户*/;');
+};
+$.ajaxSetup({cache:false});
+var sqlList = {echo string::json_encode($sqlList1)};
+$(function(){
+	$('#addSql').click(function(){
+		var saveName = $('#saveName').val().replace(/^\s+|\s+$/g, '');
+		var sql      = $('#sql').val().replace(/^\s+|\s+$/g, '');
+		if (!saveName) {
+			alert('请输入保存的名字');
+			return;
+		}
+		if (!sql) {
+			alert('请输入要保存的SQL');
+			return;
+		}
+		$.ajax({
+			type:'post',
+			url:'{r}/ajax/sql/?action=data&operation=save',
+			data:'hash='+encodeURI('{echo $var->sys_hash}')+'&name='+encodeURI(saveName)+'&sql='+encodeURI(sql),
+			dataType:'json',
+			success:function(json){
+				if (json.err) alert(json.err);
+				else if (json.status) {
+					$('#sqlList').append('<option value="'+json.id+'">'+saveName+'</option>');
+					sqlList[json.id] = sql;
+					alert('添加成功');
+				} else alert('未知错误');
+			},
+			error:function(){
+				alert('添加失败，请重试！');
+			}
+		});
+	});
+	$('#sqlList').change(function(){
+		if ($(this).val() != '') {
+			var id = $(this).val();
+			var sql = sqlList[id];
+			post_sql(sql);
+		}
+	});
+});
+</script>
+<form method="post" enctype="application/x-www-form-urlencoded" id="form1" class="form-horizontal ajaxForm" data-box="#sql_rs">
+<input type="hidden" name="exesql" value="yes" />
+{echo $var->sys_hash_code}
+	<table class="table table-bordered table-striped">
+		<tr class="hover">
+			<td><textarea name="sql" cols="100" rows="10" id="sql" class="form-control">{eval echo htmlspecialchars($sql);}</textarea></td>
+		</tr>
+		<tr class="hover">
+			<td><input type="submit" name="Submit2" value="执行" class="btn blue" />
+					<input type="button" value="创建表" onclick="sql_create_table()" class="btn blue" />
+					<input type="button" value="显示所有表" onclick="sql_show_tables()" class="btn blue" />
+					<input type="button" value="显示所有数据库" onclick="sql_show_databases()" class="btn blue" />
+					<input type="button" value="创建用户" onclick="sql_create_user()" class="btn blue" />
+					<input type="button" value="删除用户" onclick="sql_drop_user()" class="btn blue" />
+			</td>
+		</tr>
+		<tr class="hover">
+			<td>
+				<div class="col-md-2">
+					<div class="input-group">
+						<input type="text" class="form-control" id="saveName" />
+						<span class="input-group-btn">
+							<button type="button" class="btn blue" id="addSql">保存SQL</button>
+						</span>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="form-group">
+						<label class="col-md-3 control-label">快捷SQL：</label>
+						<div class="col-md-7">
+							<select id="sqlList" class="form-control">
+								<option value="">请选择要执行的SQL</option>
+								{loop $sqlList2 $k $v}
+								<option value="$k">$v</option>
+								{/loop}
+							</select>
+						</div>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr class="hover">
+			<td><div style="width: auto;border: 1px solid #CCCCCC;overflow-y: scroll;height: 200px;white-space: pre;" id="sql_rs">{echo !empty($show_result) ? $show_result : ''}</div></td>
+		</tr>
+	</table>
+</form>
+{elseif $method=='import'}
+{if empty($import)}
+<div class="row">
+<table width="100%" class="table table-bordered table-striped">
+	<tr class="header">
+		<th>文件名</th>
+		<th>文件大小</th>
+		<th>最后修改时间</th>
+		<th></th>
+	</tr>
+	{loop $sql_file_list $v}
+	<tr class="hover">
+		<td><a href="$baseUrl&download={url $v[name]}" title="下载">$v[name]</a></td>
+		<td>{echo string::formatSize($v[file_size])}</td>
+		<td>$v[filemtime]</td>
+		<td><!--[<a href="$nowurl&import={url $v[name]}&encoding=gbk">导入GBK</a>]--><a href="{echo NOW_URL}&import={url $v[name]}&encoding=utf-8" class="ajaxify btn btn-xs green">导入<!--UTF-8--></a><a href="{echo NOW_URL}&del={url $v[name]}" class="ajaxify btn btn-xs green">删除</a></td>
+	</tr>
+	{/loop}
+	<tr>
+		<td colspan="4"><input type="button" value="本地上传导入" class="btn" onclick="location.href='$baseUrl&method=import2'" /></td>
+	</tr>
+</table>
+</div>
+{else}
+<link href="{su}style/css/progress.css" rel="stylesheet" type="text/css" />
+<!--<div>成功导入：$import</div>-->
+<style type="text/css">
+.process{
+	border:#0000FF solid 1px;
+	padding:1px;
+	width:500px;
+	height:20px;
+	overflow: hidden;
+}
+.process .process_text{
+	width:500px;
+	text-align:center;
+	font-size:12px;
+	height:20px;
+	line-height:20px;
+	position: relative;
+	top:-20px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+.process .process_fill{
+	height:20px;
+	background-color:#0099FF;
+	overflow:hidden;
+}
+</style>
+<div class="row">
+<table class="table table-bordered table-striped">
+	<tr class="tip">
+		<td colspan="2">数据库备份</td>
+	</tr>
+	<tr>
+		<th>导入数据库</th>
+		<td style="word-wrap: break-word; word-break:break-all;">{echo u($sqlFile)}</td>
+	</tr>
+	<tr>
+		<th>备份进度</th>
+		<td id="box">
+		</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td><input type="button" id="btn" class="btn green" value="开始" /><span style="color:red;margin-left:50px;" id="msg"></span></td>
+	</tr>
+</table>
+</div>
+<script language="javascript">
+var process = function(boxId, minNum, maxNum, call){
+	this.boxId = boxId;
+	this.id = false;
+	this.$ = function(id, pid){
+		return document.getElementById(id);
+	};
+	this.createId = function(){
+		do {
+			var tmpId = 'process' + Date.now() + Math.random();
+			tmpId = tmpId.replace('.', '_');
+		} while (this.$(tmpId));
+		this.id = tmpId;
+	}
+	this.createId();
+	this.pwd = 500;
+	this.p   = 0;
+	this.orange = 30;
+	this.yellow = 55;
+	this.green = 85;
+	this.ini = function() {
+		//var html ='<div class="process" id="'+this.id+'"><div class="process_fill" style="width:0px"></div><div class="process_text">0%</div></div>';
+		var html = '<div class="progress progress--active" id="'+this.id+'"><b class="progress__bar"><span class="progress__text"><em>0%</em></span></b></div>';
+		$('#'+boxId).append(html);
+	};
+	this.process = function(p){
+		this.p = p;
+		p /= 100;
+		var p1 = Math.floor(p * 100);
+		p = p1 / 100;
+		var width = this.pwd * p;
+		var obj = $('#' + this.id);
+		if (this.p >= 100) {
+			obj.addClass('progress--complete');
+	        obj.find('.progress__bar').addClass('progress__bar--blue');
+		} else if (this.p >= this.green) {
+	        obj.find('.progress__bar').addClass('progress__bar--green');
+	    } else if (this.p >= this.yellow) {
+	    	obj.find('.progress__bar').addClass('progress__bar--yellow');
+	    } else if (this.p >= this.orange) {
+	    	obj.find('.progress__bar').addClass('progress__bar--orange');
+	    } else if (this.p == 0) {
+			obj.find('.progress__bar').removeClass('progress__bar--green').removeClass('progress__bar--yellow').removeClass('progress__bar--orange').removeClass('progress__bar--blue');
+	   		obj.removeClass('progress--complete');
+		}
+		obj.find('.progress__bar').css({width:p1+'%'});
+		obj.find('.progress__text').html(p1 + '%'+'('+(this.num - this.minNum + 1)+'/'+this.length+')');
+	};
+	this.setNum = function(minNum, maxNum){
+		this.minNum = minNum;
+		this.maxNum = maxNum;
+		this.length = this.maxNum - this.minNum + 1;
+		this.num    = minNum > 0 ? minNum - 1 : 0;
+	};
+	this.setNum(minNum, maxNum);
+	this.ini();
+	this.value = function(num) {
+		if (num >= this.minNum && num <= this.maxNum) {
+			if (num > 0) {
+				this.num = num;
+				this.process(((num - this.minNum + 1) / this.length) * 100);
+				if (num == this.maxNum && this.call != '') this.call(this);
+			}
+		} else {
+			this.num = this.minNum - 1;
+			this.process(0);
+		}
+	};
+	this.next = function(num){
+		if (num == void(0)) num = 1;
+		this.num += num;
+		this.value(this.num);
+	};
+	this.call = call == void(0) ? '' : call;
+	this.value(this.num);
+};
+var p = new process('box', 1 , $count);
+var isStart = false;
+p.value(0);
+var robot = {
+	isStart    : false,
+	isAjax     : false,
+	seek       : 0,
+	dataStart  : 0,
+	showMsg:function(msg){
+		$('#msg').html(msg);
+	},
+	start:function(){
+		this.isStart = true;
+		var obj = this;
+		this.isAjax = true;
+		$.ajax({
+			type:'post',
+			url:'{r}/ajax/database/import/',
+			data:'import={url $import}&start=' + this.dataStart + '&seek=' + this.seek,
+			dataType:'json',
+			success: function(rs){
+				obj.isAjax = false;
+				if (rs.status) {
+					rs.count > 0 && p.next(rs.count);
+					if (!rs.complate) {
+						obj.dataStart += rs.count;
+						obj.seek       = rs.seek;
+						if (obj.isStart) obj.start();
+					}
+				} else {
+					if (rs.msg) obj.showMsg(rs.msg);
+					else obj.showMsg('错误');
+					obj.stop();
+				}
+			},
+			error: function(rs){
+				obj.showMsg(rs.response);
+				obj.isAjax = false;
+				obj.stop();
+			}
+		});
+	},
+	stop:function(){
+		this.isStart = false;
+		if (this.isAjax) {
+			var obj = this;
+			setTimeout(function(){
+				obj.stop();
+			}, 1000);
+		} else {
+			$('#btn').val('开始').attr('disabled', false);
+			isStart = false;
+		}
+	}
+};
+p.call = function() {
+	robot.stop();
+};
+$('#btn').click(function(){
+	if (isStart) {//停止
+		//$(this).val('开始');
+		//isStart = false;
+		$(this).val('正在停止，请勿点击...');
+		$(this).attr('disabled', true);
+		robot.stop();
+	} else {//开始
+		taodianjin = $('#taodianjin').attr('checked') ? 1: 0;
+		$(this).val('停止');
+		isStart = true;
+		robot.start();
+	}
+});
+</script>
+{/if}
+{elseif $method == 'import2'}
+	{adminForm
+		upload
+		preg
+		备份文件|file  |code,<input type="file" name="file" id="file" RegStr="/\.(sql)$/i" Message="请选择要上传的备份文件(*.sql)" class="txt" style="width:240px" />
+	}
+{elseif $method=='export'}
+{if !$complate}
+<style type="text/css">
+.tables{width:600px;clear:both}
+.tables li{width:200px;float:left;height:25px;line-height:25px;}
+</style>
+<script language="javascript">
+$(function(){
+	$('[name=backupType]').click(function(){
+		switch($(this).val()) {
+			case '1':
+				$('#backname').show();
+			break;
+			case '2':
+				$('#backname').hide();
+			break;
+		}
+	});
+	$('[name=backupType][value=1]').attr({checked:true}).click();
+});
+</script>
+<form method="post" enctype="application/x-www-form-urlencoded" action="$baseUrl&method=exportRun" class="form-horizontal ajaxForm" data-box=".page-content .page-content-body">
+{v sys_hash_code}
+<table class="table table-bordered table-striped">
+	<tr class="hover">
+		<td align="right">备份类型：</td>
+		<td align="left">
+			<div class="radio-list">
+				<label class="radio-inline"><input type="radio" name="backupType" value="1" class="checkbox" />数据备份</label>
+				<label class="radio-inline"><input type="radio" name="backupType" value="2" class="checkbox" />安装备份</label>
+			</div>
+		</td>
+	</tr>
+	<tr class="hover" id="backname" style="display:none">
+		<td align="right">备份名称：</td>
+		<td align="left">./<input type="text" name="save_name" value="{echo date('Y-m-d H_i_s', time::$timestamp)}" class="form-control input-inline" style="width:200px" />.sql</td>
+	</tr>
+	<tr class="hover">
+		<td valign="top" align="right">要备份的表：</td>
+		<td align="left">
+			<div class="checkbox-list">
+				<label class="checkbox-inline"><input type="checkbox" id="back_all0" checked onclick="$('#back_all1').checkAll(null,false);$('[name=backup_tables\\[\\]]').checkAll(this)" class="checkbox" />全部</label>
+				<label class="checkbox-inline"><input type="checkbox" id="back_all1" onclick="$('#back_all0').checkAll(null,false);$('[name=backup_tables\\[\\]]').checkAll(null,false);$('[name=backup_tables\\[\\]][value*={echo PRE}]').checkAll(this);" class="checkbox" />前缀({echo PRE})</label>
+			</div>
+			<div class="checkbox-list">
+					{loop $tables $v}
+				<label class="checkbox-inline"><input type="checkbox" value="$v" name="backup_tables[]" id="$v" checked class="checkbox" />$v</label>
+					{/loop}
+			</div>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td align="left"><input type="submit" value="提交" class="btn green" /></td>
+	</tr>
+</table>
+</form>
+{else}
+<div>备份成功：{echo $backupType == 2 ? u(mu('./install/'.$complate)) : u($backupDir.$complate)}.sql</div>
+{/if}
+{elseif $method == 'exportRun'}
+<style type="text/css">
+.process{
+	border:#0000FF solid 1px;
+	padding:1px;
+	width:500px;
+	height:20px;
+	overflow: hidden;
+}
+.process .process_text{
+	width:500px;
+	text-align:center;
+	font-size:12px;
+	height:20px;
+	line-height:20px;
+	position: relative;
+	top:-20px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FF0000;
+}
+.process .process_fill{
+	height:20px;
+	background-color:#0099FF;
+	overflow:hidden;
+}
+</style>
+<link href="{su}style/css/progress.css" rel="stylesheet" type="text/css" />
+<div class="row">
+	<table class="table table-bordered table-striped">
+		<tr>
+			<td colspan="2">数据库备份</td>
+		</tr>
+		<tr>
+			<th>备份的表</th>
+			<td style="word-wrap: break-word; word-break:break-all;width:80%">{echo implode(',', $tables)}</td>
+		</tr>
+		<tr>
+			<th>备份路径</th>
+			<td>{echo u($saveFile)}</td>
+		</tr>
+		<tr>
+			<th>备份进度</th>
+			<td id="box">
+				<table class="tab_view">
+					<tr>
+						<th>整体进度</th>
+						<td>
+							<div style="width:500px;" id="box_all"></div>
+						</td>
+					</tr>
+					<tr>
+						<th></th>
+						<td>&nbsp;</td>
+					</tr>
+					<tr>
+						<th>当前进度</th>
+						<td id="box_table">
+							<div style="width:500px;" id="box_table"></div>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="button" id="btn" class="btn green" value="开始" /><span style="color:red;margin-left:50px;" id="msg"></span></td>
+		</tr>
+	</table>
+</div>
+<script language="javascript">
+var process = function(boxId, minNum, maxNum, call){
+	this.boxId = boxId;
+	this.id = false;
+	this.$ = function(id, pid){
+		return document.getElementById(id);
+	};
+	this.createId = function(){
+		do {
+			var tmpId = 'process' + Date.now() + Math.random();
+			tmpId = tmpId.replace('.', '_');
+		} while (this.$(tmpId));
+		this.id = tmpId;
+	}
+	this.createId();
+	this.pwd = 500;
+	this.p   = 0;
+	this.orange = 30;
+	this.yellow = 55;
+	this.green = 85;
+	this.ini = function() {
+		//var html ='<div class="process" id="'+this.id+'"><div class="process_fill" style="width:0px"></div><div class="process_text">0%</div></div>';
+		var html = '<div class="progress progress--active" id="'+this.id+'"><b class="progress__bar"><span class="progress__text"><em>0%</em></span></b></div>';
+		$('#'+boxId).append(html);
+	};
+	this.process = function(p){
+		this.p = p;
+		p /= 100;
+		var p1 = Math.floor(p * 100);
+		p = p1 / 100;
+		var width = this.pwd * p;
+		var obj = $('#' + this.id);
+		if (this.p >= 100) {
+			obj.addClass('progress--complete');
+	        obj.find('.progress__bar').addClass('progress__bar--blue');
+		} else if (this.p >= this.green) {
+	        obj.find('.progress__bar').addClass('progress__bar--green');
+	    } else if (this.p >= this.yellow) {
+	    	obj.find('.progress__bar').addClass('progress__bar--yellow');
+	    } else if (this.p >= this.orange) {
+	    	obj.find('.progress__bar').addClass('progress__bar--orange');
+	    } else if (this.p == 0) {
+			obj.find('.progress__bar').removeClass('progress__bar--green').removeClass('progress__bar--yellow').removeClass('progress__bar--orange').removeClass('progress__bar--blue');
+	   		obj.removeClass('progress--complete');
+		}
+		obj.find('.progress__bar').css({width:p1+'%'});
+		obj.find('.progress__text').html(p1 + '%'+'('+(this.num - this.minNum + 1)+'/'+this.length+')');
+	};
+	this.setNum = function(minNum, maxNum){
+		this.minNum = minNum;
+		this.maxNum = maxNum;
+		this.length = this.maxNum - this.minNum + 1;
+		this.num    = minNum > 0 ? minNum - 1 : 0;
+	};
+	this.setNum(minNum, maxNum);
+	this.ini();
+	this.value = function(num) {
+		if (num >= this.minNum && num <= this.maxNum) {
+			if (num > 0) {
+				this.num = num;
+				this.process(((num - this.minNum + 1) / this.length) * 100);
+				if (num == this.maxNum && this.call != '') this.call(this);
+			}
+		} else {
+			this.num = this.minNum - 1;
+			this.process(0);
+		}
+	};
+	this.next = function(num){
+		if (num == void(0)) num = 1;
+		this.num += num;
+		this.value(this.num);
+	};
+	this.call = call == void(0) ? '' : call;
+	this.value(this.num);
+};
+var tables = {echo string::json_encode($tables)};
+var p0 = new process('box_all', 1 , tables.length);
+var p1 = new process('box_table', 0, 0);
+var isStart = false;
+p0.value(0);
+var robot = {
+	tables     : tables,
+	tableIndex : 0,
+	isGetSize  : false,
+	dataCount  : 0,
+	dataStart  : 0,
+	isId       : false,
+	isStart    : false,
+	isAjax     : false,
+	showMsg:function(msg){
+		$('#msg').html(msg);
+	},
+	start:function(){
+		this.isStart = true;
+		var obj = this;
+		this.isAjax = true;
+		if (!this.isGetSize) {
+			$.ajax({
+				type:'post',
+				url:'{r}/ajax/database/dataCount/',
+				data:'table='+encodeURIComponent(this.tables[this.tableIndex]),
+				dataType:'json',
+				success: function(rs){
+					obj.isAjax = false;
+					if (rs.status) {
+						obj.isGetSize = true;
+						if (rs.count > obj.dataCount) {
+							obj.dataCount = rs.count;
+							p1.setNum(1, rs.count);
+							p1.value(0);
+						} else {
+							p1.setNum(1, 1);
+						}
+						if (obj.isStart) obj.start();
+					} else {
+						if (rs.msg) obj.showMsg(rs.msg);
+						else obj.showMsg('错误');
+						obj.stop();
+					}
+				},
+				error: function(rs){
+					obj.showMsg(rs.response);
+					obj.isAjax = false;
+					obj.stop();
+				}
+			});
+		} else {
+			$.ajax({
+				type:'post',
+				url:'{r}/ajax/database/export/',
+				data:'table=' + encodeURIComponent(this.tables[this.tableIndex]) + '&start=' + this.dataStart+'&backupType=$backupType&saveName={url $save_name}&isId=' + this.isId + '&tableIndex=' + this.tableIndex + '&isLast=' + (this.tables.length == this.tableIndex + 1),
+				dataType:'json',
+				success: function(rs){
+					obj.isAjax = false;
+					if (rs.status) {
+						rs.count > 0 && p1.next(rs.count);
+						if (!rs.complate) {
+							obj.dataStart += rs.count;
+							obj.isId       = rs.isId;
+							if (obj.isStart) obj.start();
+						} else {
+							p0.next(1);
+							obj.tableIndex++;
+							if (obj.tableIndex < obj.tables.length) {
+								p1.setNum(0, 0);
+								p1.value(0);
+								obj.isGetSize = false;
+								obj.dataCount = 0;
+								obj.dataStart = 0;
+								obj.isId      = false;
+								if (obj.isStart) obj.start();
+							}
+						}
+					} else {
+						if (rs.msg) obj.showMsg(rs.msg);
+						else obj.showMsg('错误');
+						obj.stop();
+					}
+				},
+				error: function(rs){
+					obj.showMsg(rs.response);
+					obj.isAjax = false;
+					obj.stop();
+				}
+			});
+		}
+	},
+	stop:function(){
+		this.isStart = false;
+		if (this.isAjax) {
+			var obj = this;
+			setTimeout(function(){
+				obj.stop();
+			}, 1000);
+		} else {
+			$('#btn').val('开始').attr('disabled', false);
+			isStart = false;
+		}
+	}
+};
+p0.call = function() {
+	robot.stop();
+};
+$('#btn').click(function(){
+	if (isStart) {//停止
+		//$(this).val('开始');
+		//isStart = false;
+		$(this).val('正在停止，请勿点击...');
+		$(this).attr('disabled', true);
+		robot.stop();
+	} else {//开始
+		taodianjin = $('#taodianjin').attr('checked') ? 1: 0;
+		$(this).val('停止');
+		isStart = true;
+		robot.start();
+	}
+});
+</script>
+{elseif $method == 'exportTrigger'}
+{if !$complate}
+<style type="text/css">
+.tables{width:600px;clear:both}
+.tables li{width:200px;float:left;height:25px;line-height:25px;}
+</style>
+<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal ajaxForm" data-box=".page-content .page-content-body">
+{v sys_hash_code}
+<table class="table table-bordered table-striped">
+	<tr class="hover" id="backname">
+		<td align="right">备份名称：</td>
+		<td align="left">./<input type="text" name="saveName" value="{echo date('Y-m-d H_i_s', time::$timestamp)}" class="txt" style="width:200px" />.trigger.sql</td>
+	</tr>
+	<tr class="hover">
+		<td valign="top" align="right">要备份的触发器：</td>
+		<td align="left">
+			<label><input type="checkbox" id="back_all0" checked onclick="$('#back_all1').checkAll(null,false);$('[name=backup\\[\\]]').checkAll(this)" class="checkbox" />全部</label>
+			<label><input type="checkbox" id="back_all1" onclick="$('#back_all0').checkAll(null,false);$('[name=backup\\[\\]]').checkAll(null,false);$('[name=backup\\[\\]][value*={echo PRE}]').checkAll(this);" class="checkbox" />前缀({echo PRE})</label>
+			<ul class="tables">
+				{loop $list $v}
+				<li><input type="checkbox" value="$v" name="backup[]" id="$v" checked class="checkbox" /><label for="$v">$v</label></li>
+				{/loop}
+			</ul>
+		</td>
+	</tr>
+	<tr>
+		<td></td>
+		<td align="left"><input type="submit" value="提交" class="btn" /></td>
+	</tr>
+</table>
+</form>
+{else}
+<br />
+<div>备份成功：{echo u($backupDir.$complate)}.trigger.sql</div>
+{/if}
+
+{/if}
+{sub f}

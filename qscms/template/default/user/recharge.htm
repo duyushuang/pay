@@ -1,0 +1,24 @@
+{sub header}
+      <div class="col-md-10 right">
+        <div class="cb-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;充值金额</div>
+        <div class="content-box">
+          <form class="form-horizontal" action="{r}/user/recharge" method="post" target="_blank">
+          {v sys_hash_code}
+            <div class="form-group">
+              <label class="col-md-2 control-label">充值金额：</label>
+              <div class="col-md-6">
+                <input type="text" name="money" id="money" class="form-control" placeholder="金额最低1元，最高为9万" data-toggle="tooltip" title="" data-placement="top" data-original-title="充值金额最低为1元，充值金额可提现。" maxlength="5" onkeyup='this.value=this.value.replace(/\D/gi,"")'>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-2 col-md-6">
+                <button type="submit" class="btn btn-success">&nbsp;<span class="glyphicon glyphicon-save"></span>&nbsp;确认充值&nbsp;</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{sub footer}

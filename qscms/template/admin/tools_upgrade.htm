@@ -1,0 +1,74 @@
+{sub h}
+{if $method == 'upgrade'}
+<form method="post" enctype="multipart/form-data" class="form-horizontal">
+{v sys_hash_code}
+	<table class="table table-bordered table-striped">
+		<tr class="tip">
+			<td colspan="2">$__menuName</td>
+		</tr>
+		<tr>
+			<th>选择文件</th>
+			<td><input type="file" name="file" id="file" RegStr="/\.xml$/" Message="请选择升级文件" /><span id="file_tip"></span></td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="submit" class="btn green" value="提交" /></td>
+		</tr>
+	</table>
+</form>
+{elseif $method == 'getHex'}
+<form method="post" enctype="multipart/form-data" class="form-horizontal">
+{v sys_hash_code}
+	<table class="table table-bordered table-striped">
+		<tr class="tip">
+			<td colspan="2">$__menuName</td>
+		</tr>
+		<tr>
+			<th>选择文件</th>
+			<td><input type="file" name="file" id="file" /></td>
+		</tr>
+		<tr>
+			<th>二进制</th>
+			<td>
+				<textarea class="form-control" id="hex">{var $data}</textarea>
+				<br />
+				<input type="button" class="btn green" value="复制" onclick="copyText($('#hex').val());" />
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="submit" class="btn green" value="提交" /></td>
+		</tr>
+	</table>
+</form>
+{elseif $method == 'getHexXml'}
+<form method="post" enctype="multipart/form-data" class="form-horizontal">
+{v sys_hash_code}
+	<table class="table table-bordered table-striped">
+		<tr class="tip">
+			<td colspan="2">$__menuName</td>
+		</tr>
+		<tr>
+			<th>选择文件</th>
+			<td><input type="file" name="file" id="file" /></td>
+		</tr>
+		<tr>
+			<th>保存路径</th>
+			<td><input type="text" name="saveAs" class="form-control" value="{var $saveAs}" /></td>
+		</tr>
+		<tr>
+			<th>XML</th>
+			<td>
+				<textarea class="form-control" id="data">{var $data}</textarea>
+				<br />
+				<input type="button" class="btn green" value="复制" onclick="copyText($('#data').val());" />
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td><input type="submit" class="btn green" value="提交" /></td>
+		</tr>
+	</table>
+</form>
+{/if}
+{sub f}

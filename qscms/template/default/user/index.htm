@@ -1,0 +1,371 @@
+{sub header}
+
+      <style>
+
+.main-content .right .content-box{padding:0}.index-content{padding:0 15px;}.index-content .left-border{border-left:1px solid #e1e1e1}.index-content>.row>.col-sm-6{border-bottom: 1px solid #e1e1e1;padding:40px 25px 20px 35px;min-height:150px;}.index-content>.row>.col-sm-6:hover{background: #fafafa}.bf{font-size: 4em;color:#76C379}.bf1{font-size: 1.4em;color:#999}.bf2{font-size: 1.2em;color:#E43D40}.bf3{font-size: 0.9em}.notice{border:1px solid #e1e1e1;border-bottom: 0;border-top:0}.notice dl dd{line-height: 45px;padding:0 10px;border-bottom: 1px solid #e1e1e1;background: #fff}.notice dl dd span{color:#999}.notice dl dd a{display: block}
+
+
+
+.set-h3 {
+
+    text-align: center;
+
+    height: 37px;
+
+    border-top: 3px solid #E0E0E0;
+
+    background: #FCFCFC none repeat scroll 0% 0%;
+
+    border-bottom: 1px dotted #E0E0E0;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    line-height: 37px;
+
+    color: #12719D;
+
+}
+
+</style>
+
+      <div class="col-md-10 right">
+
+
+
+       {if !$member->m_isApi}
+
+<!--未开通支付权限提示开始-->
+
+<style type="text/css">
+
+.jmp_notice{width:100%;padding:15px;text-align:center;color:#fff;background:#ff8a00;line-height:24px;}
+
+.jmp_notice-unactive{display:none;}
+
+.jmp_notice.notice-top-banner {
+
+    background: #ff8a00;
+
+    font-family: PingFangSC-Regular;
+
+    font-size: 14px;
+
+    color: #fff;
+
+    letter-spacing: 0;
+
+    position: relative;
+
+}
+
+.jmp_notice.notice-top-banner .close-banner {
+
+    width: 14px;
+
+    height: 14px;
+
+    background-size: cover;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='//www.jinmipay.com/img/usercodeimg/x28-28.png',sizingMethod='scale')";
+
+    background-image: url(//www.jinmipay.com/img/usercodeimg/x28-28.png);
+
+    position: absolute;
+
+    top: 50%;
+
+    right: 18px;
+
+    margin-top: -7px;
+
+    cursor: pointer;
+
+}
+
+
+
+</style>
+
+
+
+<script type="text/javascript">
+
+    var $close = document.getElementById('J_closeNotice');
+
+    $close.onclick = function() {
+
+        $close.parentNode.setAttribute('class', 'jmp_notice notice-active notice-top-banner');
+
+        document.getElementById('J_navigation').style.top = '0';
+
+    }
+
+</script>
+
+
+
+
+
+<div id="J_closeNotice" class="jmp_notice notice-active notice-top-banner hidden-xs">
+
+<span class="glyphicon glyphicon-alert"></span>
+
+系统提示：您还未开通收款功能，完善账户资料后可联系客服QQ：<a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true" style="color:#000;" target="_blank" data-toggle="tooltip" title="" data-placement="top" data-original-title="点击联系客服" >{cfg web,qq}</a>免费开通。<a href="{cfg web,qqqun}" target="_blank" data-toggle="tooltip" title="" data-placement="top" data-original-title="点击加入QQ群，入群请勿发广告" style="color:#000;"><span class="glyphicon glyphicon-send"></span>&nbsp;QQ交流群</a>，欢迎加入！
+
+    <div class="close-banner" id="J_navigation"></div>
+
+</div>
+
+<!--未开通支付权限提示结束-->
+
+  {/if} 
+
+        <div class="cb-title">
+
+   <div class="row">
+
+            <div class="col-sm-6"><!--span class="glyphicon glyphicon-user"></span>&nbsp;商户ID：<span class="label label-success" title="{$member->m_id}">{$member->m_id}</span>&nbsp;会员级别：<span class="label label-success" title="{if $member->m_vip == 0}注册会员{else}{echo db::one_one('pay_bl', 'name', "id='$member->m_vip'");}{/if}">{if $member->m_vip == 0}注册会员{else}{echo db::one_one('pay_bl', 'name', "id='$member->m_vip'");}{/if}</span><a href="{r}vip?spam=u" target="_blank" class="label label-info">升级</a-->
+
+
+
+	<span class="glyphicon glyphicon-user"></span><span>商户首页</span>
+
+
+
+	</div>
+
+            <div class="col-sm-6 text-right bf3 gray hidden-xs">上次登录IP：{echo qscms::intip($member->m_lastLoginIp)} 登录时间：{date2 $member->m_lastLoginTime}&nbsp;&nbsp;</div>
+
+          </div>
+
+        </div>
+
+        <div class="alert alert-default" style="margin-bottom:0;border:1px solid #e1e1e1;border-top:0"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;您当前的账号结算周期为：<span class="label label-success" data-toggle="tooltip" title="" data-original-title="提现处理时间周一到周五">T+{if $member->m_cashT}{if $member->m_cashT == -1}0{else}$member->m_cashT{/if}{else}{cfg web,cashT}{/if}</span>&nbsp;&nbsp;如需提现请点击左侧导航的【申请提现】。</div>
+
+        <div class="content-box" style="border-bottom:0">
+
+          <div class="index-content">
+
+            <div class="row">
+
+              <div class="col-sm-6 col-xs-6">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-user bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1">账户ID</p>
+
+                  <p class="bf2">{$member->m_id}</p>
+
+                  <p class="bf3 hidden-xs"><a href="javascript:;" id="api" onclick="{if $member->m_isApi}showContent('接入密钥','{r}/user/api/show');{else}layer.msg('您还未开通API支付接口权限，请联系客服'){/if}" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="已经开通收款功能的可点击查看商户KEY">查看API</a></p>
+
+                </div>
+
+              </div>
+
+              <div class="col-sm-6 col-xs-6 left-border">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-bookmark bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1">套餐</p>
+
+                  <p class="bf2">{if $member->m_vip == 0}注册会员{else}{echo db::one_one('pay_bl', 'name', "id='$member->m_vip'");}{/if}</p>
+
+                  <p class="bf3 hidden-xs"><a href="#" id="shvip" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="购买会员套餐可以获得更低的费率">商户套餐</a></p>
+
+                </div>
+
+              </div>
+
+<script type="text/javascript">
+
+
+
+$('#shvip').on('click', function(){
+
+  layer.open({
+
+  type: 2,
+
+  title: '商户套餐',
+
+  maxmin: true,
+
+  shadeClose: true, //点击遮罩关闭层
+
+  area : ['80%' , '620px'],
+
+  content: '{r}/vip?u'
+
+  });
+
+});
+
+/*
+
+$('#api').on('click', function(){
+
+
+
+  layer.open({
+
+  type: 2,
+
+  title: '商户API',
+
+  maxmin: true,
+
+  shadeClose: true, //点击遮罩关闭层
+
+  area : ['60%' , '600px'],
+
+  content: '{r}/user/api?u'
+
+  });
+
+});
+
+*/
+
+</script>
+
+<style type="text/css">
+
+.jinmipay_yg{font-size:13px;color:#208e24;}
+
+
+
+</style>
+
+        <div class="content-box" style="border-bottom:0">
+
+          <div class="index-content">
+
+            <div class="row">
+
+              <div class="col-sm-6 col-xs-6">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-yen bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1">余额</p>
+
+                  <p class="bf2">{$member->m_money}<font class="jinmipay_yg">[元]</font></p>
+
+                  <p class="bf3 hidden-xs"><a href="{r}/user/takecash" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="提现账户余额到支付宝或银行卡">提现</a><span class="v-line">|</span><a href="{r}/user/recharge?u" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="充值余额到账户,余额可提现">充值</a></p>
+
+                </div>
+
+	</div>
+
+              <div class="col-sm-6 col-xs-6 left-border">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-piggy-bank bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1">已结算</p>
+
+                  <p class="bf2"><!--$allPayMoney1-->$cashMoney<font class="jinmipay_yg">[元]</font></p>
+
+                  <p class="bf3 hidden-xs"><a href="{r}/user/payments" title="" data-placement="bottom" data-original-title="查看自己提现计算记录">结算记录</a></p>
+
+                </div>
+
+              </div>
+
+              <div class="col-sm-6 col-xs-6">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-time bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1" title="未付和已付订单总个数">总订单</p>
+
+                  <p class="bf2">$dayTotal<font class="jinmipay_yg">[个]</font></p>
+
+                  <p class="bf3 hidden-xs"><a href="{r}/user/orders?startDate={echo date('Y-m-d');}" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="查看今天的通道交易记录">查看订单</a></p>
+
+                </div>
+
+              </div>
+
+              <div class="col-sm-6 col-xs-6 left-border">
+
+                <div class="col-sm-4"><span class="glyphicon glyphicon-usd bf"></span></div>
+
+                <div class="col-sm-8">
+
+                  <p class="bf1" title="今天的收入总额">今收</p>
+
+                  <p class="bf2">$dayMoney<font class="jinmipay_yg">[元]</font></p>
+
+                  <p class="bf3 hidden-xs"><a href="{r}/user/orders?fdate={echo date('Y-m-d');}" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="查看今天的通道交易记录金额">查看订单</a></p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <!--div class="alert alert-success" style="font-size:16px">
+
+        <span style="margin-right:10px;">推广链接</span>{echo WEB_URL;}/user/reg/{echo base64_encode($member->m_id);}<a href="javascript:;" style="margin-left:10px;" class="zclipCopy" title="点击复制" data="{echo WEB_URL;}/user/reg/{echo base64_encode($member->m_id);}">复制</a>
+
+        </div-->
+
+
+
+<div class="input-group" style="margin-top:10px;"> <span class=" input-group-addon" id="basic-addon3"><em class="glyphicon glyphicon-jpy hidden-xs"></em>推广链接</span> <input class="form-control"  aria-describedby="basic-addon3" value="{echo WEB_URL;}/user/reg/{echo base64_encode($member->m_id);}" data-toggle="tooltip" title="" data-placement="top" data-original-title="推广下线将可以获取27%提成，在一级二级三级下线处可提成的份额分别为20%，5%，2%。" > <span class="input-group-addon hidden-xs" id="basic-addon3"><a href="javascript:;" style="margin-left:10px;" class="zclipCopy" title="点击复制" data="{echo WEB_URL;}/user/reg/{echo base64_encode($member->m_id);}" >点击复制</a></span> </div>
+
+        <div class="notice-content">
+
+          <div class="cb-title"><span class="glyphicon glyphicon-bell"></span>&nbsp;系统公告</div>
+
+          <div class="notice">
+
+            <dl>
+
+            {eval $list = db::select('cms_notice', '*', '', "sort,id DESC", 10);}
+
+            {if $list}
+
+            {loopQuick $list}
+
+              <dd><a href="javascript:;" onclick="showContent('系统公告','{r}/user/notice/$v[id]')"><span>[{date3 $v[addTime]}]</span> $v[title]</a></dd>
+
+            {/loopQuick}
+
+            {/if}
+
+            </dl>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+<script>$('.zclipCopy').zclip({path: '{su}swf/copy.swf',copy: function(){return $(this).attr('data');},afterCopy: function(){layer.msg('复制成功');}});</script>
+
+{sub footer}

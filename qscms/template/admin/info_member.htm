@@ -1,0 +1,840 @@
+{sub h}
+
+{css_select jquery_ui}
+
+{jsFile ../jquery-ui.min}
+
+{jsFile datepicker,}
+
+{jsFile WdatePicker,index/My97DatePicker}
+
+
+
+{if $method == 'list'}
+
+{if !$isList}
+<div id="searchmembers">
+  <form method="post" autocomplete="off" name="cpform" class="form-horizontal ajaxForm" data-box=".page-content .page-content-body">
+    <input type="hidden" name="type" value="so" />
+    <table class="table table-bordered table-striped">
+      <tbody>
+        <tr>
+          <td s="1" class="td27" colspan="2">用户信息 </td>
+        </tr>
+        <tr> {eval
+          
+          $stat = time::$todayStart;
+          
+          $end = time::$todayEnd;
+          
+          $stat1 = $stat - 86400;
+          
+          $end1 = $end - 86400;
+          
+          }
+          <td s="1" class="td27"  colspan="2" ><span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-2"><br/>
+            <br/>
+            <em class="glyphicon glyphicon-user glyphicon-l"></em>系统用户：{echo db::dataCount('member')}<br/>
+            <br/>
+            --</span> <span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2"><br/>
+            <br/>
+            <em class="glyphicon glyphicon-remove"></em>禁用数量：{echo db::dataCount('member', 'status=1')}<br/>
+            <br/>
+            --</span> <span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-2"><br/>
+            <br/>
+            <em class="glyphicon glyphicon-thumbs-up"></em>今日注册：{echo db::dataCount('member', "regTime>=$stat AND regTime<$end")}<br/>
+            <br/>
+            --</span> <span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2"><br/>
+            <br/>
+            <em class="glyphicon glyphicon-heart"></em>昨日注册：{echo db::dataCount('member', "regTime>=$stat1 AND regTime<$end1")}<br/>
+            <br/>
+            --</span></font></td>
+        </tr>
+        <tr>
+          <td s="1" class="td27" colspan="2">通过姓名或ID搜索:</td>
+        </tr>
+        <tr class="noborder">
+          <td class="vtop rowform"><input type="text" value="" name="name" class="form-control" placeholder="输入用户姓名"></td>
+          <td class="vtop rowform"><input type="text" value="" name="uid" class="form-control" placeholder="输入用户ID"></td>
+        </tr>
+        <tr>
+          <td s="1" class="td27" colspan="2">手机号:</td>
+        </tr>
+        <tr class="noborder">
+          <td class="vtop rowform"><input type="text" value="" name="mobile" class="form-control" placeholder="输入用户手机号"></td>
+          <td s="1" class="vtop tips2">可使用通配符 *，多个用户名用半角逗号 "," 隔开</td>
+        </tr>
+        <tr class="noborder">
+          <td class="vtop rowform"><p class="td27m">是否购买商户套餐:</p>
+            <div class="radio-list" style="margin-left:25px;">
+              <label class="radio-inline">
+                <input type="radio" value="1" name="vip" class="radio">
+                是</label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="vip" class="radio">
+                否</label>
+            </div></td>
+          <td class="vtop rowform"><p class="td27m">是否设置独立费率:</p>
+            <div class="radio-list" style="margin-left:25px;">
+              <label class="radio-inline">
+                <input type="radio" value="1" name="bl" class="radio">
+                是</label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="bl" class="radio">
+                否</label>
+            </div></td>
+        </tr>
+        <tr class="noborder">
+          <td class="vtop rowform"><p class="td27m" >是否代理:</p>
+            <div class="radio-list" style="margin-left:25px;">
+              <label class="radio-inline">
+                <input type="radio" value="1" name="agent" class="radio">
+                是</label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="agent" class="radio">
+                否</label>
+            </div></td>
+          <td class="vtop rowform"><p class="td27m">是否开通收款权限:</p>
+            <div class="radio-list" style="margin-left:25px;">
+              <label class="radio-inline">
+                <input type="radio" value="1" name="isApi" class="radio">
+                是</label>
+              <label class="radio-inline">
+                <input type="radio" value="0" name="isApi" class="radio">
+                否</label>
+            </div></td>
+        </tr>
+      
+        <td class="vtop rowform"><p class="td27m">余额范围查询:</p>
+          <input type="text" style="width: 40%; margin-right: 5px;" value="" name="minMoney" class="form-control input-inline" />
+          --
+          <input type="text" style="width: 40%; margin-left: 5px;" value="" name="maxMoney" class="form-control input-inline" /></td>
+      <tr>
+        <td class="vtop rowform"><p class="td27m">是否禁用:</p>
+          <div class="radio-list" style="margin-left:25px;">
+            <label class="radio-inline">
+              <input type="radio" value="1" name="status" class="radio">
+              是</label>
+            <label class="radio-inline">
+              <input type="radio" value="0" name="status" class="radio">
+              否</label>
+          </div></td>
+        <td class="vtop rowform"><p class="td27m">按注册日期搜索:</p>
+          <input type="text" style="width: 40%; margin-right: 5px;" value="" name="regTime1" class="form-control input-inline" />
+          --
+          <input type="text" style="width: 40%; margin-left: 5px;" value="" name="regTime2" class="form-control input-inline" /></td>
+      </tr>
+        </tbody>
+      
+    </table>
+    <table class="tb tb2 ">
+      <tbody style="display: none" id="advanceoption">
+      </tbody>
+      <tbody>
+        <tr>
+          <td colspan="15"><div class="fixsel">
+              <input type="submit" value="马上搜索" data-toggle="tooltip" title="" data-original-title="按 Enter 键可随时提交您的修改" name="submit" id="submit_submit" class="btn green">
+              &nbsp;
+              
+              {if false}
+              <input type="checkbox" id="btn_more" onclick="if ($('#advanceoption').is(':hidden')) $('#advanceoption').show();else $('#advanceoption').hide();" value="1" class="checkbox">
+              <label for="btn_more">更多选项</label>
+              {/if} </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>
+<script language="javascript">
+
+$('[name=regTime1]').datepicker();
+
+$('[name=regTime2]').datepicker();
+
+$('[name=lastLoginTime1]').datepicker();
+
+$('[name=lastLoginTime2]').datepicker();
+
+$('[name=birth_month]').change(function(){
+
+	var thisYear = parseInt($('[name=birth_year]').val());
+
+	var thisMonth = $(this).val() == '' ? 1 : parseInt($(this).val());
+
+	var maxDay = 0;
+
+	if (thisMonth == 2) {
+
+		if (thisYear % 400 == 0 || thisYear % 4 == 0 && thisYear % 100 != 0) maxDay = 29;
+
+		else maxDay = 28;
+
+	} else if ('1|3|5|7|8|10|12|'.indexOf(thisMonth+'|') != -1) maxDay = 31;
+
+	else maxDay = 30;
+
+	$('[name=birth_day]').find('option').remove();
+
+	$('[name=birth_day]').append('<option value="">不限&nbsp;</option>');
+
+	if ($(this).val() != '') {
+
+		for (var i = 1; i <= maxDay; i++) {
+
+			$('[name=birth_day]').append('<option value="'+i+'">'+(i < 10 ? '0' + i : i)+'&nbsp;</option>');
+
+		}
+
+	}
+
+}).change();
+
+$('[name=birth_year]').change(function(){
+
+	if ($(this).val() == '') {
+
+		$('[name=birth_month]').find('option').remove();
+
+		$('[name=birth_day]').find('option').remove();
+
+		$('[name=birth_month]').append('<option value="">不限&nbsp;</option>');
+
+		$('[name=birth_day]').append('<option value="">不限&nbsp;</option>');
+
+	} else {
+
+		if ($('[name=birth_month]').find('option').length == 1) {
+
+			for (var i = 1; i <= 12; i++) {
+
+				$('[name=birth_month]').append('<option value="'+i+'">'+(i < 10 ? '0' + i : i)+'&nbsp;</option>');
+
+			}
+
+		}
+
+		$('[name=birth_month]').attr('selectedIndex', 0).change();
+
+		$('[name=birth_day]').attr('selectedIndex', 0).change();
+
+	}
+
+});
+
+var area = {
+
+	lastId : 0,
+
+	areaList : [],
+
+	selectedList : [],
+
+	loadArea : function(){
+
+		$.ajax({
+
+			type:'GET',
+
+			url:'{r}/ajax/other/area?aid=' + this.lastId,
+
+			dataType:"json",
+
+			success: function(rs){
+
+				var html = '';
+
+				html += '<select onchange="ie_area.change(this);"style="width:100px;'+(area.areaList.length > 0 ? 'margin-left:10px;' : '')+'">';
+
+				html += '<option value="">不限</option>';
+
+				for (var i = 0; i < rs.length; i++) {
+
+					html += '<option value="' + rs[i].id + '">' + rs[i].name + '</option>';
+
+				}
+
+				html += '</select>';
+
+				$('#areaBox').append(html);
+
+				area.areaList[area.areaList.length] = rs;
+
+				if (area.selectedList.length > 0) {
+
+					var obj = $('#areaBox select:last');
+
+					var index = obj.index();
+
+					var i   = obj.find('option[value='+area.selectedList[index]+']').index();
+
+					obj.attr('selectedIndex', i).change();
+
+					if (index + 1 == area.selectedList.length) area.selectedList = [];
+
+				}
+
+			}
+
+		});
+
+	},
+
+	findId:function(index, id){
+
+		for (var i = 0; i < this.areaList[index].length; i++) {
+
+			if (this.areaList[index][i].id == id) return i;
+
+		}
+
+		return -1;
+
+	},
+
+	delTo:function(o){
+
+		var obj = $(o);
+
+		var index = obj.index();
+
+		if (index + 1 < this.areaList.length) {
+
+			for (var i = index + 1; i < this.areaList.length; i++) {
+
+				$($('#areaBox').find('select')[index + 1]).remove();
+
+			}
+
+			var list = this.areaList;
+
+			this.areaList = [];
+
+			for (var i = 0; i <= index; i++) {
+
+				this.areaList[i] = list[i];
+
+			}
+
+		}
+
+	},
+
+	change:function(o){
+
+		var obj = $(o);
+
+		var index = obj.index();
+
+		this.delTo(o);
+
+		if (obj.val() == '') {
+
+			$('[name=area]').val(this.areaList.length == 1 ? '' : $($('#areaBox').find('select')[this.areaList.length - 2]).val());
+
+		} else {
+
+			var id = parseInt(obj.val());
+
+			if (id != this.lastId) {
+
+				$('[name=area]').val(id);
+
+				if (this.areaList[index][this.findId(index, id)].sub_num > 0) {
+
+					this.lastId = id;
+
+					this.loadArea();
+
+				} else {
+
+					//$('[name=area]').val(id);
+
+				}
+
+			}
+
+		}
+
+	},
+
+	ini:function(){
+
+		var defId = parseInt($('[name=area]').val());
+
+		if (defId) {
+
+			$.ajax({
+
+				type:'GET',
+
+				url:'{r}/ajax/other/area?aid=' + defId + '&type=parentAll',
+
+				dataType:"json",
+
+				success: function(rs){
+
+					var arr = [];
+
+					for (var i = rs.length - 1; i >= 0; i--) {
+
+						arr[arr.length] = rs[i];
+
+					}
+
+					arr[arr.length] = defId;
+
+					area.selectedList = arr;
+
+					area.loadArea();
+
+				}
+
+			});
+
+		} else this.loadArea();
+
+	}
+
+};
+
+var ie_area = area;
+
+ie_area.ini();
+
+</script> 
+{else}
+
+	{adminList
+
+        会员ID||code,<a href="$baseUrl&method=gotoUser&id=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[id]</a> 
+        真实姓名|name
+		手机|mobile
+		金额||code,<a href="$baseUrl&operation=finance&action=log&method=paylist&uid=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="充值记录">充</a><a href="$baseUrl&operation=finance&action=log&method=cashlist&uid=$v[id]" target="_blank" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="提现记录">提</a><a href="$baseUrl&operation=member&action=info&method=info&uid=$v[id]" target="_blank" class="btn btn-xs blue ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="资金记录">记</a><a target="_blank" class="btn btn-xs blue ajaxify" data-type="show" title="">T+{if $v[cashT]}{if $v[cashT] == -1}0{else}$v[cashT]{/if}{else}{cfg web,cashT}{/if}</a><br /><font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户余额$v[money]元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$v[money]</font><font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户累积提现成功和等待提现的（实际到账）{eval $cashMoney = db::one_one('pay_cash', 'SUM(money)', "uid='$v[id]' AND (status=1 OR status=0)"); $cashMoney || $cashMoney = 0;}$cashMoney元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$cashMoney</font> <font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户累计API充值金额（已扣除费率）{eval $payMoney = db::one_one('pay_payment', 'SUM(money1)', "uid='$v[id]' AND status=1"); $payMoney || $payMoney = 0;}$payMoney元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$payMoney</font> 
+        套餐明细/独立费率||code,<a href="$baseUrl&operation=order&action=info&method=list&uid=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="api交易记录">交</a><a href="$baseUrl&operation=order&action=info&method=ordersca&uid=$v[id]" target="_blank" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="api通道统计">通</a>{if $v[bl]}{eval $memberBl = unserialize($v[bl]);}<span class="btn btn-xs blue ajaxify"><a href="javascript:void(0);" class="btn btn-xs blue ajaxify" data-toggle="modal" onclick='memberBl($v[id], {echo string::json_encode($memberBl)});' data-target="#myModal" data-toggle="tooltip" title="" data-original-title="查看编辑独立费率">已设置</a></span>{else}{eval $memberBl = array();}<span class="btn btn-xs red ajaxify"><a href="javascript:void(0);" class="btn btn-xs red ajaxify" data-toggle="modal" onclick='memberBl($v[id], {echo string::json_encode($memberBl)});' data-target="#myModal" data-toggle="tooltip" title="" data-original-title="查看编辑独立费率">未设置</a></span>{/if}<br /><font class="btn btn-default btn-xs">{if $v[vip]}{echo db::one_one('pay_bl', 'name', "id='$v[vip]'");} / {date $v[vip_endTime]}{else}无套餐{/if}</font>
+        是否代理||code,{if $v[agent]}<span class="btn btn-xs green ajaxify">已开通</span><a href="$baseUrl&method=list&type=set&agent=$v[id]" class="btn btn-xs red ajaxify" data-type="show">关闭</a>{else}<span class="btn btn-xs red ajaxify">未开通</span><a href="$baseUrl&method=list&type=set&agent=$v[id]" class="btn btn-xs green ajaxify" data-type="show">开通</a>{/if}
+
+        收款权限||code,{if $v[isApi]}<span class="btn btn-xs blue ajaxify" data-toggle="tooltip" title="" data-original-title="已开通收款功能">已开通</span><a href="$baseUrl&method=list&type=set&isApi=$v[id]" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="关闭收款权限">关闭</a>{else}<span class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="未开通收款权限">未开通</span><a href="$baseUrl&method=list&type=set&isApi=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="开通收款权限">开启</a>{/if}<a href="javascript:void(0);" class="btn btn-xs green ajaxify" data-toggle="modal" onclick='memberApi($v[id])' data-target="#myModal1" data-target="#myModal1" data-type="show" data-toggle="tooltip"  data-original-title="设置独立通道">独</a>
+        状态||code,{if !$v[status]}<span class="btn btn-xs blue ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="该用户状态正常">正常</span><a href="$baseUrl&method=list&type=set&status=$v[id]" class="btn btn-xs red ajaxify" data-type="show" data-type="show" data-toggle="tooltip" title="" data-original-title="点击禁用该用户">禁</a>{else}<a href="$baseUrl&method=list&type=set&status=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" data-original-title="已被禁用 点击启动该用户">启用</a>{/if}
+        注册时间|regTime |flag,date2
+		查看上下级||code,<a href="$baseUrl&method=list4&id=$v[id]&type=1" class="btn btn-xs blue ajaxify" data-type="show">上级</a><a href="$baseUrl&method=list4&id=$v[id]&type=2" class="btn btn-xs green ajaxify" data-type="show">下级</a> 
+        操作||code,<a href="$baseUrl&method=more&id=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="编辑用户资料">编辑</a><a href="$baseUrl&method=message&uid=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="发送站内信">站内信</a>
+        
+        }
+
+
+
+{/if}
+
+
+
+{elseif $method == 'list4'}
+
+{eval
+
+	if ($type == 1) $name = '上级';
+
+    elseif ($type == 2) $name = '下级';
+
+}
+        <table class="table table-bordered table-striped">
+  <form action="$baseUrl&method=$method" class="form-horizontal ajaxForm" data-box="default">
+            <input name="operation" value="member" type="hidden"/>
+            <input name="action" value="$action" type="hidden" />
+            <input name="method" value="$method" type="hidden" />
+            <input name="type" value="$type" type="hidden" />
+            <input name="id" value="$id" type="hidden" />
+            <tbody>
+      <tr>
+                <td s="1" class="td27" >$item[name] $item[email] $item[mobile] 用户的 <span style="font-size:18px">$name</span></td>
+              </tr>
+    </tbody>
+          </form>
+</table>
+{adminList
+
+        会员ID||code,<a href="$baseUrl&method=gotoUser&id=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[id]</a> 
+        级别||code,{if $sort}{echo $v[rank]}{else}{if $type == 1}{if $v[rank] == 0}顶级{else}{echo $v[rank]}{/if}{else}{echo $v[rank] - $item[rank]}{/if}{/if}
+		真实姓名|name
+		手机|mobile
+		金额||code,<a href="$baseUrl&operation=finance&action=log&method=paylist&uid=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="充值记录">充</a><a href="$baseUrl&operation=finance&action=log&method=cashlist&uid=$v[id]" target="_blank" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="提现记录">提</a><a href="$baseUrl&operation=member&action=info&method=info&uid=$v[id]" target="_blank" class="btn btn-xs blue ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="资金记录">记</a><a target="_blank" class="btn btn-xs blue ajaxify" data-type="show" title="">T+{if $v[cashT]}{if $v[cashT] == -1}0{else}$v[cashT]{/if}{else}{cfg web,cashT}{/if}</a><br /><font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户余额$v[money]元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$v[money]</font><font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户累积提现成功和等待提现的（实际到账）{eval $cashMoney = db::one_one('pay_cash', 'SUM(money)', "uid='$v[id]' AND (status=1 OR status=0)"); $cashMoney || $cashMoney = 0;}$cashMoney元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$cashMoney</font> <font class="btn btn-default btn-xs" data-toggle="tooltip" title="" data-original-title="账户累计API充值金额（已扣除费率）{eval $payMoney = db::one_one('pay_payment', 'SUM(money1)', "uid='$v[id]' AND status=1"); $payMoney || $payMoney = 0;}$payMoney元" style="color: #f00; font-weight: 600; font-size: 15px; font-family: 微软雅黑;">$payMoney</font> 
+        
+        套餐明细/独立费率||code,<a href="$baseUrl&operation=order&action=info&method=list&uid=$v[id]" target="_blank" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="api交易记录">交</a><a href="$baseUrl&operation=order&action=info&method=ordersca&uid=$v[id]" target="_blank" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="api通道统计">通</a>{if $v[bl]}{eval $memberBl = unserialize($v[bl]);}<span class="btn btn-xs blue ajaxify"><a href="javascript:void(0);" class="btn btn-xs blue ajaxify" data-toggle="modal" onclick='memberBl($v[id], {echo string::json_encode($memberBl)});' data-target="#myModal" data-toggle="tooltip" title="" data-original-title="查看编辑独立费率">已设置</a></span>{else}{eval $memberBl = array();}<span class="btn btn-xs red ajaxify"><a href="javascript:void(0);" class="btn btn-xs red ajaxify" data-toggle="modal" onclick='memberBl($v[id], {echo string::json_encode($memberBl)});' data-target="#myModal" data-toggle="tooltip" title="" data-original-title="查看编辑独立费率">未设置</a></span>{/if}<br /><font class="btn btn-default btn-xs">{if $v[vip]}{echo db::one_one('pay_bl', 'name', "id='$v[vip]'");} / {date $v[vip_endTime]}{else}无套餐{/if}</font>
+
+        是否代理||code,{if $v[agent]}<span class="btn btn-xs green ajaxify">已开通</span><a href="$baseUrl&method=list&type=set&agent=$v[id]" class="btn btn-xs red ajaxify" data-type="show">关闭</a>{else}<span class="btn btn-xs red ajaxify">未开通</span><a href="$baseUrl&method=list&type=set&agent=$v[id]" class="btn btn-xs green ajaxify" data-type="show">开通</a>{/if}
+
+        收款权限||code,{if $v[isApi]}<span class="btn btn-xs blue ajaxify" data-toggle="tooltip" title="" data-original-title="已开通收款功能">已开通</span><a href="$baseUrl&method=list&type=set&isApi=$v[id]" class="btn btn-xs red ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="关闭收款权限">关闭</a>{else}<span class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="未开通收款权限">未开通</span><a href="$baseUrl&method=list&type=set&isApi=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="开通收款权限">开启</a>{/if}<a href="javascript:void(0);" class="btn btn-xs green ajaxify" data-toggle="modal" onclick='memberApi($v[id])' data-target="#myModal1" data-target="#myModal1" data-type="show" data-toggle="tooltip"  data-original-title="设置独立通道">独</a>
+
+		状态||code,{if !$v[status]}<span class="btn btn-xs blue ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="该用户状态正常">正常</span><a href="$baseUrl&method=list&type=set&status=$v[id]" class="btn btn-xs red ajaxify" data-type="show" data-type="show" data-toggle="tooltip" title="" data-original-title="点击禁用该用户">禁</a>{else}<a href="$baseUrl&method=list&type=set&status=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" data-original-title="已被禁用 点击启动该用户">启用</a>{/if}
+
+        注册时间|regTime |flag,date2
+
+		查看上下级||code,<a href="$baseUrl&method=list4&id=$v[id]&type=1" class="btn btn-xs blue ajaxify" data-type="show">上级</a><a href="$baseUrl&method=list4&id=$v[id]&type=2" class="btn btn-xs green ajaxify" data-type="show">下级</a> 
+        操作||code,<!--a href="javascript:void(0);" class="btn btn-xs red ajaxify" data-toggle="modal" onclick='memberBl($v[id], {echo string::json_encode($memberBl)});' data-target="#myModal" data-toggle="tooltip" title="" data-original-title="查看编辑独立费率">费</a--><a href="$baseUrl&method=more&id=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="编辑用户资料">编辑</a><a href="$baseUrl&method=message&uid=$v[id]" class="btn btn-xs green ajaxify" data-type="show" data-toggle="tooltip" title="" data-original-title="发送站内信">站内信</a>
+       }
+
+    
+
+{elseif $method == 'info'}
+        <form action="$baseUrl&method=$method" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+  <table class="table table-bordered table-striped">
+            <input name="operation" value="member" type="hidden"/>
+            <input name="action" value="$action" type="hidden" />
+            <input name="method" value="$method" type="hidden" />
+            <tr class="hover">
+      <td  align="left" colspan="3" ><h3>搜索</h3><h4 style="margin-left:30px;">当前查询累计数量 $total 条 当前查询累计金额 $allMoney 元</h4>
+                <select class="form-control input-inline" name="type">
+          <option value="-1"{if $type == -1} selected{/if}>全部</option>
+          <option value="0"{if $type == 0} selected{/if}>系统</option>
+          <option value="1"{if $type == 1} selected{/if}>购买套餐</option>
+          <option value="5"{if $type == 5} selected{/if}>提成</option>
+          <option value="9"{if $type == 9} selected{/if}>API接口充值</option>
+          <option value="10"{if $type == 10} selected{/if}>商户充值</option>
+          <option value="11"{if $type == 11} selected{/if}>提现</option>
+        </select>
+                用户ID：
+                <input type="text" class="form-control input-inline" name="uid" value="{$var->gp_uid}" />
+				系统支付订单号：
+                <input type="text" class="form-control input-inline" name="sn" value="{$var->gp_sn}" />
+                时间搜索
+                <input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />
+                --
+                <input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+                金额：
+                <input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" />
+                -
+                <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+                {if false}
+                
+                积分：
+                <input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" />
+                -
+                <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+                {/if}
+                <input type="button" value="重置" class="btn" onclick="document.getElementById('list_serach').reset();$('#addTime1').val('');$('#addTime2').val('');" />
+                <input type="submit" value="提交" class="btn green" /></td>
+    </tr>
+    
+     
+    
+          </table>
+</form>
+{adminList
+
+        用户ID||code,<a href="$baseUrl&method=gotoUser&id=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a> 
+        类型||code,{if $v[type] == 0}系统{elseif $v[type] == 1}购买套餐{elseif $v[type] == 2}用户充值的{elseif $v[type] == 5}提成{elseif $v[type] == 9}API接口充值{elseif $v[type] == 10}商户充值{elseif $v[type] == 11}提现{else}其它{/if}
+		订单号|sn
+		金额|money
+
+        备注|remark
+
+        时间|time |flag,date2
+
+      
+
+}
+
+{if false}
+
+		积分|credit
+
+{/if} 
+        <script type="text/javascript">
+
+$(function(){
+
+	$('[name=addTime1]').datepicker();
+
+	$('[name=addTime2]').datepicker();
+
+})
+
+</script> 
+        {elseif $method == 'more'}
+        <form method="post" enctype="multipart/form-data">
+  {v sys_hash_code}
+  <table class="table table-bordered table-striped">
+            <tr class="hover">
+      <td>姓名：$member[name] 手机号：$member[mobile]基本资料信息</td>
+      <td colspan="4">金额 $member[money]</td>
+    </tr>
+            <tr>
+      <th>真实姓名</th>
+      <td><input type="text" name="name" value="$member[name]" class="form-control input-inline" style="width:180px" /></td>
+      <th>身份证号码</th>
+      <td><input type="text" name="card" value="$member[card]" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+            <tr>
+      <th>支付宝账号</th>
+      <td><input type="text" name="alipay" value="$member[alipay]" class="form-control input-inline" style="width:180px" /></td>
+      <th>银行卡号</th>
+      <td><input type="text" name="back_card" value="$member[back_card]" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+            <tr>
+      <th>银行名称</th>
+      <td><input type="text" name="back_name" value="$member[back_name]" class="form-control input-inline" style="width:180px" /></td>
+      <th>开户地址</th>
+      <td><input type="text" name="back_add" value="$member[back_add]" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+            <tr>
+      <th>网站名称</th>
+      <td><input type="text" name="sitename" value="$member[sitename]" class="form-control input-inline" style="width:180px" /></td>
+      <th>网站地址</th>
+      <td><input type="text" name="siteurl" value="$member[siteurl]" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+            <tr>
+      <th>QQ号</th>
+      <td><input type="text" name="qq" value="{if $member[qq]}$member[qq]{/if}" class="form-control input-inline" style="width:180px" /></td>
+      <th>密码修改</th>
+      <td><input type="text" name="password" value="" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+    
+      <tr>
+      <th>独立设置每日提现次数（0为系统默认）</th>
+      <td ><input type="text" name="cashNum" value="$member[cashNum]" class="form-control input-inline" style="width:180px" /></td>
+      <th></th>
+      <td></td>
+    </tr>
+    
+            <tr>
+      <th>手机号修改</th>
+      <td ><input type="text" name="mobile" value="$member[mobile]" class="form-control input-inline" style="width:180px" /></td>
+      <th>T+？（-1表示不限制）</th>
+      <td><input type="text" name="cashT" value="{if $member[cashT]}$member[cashT]{/if}" class="form-control input-inline" style="width:180px" /></td>
+    </tr>
+            
+      <th></th>
+      <td colspan="2"><input type="submit" class="btn green" value="修改" /></td>
+      <td colspan="2"><a class="btn green" href="?action=info&operation=member&method=list&type=so&"/>返回</td>
+    </tr>
+          </table>
+</form>
+{elseif $method == 'addMoney'}
+
+	{adminForm
+
+		用户ID或邮箱或手机号,null=请填写操作用户|user|text|240
+
+		金额（正数增加负数减少）|money|text|240
+
+		积分（正数增加负数减少）|credit|text|240
+
+		备注,null=备注不能为空|remark|text|600
+
+	} 
+<script>
+
+$('#onUser').change(function(){
+
+	$('#user').val($(this).val());	
+
+})
+
+</script> 
+{elseif $method == 'change'}
+
+	{adminForm
+
+		调整类型|type|radio,3=设为下级（把用户B设为用户A下级 用户A空时 用户B设为顶级用户）
+
+		用户A ID|val1|text|600
+
+		用户B ID|val2|text|600
+
+	}
+
+{elseif $method == 'add1'}
+
+	{adminForm
+
+		上级不填代表为最顶层用户|tip
+
+		上级用户ID|puid|text|600
+
+		手机号码,null=必填|mobile|text|600
+
+		邮箱|email|text|600
+
+	}
+{elseif $method == 'message'}
+	{adminForm
+		发送站内信|tip
+		是否发送全部用户|isF|radio,0=否,1=是
+		独立发送用户ID|uid|text|600
+		发送标题,null=必填|title|text|600
+		发送内容,null=必填|message|textarea
+
+	}
+{/if}
+
+<!--  独立费率设置 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> </h4>
+      </div>
+      <div class="modal-body">
+        <p>-1默认为未设置：未设置按默认费率</p>
+        {if pay::$array}
+        
+        {loopQuick pay::$array}
+        
+        {$v}费率
+        <input type="text" class="form-control" value="-1" name="$k" id="$k" placeholder="填写小数，0表示不收费率" />
+        {/loopQuick}
+        
+        {/if}
+        <input type="hidden" name="uid" id="uid" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+        <button type="button" onclick="changeBl()" class="btn btn-primary"> 提交更改 </button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal --> 
+  
+</div>
+<style type="text/css">
+.radio-inline input[type=radio]{
+
+position: absolute;
+margin-left: -20px;
+margin-top: -20px;
+
+}
+</style>
+<!--  独立通道设置 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+        <h4 class="modal-title" id="myModalLabel"> </h4>
+      </div>
+      <div class="modal-body">
+        <p>设置单独通道</p>
+        <div id="memberApi"></div>
+        <input type="hidden" name="uid_" id="uid" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+        <button type="button" onclick="changeApi()" class="btn btn-primary"> 提交更改 </button>
+      </div>
+    </div>
+    <!-- /.modal-content --> 
+    
+  </div>
+  <!-- /.modal --> 
+  
+</div>
+
+<script>
+
+	function memberBl(uid, bl){
+
+		$('#myModalLabel').text('用户 '+ uid + ' 费率设置');
+
+		$('#uid').val(uid);
+
+		if (bl){
+
+			{if pay::$array}
+
+            {loopQuick pay::$array}
+
+            	$('#{$k}').val(bl.{$k});	
+
+             {/loopQuick}
+
+            {/if}
+
+		}
+
+	}
+	function memberApi(uid){
+		$.get('$baseUrl&method=memberApi', {uid : uid},function(ret){
+
+			if(ret.status == true){
+					$('#memberApi').html(ret.html);
+					$('[name="uid_"]').val(uid);
+			} else {
+
+				alert(ret.msg);
+
+			}
+
+		},'json');	
+	}
+	function changeApi(){
+		$.get('$baseUrl&method=changeApi',{
+
+			{if pay::$array}
+
+                {loopQuick pay::$array}
+
+                	{$k}:$('[name="{$k}_"]:checked').val(),
+
+                {/loopQuick}
+
+            {/if}
+
+			uid:$('[name="uid_"]').val(),
+
+			},function(ret){
+
+			if(ret.status == true){
+
+				alert('设置成功');
+
+				//location.reload();
+
+			} else {
+
+				alert(ret.msg);
+
+			}
+
+		},'json');	
+	}
+	function changeBl(){
+
+		
+
+		$.get('$baseUrl&method=changeBl',{
+
+			{if pay::$array}
+
+                {loopQuick pay::$array}
+
+                	{$k}:$('#{$k}').val(),
+
+                {/loopQuick}
+
+            {/if}
+
+			uid:$('#uid').val(),
+
+			},function(ret){
+
+			if(ret.status == true){
+
+				alert('设置成功');
+
+				//location.reload();
+
+			} else {
+
+				alert(ret.msg);
+
+			}
+
+		},'json');
+
+	}
+
+</script> 
+{sub f}

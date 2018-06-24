@@ -1,0 +1,1 @@
+<?php exit;?>a:3:{s:3:"MCH";s:10:"1505612601";s:3:"KEY";s:32:"GQDbtgFkO1cdXbM1Ww8E8YS1U9ysXDoP";s:7:"SUB_MCH";s:0:"";}

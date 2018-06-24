@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title>$webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<link rel="shortcut icon" href="{r}/favicon.ico" type="image/x-icon">
+
+<link href="{su}pay/static/common/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="{su}pay/static/assets/css/app.css" type="text/css" rel="stylesheet">
+<script src="{su}pay/static/common/jquery-1.12.1.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/bootstrap.min.js" type="text/javascript"></script>
+<script src="{su}layer/layer.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/comm.js" type="text/javascript"></script>
+
+
+<style>input:-webkit-autofill{-webkit-box-shadow:0 0 0px 1000px white inset;-webkit-text-fill-color:#333;}</style>
+</head>
+<body style="background: #f1f1f1;">
+<div class="app app-header-fixed  ">
+<div class="container w-xxl w-auto-xs" ng-controller="SigninFormController" ng-init="app.settings.container = false;">
+<span class="navbar-brand block m-t"><a href="{r}/">{$webName}</a></span>
+<div class="m-b-lg">
+<div class="wrapper text-center">
+<strong>代理商管理中心登录</strong>
+</div>
+<form name="form" class="form-validation form-ajax" method="post" >
+{v sys_hash_code}
+<div class="text-danger wrapper text-center" ng-show="authError">
+</div>
+<div class="list-group list-group-sm swaplogin">
+<div class="list-group-item">
+<input type="text" name="username" placeholder="商户手机号或ID" class="form-control no-border" data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您注册商户时填写的手机号" required>
+</div>
+<div class="list-group-item">
+<input type="password" name="password" placeholder="商户密码" class="form-control no-border" data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您的登录密码"  required>
+</div>
+</div>
+<button type="submit" class="btn btn-lg btn-primary btn-block" ng-click="login()" ng-disabled='form.$invalid'>立即登录</button>
+<a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true" target="_blank" ui-sref="access.signup" class="btn btn-lg btn-info btn-block "  data-toggle="tooltip" title="" data-placement="top" data-original-title="如果您有一定资源或懂得推广，可申请代理获取高额提成，点击联系客服申请"><img src="{su}pay/static/assets/img/ruzhu.png" width="28px">申请代理</a>
+<br/>
+<dd class="text-center"><a href="{r}/user/forgot"   data-toggle="tooltip" title="" data-placement="top" data-original-title="点击这里找回密码">忘记密码？点此找回。</a><br/><br/><a href="{r}/user/reg" class="btn btn-primary btn-block">没有账号？请点此注册</a></dd>
+
+{if false}<a href="#" ui-sref="access.signup" class="btn btn-lg btn-default btn-block " disabled><img src="{su}pay/static/assets/img/qq.png" width="28px">QQ快捷登录</a>{/if}
+</form>
+</div>
+<div class="text-center">
+<p>
+<small class="text-muted">{$webName}<br>
+Copyright &copy; 2013-{echo date('Y');} </small>
+</p>
+</div>
+</div>
+</div>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+</body>
+</html>

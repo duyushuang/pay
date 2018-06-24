@@ -1,0 +1,65 @@
+{sub header}
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+    <div class="bg-light lter b-b wrapper-md hidden-print">
+      <h1 class="m-n font-thin h3">我的下级</h1>
+    </div>
+    <div class="wrapper-md control">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"> 我的下级&nbsp;({$total})</div>
+        <div class="row wrapper">
+          <div class="col-sm-5 m-b-xs">
+            <form action="" method="GET" class="form-inline">
+              <div class="form-group">
+                <input type="text" class="input-sm form-control" name="user" value="{var $user}" placeholder="用户ID或手机号搜索">
+              </div>
+              <div class="form-group">
+                <button class="btn btn-sm btn-default" type="submit">搜索</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>下级级别</th>
+                <th>商户ID</th>
+                <th>商户手机号</th>
+                <th>下级商户支付总订单</th>
+                <th>下级商户支付总额</th>
+                <th>下级商户总佣金</th>
+                <th>收款权限</th>
+                <th>商户注册时间</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{if $list}
+                {loopQuick $list}
+            	<tr>
+                    <td>{echo $v[rank] - $member->m_rank}</td>
+                    <td><a href="{r}/member/count?user=$v[id]" target="_blank" style="color:green">$v[id]</a></td>
+                    <td>$v[mobile]</td>
+                    <td>{echo db::dataCount('pay_payment', "uid='$v[id]' AND types=0 AND status=1");}</td>
+                    <td>￥ <b>{echo round(db::one_one('pay_payment', 'SUM(money)', "uid='$v[id]' AND types=0 AND status=1"), 2);}</b></td>
+                    <td>￥ <b>{echo round(db::one_one('fc_log', 'SUM(money)', "fuid='$v[id]'"), 2);}</b></td>
+                    <td>{if $v[isApi] == 1}<span style="color:green">正常</span>{else}<span style="color:red">未开通</span>{/if}</td>
+                    <td>{date3 $v[regTime]}</td>
+              	</tr>
+                {/loopQuick}
+            	{else}
+            	<tr>
+                	<td colspan="6"><span>暂无信息。</span></td>
+              	</tr>
+            	{/if}
+            </tbody>
+          </table>
+        </div>
+        <footer class="panel-footer">
+          $multipage
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+{sub footer}

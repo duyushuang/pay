@@ -1,0 +1,154 @@
+{sub header}
+<div class="row">
+	<div class="col-md-12">
+		<div class="note note-success">
+			<h4 class="block">友情提示</h4>
+			<p>
+				当程序进行了数据恢复、升级或者工作出现异常的时候，您可以使用本功能重新生成缓存。更新缓存的时候，可能让服务器负载升高，请尽量避开会员访问的高峰时间<br />
+				数据缓存：更新程序的版块设置、全局设置、用户组设置、权限设置等缓存<br />
+				模板缓存：更新程序模板、风格等缓存文件，当您修改了模板或者风格，但是没有立即生效的时候使用<br />
+				CDN缓存：若您程序域名有使用cdn功能，缓存更新可能会延迟。可去cdn管理中心刷新缓存。<br />
+			</p>
+		</div>
+		<div id="form_wizard_1" class="portlet box blue">
+			<div class="portlet-title">
+				<div class="caption">
+					<i class="fa fa-gift"></i> 系统缓存更新
+				</div>
+				
+			</div>
+			<div class="portlet-body form">
+				<form method="POST" id="submit_form" class="form-horizontal" action="#" novalidate="novalidate">
+					<div class="form-wizard">
+						<div class="form-body">
+							<ul class="nav nav-pills nav-justified steps">
+								<li class="active">
+									<a class="step" href="javascript:;" aria-expanded="true">
+									<span class="number">
+									1 </span>
+									<span class="desc">
+									<i class="fa fa-check"></i> 选择更新缓存项目 </span>
+									</a>
+								</li>
+								<li>
+									<a class="step disabled" href="javascript:;">
+									<span class="number">
+									2 </span>
+									<span class="desc">
+									<i class="fa fa-check"></i> 缓存更新中 </span>
+									</a>
+								</li>
+								<li>
+									<a class="step active" href="javascript:;">
+									<span class="number">
+									3 </span>
+									<span class="desc">
+									<i class="fa fa-check"></i> 缓存更新结果 </span>
+									</a>
+								</li>
+							</ul>
+							<div role="progressbar" class="progress progress-striped" id="bar">
+								<div class="progress-bar progress-bar-success" style="width: 0%;">
+								</div>
+							</div>
+							<div class="tab-content">
+								<div class="alert alert-danger display-none">
+									<button data-dismiss="alert" class="close"></button>
+									请选择要更新的缓存项目
+								</div>
+								<div class="alert alert-success display-none">
+									<button data-dismiss="alert" class="close"></button>
+									缓存更新完毕
+								</div>
+								<div id="tab1" class="tab-pane active">
+									<div class="form-group">
+										<label class="control-label col-md-3">要更新的缓存项目</label>
+										<div class="checkbox-list col-md-5">
+											<label><input type="checkbox" name="type[]" value="cache" />加速缓存</label>
+											<label><input type="checkbox" name="type[]" value="cfg" />配置缓存</label>
+											<label><input type="checkbox" name="type[]" value="plugin" />插件缓存</label>
+											<label><input type="checkbox" name="type[]" value="nav" />导航缓存</label>
+											<label><input type="checkbox" name="type[]" value="task" />系统任务缓存</label>
+											<label><input type="checkbox" name="type[]" value="tkd" />标题关键词描述缓存</label>
+											<label><input type="checkbox" name="type[]" value="data" />加速缓存</label>
+											<label><input type="checkbox" name="type[]" value="tplCache" checked="checked" />模版数据块缓存</label>
+											<label><input type="checkbox" name="type[]" value="tpl" id="tplcache" checked />模板缓存</label>
+											<label><input type="checkbox" name="type[]" value="ptpl" id="pcache" checked />中文程序缓存</label>
+											<label><input type="checkbox" name="type[]" value="thumb" id="thumb" />缩略图缓存</label>
+											<label><input type="checkbox" name="type[]" value="area" id="area" />地区缓存</label>
+											{if memory::$isMemcache}<label><input type="checkbox" name="type[]" value="memcache" id="memcache" />Memcache</label>{/if}
+											<label><input type="checkbox" onclick="$('[name=type\\[\\]]').checkAll(this);" />全选</label>
+										</div>
+									</div>
+								</div>
+								<div id="tab2" class="tab-pane">
+									<div style="text-align:center"><h3 class="block">缓存更新中...</h3></div>
+								</div>
+								<div id="tab3" class="tab-pane">
+									<div style="text-align:center"><h3 class="block">更新完成</h3></div>
+								</div>
+								
+							</div>
+						</div>
+						<div class="form-actions">
+							<div class="row">
+								<div class="col-md-offset-3 col-md-9">
+									<a class="btn default button-previous disabled" href="javascript:;" style="display: none;">
+									<i class="m-icon-swapleft"></i> Back </a>
+									<a class="btn blue button-next" href="javascript:;">
+									开始更新 <i class="m-icon-swapright m-icon-white"></i>
+									</a>
+									<a class="btn green button-submit" href="javascript:;" style="display: none;">
+									Submit <i class="m-icon-swapright m-icon-white"></i>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+$(function(){
+	var step = 0;
+	$('.button-next').click(function(){
+		if ($('[name=type\\[\\]]').checked()) {
+			$('.alert-danger').addClass('display-none');
+			$('.steps li:eq('+step+')').removeClass('active');
+			$('#tab'+(step + 1)).hide();
+			step++;
+			$('.steps li:eq('+step+')').addClass('active');
+			$('#tab'+(step + 1)).show();
+			$('.progress-bar').css({width:Math.floor((step + 1) / 3 * 100) + '%'});
+			$('.form-actions').hide();
+			var type='';
+			$('[name=type\\[\\]]').each(function(){
+				if($(this).attr('checked')){
+					if(type)type+='&';
+					type+='type[]='+$(this).val();
+				}
+			});
+			$.ajax({
+				type:'post',
+				url:'$baseUrl',
+				data:type+'&hash={v sys_hash}',
+				success:function(html){
+					$('.steps li:eq('+step+')').removeClass('active');
+					$('#tab'+(step + 1)).hide();
+					step++;
+					$('.steps li:eq('+step+')').addClass('active');
+					$('#tab'+(step + 1)).show();
+					$('.progress-bar').css({width:Math.floor((step + 1) / 3 * 100) + '%'});
+					$('.alert-success').removeClass('display-none');
+				}
+			});
+		} else {
+			$('.alert-danger').removeClass('display-none');
+		}
+	});
+});
+</script>
+
+{sub footer}

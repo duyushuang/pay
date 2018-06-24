@@ -1,0 +1,948 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8">
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<!-- <title>$webTitle</title> -->
+<title>支付</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+	<meta name="viewport" content="width=device-width, height=device-height,initial-scale=1.0, minimum-scale=1.0 , maximum-scale=1.0, user-scalable=0">
+	<meta name="author" content="YY-MO">
+	<meta content="yes" name="apple-mobile-web-app-capable" />
+	<meta content="black" name="apple-mobile-web-app-status-bar-style" />
+	<meta content="telephone=no" name="format-detection" />
+	<LINK REL="SHORTCUT ICON" HREF="favicon.ico">
+	<script type="text/javascript" src="/style/newindex/js/fileload.js"></script>
+	<script type="text/javascript">
+	if(is_pc()){
+		document.write('<link rel="stylesheet" type="text/css" href="/style/newindex/css/style.css?spm=v1.2">');
+	}else{
+		document.write('<link rel="stylesheet" type="text/css" href="/style/newindex/css/mstyle.css?spm=v1.2">');
+	}
+	</script>
+	
+	
+	<title>支付</title>
+	<style type="text/css">
+	html,body {
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.preloader{
+	  position:fixed;
+	  width:100%;
+	  height:100%;
+	  background:black;
+	  z-index:99999;
+	}
+	 
+	.preloader .item{
+	  position:absolute;
+	  width:40px;
+	  height:40px;
+	  left:50%;
+	  top:50%;
+	  margin-left:-20px;
+	  margin-top:-20px;
+	}
+	</style>
+	<div id="cc-myssl-id" style="position: fixed;left: 0;bottom: 0;width: 65px;height: 65px;z-index: 99;">
+    <a href="https://myssl.com/fengbaopay.com?from=mysslid"><img src="https://www.fengbaopay.com/myssl-id.png" alt="" style="width:100%;height:100%"></a>
+</div>
+</head>
+<body >
+	<div class="preloader" id="preloader">
+	    <div class="item">
+	      <img src="/style/newindex/images/loading.gif">
+	    </div>
+	</div>
+	<div class="main-back" id="mask" style="display:none"></div>
+	<div id="header">
+	  <div class="content">
+		<a href="javascript:;" class="toggle" id="sidenav-toggle">
+	    	<i class="material-icons">menu</i>
+	  	</a>
+		<a href="#" id="logo">
+			<!-- <img src="/logo.png" /> -->
+		</a>
+        
+
+
+		<div class="more">
+			<a>账户管理 <span></span></a>
+			{if !$member}
+			<ul class="more-list">
+			 	<li><a href="/user/reg" >注册成为商户</a></li>
+				<li><a href="/user/login" >登录商户中心</a></li>
+				<li><a href="/member/" target="blank">登录代理平台</a></li>
+				<li><a href="/doc" >查看开发文档</a></li>
+				<li><a href="/oldindex/" target="blank">返回旧版首页</a></li>
+			</ul>
+			{else}
+			<ul class="more-list">
+			 	<li><a href="/user/reg" >进入商户中心</a></li>
+				<li><a href="/member/" target="blank">进入代理平台</a></li>
+				<li><a href="/doc" >查看开发文档</a></li>
+				<li><a href="/oldindex/" target="blank">返回旧版首页</a></li>
+			</ul>
+			{/if}
+		</div>
+
+		<ul id="nav" class="sidenav-menu">
+			<li class="navitem"><a class="nav-a  active " onClick="highline.scroll_To($('#mslider'))" data-href="index" target="_self"> 首页 </a></li>
+			<li class="navitem pnav"><a class="nav-a "  onClick="highline.scroll_To($('#mservice'))" target="_self">
+				账户管理 </a>
+				{if !$member}
+				<ul class="subnav">
+					<li><a href="javascript:void(0)"  onClick="location='<?php echo WEB_URL; ?>/user/reg'" >账户注册</a></li>
+					<li><a href="javascript:void(0)" onClick="location='<?php echo WEB_URL; ?>/user/login'" target="_self">账户登录</a></li>
+					<li><a href="javascript:void(0)"  onClick="location='<?php echo WEB_URL; ?>/member/'"   target="_self">代理登录</a></li>
+				</ul>
+				{else}
+				<ul class="subnav">
+					<li><a href="javascript:void(0)"    onClick="location='<?php echo WEB_URL; ?>/user'" target="_self">会员中心</a></li>
+					<li><a href="javascript:void(0)"  onClick="location='<?php echo WEB_URL; ?>/member/'" target="_self">代理中心</a></li>
+					<li><a href="javascript:void(0)"  onClick="location='<?php echo WEB_URL; ?>/user/'" target="_self">代理申请</a></li>					
+				</ul>
+				{/if}
+			</li>
+	<script type="text/javascript">
+	if(is_pc()){
+		document.write('');
+		
+		}else{
+document.writeln("<li class=\"navitem pnav\"><a class=\"nav-a \"  onClick=\"highline.scroll_To($(\'#help\'))\" target=\"_self\">");
+document.writeln("				使用帮助 </a>");
+document.writeln("				");
+document.writeln("				<ul class=\"subnav\">");
+document.writeln("					<li><a href=\"javascript:void(0)\"  onClick=\"location=\'<?php echo WEB_URL; ?>/vip\'\" >费率套餐</a></li>");
+document.writeln("					<li><a href=\"javascript:void(0)\" onClick=\"location=\'<?php echo WEB_URL; ?>/news_list\'\" target=\"_self\">开发文档</a></li>");
+document.writeln("					<li><a href=\"javascript:void(0)\"  onClick=\"location=\'<?php echo WEB_URL; ?>/member/\'\"   target=\"_self\">新闻资讯</a></li>");
+document.writeln("				</ul>");
+document.writeln("				</li>");
+document.writeln("			<li class=\"navitem pnav\"><a class=\"nav-a \"  onClick=\"highline.scroll_To($(\'#help\'))\" target=\"_self\">");
+document.writeln("				联系方式 </a>");
+document.writeln("				");
+document.writeln("				<ul class=\"subnav\">");
+document.writeln("					<li><a href=\"javascript:void(0)\"    onClick=\"location=\'<?php echo WEB_URL; ?>/news/9\'\" target=\"_self\">了解我们</a></li>");
+document.writeln("					<li><a href=\"javascript:void(0)\"  onClick=\"location=\'<?php echo WEB_URL; ?>//news/3\'\" target=\"_self\">联系方式</a></li>");
+document.writeln("					<li><a href=\"javascript:void(0)\"  onClick=\"location=\'<?php echo WEB_URL; ?>/news/6\'\" target=\"_self\">免责申明</a></li>");
+document.writeln("				</ul>");
+document.writeln("				");
+document.writeln("			</li>");
+				}
+	</script>
+			<li class="navitem"><a class="nav-a " data-href="industry"  onClick="highline.scroll_To($('#mproject'))" target="_self"> 行业方案 </a></li>
+			<li class="navitem"><a class="nav-a "  onClick="highline.scroll_To($('#mcoopration'))" data-href="partners" target="_self"> 合作伙伴 </a></li>
+			<li class="navitem"><a class="nav-a "  data-href="contact"  onClick="highline.scroll_To($('#mcontact'))" target="_self"> 关于我们 </a></li>
+		</ul>
+
+		<div class="clear"></div>
+		</div>
+	</div>
+	<div id="sitecontent">
+		<div id="indexPage">
+			<div id="mslider" class="module">
+				<div class="list-container">
+				<ul class="slider-list list">
+					<li  class="banner1" data-initfn="banner1Active">
+						<div id="banner1-map" class="img-cont">
+							<div class="banner1-map layer" data-depth="0.30"></div>
+							<div class="banner1-dian layer" data-depth="0.50"></div>
+						</div>
+						<div class="banner1-light">
+							<div class="banner1-circle">
+								<div>
+									<span class="circle1 circle"></span>
+								</div>
+							</div>
+						</div>
+						<div class="banner1-title-container">
+							<div class="banner1-title">
+								<div class="banner1-title-main">
+									<div class="back"></div>
+									<div class="cont">
+										<img src="/style/newindex/images/banner1_title.png?spm=v1.1" />
+									</div>
+								</div>
+								
+							</div>
+							
+						</div>
+					</li>
+					<li class="banner2 banner" data-initfn="banner2Active">
+						<div class="img-container">
+						<div class="img-cont">
+							<div class="pic1 layer" data-depth="0.50" ></div>
+							<div class="pic2 layer" data-depth="0.30"></div>
+							<div class="pic3 layer" data-depth="0.40"></div>
+						</div>
+						</div>
+						<div class="title"></div>
+					</li>
+					<li class="banner3 banner">
+						<div class="img-container">
+						<div class="img-cont">
+							<div class="pic1 layer" data-depth="0.30"></div>
+							<div class="pic2 layer" data-depth="0.50"></div>
+						</div>
+						</div>
+						<div class="title"></div>
+					</li>
+					<li class="banner4 banner">
+						<div class="img-container">
+						<div class="img-cont">
+							<div class="pic1 layer" data-depth="0.30"></div>
+							<div class="pic2 layer" data-depth="0.50"></div>
+							<div class="pic3 layer" data-depth="0.30"></div>
+						</div>
+						</div>
+						<div class="title"></div>
+					</li>
+					<li class="banner5 banner">
+						<div class="img-container">
+						<div class="img-cont">
+							<div class="pic1 layer" data-depth="0.30"></div>
+							<div class="pic2 layer" data-depth="0.50"></div>
+							<div class="pic3 layer" data-depth="0.60"></div>
+						</div>
+						</div>
+						<div class="title"></div>
+					</li>
+				</ul>
+				</div>
+				<div class="left-btn">
+				</div>
+				<div class="right-btn">
+				</div>
+				<div class="btn-bar-container">
+					<ul id="btn-bar">
+					</ul>
+				</div>
+			</div>
+			<div id="mservice" class="module">
+				<div class="bgmask"></div>
+				<div class="content layoutslider">
+					<div class="tab-bar-container">
+						<div class="tab-bar">
+							<a href="javascript:;" class="active"></a>
+							<!--span>|</span>
+							<a href="javascript:;">智能云POS</a>
+							<span>|</span>
+							<a href="javascript:;">智能云应用</a-->
+						</div>
+					</div>
+					
+					<div class="module-content fw" id="servicelist">
+						<div class="sevice-container">
+							<ul>
+								<li>
+									<div class="product-container">
+										<div class="header wow fw" data-wow-delay=".1s">
+											<p class="title">产品服务</p>
+											<p class="subtitle"> All Product </p>
+										</div>
+										<div class="m-title">
+											<p class="title">{$webName}</p>
+										</div>
+										<div class="computer">
+											<div class="computer-outside">
+												<div class="computer-inside">
+													<div class="service-page" id="service-page">
+														<div class="service-list-row">
+															<a href="/user">
+															<div class="service-list">
+																
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic4.png"></div>
+																			<span>会员管理</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>线上线下会员获取<br/>全方位会员画像<br/>标签化会员管理</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+																
+															</div>
+															</a>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic3.png"></div>
+																			<span>账目清晰</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>
+																			多样化查询系统<br/>所有订单随时查看<br/>一目了然立减
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic6.png"></div>
+																			<span>资金安全</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>资金随时提现<br/>当日到达，无忧虑<br/>微信自动打款，更放心</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic7.png"></div>
+																			<span>多种对账</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>支持支付通道对账<br/>支持按时间检索对账<br/>支持按支付状态对账<br/>
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+
+														</div>
+														<div class="service-list-row">
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic11.png"></div>
+																			<span>运维服务</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>
+																			支付系统搭建服务<br/>正版程序授权<br/>服务器/域名协助处理<br/>支付商户代申请
+
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic12.png"></div>
+																			<span>全网可达</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+
+																			<span>
+																			采用阿里CDN<br/>全网99%可达<br/>拒绝超时
+
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic8.png"></div>
+																			<span>在线文档</span>
+																		</div>
+																	</div>
+																	<a href="doc">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>使用帮助文档<br/>各类相关教程</span>
+																			
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic2.png"></div>
+																			<span>开发者平台</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>开发者应用发布<br/>开放API接口</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+														</div>
+														<div class="service-list-row">
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic9.png"></div>
+																			<span>融合收款</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>
+																			二维码支付（支付宝,微信,QQ钱包）<br/>多渠道网银<br/>通道多、更畅快
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																		<div>
+																			<img src="/style/newindex/images/service_pic1.png"></div>
+																			<span>线下商店</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>
+																			多码合一<br/>
+																			收款只需一码即可
+																			</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic10.png"></div>
+																			<span>短信服务</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>账户登录<br/>
+																			提现问题<br/>
+																			短信随时通知、更安心</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+															<div class="service-list">
+																<div class="service-list-cont">
+																	<div class="service-block-container">
+																		<div class="service-block">
+																			<div>
+																			<img src="/style/newindex/images/service_pic5.png"></div>
+																			<span>统计分析</span>
+																		</div>
+																	</div>
+																	<a href="#">
+																	<div class="service-back-container">
+																		<div class="service-back">
+																			<span>会员状况全掌握<br/>营业数据全知悉<br/>大数据经营决策</span>
+																		</div>
+																	</div>
+																	</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="computer-foot"></div>
+										</div>
+										<div class="more" id="product-more">
+											MORE+
+										</div>
+									</div>
+								</li>
+								{if false}<!--li>
+									<div class="m-title">
+										<p class="title">支付技术服务</p>
+									</div>
+									<div class="pos-cont" id="pos-cont">
+									<div class="k9-container pos-container active">
+										<div class="k9-cont">
+											<div class="title">
+												<img src="/style/newindex/images/k9_title.png">
+											</div>
+											<div class="goods">
+												<img src="/style/newindex/images/k9.png">
+											</div>
+										</div>
+									</div>
+									<div class="c960f-container pos-container">
+										<div class="c960f-cont">
+											<div class="title">
+												<img src="/style/newindex/images/c960f_title.png">
+											</div>
+											<div class="goods">
+												<img src="/style/newindex/images/pic_c960f.png">
+											</div>
+										</div>
+									</div>
+									</div>
+									<div class="btn-bar" id="terminal-btn">
+										<a class="active" data-href="k9">K9</a>
+										<span>|</span>
+										<a data-href="c960f">C960F</a>
+									</div>
+									<div class="left-btn"></div>
+									<div class="right-btn"></div>
+								</li-->{/if}
+							</ul>
+						</div>
+					</div>
+					<div class="clear"></div>
+					
+				</div>
+			</div>
+			<div id="mproject" class="module">
+				<div class="bgmask"></div>
+				<div class="content layoutslider">
+					<div class="header wow m-title">
+						<p class="title">行业方案</p>
+						<p class="subtitle">Industry Solutions</p>
+					</div>
+					
+					<div class="module-content" id="projectlist">
+						<div class="projectlist-container list-container">
+                    	<ul class="projectlist list">
+                    		
+                    		<li data-bg="finance" style="background-image:url(/style/newindex/images/pic_finance.jpg)">
+                    			<div>
+								<div class="back"></div>
+								<a href="finance.html">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_finance.png"/>
+										<span class="split"></span>
+										<span class="title">金融网站</span>
+										<p>稳定安全的通道收款服务、清晰明了的订单查询方式，助力金融网站，赢得更辉煌的业绩。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							
+							<li data-bg="food" style="background-image:url(/style/newindex/images/pic_food.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+									<div class="info-container">
+										<div class="info">
+											<img src="/style/newindex/images/icon_food.png"/>
+											<span class="split"></span>
+											<span class="title">餐饮</span>
+											<p>提升店内服务效率，打通线上资源和线下客流，帮助餐饮商家实现智慧经营。</p>
+											<button>查看详情</button>
+										</div>
+									</div>
+								</a>
+								</div>
+							</li>
+							
+							<li data-bg="retail" style="background-image:url(/style/newindex/images/pic_retail.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="sale.html">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_retail.png"/>
+										<span class="split"></span>
+										<span class="title">线下零售</span>
+										<p>QQ钱包，支付宝支付，微信支付，多码合一功能，线下收款更轻松。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							<li data-bg="insurance" style="background-image:url(/style/newindex/images/pic_insurance.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_insurance.png"/>
+										<span class="split"></span>
+										<span class="title">网站论坛</span>
+										<p>丰富的插件服务，安装即用！便捷查询明细，可实时进行资金查看和监管。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							<li data-bg="edu" style="background-image:url(/style/newindex/images/pic_edu.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_edu.png"/>
+										<span class="split"></span>
+										<span class="title">技术</span>
+										<p>H5支付、公众号支付、pc扫码支付、多吗合一支付，强大的技术支撑才有更强劲的功能。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							
+							<li data-bg="shop" style="background-image:url(/style/newindex/images/pic_shop.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_shop.png"/>
+										<span class="split"></span>
+										<span class="title">在线商城</span>
+										<p>为商城量身打造综合收款平台，涵盖多种支付手段，一站式解决收款问题。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							
+							{if false}<!--li data-bg="parking" style="background-image:url(/style/newindex/images/pic_parking.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_parking.png"/>
+										<span class="split"></span>
+										<span class="title">停车场</span>
+										<p>提供自助缴费终端，融合多种收款方式，缓解停车场出口因排队缴费造成的拥堵问题。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li-->{/if}
+							<li data-bg="house" style="background-image:url(/style/newindex/images/pic_house.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="#">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_house.png"/>
+										<span class="split"></span>
+										<span class="title">建站</span>
+										<p>万丈高楼平地起，强大支付系统为基石，助您成就心中的理想。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li>
+							{if false}<!--li data-bg="gas" style="background-image:url(/style/newindex/images/pic_gas.jpg)">
+								<div>
+								<div class="back"></div>
+								<a href="/l">
+								<div class="info-container">
+									<div class="info">
+										<img src="/style/newindex/images/icon_gas.png"/>
+										<span class="split"></span>
+										<span class="title">加油站</span>
+										<p>提供消费支付圈存、积分兑换等一站式服务，打造智慧加油站新型服务体系。</p>
+										<button>查看详情</button>
+									</div>
+								</div>
+								</a>
+								</div>
+							</li-->{/if}
+						</ul>
+						</div>         
+						<div class="foot">
+							<div class="data-container">
+								<ul id="service-data">
+									<li>
+										<div class="value">
+											<span data-value="2" class="num">0</span> 种渠道
+										</div>
+										<div class="name">覆盖线上线下</div>
+									</li>
+									<li>
+										<div class="value">
+											<span data-value="12" class="num">0</span> 个
+										</div>
+										<div class="name">合作伙伴</div>
+									</li>
+									<li>
+										<div class="value">
+											<span data-value="50" class="num">0</span> 万订单
+										</div>
+										<div class="name">稳定的业务支持</div>
+									</li>
+									<li>
+										<div class="value">
+											<span data-value="1024" class="num">0</span> 兆比特
+										</div>
+										<div class="name">超强数据负载</div>
+									</li>
+
+								</ul>
+							</div>
+                    	</div><!--
+                    	<div class="left-btn">
+							<i class="fa fa-angle-left"></i>
+						</div>
+						<div class="right-btn" style="right: 40px;">
+							<i class="fa fa-angle-right"></i>
+						</div>-->
+                    </div>
+
+					<!--projectlist-->
+					<div class="clear"></div>
+				</div>
+			</div><!--project-->
+			<div id="mcoopration" class="module">
+				<div class="bgmask"></div>
+				<div class="content">
+					<div class="header wow m-title">
+						<p class="title">合作伙伴</p>
+						<p class="subtitle">Partners</p>
+					</div>
+					
+					<div class="module-content fw" id="teamlist">
+						<div class="coopration-list-container">
+                        <div class="coopration-list" id="plist1">
+							<img src="/style/newindex/images/partner_pic1.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist2">
+							<img src="/style/newindex/images/partner_pic2.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist3">
+							<img src="/style/newindex/images/partner_pic3.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist4">
+							<img src="/style/newindex/images/partner_pic4.jpg" />
+                        </div>  
+                        <div class="list-container">
+                        	<div class="coopration-list" id="plist12">
+								<img src="/style/newindex/images/partner_pic5.jpg" />
+	                        </div>
+	                        <div class="coopration-list" id="plist11">
+								<img src="/style/newindex/images/partner_pic6.jpg" />
+	                        </div>  
+                        </div>
+                        <div class="next-tip" id="next-tip"></div>
+                        <div class="list-container">
+                        	<div class="coopration-list" id="plist5">
+								<img src="/style/newindex/images/partner_pic7.jpg" />
+	                        </div>
+	                        <div class="coopration-list" id="plist6">
+								<img src="/style/newindex/images/partner_pic8.jpg" />
+	                        </div>  
+                        </div>
+                        <div class="coopration-list" id="plist10">
+							<img src="/style/newindex/images/partner_pic9.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist9">
+							<img src="/style/newindex/images/partner_pic10.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist8">
+							<img src="/style/newindex/images/partner_pic11.jpg" />
+                        </div>  
+                        <div class="coopration-list" id="plist7">
+							<img src="/style/newindex/images/partner_pic12.jpg" />
+                        </div> 
+						</div>
+						
+                    </div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div id="mcontact" class="module">
+				<div class="bgmask"></div>
+				<div class="content">
+					<div class="header wow fadeInUp fw m-title" data-wow-delay=".1s">
+						<p class="title">关于我们</p>
+						<p class="subtitle">About Us</p>
+					</div>
+					<div id="contactlist" class="fw contact-list">
+						<div class="info-container">
+							<div class="about-us">
+								<div class="logo">
+									StormCloud Pay
+								</div>
+								<div class="title">
+									专业支付产品供应商<br/>
+									云支付整体解决方案提供商
+								</div>
+								<div class="description">
+									风暴云支付系统由公司自行开发<br/>
+									风暴云支付系统已申请国家软件著作权<br/>
+									强大的技术支持和维护，更安全、更可靠<br/>
+									多年支付系统制作经验<br/>
+									专注PHP支付系统,金融系统开发<br/>
+									……
+
+								</div>
+							</div>
+	<style type="text/css">
+	.jmp_appqr{width: 188px;
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    border: 1px solid #aaa;
+    padding: 15px;
+	}</style>
+							<div class="contact">
+								<div class="title">
+									风暴云计算有限公司
+								</div>
+								<ul class="info">
+									<li class="info-tel"><span>Tel：</span>{cfg web,phone}</li>
+									<li class="info-add"><span>商务合作：</span><a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true" target="_blank" style="color:#0ed1cd;" title="点击联系">点击联系</a></li>
+									<li class="info-add"><span>交流Q群：</span><a href="{cfg web,qqqun}" target="_blank"  title="暂未开通" style="color:#0ed1cd;">暂未开通</a></li>
+									<li class="info-email"><span>Email：</span>admin#fengbaomail.com(#→@)</li>
+								<script type="text/javascript">
+	if(is_pc()){
+									<!-- document.writeln("<li class=\"info-email\">手机扫二维码码下载APP---><span><img src=\"/style/appdownstyle/img/downappqr.jpg\" class=\"jmp_appqr\"></span></li>");	}else{} -->
+	</script>
+
+
+								</ul>
+								<div class="btn-bar">
+									<a href="tel:{cfg web,phone}"><div class="btn-phone" id="open-call"></div></a>
+									<div class="btn-qr" id="open-qr"></div>
+								</div>
+
+							</div>
+						</div>
+						
+					</div>
+				</div>
+				<div class="records">
+					 Copyright ©2018 风暴云计算有限公司 版权所有 <br/>  <a href="http://www.miitbeian.gov.cn" target="_blank" style="color:#10c5c1;">{cfg web,webIcp} </a><a href="http://wpa.qq.com/msgrd?v=3&uin=2514265489&site=qq&menu=yes" target="_blank" style="color:#10c5c1;">投诉建议</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="shares">
+		<div>
+			<a href="javascript:;" class="tel">
+				<div>
+					<div class="tel-info">
+						<span class="name">客服热线</span>
+						<span class="value">{cfg web,phone}</span>
+					</div>
+				</div>
+			</a>
+         
+			<a href="javascript:;" class="weixin">
+				<div>
+					<div class="weixin-info">
+						<img src="{r}/{cfg web,wxerm}" width="111px" height="111px" alt="{$webName}" />
+						<span class="value">暂未开通</span>
+					</div>
+				</div>
+			</a>
+			<a href="javascript:;" id="gotop" onClick="highline.scroll_To($('#mslider'))">
+				
+			</a>
+		</div>
+		
+	</div>
+	<div class="hide"></div>
+	<ul class="btnlistpar" id="btnlistpar">
+		<a class="png mar-t-0" onClick="highline.scroll_To($('#mslider'))"><span>首页</span></a>
+		<a class="png" onClick="highline.scroll_To($('#mservice'))"><span>产品服务</span></a>
+		<a class="png" onClick="highline.scroll_To($('#mproject'))"><span>行业案例</span></a>
+		<a class="png" onClick="highline.scroll_To($('#mcoopration'))"><span>合作伙伴</span></a>
+		<a class="png" onClick="highline.scroll_To($('#mcontact'))"><span>关于我们</span></a>
+	</ul>
+	<div id="detail-container" class="detail-container" style="display:none">
+		<div class="main" style="display:none"></div>
+	</div>
+	<div id="qr" style="display:none">
+		<img src="{r}/{cfg web,wxerm}" width="111px" height="111px" alt="{$webName}" />
+	</div>
+
+	<script type="text/javascript" src="/style/newindex/js/jquery.js"></script>
+	<script type="text/javascript">
+	if(is_pc()){
+	document.write('<script type="text/javascript" src="/style/newindex/js/jquery.mousewheel.js"><\/script><script type="text/javascript" src="/style/newindex/js/jquery.scrollTo-1.4.3.1-min.js"><\/script><script type="text/javascript" src="/style/newindex/js/jquery.cxscroll.js"><\/script><script type="text/javascript" src="/style/newindex/js/jquery.parallax.js"><\/script><script type="text/javascript" src="/style/newindex/js/init.js"><\/script><script type="text/javascript" src="/style/newindex/js/main.js"><\/script>');
+	}else{
+		document.write('<script type="text/javascript" src="/style/newindex/js/jquery.touchSwipe.js"><\/script><script type="text/javascript" src="/style/newindex/js/jquery.cxscroll.js"><\/script><script type="text/javascript" src="/style/newindex/js/minit.js?spm=v1.87.b2"><\/script>');
+	}
+	$(window).load(function(){
+
+	$(".preloader").fadeOut("slow") 
+
+	});
+	</script>
+</body>
+</html>

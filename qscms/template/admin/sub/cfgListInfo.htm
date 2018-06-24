@@ -1,0 +1,121 @@
+{if $var->menuAjax}<script type="text/javascript">
+var setUpload = function(name, url){
+	$('[name='+name+']').val(url);
+	$('#'+name+'_img').html('<a href="{u}'+url+'" target="_blank"><img src="{u}'+url+'" width="100" /></a>');
+};
+</script>{/if}
+<form method="post"  enctype="multipart/form-data" class="form-horizontal ajaxForm">
+{v sys_hash_code}
+<div class="form-body">
+		<h3 class="form-section">$cate[name]配置信息</h3>
+		{loop $list $v}
+				{eval
+					if (in_array($v[type], array('select', 'radio', 'checkbox', 'link'))) {
+						$__list0 = string::parseChoose($v[attach]);
+						$__list = array();
+						foreach ($__list0 as $__v0) {
+							$__key = $__v0[key];
+							$__set = false;
+							if (strpos($__key, '|') !== false) {
+                            	$__tmp = explode('|', $__key);
+								$__flag = array_pop($__tmp);
+								if (strpos($__flag, ':') !== false) {
+									$__sp = explode(':', $__flag);
+									if ($__sp[0] == 'call') {
+                                    	$__tmp = explode('|', $__v0[key]);
+										$__k = array_shift($__tmp);
+										$__fields = $__v0[value].','.$__k;
+										foreach (db::select($__sp[1], $__fields) as $__v1) {
+											$__list[] = array('key' => $__v1[$__k], 'value' => $__v1[$__v0[value]]);
+										}
+										$__set = true;
+									}
+								}
+							}
+							if (!$__set) {
+								$__list[] = $__v0;
+							}
+						}
+					}
+				}
+		<div class="form-group">
+			<label class="control-label col-md-3">$v[name]</label>
+			<div class="col-md-9">
+				{switch $v[type] 'text'}
+						<input type="text" name="$v[name]" value="$v[value]" class="form-control" />
+						{case 'textarea'}
+						<textarea name="$v[name]" class="form-control">{html $v[value]}</textarea>
+						{case 'select'}
+						<select name="$v[name]" class="form-control">
+						{loop $__list $__v}
+						<option value="$__v[value]"{if $v[value]==$__v[value]} selected="selected"{/if}>$__v[key]</option>
+						{/loop}
+						</select>
+						{case 'radio'}
+						<div class="radio-list">
+						{loop $__list $__v}
+						<label class="radio-inline"><input type="radio" name="$v[name]" value="$__v[value]"{if $v[value]==$__v[value]} checked="checked"{/if} />$__v[key]</label>
+						{/loop}
+						</div>
+						{case 'radio2'}
+						{eval
+							if (!function_exists('__replaceRadio2')) {
+								function __replaceRadio2($v, $str){
+									$sp = qscms::trimExplode('=', $str);
+									return '<label class="radio-inline"><input type="radio" name="'.$v[name].'" value="'.$sp[0].'"'.($v[value]==$sp[0]? ' checked="checked"' : '').' class="radio" />'.$sp[1].'</label>';
+								}
+                                function __replaceRadio2_call($datas, $ms){
+                                	return __replaceRadio2($datas, $ms[1]);
+                               	}
+							}
+                            if (PHP55) {
+                            	$__call = curry('__replaceRadio2_call', 2);
+                            	echo preg_replace_callback('/{(.+?)}/', $__call($v), $v[attach]);
+                            } else echo preg_replace('/{(.+?)}/e', '__replaceRadio2($v, \'$1\')', $v[attach]);
+						}
+						{case 'checkbox'}
+						<div class="checkbox-list">
+						{loop $__list $__v}
+						<label class="checkbox-inline"><input type="checkbox" name="{$v[name]}[]" value="$__v[value]"{if $v[value] & 1 << $__v[value] - 1} checked="checked"{/if} />$__v[key]</label>
+						{/loop}
+						</div>
+						{case 'image'}
+                        {if $var->menuAjax}
+                        <input type="hidden" name="$v[name]" value="$v[value]" />
+                        <iframe src="$baseUrl&ifUpload=$v[id]" style="border:0px;" id="$v[name]_if"></iframe>
+                        <div id="$v[name]_img"></div>
+                        <script>
+                        $('#$v[name]_if').load(function(){
+							var mainheight = $(this).contents().find("body").height();
+							$(this).height(mainheight);
+						});
+						{if $v[value]}
+						setUpload('$v[name]', '$v[value]');
+						{/if}
+                        </script>
+                        {else}
+						<input type="file" name="$v[name]" class="txt" style="width:240px"  />
+						{if $v[value]}<br />
+						<a href="{u}$v[value]" target="_blank"><img src="{u}$v[value]" width="100" /></a>
+						{/if}
+                        {/if}
+						{case 'link'}
+						{loop $__list $__k $__v}
+						{if $__k > 0}<br />{/if}
+						<a href="$__v[key]" target="_blank">$__v[value]</a>
+						{/loop}
+						{case_else}
+						<input type="text" name="$v[name]" value="$v[value]" class="txt" class="form-control" />
+						{/switch}
+						<div class="help-block">$v[remark]</div>
+			</div>
+		</div>
+		{/loop}
+	</div>
+<div class="form-actions">
+						<div class="col-md-offset-3">
+							<button class="btn green" type="submit">提交</button>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+</form>

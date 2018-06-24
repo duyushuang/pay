@@ -1,0 +1,350 @@
+<?php
+/**
+
+ */
+
+(!defined('IN_QSCMS') || IN_QSCMS !== true ) && exit('error');
+class shop_base extends ext_base{
+	public function __construct($id, $needLogin = true){
+		$var = qscms::v('_G');
+		if (!$needLogin || $var->member) {
+			$where = "id='$id'";
+			if ($needLogin) {
+				$uid = $var->member->uid;
+				$where .= " AND uid='$uid'";
+			}
+			if ($shop = db::one('shop', '*', $where)) {
+				$this->isLoad = true;
+				foreach ($shop as $k => $v) $this->{'s_'.$k} = $v;
+				$this->s_freezeYKJ = $this->s_type == 1 ? cfg::getFloat('web', 'freezeYKJ') * $this->s_money : 0;
+				$this->m = new shopModule(intval($this->s_cid));
+			} else $this->isLoad = false;
+		} else $this->isLoad = false;
+	}
+	public function extDatas(){
+		$datas = array();
+		if ($this->isLoad) {
+			$tb = $this->m->extName;
+			$datas = db::one($tb, '*', "sid='$this->s_id'");
+			$filterArray = qscms::arrid($this->m->fieldList, 'fieldName');
+			$datas = qscms::filterArray($datas, $filterArray);
+			$datas = qscms::arrayMap($datas, array_combine(qscms::arrid($this->m->fieldList, 'htmlName'), $filterArray));
+			return $datas;
+		}
+		return $datas;
+	}
+	public function datas(){
+		$datas = array();
+		return array_merge(array('type' => $this->s_type, 'title' => $this->s_title, 'des' => $this->s_des, 'money' => $this->s_money), $this->extDatas());
+	}
+	public function formatExtDatas(){
+		$tb = new db_table($this->m->extName, '*', array('sid' => $this->s_id));
+		$datas = $tb->fetchOne();
+		$fields = $this->m->formatField1();
+		$list = array();
+		if ($fields) {//检测字段
+			foreach ($fields as $v) {
+				if (isset($datas[$v['fieldName']])) {
+					switch ($v['htmlType']) {
+						case 'select':
+						case 'radio':
+							$list[] = array(
+								'name' => $v['name'],
+								'value' => $v['htmlListValue'][$datas[$v['fieldName']]]
+							);
+						break;
+						case 'checkbox':
+							$vals = array();
+							$val = intval($datas[$v['fieldName']]);
+							if ($val > 0) {
+								foreach ($v['htmlListValue'] as $k1 => $v1) {
+									if (qscms::binAt($val, intval($k1))) $vals[] = $v1;
+								}
+								$list[] = array(
+									'name' => $v['name'],
+									'value' => $vals
+								);
+							}
+						break;
+						default:
+							$list[] = array(
+								'name' => $v['name'],
+								'value' => $v['htmlListValue'] ? $v['htmlListValue'][$datas[$v['fieldName']]] : $datas[$v['fieldName']]
+							);
+						break;
+					}
+				}
+			}
+		}
+		return $list;
+	}
+	public function edit($datas){
+		$fields = $this->m->formatField1();
+		$fieldKeys = qscms::arrid($fields, 'htmlName');
+		$getKeys = array_merge(array('des', array('money', 'money')), $fieldKeys);
+		$datas = form::get4($datas, $getKeys);
+		$datas['title'] = $this->s_title;
+		foreach ($fields as $v) {
+			switch ($v['htmlType']) {
+				case 'radio':
+				case 'select':
+					if (!in_array($datas[$v['htmlName']], $v['htmlListDatas'])) return '请勿非法提交';
+				break;
+				case 'checkbox':
+					if (is_array($datas[$v['htmlName']])) {
+						$err = false;
+						foreach ($datas[$v['htmlName']] as $v1) {
+							if (!in_array($v1, $v['htmlListDatas'])) {
+								$err = true;
+								break;
+							}
+						}
+						$datas[$v['htmlName']] = string::getCheckBox($datas[$v['htmlName']]);
+						if ($err) return '请勿非法提交';
+					} else $datas[$v['htmlName']] = 0;
+				break;
+				default:
+					if (substr($v['htmlType'], 0, 6) == '{call ') {
+						$func = trim(substr($v['htmlType'], 6, -1));
+						$func = qscms::replaceVars($func, $datas);
+						$datas[$v['htmlName']] = eval('return '.$func.';');
+					}
+				break;
+			}
+		}
+		$checkArr = array();
+		foreach ($fields as $v) {
+			if ($v['htmlIsReg'] && $v['htmlRegStr']) {
+				$checkArr[$v['htmlName']] = $v['htmlRegStr'];
+			}
+		}
+		$this->m->c_titleRegStr && $checkArr['title'] = $this->m->c_titleRegStr;
+		$this->m->c_desRegStr && $checkArr['des'] = $this->m->c_desRegStr;
+		foreach ($datas as $k => $v) {
+			if (isset($checkArr[$k])) {//要检测
+				if (!form::isMatch($checkArr[$k], $v)) return '请勿非法提交1';
+			}
+		}
+		$baseDatas = qscms::arrayMap($datas, array('title', 'des', 'money'));
+		$extDatas = $fields ? qscms::arrayMap($datas, array_combine(qscms::arrid($fields, 'fieldName'), qscms::arrid($fields, 'htmlName'))) : array();;
+		$baseDatas['time'] = time::$timestamp;
+		$baseDatas['status'] = $this->m->c_shenhe ? 0 : 2;
+		if ($this->s_type == 1) unset($baseDatas['money']);
+		//print_r($baseDatas);print_r($extDatas);exit;
+		if (db::update('shop', $baseDatas, "id='$this->s_id'")) {
+			if (db::update($this->m->extName, $extDatas, "sid='$this->s_id'")) {
+				//db::update('shop_cate', "shopCount=shopCount+1", "id='$this->c_id'");
+				return true;
+			} else {
+				db::del_id('shop', $sid);
+				return '编辑失败，请重试';
+			}
+		}
+		return '编辑失败，请重试';
+	}
+	public function baojia($money, $content = '', $bid = 0){//状态，10：等待卖家回复，11：卖家拒绝，20：等待买家回复，21：买家拒绝，30：谈判成功，交易中，31：谈判成功，交易成功，32：被抢拍
+		$var = qscms::v('_G');
+		if ($money <= 0) return '报价金额不能为0';
+		if ($var->member) {
+			if ($this->isLoad) {
+				if ($this->s_type == 0) {
+					if (in_array($this->s_status, array(2, 3))) {//报价处理
+						if ($this->s_money > 0 && $money < $this->s_money) return '该报价太低，被过滤';
+						$suid = $this->s_uid;
+						$buid = $var->member->uid;
+						if ($suid != $buid) {//买家报价
+							$tb = new db_table('baojia', '*', array('sid' => $this->s_id, 'buid' => $buid));
+							if ($item = $tb->fetchOne()) {//已经存在的
+								switch ($item['status']) {
+									case 10:
+										return '已经报价过，等待卖方回复';
+									break;
+									case 11:
+										return '该商品卖方拒绝您的报价';
+									break;
+									case 20://OK可以报价
+										if ($money < $item['newPrice']) return '您的报价不能低于'.$item['newPrice'].'元';
+										if (db::insert('baojia_list', array(
+											'bid' => $bid,
+											'uid' => $buid,
+											'price' => $money,
+											'content' => $content,
+											'time'    => time::$timestamp
+										))) {
+											db::update('baojia', array('newPrice' => $money, 'time' => time::$timestamp, 'status' => 10), "id='$item[id]'");
+											db::update('shop', 'offerCount=offerCount+1', "id='$this->s_id'");
+											return true;
+										} else {
+											return '报价失败，请重试';
+										}
+									break;
+									case 21:
+										return '您已拒绝对该商品报价';
+									break;
+									case 30:
+										return '已经谈判成功，您可以购买该商品';
+									break;
+									case 31:
+										return '该商品已经交易成功，停止报价';
+									break;
+									case 32:
+										return '该商品已被抢拍，停止报价';
+									break;
+								}
+							} else {//不存在的
+								if ($bid = db::insert('baojia', array(
+									'suid'     => $suid,
+									'buid'     => $buid,
+									'sid'      => $this->s_id,
+									'newPrice' => $money,
+									'status'   => 10,
+									'time'     => time::$timestamp
+								), true)) {
+									if (db::insert('baojia_list', array(
+										'bid' => $bid,
+										'uid' => $buid,
+										'price' => $money,
+										'content' => $content,
+										'time'    => time::$timestamp
+									))) {
+										return $bid;
+									} else {
+										db::del_id('baojia', $bid);
+										return '报价失败，请重试';
+									}
+								} else return '报价失败，请重试';
+							}
+						} else {//卖家报价
+							$tb = new db_table('baojia', '*', array('id' => $bid, 'sid' => $this->s_id, 'suid' => $suid));
+							if ($item = $tb->fetchOne()) {//已经存在的
+								switch ($item['status']) {
+									case 10://OK回复买方
+										if ($money < $item['newPrice']) return '您的报价不能低于'.$item['newPrice'].'元';
+										if (db::insert('baojia_list', array(
+											'bid' => $bid,
+											'uid' => $suid,
+											'price' => $money,
+											'content' => $content,
+											'time'    => time::$timestamp
+										))) {
+											db::update('baojia', array('newPrice' => $money, 'time' => time::$timestamp, 'status' => 20), "id='$item[id]'");
+											return true;
+										} else {
+											return '报价失败，请重试';
+										}
+									break;
+									case 11:
+										return '该商品卖方拒绝您的报价';
+									break;
+									case 20://OK可以报价
+										return '请等待买方回复';
+									break;
+									case 21:
+										return '您已拒绝对该商品报价';
+									break;
+									case 30:
+										return '已经谈判成功，您可以购买该商品';
+									break;
+									case 31:
+										return '该商品已经交易成功，停止报价';
+									break;
+									case 32:
+										return '该商品已被抢拍，停止报价';
+									break;
+								}
+							} else {
+								return '卖方不能先报价或者报价项目不存在';
+							}
+						}
+					} else return '该商品当前状态停止报价';
+				} else return '请勿非法操作';
+			} else return '该商品不存在';
+		} else return array('needLogin' => true);
+	}
+	public function cancelBaojia($bid){
+		$var = qscms::v('_G');
+		if ($var->member) {
+			if ($this->isLoad) {
+				if ($this->s_type == 0) {
+					if ($item = db::one('baojia', '*', "id='$bid'")) {
+						if ($item['suid'] != $var->member->uid && $item['buid'] != $var->member->uid) return '非法操作';
+						$seller = $item['suid'] == $var->member->uid;
+						if ($seller && $item['status'] == 10) {//卖家取消
+							db::update('baojia', array('status' => 11), "id='$bid'");
+							return true;
+						} elseif (!$seller && $item['status'] == 20) {//买家取消
+							db::update('baojia', array('status' => 21), "id='$bid'");
+							return true;
+						} else return '该状态不允许取消';
+					} else return '不存在该报价';
+				} else return '请勿非法操作';
+			} else return '该商品不存在';
+		} else return array('needLogin' => true);
+	}
+	public function buy($datas){
+		$var = qscms::v('_G');
+		$member = $var->member;
+		if (!$member) return array('needLogin' => true);
+		if (!$this->isLoad) return '您要购买的商品不存在';
+		if ($this->s_status != 2) return '该商品已下架';
+		$uid = $member->uid;
+		if ($this->s_type == 0) {//议价
+			extract(form::get4($datas, array(array('bid', 'int'), 'expire', array('trade_type', 'int'), 'who')));
+			if ($item = db::one('baojia', '*', "id='$bid' AND sid='$this->s_id'")) {
+				if ($item['suid'] != $uid) return '请勿非法操作';
+				if ($item['status'] == 10) {
+					$money = $item['newPrice'];
+					if (!in_array($trade_type, array('1', '2'))) return '请勿非法操作';
+					if (!in_array($expire, cfg::getListValues('web', 'orderDays'))) return '请勿非法操作';
+					if (!in_array($who, array('buyer', 'seller', 'both'))) return '请勿非法操作';
+					$datas = array(
+						'sid'        => $this->s_id, 
+						'bid'        => $bid,
+						'suid'       => $item['suid'], 
+						'buid'       => $item['buid'],
+						'cid'        => $this->s_cid,
+						'title'      => $this->s_title,
+						'trade_type' => $trade_type,
+						'who'        => $who,
+						'expire'     => time() + intval($expire) * 86400,
+						'money'      => $money,
+						'status'     => 0,
+						'time'       => time::$timestamp
+					);
+					if ($oid = db::insert('shop_order', $datas, true)) {
+						//db::update('shop', array('status' => 3), "id='$this->s_id'");
+						//db::update('baojia', 'lastStatus=status,status=30', "id='$bid'");
+						//db::update('baojia', 'lastStatus=status,status=32', "sid='$this->s_id' AND id<>'$bid'");
+						return true;
+					}
+				}
+				return '该报价单不允许下单';
+			}
+			return '没找到议价信息，不能下单';
+		} elseif ($this->s_type == 1) {//一口价
+			if ($member->m_money < $this->s_freezeYKJ) return '账户余额不足，冻结保证金失败';
+			$datas = array(
+				'sid'        => $this->s_id, 
+				'bid'        => 0,
+				'suid'       => $this->s_uid, 
+				'buid'       => $uid,
+				'cid'        => $this->s_cid,
+				'title'      => $this->s_title,
+				'trade_type' => 0,//一口价
+				'who'        => '',
+				'expire'     => 0,
+				'money'      => $this->s_money,
+				'status'     => 1,
+				'time'       => time::$timestamp
+			);
+			$rs = $member->addFreezeMoney($this->s_freezeYKJ, 1, '购买'.$this->m->c_name.$this->s_title, $this->s_id);
+			if ($rs === true) {
+				if (db::insert('shop_order', $datas)) return true;
+				$member->unsetFreezeMoney($this->s_id);
+				return '添加失败，请重试';
+			}
+			return $rs;
+		}
+	}
+}
+?>

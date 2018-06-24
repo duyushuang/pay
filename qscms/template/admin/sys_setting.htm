@@ -1,0 +1,13 @@
+{subtemplate header}
+{adminForm
+	系统设置|tip
+	数据加密密钥,null=不能为空,,用于一些重要的数据加密，一旦设定，不要轻易改动，否则后果不可预料！   |auth_key        |text
+	后台路径,null=不能为空,,路径前后不要加“/”       |sys_admin_folder|text
+	MYSQL服务器,null=不能为空,,默认为：localhost    |db_host         |text
+	MYSQL服务器端口,null=不能为空,,默认为：3306|db_port         |text
+	MYSQL数据库,null=不能为空,,MYSQL数据库名字    |db_name         |text
+	MYSQL数据库帐号,null=不能为空,,填写你数据库的用户名|db_user         |text
+	MYSQL数据库密码,null=不能为空,,填写你数据库的密码|db_pwd          |text
+	数据库表前缀,null=不能为空,,整个网站的数据库表前缀   |db_table_pre    |text
+}
+{subtemplate footer}

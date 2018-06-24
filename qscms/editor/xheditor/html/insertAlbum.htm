@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>图片插入</title>
+<style>
+body{
+	padding:5px;
+	margin:0px;
+	font-size:12px;
+	background:#EEEEEE
+}
+.box{
+	width:100%;
+	text-align:center;
+}
+#ids{
+	margin-top:30px;
+	width:250px;
+	height:20px;
+}
+</style>
+<script>
+function upload()
+{
+	callback($rs);
+}
+function closewindow()
+{
+	unloadme();
+}
+var $=function(id){return document.getElementById(id);}
+var insert = function(){
+	var ids = $('ids').value.replace(/^\s+|\s+$/g, '');
+	if (/\d+(?:(?:,|，)\d+)*/.test(ids)) {
+		callback(ids);
+	} else {
+		alert('请输入图片ID，多个ID用逗号隔开');
+		$('ids').focus();
+	}
+}
+</script>
+</head> 
+<body> 
+	<div class="box">
+			图片ID：<input type="text" id="ids" /><input type="button" value="插入" onclick="insert()" />
+	</div>
+</body> 
+</html>

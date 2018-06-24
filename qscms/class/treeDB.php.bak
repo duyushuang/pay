@@ -1,0 +1,376 @@
+<?php
+/**
+
+ */
+
+(!defined('IN_QSCMS') || IN_QSCMS !== true ) && exit('error');
+class treeDB{
+	
+	/**
+	 * 插入数据到某个分类
+	 * @tb 表名不带前缀
+	 * @args 插入的数据数组和对应表字段对应
+	 * @pid 上级ID，为0表示顶级
+	 */
+	public static function insert($tb, $args, $pid = 0, $returnId = false){
+		$tb1 = $tb.'_tree';
+		if ($pid > 0) {//有上级
+			if (($rank = db::one_one($tb, 'rank', "id='$pid'")) !== false) {
+				$args['rank'] = $rank + 1;
+				//$parents = db::select($tb1, 'pid,rank,diff', "cid='$pid'");
+				//$parents[] = array('pid' => $pid, 'rank' => $rank, 'diff' => 0);
+				//db::autocommit();
+				if ($id = db::insert($tb, $args, true)) {
+					
+					$sql = "INSERT INTO ".db::table($tb1)." SELECT pid,$id cid,rank+1 rank,diff+1 diff FROM ".db::table($tb1)." WHERE cid='$pid'";
+					$isError = false;
+					if (!db::query($sql)) {
+						$isError = true;
+					} else {
+						if (!db::insert($tb1, array('pid' => $pid, 'cid' => $id, 'rank' => $rank + 1, 'diff' => 1))) {
+							$isError = true;
+						}
+					}
+					
+					/*foreach ($parents as $v) {
+						$v['cid'] = $id;
+						$v['rank']++;
+						$v['diff']++;// = $v['rank'] - $v['prank'];
+						if (!db::insert($tb1, $v)) {
+							$isError = true;
+							break;
+						}
+					}*/
+					if (!$isError) {
+						//db::commit();
+						if ($returnId) return $id;
+						return true;
+					}
+					//db::rollback();
+					return false;
+				}
+				echo db::error();exit;
+				return false;
+			}
+			return false;
+		} else {//无上级
+			$args['rank'] = 0;
+			if ($id = db::insert($tb, $args, true)) {
+				//db::insert($tb1, array('pid' => 0, 'cid' => $id, 'rank' => 0));
+				if ($returnId) return $id;
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public static function update($tb, $cid, $pid, $delete = false){
+		$tb1 = $tb.'_tree';
+		if (($rank = db::one_one($tb, 'rank', "id='$pid'")) !== false) {
+			$rank1 = $rank + 1;
+			//$parents = db::select($tb1, 'pid,rank,diff', "cid='$pid'");
+			//$parents[] = array('pid' => $pid, 'rank' => $rank, 'diff' => 0);
+			//db::autocommit();
+			if (db::update($tb, "rank=$rank1", "id='$cid'")) {
+				if ($delete) {
+					db::del_key($tb1, 'pid', $pid);
+				}
+				$sql = "INSERT INTO ".db::table($tb1)." SELECT pid,$cid cid,rank+1 rank,diff+1 diff FROM ".db::table($tb1)." WHERE cid='$pid'";
+				$isError = false;
+				if (!db::query($sql)) {
+					$isError = true;
+				} else {
+					if (!db::insert($tb1, array('pid' => $pid, 'cid' => $cid, 'rank' => $rank + 1, 'diff' => 1))) {
+						$isError = true;
+					}
+				}
+				/*foreach ($parents as $v) {
+					$v['cid'] = $cid;
+					$v['rank']++;
+					$v['diff']++;// = $v['rank'] - $v['prank'];
+					if (!db::insert($tb1, $v)) {
+						$isError = true;
+						break;
+					}
+				}*/
+				if (!$isError) {
+					//db::commit();
+					return true;
+				}
+				//db::rollback();
+				return false;
+			}
+			return false;
+		}
+		return false;
+	}
+	
+	/**
+	 * 删除数据集
+	 * @tb 表名 不带前缀
+	 * @ids 可以为单个ID，也可以为数组形式的ID，如果某个ID下面有多个子集，那么子集会被全部删掉，慎重
+	 */
+	public static function delete($tb, $ids){
+		$tb1 = $tb.'_tree';
+		if($ids){
+			if(!is_array($ids)) $ids = array($ids);
+			db::del_ids($tb, $ids);
+			db::del_keys($tb1, 'pid', $ids);
+		}
+	}
+	
+	/**
+	 * 节点位置替换 源节点和目标节点相互替换位置
+	 * @tb 表名 不带前缀
+	 * @id1 源节点ID
+	 * @id2 目标节点ID
+	 */
+	public static function move($tb, $id1, $id2){return false;
+		if (($rs1 = db::one($tb, 'l,r,rank', "id='$id1'")) && ($rs2 = db::one($tb, 'l,r,rank', "id='$id2'"))) {
+			$ftb = db::table($tb);
+			db::query("LOCK TABLE `$ftb` WRITE");
+			if ($rs1['l'] > $rs2['l']) {
+				$rs3 = $rs1;
+				$rs1 = $rs2;
+				$rs2 = $rs3;
+			}
+			if ($rs2['l'] > $rs1['l'] && $rs2['r'] < $rs1['r']) return false;
+			$cl = $rs2['l'] - $rs1['l'];//左值相差
+			$cr = $rs2['r'] - $rs1['r'];//右值相差
+			$c  = $cr - $cl;//右值和左值相差
+			$cRank = $rs2['rank'] - $rs1['rank'];//等级相差
+			$cRank >= 0 && $cRank = '+'.$cRank;
+			$max = intval(db::one_one($tb, 'max(r)')) + 10000;
+			$flag = 10000000;
+			//db::update($tb, 'l=l+'.$max.',r=r+'.$max, "l>='$rs1[l]' and r<='$rs1[r]'");//缓存
+			db::update($tb, "rank=rank+$flag", "l>='$rs1[l]' and r<='$rs1[r]'");//缓存
+			db::update($tb, "rank=rank+$flag", "l>='$rs2[l]' and r<='$rs2[r]'");//缓存
+			if ($c != 0) {
+				$cs = $c >= 0 ? '+'.$c : $c;
+				db::update($tb, 'l=l'.$cs, "l>'$rs1[r]' and l<'$rs2[l]' AND rank<$flag" );
+				db::update($tb, 'r=r'.$cs, "r>'$rs1[r]' and r<'$rs2[l]' AND rank<$flag");
+			}
+			//db::update($tb, 'l=l-'.$cl.',r=r-'.$cl.',rank=rank-'.$cRank, "l>=$rs2[l] and r<=$rs2[r] AND rank<$flag");//节点2
+			db::update($tb, 'l=l-'.$cl.',r=r-'.$cl.",rank=rank-$cRank-$flag", "l>=$rs2[l] and r<=$rs2[r] AND rank>=$rs2[rank]+$flag");//节点2
+			//db::update($tb, 'l=l+'.$cr.'-'.$max.',r=r+'.$cr.'-'.$max.',rank=rank+'.$cRank, 'l>=\''.($rs1['l'] + $max).'\' and r<=\''.($rs1['r'] + $max).'\'');//节点1
+			db::update($tb, 'l=l+'.$cr.',r=r+'.$cr.",rank=rank+$cRank-$flag", "l>='$rs1[l]' AND r<='$rs1[r]' AND rank>=$rs1[rank]+$flag");//节点1
+			db::query('UNLOCK TABLES');
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 把某id1移动到id2下面
+	 */
+	public static function moveTo($tb, $id1, $id2) {return false;
+		if ($rs1 = db::one($tb, 'l,r,rank', "id='$id1'")) {
+			if (!$id2) {//移动到最顶层
+				$flag = 100000000;
+				db::update($tb, "rank=rank+$flag", "l>=$rs1[l] AND r<=$rs1[r] AND rank>=$rs1[rank]");
+				$rank = $rs1['rank'];
+				$len = $rs1['r'] - $rs1['l'] + 1;//长度
+				if ($rank == -1) return true;
+				if ($rank == 0) return true;
+				db::update($tb, "l=l-$len", "l>'$rs1[r]' AND rank<$flag");
+				db::update($tb, "r=r-$len", "r>'$rs1[r]' AND rank<$flag");
+				$maxR = db::one_one($tb, 'MAX(r)', "rank='0'");
+				$len = $maxR - ($rs1['l'] - 1);//长度
+				$len > 0 && $len = '+'.$len;
+				db::update($tb, "l=l$len,r=r$len,rank=rank-$rank-$flag", "l>=$rs1[l] AND r<=$rs1[r] AND rank>=$rs1[rank]+$flag");
+				return true;
+			} else {
+				if ($rs2 = db::one($tb, 'l,r,rank', "id='$id2'")) {
+					if ($rs1['l'] < $rs2['l'] && $rs1['r'] > $rs2['r']) return false;
+					$flag = 100000000;
+					db::update($tb, "rank=rank+$flag", "l>='$rs1[l]' AND r<='$rs1[r]'");//假设标记删除
+					
+					$len = $rs1['r'] - $rs1['l'] + 1;
+					db::update($tb, "l=l-$len", "l>'$rs1[r]' AND rank<$flag");
+					db::update($tb, "r=r-$len", "r>'$rs1[r]' AND rank<$flag");
+					
+					$rs2 = db::one($tb, 'l,r,rank', "id='$id2'");
+					db::update($tb, "l=l+$len", "l>'$rs2[r]' AND rank<$flag");
+					db::update($tb, "r=r+$len", "r>='$rs2[r]' AND rank<$flag");
+					
+					$rank = $rs1['rank'] - $rs2['rank'] -1;//rank 差
+					$len1  = $rs1['l'] - $rs2['r'];//
+					
+					db::update($tb, "l=l-$len1,r=r-$len1,rank=rank-$rank-$flag", "l>=$rs1[l] AND r<=$rs1[r] AND rank>=$rs1[rank]+$flag");
+					
+					
+				}
+				return false;
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * 获取某个ID的一级下线个数，PID为0就获取顶级的
+	 */
+	public static function childsCount($tb, $pid = 0, $where = ''){
+		$tb1 = $tb.'_tree';
+		if (!$pid) return db::dataCount($tb, 'rank=\'0\'');
+		else {
+			/*if ($line = db::one($tb, 'l,r,rank', "id='$pid'")) {
+				//return (intval($line['r']) - intval($line['l']) - 1) / 2;
+				$rank = $line['rank'] + 1;
+				return db::dataCount($tb, "l>'$line[l]' AND r<'$line[r]' AND rank='$rank'");
+			}*/
+			$tb = db::table($tb);
+			$tb1 = db::table($tb1);
+			$sql = "SELECT cid FROM $tb1 t1 JOIN (SELECT rank+1 rank FROM $tb WHERE id='$pid') t2 WHERE pid='$pid' AND t1.rank=t2.rank";
+			$sql = "SELECT cid FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.cid=t1.id".($where ? ' WHERE '.$where : '');
+			$sql = "SELECT COUNT(*) FROM ($sql) t1";
+			return db::resultFirst($sql);
+		}
+	}
+	
+	/**
+	 * 获取某个下级的一级下线，PID为0获取顶级的
+	 */
+	public static function childs($tb, $pid = 0, $f = '*', $where = '', $order = '', $pagesize = 0, $page = 1){
+		$tb1 = $tb.'_tree';
+		if (!$pid) {
+			$where && ($where = "rank='0' AND ".$where) || $where = "rank='0'";
+			return db::select($tb, $f, $where, $order, $pagesize, $page);
+		}
+		else {
+			$tb = db::table($tb);
+			$tb1 = db::table($tb1);
+			//$f = db::fieldsAddPrefix($f, 't1');
+			$sql = "SELECT cid FROM $tb1 t1 JOIN (SELECT rank+1 rank FROM $tb WHERE id='$pid') t2 WHERE pid='$pid' AND t1.rank=t2.rank";
+			$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.cid=t1.id";//.($where ? ' AND '.$where : '');
+			return db::select("($sql)", $f, $where, $order, $pagesize, $page);
+			//$sql = db::Sqlselect("($sql)", $f, $where, $order, $pagesize, $page);
+			//return db::select("($sql)|member_count:uid=id", '*|*');
+		}
+		/*$ftb = db::table($tb);
+		//$f=preg_replace('/([^`,]+)/i','t.\\1',$f);
+		if(!$pid)db::query("SET @l=1");
+		else db::query("SELECT @l:=l+1 FROM $ftb WHERE id='$pid'");
+		$sql = "SELECT @l:=r+1,id FROM (SELECT id,l,r FROM $ftb ORDER BY l) t WHERE l=@l";
+		$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $ftb t1 ON t1.id=t0.id";
+		$sql = "SELECT $f FROM ($sql) t".($where?' WHERE '.$where:'').($order?' ORDER BY '.$order:'');
+		if($pagesize>0)$sql.=' LIMIT '.($page-1)*$pagesize.','.$pagesize;
+		$query = db::query($sql);
+		$list = array();
+		while($line = db::fetch($query)){
+			$line['subNum'] = ($line['r']-$line['l']-1)/2;
+			$list[] = $line;
+		}
+		return $list;*/
+	}
+	/**
+	 * 获取某个ID的所有下线个数，PID为0就获取顶级的
+	 */
+	public static function childsCount_all($tb, $pid = 0, $where = ''){
+		$tb1 = $tb.'_tree';
+		if (!$pid) return db::dataCount($tb, 'rank=\'0\'');
+		else {
+			/*if ($line = db::one($tb, 'l,r,rank', "id='$pid'")) {
+				//return (intval($line['r']) - intval($line['l']) - 1) / 2;
+				$rank = $line['rank'] + 1;
+				return db::dataCount($tb, "l>'$line[l]' AND r<'$line[r]' AND rank='$rank'");
+			}*/
+			$tb = db::table($tb);
+			$tb1 = db::table($tb1);
+			$sql = "SELECT cid FROM $tb1 WHERE pid='$pid'";
+			$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.cid=t1.id".($where ? ' WHERE '.$where : '');
+			$sql = "SELECT COUNT(*) FROM ($sql) t1";
+			return db::resultFirst($sql);
+		}
+	}
+	/**
+	 * 获取某个ID的所有上线个数，PID为0就获取顶级的
+	 */
+	public static function parentCount_all($tb, $pid = 0, $where = ''){
+		$tb1 = $tb.'_tree';
+		if (!$pid) return db::dataCount($tb, 'rank=\'0\'');
+		else {
+			/*if ($line = db::one($tb, 'l,r,rank', "id='$pid'")) {
+				//return (intval($line['r']) - intval($line['l']) - 1) / 2;
+				$rank = $line['rank'] + 1;
+				return db::dataCount($tb, "l>'$line[l]' AND r<'$line[r]' AND rank='$rank'");
+			}*/
+			$tb = db::table($tb);
+			$tb1 = db::table($tb1);
+			$sql = "SELECT pid FROM $tb1 WHERE cid='$pid'";
+			$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.pid=t1.id".($where ? ' WHERE '.$where : '');
+			$sql = "SELECT COUNT(*) FROM ($sql) t1";
+			return db::resultFirst($sql);
+		}
+	}
+	/**
+	 * 获取某个下级的所以级下线，PID为0获取顶级的
+	 */
+	public static function childs_all($tb, $pid = 0, $f = '*', $where = '', $order = '', $pagesize = 0, $page = 1){
+		$tb1 = $tb.'_tree';
+		if (!$pid) {
+			$where && ($where = "rank='0' AND ".$where) || $where = "rank='0'";
+			return db::select($tb, $f, $where, $order, $pagesize, $page);
+		}
+		else {
+			$tb = db::table($tb);
+			$tb1 = db::table($tb1);
+			$sql = "SELECT cid FROM $tb1 WHERE pid='$pid'";
+			$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.cid=t1.id";
+			
+			return db::select("($sql)", $f, $where, $order, $pagesize, $page);
+			//$sql = db::Sqlselect("($sql)", $f, $where, $order, $pagesize, $page);
+			//return db::select("($sql)|member_count:uid=id", '*|*');
+		}
+	}
+	/**
+	 * 获取某个ID的所有上级，排序从下网上排列
+	 */
+	public static function parents($tb, $pid = 0, $f = '*', $where = '', $order = '', $pagesize = 0, $page = 1){
+		$tb1 = $tb.'_tree';
+		$tb = db::table($tb);
+		$tb1 = db::table($tb1);
+		$sql = "SELECT pid FROM $tb1 WHERE cid='$pid'";
+		$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.pid=t1.id ORDER BY rank DESC";
+		return db::select("($sql)", $f, $where, $order, $pagesize, $page);
+		//$sql = db::Sqlselect("($sql)", $f, $where, $order, $pagesize, $page);
+		//return db::select("($sql)|member_count:uid=id", '*|*');
+	}
+	/**
+	 * 获取某个ID的第一个上级的所有数据 第一个上级
+	 */
+	public static function parents_one($tb, $pid = 0, $f = '*', $where = '', $order = ''){
+		$tb1 = $tb.'_tree';
+		$tb = db::table($tb);
+		$tb1 = db::table($tb1);
+		$sql = "SELECT pid FROM $tb1 WHERE cid='$pid'";
+		$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.pid=t1.id ORDER BY rank DESC LIMIT 1";
+		return db::execute('fetch_first', $sql);
+	}
+	/**
+	 * 获取某个ID的第一个上级的name和xin，排序从下网上排列
+	 */
+	public static function parents_one_one($tb, $pid = 0, $f = '', $where = '', $order = ''){
+		$tb1 = $tb.'_tree';
+		$tb = db::table($tb);
+		$tb1 = db::table($tb1);
+		$sql = "SELECT pid FROM $tb1 WHERE cid='$pid'";
+		$sql = "SELECT ".($f ? $f : "*")." FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.pid=t1.id ORDER BY rank DESC";
+		return db::execute('result_first', $sql);
+		
+		
+	}
+	
+	/**
+	 * 检测是是否是它的上级 有的话返回ppid上级的数据
+	 */
+	public static function exists_parent($tb, $ppid = 0, $pid = 0){
+		$tb1 = $tb.'_tree';
+		$tb = db::table($tb);
+		$tb1 = db::table($tb1);
+		$sql = "SELECT pid FROM $tb1 WHERE cid='$pid' AND pid='$ppid'";
+		$sql = "SELECT t1.* FROM ($sql) t0 LEFT JOIN $tb t1 ON t0.pid=t1.id ORDER BY rank DESC LIMIT 1";
+		return db::execute('fetch_first', $sql);
+		//return db::one("($sql)", '*');
+	}
+}
+?>

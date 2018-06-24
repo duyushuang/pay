@@ -1,0 +1,81 @@
+{sub header}
+{css_select jquery_ui}
+{jsFile ../jquery-ui.min}
+{jsFile datepicker,}
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+    <div class="bg-light lter b-b wrapper-md hidden-print">
+      <h1 class="m-n font-thin h3">订单记录</h1>
+    </div>
+    <div class="wrapper-md control">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"> 订单记录&nbsp;({$total})</div>
+        <div class="row wrapper">
+          <div class="col-sm-8 m-b-xs">
+            <form action="" method="GET" class="form-inline">
+              <div class="form-group">
+                <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                <input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly name="addTime1" value="{var $addTime1}" class="form-control input-inline" />
+                <span class="input-group-addon">至</span>
+                <input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly  name="addTime2" value="{var $addTime2}"class="form-control input-inline" />
+                </div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="input-sm form-control" name="uid" value="{var $uid}" placeholder="商户ID">
+              </div>
+              <div class="form-group">
+                <input type="text" class="input-sm form-control" name="out_trade_no" value="{var $out_trade_no}" placeholder="商户订单搜索">
+              </div>
+              
+              <div class="form-group">
+                <button class="btn btn-sm btn-default" type="submit">搜索</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>商户订单号</th>
+                <th>来自商户API</th>
+                <th>提成金额</th>
+                <th>支付金额</th>
+                <th>费率总金额</th>
+                <th>提成比例</th>
+                <th>提成时间</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{if $list}
+                {loopQuick $list}
+            	 <tr>
+                    <td>$v[out_trade_no]</td>
+                    <td>$v[fuid]</td>
+                    <td>￥ <b>$v[money]</b></td>
+                    <td>￥ <b>$v[payMoney]</b></td>
+                    <td>￥ <b>$v[blMoney]</b></td>
+                    <td>{echo $v[fc_m] * 100}%</td>
+                    <td>{date $v[addTime]}</td>
+                 </tr>
+                {/loopQuick}
+            	{else}
+            	<tr>
+                	<td colspan="6"><span>暂无信息。</span></td>
+                </tr>
+            	{/if}
+            </tbody>
+          </table>
+        </div>
+        <footer class="panel-footer">
+          $multipage
+        </footer>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+$('[name=addTime1]').datepicker();
+$('[name=addTime2]').datepicker();
+</script>
+{sub footer}

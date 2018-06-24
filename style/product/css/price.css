@@ -1,0 +1,267 @@
+﻿.warpper,.wrap{
+	width: 1200px;
+margin: 0 auto;
+position: relative;
+}
+.blank30{
+	height: 30px;
+	clear: both;
+	visibility: hidden;
+}
+.blank15{
+	height: 15px;
+	clear: both;
+	visibility: hidden;
+}
+.blank440{
+	height: 440px;
+	clear: both;
+	visibility: hidden;
+}
+.price_banner{
+	position: relative;
+	background: url(//www.jinmipay.com/style/product/images/banner_price.png) no-repeat center 0 #fbf8ed;
+}
+.mr{
+	margin-right: 10px; 
+}
+.pricebox{
+	float: left;
+	width: 230px;
+	height: 380px;
+	text-align: center;
+	background: #f9f9f9;
+    border-radius: 3px; 
+    -moz-border-radius:3px; 
+    -webkit-border-radius:3px;
+    position: relative;
+}
+.br{
+	border: 1px solid #e3e0d6;
+}
+.box-tit{
+	background: #00a4d2;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	border-top-left-radius: 3px; 
+    -moz-border-top-left-radius:3px; 
+    -webkit-border-top-left-radius:3px;
+    border-top-right-radius: 3px; 
+    -moz-border-top-left-radius:3px; 
+    -webkit-border-top-left-radius:3px;
+}
+.box-price{
+	height: 56px;
+	line-height: 56px;
+	color: #f75036;
+	font-size: 22px;
+	font-weight: bold;
+	background: #fff;
+}
+.box-bz{
+	height: 50px;
+	line-height: 42px;
+	color: #5b5b95;
+	font-weight: bold;
+	font-size: 14px;
+	background: url(//www.jinmipay.com/style/product/images/box_price_bj.png) no-repeat center;
+}
+.box-con ul{
+	padding-top: 5px;
+}
+.box-con ul li{
+	display: block;
+	padding-left: 76px;
+	text-align: left;
+	height: 22px;
+	line-height: 22px;
+	font-size: 12px;
+	color: #3f3e3e;
+	background: url(//www.jinmipay.com/style/product/images/conli.png) no-repeat 48px center;
+}
+.box-btn{
+	position: absolute;
+	bottom: 15px;
+	left:31px;
+	width: 170px;
+	height: 30px;
+	line-height: 30px;
+	background: #00a4d2;
+	color: #fff;
+	font-size: 14px;
+	border-radius: 3px; 
+    -moz-border-radius:3px; 
+    -webkit-border-radius:3px;
+}
+.blue{
+	background: #00a4d2;
+}
+a.blue:hover{
+	background: #008DB5;
+}
+.green{
+	background: #14b9af;
+}
+a.green:hover{
+	background: #029990;
+}
+.red{
+	background: #f46172;
+}
+a.red:hover{
+	background: #E24759;
+}
+.price_tit{
+	height: 50px;
+	width: 100%;
+}
+.cpsq{
+	background: url(//www.jinmipay.com/style/product/images/tit_cpsq.png) no-repeat left center;
+}
+.cpfw{
+	background: url(//www.jinmipay.com/style/product/images/tit_cpfw.png) no-repeat left center;
+}
+/* p2p_price 开始 */
+ .bdw_1{
+	z-index:1;
+	position:relative;
+	margin:0px auto 0px;
+	width:1200px;
+	overflow:hidden;
+}
+.p2p_price table
+{
+	width:100%;
+	border-right:1px solid #ced6d9;
+	border-bottom:1px solid #ced6d9;
+	fon
+}
+.p2p_price th
+{
+	height:42px;
+ 	background-color:#00a4d2;
+ 	color:#fff;
+ 	font-size:16px;
+ 	font-weight:bold;
+ 	text-align:center;
+ 	border-left:1px solid #ced6d9;
+ 	border-top:1px solid #ced6d9;
+}
+.p2p_price td
+{
+	border-left:1px solid #ced6d9;
+ 	border-top:1px solid #ced6d9;
+	background:#fff;
+	color:#666;
+	font-size:15px;
+	line-height:18px;
+	text-align:center;
+ 	padding:10px 0px;
+}
+.p2p_price td em{
+	font-size: 12px;
+	color: #9f9fb2;
+	font-style: normal;
+}
+
+.p2p_price .price{
+	height:100px;
+}
+.p2p_price .price td{
+	background:#e8fefe;
+	font-family:"Microsoft YaHei";
+}
+.p2p_price td.tl{ text-align:left; padding-left:15px}
+.p2p_price td b
+{
+	
+}
+.p2p_price .td_bg
+{
+	background-color:#fcfcfc;
+}
+.p2p_price .f_red{
+	 font-weight:bolder;
+	 color:#ff0000
+}
+.jiao_fuyong
+{
+	padding-top:20px;
+	background:url({$TMPL}/images/jiaoyu/jiaoyu_43.gif) repeat;
+	height:35px;
+	margin:0 auto;
+	position:relative;
+	margin-top:20px;
+}
+.jiao_fuyong h3
+{
+	color:#494949;
+	text-align:center;
+}
+.p2p_price i{
+	width:22px;
+	height:22px;
+	display:inline-block;
+	background:url(//www.jinmipay.com/style/product/images/table_icon.png) no-repeat;
+	vertical-align:middle;
+	margin-right:8px;
+}
+.p2p_price .mod_icon{
+	background-position:0 0;
+	width:17px;
+}
+.p2p_price .cate_icon{
+	background-position:0 -37px;
+	width:18px;
+}
+.p2p_price .standard_icon{
+	background-position:0 -77px;
+	width:17px;
+}
+.p2p_price .specialty_icon{
+	background-position:0 -116px;
+	width:14px;
+}
+.p2p_price .flagship_icon{
+	background-position:0 -157px;
+}
+.p2p_price .business_icon{
+	background-position:0 -198px;
+	width:17px;
+}
+/* p2p_price 结束 */
+.leave-show{
+	display: none;
+}
+.background{
+	position: absolute;
+	z-index: 9;
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0.6;
+	filter: alpha(Opacity=60);
+	background: #000;
+	display: none;
+}
+.leave-con{
+	position: fixed;
+	top:-500px;
+	z-index: 10;
+	width: 100%;
+height: 100%;
+padding-top: 200px;
+}
+
+.leavemealong{
+	line-height: 30px;
+	padding-top: 15px;
+	color: #333;
+	font-weight: bold;
+	font-size: 16px;
+}

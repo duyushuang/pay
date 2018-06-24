@@ -1,0 +1,1 @@
+<?php exit;?>a:10:{s:8:"minMoney";s:3:"500";s:6:"blCash";s:1:"0";s:9:"isReferer";s:1:"0";s:8:"queryDay";s:2:"30";s:7:"cashNum";s:3:"100";s:9:"cashMoney";s:5:"60000";s:9:"moneyCash";s:2:"25";s:8:"maxMoney";s:5:"50000";s:9:"maxMoney1";s:0:"";s:11:"transferNum";s:0:"";}

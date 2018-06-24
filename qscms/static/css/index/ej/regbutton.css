@@ -1,0 +1,265 @@
+#reg_button {
+	margin: 0 auto;
+	width: 1100px;
+	text-align: left;
+	padding: 25px 0;
+}
+#reg_button p {
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+#reg_button p.h {
+	font-size: 20px;
+	font-weight: bold;
+	margin: 0;
+	color: #00465B;
+}
+#reg_button small {
+	font-size: 12px;
+	font-weight: normal!important;
+	color: #00465B;
+}
+#reg_button table {
+	width: 100%;
+	background: #ddd;
+	border: 1px solid #ccc;
+	border-spacing: 0;
+	margin: 20px 0;
+	border-collapse: collapse;
+}
+#reg_button table td {
+	vertical-align: top;
+	border: 1px solid #ccc;
+	text-align: center;
+}
+#reg_button table th {
+	border: 1px solid #ccc;
+	text-align: left;
+	font-size: 16px;
+	font-weight: bold;
+}
+#reg_button table td, #reg_button table th {
+	padding: 0;
+}
+#reg_button table td div, #reg_button table th div {
+	padding: 10px;
+	position: relative;
+}
+#reg_button table td i {
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #ccc;
+	border-right: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+}
+#reg_button table td input[type="radio"] {
+	margin: 5px 5px 6px 5px;
+	padding: 0;
+}
+#reg_button table td img {
+	vertical-align: top;
+}
+#reg_button table tr:nth-child(even) td:nth-child(odd) {
+	background: #aaa;
+}
+#reg_button table tr:nth-child(odd) td:nth-child(even) {
+	background: #aaa;
+}
+#reg_button table th p {
+	margin: 0;
+	color: #00465B;
+}
+.reg_button_lay {
+	background: #fff;
+	position: fixed;
+	left: 0;
+	top: 50%;
+	margin-top: -300px;
+	-webkit-border-radius: 0 6px 6px 0;
+	-moz-border-radius: 0 6px 6px 0;
+	border-radius: 0 6px 6px 0;
+	z-index: 9999;
+	padding: 20px;
+	border: 1px solid #aaa;
+}
+.reg_button_lay .h {
+	color: #00465B;
+	font-size: 14px;
+	font-weight: bold;
+}
+.reg_button_lay div {
+	background: #ccc;
+	padding: 10px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+.reg_button_lay div a {
+	border: 0;
+}
+.reg_button_lay textarea {
+	border: 1px solid #aaa;
+	background: #fff;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	width: 200px;
+	height: 100px;
+}
+.reg_button_lay a {
+	text-decoration: none;
+	border-bottom: 1px dashed #00465B;
+	font-size: 12px;
+}
+.reg_button_lay a.close {
+	position: absolute;
+	right: 5px;
+	top: 0;
+	border: 0;
+	font-size: 26px;
+}
+.type_1 {
+	display: block;
+	overflow: hidden;
+	height: 229px;
+	width: 51px;
+	margin: 0 auto;
+}
+.type_1:hover img {
+	margin-left: -51px;
+	cursor: pointer;
+}
+.type_2 {
+	display: block;
+	overflow: hidden;
+	width: 106px;
+	height: 106px;
+	margin: 0 auto;
+}
+.type_2:hover img {
+	margin-top: -106px;
+	cursor: pointer;
+}
+.type_3 {
+	display: block;
+	overflow: hidden;
+	width: 106px;
+	height: 106px;
+	margin: 0 auto;
+}
+.type_3:hover img {
+	margin-top: -106px;
+	cursor: pointer;
+}
+.type_4 {
+	display: block;
+	overflow: hidden;
+	width: 105px;
+	height: 71px;
+	margin: 0 auto;
+}
+.type_4:hover img {
+	margin-top: -71px;
+	cursor: pointer;
+}
+.type_5 {
+	display: block;
+	overflow: hidden;
+	width: 205px;
+	height: 51px;
+	margin: 0 auto;
+}
+.type_5:hover img {
+	margin-top: -51px;
+	cursor: pointer;
+}
+.type_5_1 {
+	display: block;
+	overflow: hidden;
+	width: 205px;
+	height: 50px;
+	margin: 0 auto;
+}
+.type_5_1:hover img {
+	margin-top: -50px;
+	cursor: pointer;
+}
+.type_6 {
+	display: block;
+	overflow: hidden;
+	width: 275px;
+	height: 51px;
+	margin: 0 auto;
+}
+.type_6:hover img {
+	margin-top: -51px;
+	cursor: pointer;
+}
+.type_6_1 {
+	display: block;
+	overflow: hidden;
+	width: 275px;
+	height: 50px;
+	margin: 0 auto;
+}
+.type_6_1:hover img {
+	margin-top: -50px;
+	cursor: pointer;
+}
+.type_7 {
+	display: block;
+	overflow: hidden;
+	width: 256px;
+	height: 82px;
+	margin: 0 auto;
+}
+.type_7:hover img {
+	margin-top: -82px;
+	cursor: pointer;
+}
+.type_8 {
+	display: block;
+	overflow: hidden;
+	width: 136px;
+	height: 287px;
+	margin: 0 auto;
+}
+.type_8:hover img {
+	margin-left: -136px;
+	cursor: pointer;
+}
+.type_8_1 {
+	display: block;
+	overflow: hidden;
+	width: 172px;
+	height: 287px;
+	margin: 0 auto;
+}
+.type_8_1:hover img {
+	margin-left: -172px;
+	cursor: pointer;
+}
+.type_9 {
+	display: block;
+	overflow: hidden;
+	width: 181px;
+	height: 209px;
+	margin: 0 auto;
+}
+.type_9:hover img {
+	margin-left: -181px;
+	cursor: pointer;
+}
+.type_9_1 {
+	display: block;
+	overflow: hidden;
+	width: 232px;
+	height: 211px;
+	margin: 0 auto;
+}
+.type_9_1:hover img {
+	margin-left: -232px;
+	cursor: pointer;
+}

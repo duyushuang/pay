@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title>$webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<link rel="shortcut icon" href="{r}/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="{su}pay/static/assets/css/bootstrap.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/animate.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/font-awesome.min.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/simple-line-icons.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/font.css" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/app.css?spm=2017.1" type="text/css" />
+<link rel="stylesheet" href="{su}pay/static/assets/css/toastr.min.css" type="text/css" />
+
+
+<script src="{su}pay/static/assets/js/jquery.min.js"></script>
+<script src="{su}pay/static/assets/js/bootstrap.js"></script>
+<script src="{su}pay/static/assets/js/ui-nav.js"></script>
+<script src="{su}layer/layer.js" type="text/javascript"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+<script>
+$(function(){
+	$('.disabled').click(function(){
+		return false;	
+	})	
+})
+</script>
+</head>
+<body>
+<div class="app app-header-fixed  ">
+<!-- header -->
+<header id="header" class="app-header navbar" role="menu"> 
+  <!-- navbar header -->
+  <div class="navbar-header bg-dark">
+    <button class="pull-right visible-xs dk" ui-toggle="show" target=".navbar-collapse"> <i class="glyphicon glyphicon-cog"></i> </button>
+    <button class="pull-right visible-xs" ui-toggle="off-screen" target=".app-aside" ui-scroll="app"> <i class="glyphicon glyphicon-align-justify"></i> </button>
+    <!-- brand --> 
+    <a href="{r}/member" class="navbar-brand text-lt"> <i class="fa fa-btc"></i> <span class="hidden-folded m-l-xs">{$webName}</span> </a> 
+    <!-- / brand --> 
+  </div>
+  <!-- / navbar header --> 
+  
+  <!-- navbar collapse -->
+  <div class="collapse pos-rlt navbar-collapse box-shadow bg-white-only"> 
+    <!-- buttons -->
+    <div class="nav navbar-nav hidden-xs"> <a href="#" class="btn no-shadow navbar-btn" ui-toggle="app-aside-folded" target=".app"> <i class="fa fa-dedent fa-fw text"></i> <i class="fa fa-indent fa-fw text-active"></i> </a> </div>
+    <!-- / buttons --> 
+    
+    <!-- nabar right -->
+    <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown"> <a href="#" data-toggle="dropdown" class="dropdown-toggle clear" data-toggle="dropdown"> <span class="thumb-sm avatar pull-right m-t-n-sm m-b-n-sm m-l-sm"> <img src="{su}pay/static/assets/img/user.png"> <i class="on md b-white bottom"></i> </span> <span class="hidden-sm hidden-md" style="text-transform:uppercase;">代理：{$member->m_id}</span> <b class="caret"></b> </a> 
+        <!-- dropdown -->
+        <ul class="dropdown-menu animated fadeInRight w">
+          <li> <a href="{r}/user"> <span>商户中心</span> </a> </li>
+          <li> <a href="{r}/user/info"> <span>修改资料</span> </a> </li>
+          <li class="divider"></li>
+          <li> <a ui-sref="access.signin" href="{r}/member/logout">退出登录</a> </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</header>
+<aside id="aside" class="app-aside hidden-xs bg-dark">
+  <div class="aside-wrap">
+    <div class="navi-wrap"> 
+      
+      <!-- nav -->
+      <nav ui-nav class="navi clearfix">
+        <ul class="nav">
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"> <span>导航</span> </li>
+          <li> <a href="{r}/member"> <i class="glyphicon glyphicon-home icon text-primary-dker"></i> <b class="label bg-info pull-right">N</b> <span class="font-bold">代理中心</span> </a> </li>
+          <li> <a href class="auto"> <span class="pull-right text-muted"> <i class="fa fa-fw fa-angle-right text"></i> <i class="fa fa-fw fa-angle-down text-active"></i> </span> <i class="glyphicon glyphicon-leaf icon text-success-lter"></i> <span>账户安全</span> </a>
+            <ul class="nav nav-sub dk">
+              <li class="nav-sub-header"> <a href> <span>账户安全</span> </a> </li>
+              <li> <a href="{r}/user/info"> <span>修改资料</span> </a> </li>
+              <li> <a href="{r}/user/userpwd"> <span>修改密码</span> </a> </li>
+              {if false}<li> <a href="#" onclick="layer.alert('暂未开放');return false;"> <span>验证信息</span> </a> </li>{/if}
+            </ul>
+          </li>
+          <li class="line dk"></li>
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"> <span>查询</span> </li>
+          <li> <a href="{r}/member/list"> <i class="glyphicon glyphicon-th-list"></i> <span>我的下级</span> </a> </li>
+          <li> <a href="{r}/member/order"> <i class="glyphicon glyphicon-list-alt"></i> <span>提成详情</span> </a> </li>
+
+          <li class="line dk"></li>
+          <li class="hidden-folded padder m-t m-b-sm text-muted text-xs"> <span>商户</span> </li>
+          <li> <a href="{r}/user?spm=come&agent" target="_blank"> <i class="glyphicon glyphicon-th-list"></i> <span>商户中心</span> </a> </li>
+          
+        </ul>
+      </nav>
+    </div>
+  </div>
+</aside>

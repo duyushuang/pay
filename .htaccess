@@ -1,0 +1,8 @@
+#Options -Indexes
+RewriteEngine on
+#RewriteCond %{HTTP_HOST} !(www(?:\.\w+)+)$ [NC]
+#RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteRule ^(?!rewrite\.php)(.*)$ rewrite.php\?rewrite=$1&%1 [L]

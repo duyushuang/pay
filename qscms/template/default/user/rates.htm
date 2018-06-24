@@ -1,0 +1,152 @@
+{sub header}
+
+<div class="col-md-10 right">
+
+  <div class="cb-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;我的费率</div>
+
+  <div class="content-box">
+
+    <table class="table table-hover">
+
+      <thead>
+
+        <tr>
+
+          <th>通道名称</th>
+
+          <th>结算费率</th>
+
+          <th>当前状态</th>
+
+          <th>操作</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <tr>
+
+          <td>微信</td>
+
+          <td>{echo $one['wxpay'] * 100}%</td>
+
+          <td class="label_wxpay"> {if $member->isOff('wxpay')} <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span> {else} <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span> {/if} </td>
+
+          <td class="btn_wxpay"><a onclick="op('wxpay')" class="btn btn-default btn-sm" data-toggle="tooltip" title="" data-placement="top" data-original-title="默认开启，关闭后将无法收款"> {if $member->isOff('wxpay')}关闭{else}开启{/if}</a></td>
+
+        </tr>
+
+        <tr>
+
+          <td>支付宝</td>
+
+          <td>{echo $one['alipay'] * 100}%</td>
+
+          <td class="label_alipay"> {if $member->isOff('alipay')} <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span> {else} <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span> {/if} </td>
+
+          <td class="btn_alipay"><a onclick="op('alipay')" class="btn btn-default btn-sm"   data-toggle="tooltip" title="" data-placement="top" data-original-title="默认开启，关闭后将无法收款">{if $member->isOff('alipay')}关闭{else}开启{/if}</a></td>
+
+        </tr>
+
+        <tr>
+
+          <td>QQ钱包</td>
+
+          <td>{echo $one['qqpay'] * 100}%</td>
+
+          <td class="label_qqpay"> {if $member->isOff('qqpay')} <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span> {else} <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span> {/if} </td>
+
+          <td class="btn_qqpay"><a onclick="op('qqpay')" class="btn btn-default btn-sm" data-toggle="tooltip" title="" data-placement="top" data-original-title="默认开启，关闭后将无法收款">{if $member->isOff('qqpay')}关闭{else}开启{/if}</a></td>
+
+        </tr>
+
+        <tr>
+
+          <td>百度网银</td>
+
+          <td>{echo $one['bdpay'] * 100}%</td>
+
+          <td class="label_bdpay"> {if $member->isOff('bdpay')} <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span> {else} <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span> {/if} </td>
+
+          <td class="btn_bdpay"><a onclick="op('bdpay')" class="btn btn-default btn-sm" data-toggle="tooltip" title="" data-placement="top" data-original-title="默认开启，关闭后将无法收款">{if $member->isOff('bdpay')}关闭{else}开启{/if}</a></td>
+
+        </tr>
+
+        {if false}
+
+        {loopQuick pay::$bdpay}
+
+        <tr>
+
+          <td>$v</td>
+
+          <td>{echo $one['bdpay'] * 100}%</td>
+
+          <td class="label_$k"> {if $member->isOff($k)} <span class="label label-success"><span class="glyphicon glyphicon-ok"></span></span> {else} <span class="label label-danger"><span class="glyphicon glyphicon-remove"></span></span> {/if} </td>
+
+          <td class="btn_$k"><a href="javascript:;" onclick="op('$k')" class="btn btn-default btn-sm">{if $member->isOff($k)}关闭{else}开启{/if}</a></td>
+
+        </tr>
+
+       	{/loopQuick}
+
+        {/if}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+function op(type){
+
+    $.post('{r}/user/rates/edit',{hash:hash,type:type},function(ret){
+
+        if(ret.status == true){
+
+            if(ret.st == false){
+
+                $('td.label_'+type+' span.label').removeClass('label-danger').addClass('label-success');
+
+                $('td.label_'+type+' span.glyphicon').removeClass('glyphicon-remove').addClass('glyphicon-ok');
+
+                $('td.btn_'+type+' a').text('关闭');
+
+            }
+
+            if(ret.st == true){
+
+                $('td.label_'+type+' span.label').removeClass('label-success').addClass('label-danger');
+
+                $('td.label_'+type+' span.glyphicon').removeClass('glyphicon-ok').addClass('glyphicon-remove');
+
+                $('td.btn_'+type+' a').text('开启');
+
+                //$('td.btn_'+id+' a').attr('onclick',"alert('请联系平台管理员开通！')");
+
+            }
+
+        } else {
+			layer.alert(ret.msg);return false;
+
+        }
+
+    },'json');
+
+}
+
+</script> 
+
+{sub footer} 

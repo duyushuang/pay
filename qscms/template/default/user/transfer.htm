@@ -1,0 +1,151 @@
+{sub header}
+<div class="col-md-10 right">
+
+<div class="alert alert-success hidden-xs" style="font-size:14px"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;提现说明：如果您对提现事宜不了解，可以查看此处的商户提现说明。&nbsp;<a href="#" id="cashsys" data-toggle="tooltip" title="" data-original-title="提现详细说明">点击查看</a></div>
+
+<script type="text/javascript">
+
+$('#cashsys').on('click', function(){
+  layer.open({
+  type: 2,
+  title: '提现说明',
+  maxmin: true,
+  shadeClose: true, //点击遮罩关闭层
+  area : ['80%' , '620px'],
+  content: '{r}/news/14?u'
+  });
+});
+
+
+</script>
+
+  {sub h_cash}
+  <div class="content-box" >
+    <form class="form-ajax form-horizontal" action="" method="post">
+      {v sys_hash_code}
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现金额：</label>
+        <div class="col-md-2">
+          <input type="text" name="money" id="money" class="form-control" value="" placeholder="$member->m_money"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您需要提现的金额"  required>
+        </div>
+        <label class="col-md-2 control-label">实际到账：</label>
+        <div class="col-md-2">
+          <input type="text" id="money1" class="form-control" value="" placeholder="手续费{echo member_base::blCash() * 100}%" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现支付宝：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name='alipay' id='alipay' value="" placeholder="您账收款支付宝账户">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现银行：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name='back_name' id='back_name' value="" placeholder="您账收款银行名称" >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现银行卡：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name='back_card' id='back_card' value="" placeholder="您账收款银行卡号" >
+        </div>
+      </div>
+	  <div class="form-group">
+        <label class="col-md-2 control-label">银行开户地址：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" name='back_add' id='back_add' value="" placeholder="您账收款银行开户地址">
+        </div>
+      </div>
+	  
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现方式：</label>
+        <div class="col-md-6">
+          <select errormsg="请选择提现方式" class="form-control left mt5 yz" datatype="select" id="type" name="type"  data-toggle="tooltip" title="" data-placement="top" data-original-title="目支付宝和银行卡，您可以根据自己意愿选择" required>
+            <option value="">请选择</option>
+            <option value="0">支付宝</option>
+            <option value="1">银行卡</option>
+            
+          </select>
+        </div>
+      </div>
+      <div class="form-group" >
+        <label class="col-md-2 control-label">验证码：</label>
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" name="code" id="code" class="form-control" placeholder="您账户已绑定的手机号为{echo string::getXin($member->m_mobile, 6, 4);}" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户绑定手机号所收到的6位数验证码" required>
+            <span class="input-group-btn">
+            <button class="btn btn-default" id="yzm" onClick="getYZM()" type="button">获取验证码</button>
+            </span> </div>
+        </div>
+      </div>
+      <div class="form-group">
+         <div class="col-md-offset-2 col-md-6">
+           <button type="submit" class="btn btn-success" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="每天可申请{cfg pay,cashNum}次" >&nbsp;<span class="glyphicon glyphicon-save" ></span>&nbsp;确定&nbsp;</button>
+         </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<script>
+var wait = '{echo message::sms_time();}';
+$('#yzm').attr('disabled', false);
+var time = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm').html('获取验证码');
+		$('#yzm').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm').html('获取验证码(' + wait + ')');
+		$('#yzm').attr('disabled', true);
+		wait--;
+		setTimeout('time()', 1000);
+	}
+}
+function checkForm(){
+	allMoney = $member->m_money;
+	money = $('#money').val();
+	if (money < {echo member_base::minMoney()}) {
+		showError('提现金额不能低于{echo member_base::minMoney()}元');
+		$('#money').focus();
+		return false;
+	}
+	if (allMoney < money){
+		$('#money').focus();
+		showError('余额不足');
+		return false;
+	}
+	type = $('#type').val();
+	if (!type){
+		showError('请选择提现方式');
+		return false;
+	}
+	return true;
+}
+function getYZM(){
+	var rs = checkForm();
+	if (rs == true){
+		$.post('{r}/user/takecashcode', {hash:hash}, function(rs){
+			if (rs.status == true){
+				showError('验证码发送成功');
+				time();	
+			}else{
+				showError(rs.msg);
+				return false;	
+			}
+		},'json');	
+	}
+	return false;	
+}
+$('#money').blur(function(){
+	var blCash = {echo member_base::blCash()};
+	cashMoney = $(this).val();
+	money1 = cashMoney - (cashMoney * blCash).toFixed(2);
+	$('#money1').val(money1);
+})
+</script> 
+{sub footer}

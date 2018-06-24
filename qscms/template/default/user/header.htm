@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title> $webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<!--link href="{su}pay/static/common/bootstrap.min.css" type="text/css" rel="stylesheet"-->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="{su}pay/static/member/app.css" type="text/css" rel="stylesheet">
+<link href="{su}pay/static/common/datetimepicker.min.css" type="text/css" rel="stylesheet">
+<script>
+	var webUrl = '{r}';
+	var su   ='{su}';
+	var hash = '{v sys_hash}';
+</script>
+<script src="{su}pay/static/common/jquery.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/bootstrap.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/jquery.zclip.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/datetimepicker.min.js" type="text/javascript"></script>
+<script src="{su}layer/layer.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/comm.js" type="text/javascript"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+<!--+css style-->
+
+<!--+css style end-->
+</head>
+<body>
+  
+
+{if $var->p0 == 'user' && ($var->p1 == 'reg' || $var->p1 == 'login' || $var->p1 == 'forgot')}
+<link href="{su}pay/reg_login.css?spm=v1.1.8" type="text/css" rel="stylesheet">
+{else}
+<section class="header">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-8 logo"><a href="{r}/user/"><img src="{r}/{cfg web,webLogo}" style="width:160px; height:40px;"></a>&nbsp;&nbsp;<span class="label label-success">商户中心</span></div>
+      <div class="col-md-9 col-sm-6 col-xs-4 login-info">
+        <div class="dropdown hidden-xs hidden-sm"  style="float:right; margin-right:20px;"><a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span>&nbsp;
+        {if $member->m_name}{$member->m_name}{else}{$member->m_mobile}{/if}&nbsp;<span class="caret"></span></a>&nbsp;&nbsp;
+          <ul class="dropdown-menu" style="min-width: auto;">
+            <li><a href="{r}/?spm=u"><span class="glyphicon glyphicon-th-large"></span>&nbsp;返回首页</a></li>
+            <li><a href="{r}/user/info"><span class="glyphicon glyphicon-user"></span>&nbsp;商户资料</a></li>
+            <li><a href="{r}/user/userpwd"><span class="glyphicon glyphicon-lock"></span>&nbsp;修改密码</a></li>
+              <li><a href="#" id="bdweixin"><span class="glyphicon glyphicon-qrcode"></span>&nbsp;微信绑定</a></li>    
+
+<script type="text/javascript">
+$('#bdweixin').on('click', function(){
+  layer.open({
+  type: 2,
+  title: '绑定微信',
+  maxmin: true,
+  shadeClose: true, //点击遮罩关闭层
+  area : ['430px' , '500px'],
+  content: '{r}/user/userweixin'
+  });
+});
+
+</script>
+     
+            <li><a href="{r}/user/userrecord"><span class="glyphicon glyphicon-time"></span>&nbsp;登陆日志</a></li>
+         
+            <li role="separator" class="divider"></li>
+            <li><a href="{r}/user/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;安全退出</a></li>
+          </ul>
+        </div>
+        <a href="javascript:;" class="hidden-md hidden-lg" id="dropdownMenu" style="font-size:2em"><span class="glyphicon glyphicon-th-large"></span></a></div>
+    </div>
+  </div>
+</section>
+<script>$('#dropdownMenu').click(function(){if($('.main-content .left ul.nav').is(':visible')){$('.main-content .left ul.nav').addClass('hidden-sm hidden-xs').hide();} else {$('.main-content .left ul.nav').removeClass('hidden-sm hidden-xs').show();}});</script>
+<section class="main-content">
+<div class="container-fluid">
+<div class="row">
+<div class="col-md-2 left">
+  <ul class="nav hidden-sm hidden-xs">
+    <li{if $var->p1 == 'index'} class="current"{/if}><a href="{r}/user"><span class="glyphicon glyphicon-home"></span>&nbsp;商户首页</a></li>
+   
+    <li{if $var->p1 == 'info'} class="current"{/if}><a href="{r}/user/info"><span class="glyphicon glyphicon-user"></span>&nbsp;基本资料</a></li>
+    <!--li{if $var->p1 == 'userpwd'} class="current"{/if}><a href="{r}/user/userpwd"><span class="glyphicon glyphicon-lock"></span>&nbsp;修改密码</a></li>
+    <li{if $var->p1 == 'usermobile'} class="current"{/if}><a href="{r}/user/usermobile"><span class="glyphicon glyphicon-lock"></span>&nbsp;修改手机</a></li-->
+ 	<li{if $var->p1 == 'recharge'} class="current"{/if}><a href="{r}/user/recharge"><span class="glyphicon glyphicon-yen"></span>&nbsp;充值金额</a></li>
+    <li{if $var->p1 == 'payment'} class="current"{/if}><a href="{r}/user/payment"><span class="glyphicon glyphicon-tasks"></span>&nbsp;充值记录</a></li>
+    <li{if $var->p1 == 'qrcode'} class="current"{/if}><a href="{r}/user/qrcode"><span class="glyphicon glyphicon-user"></span>&nbsp;线下收款</a></li>
+    <li{if $var->p1 == 'qrorders'} class="current"{/if}><a href="{r}/user/qrorders"><span class="glyphicon glyphicon-list"></span>&nbsp;线下订单</a></li>
+    <li{if $var->p1 == 'consumption'} class="current"{/if}><a href="{r}/user/consumption"><span class="glyphicon glyphicon-tasks"></span>&nbsp;消费记录</a></li>
+    <li{if $var->p1 == 'orders'} class="current"{/if}><a href="{r}/user/orders"><span class="glyphicon glyphicon-list"></span>&nbsp;交易订单</a></li>
+    <li{if $var->p1 == 'count'} class="current"{/if}><a href="{r}/user/count"><span class="glyphicon glyphicon-time"></span>&nbsp;收入统计</a></li>
+    <li{if $var->p1 == 'ordersca'} class="current"{/if}><a href="{r}/user/ordersca"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;通道统计</a></li>
+    <li{if $var->p1 == 'takecash'} class="current"{/if}><a href="{r}/user/takecash"><span class="glyphicon glyphicon-tasks"></span>&nbsp;申请提现</a></li>
+    <li{if $var->p1 == 'payments'} class="current"{/if}><a href="{r}/user/payments"><span class="glyphicon glyphicon-piggy-bank"></span>&nbsp;提现记录</a></li>
+    <li{if $var->p1 == 'rates'} class="current"{/if}><a href="{r}/user/rates"><span class="glyphicon glyphicon-sort"></span>&nbsp;我的费率</a></li>
+
+    <li{if $var->p1 == 'vip'} class="current"{/if}><a href="{r}/vip?spm=u&.1.1" target="_blank"><span class="glyphicon glyphicon-usd"></span>&nbsp;商户套餐</a></li>
+
+    <li{if $var->p1 == 'api'} class="current"{/if}><a href="{r}/user/api"><span class="glyphicon glyphicon-wrench"></span>&nbsp;接入信息</a></li>
+
+    <li{if $var->p1 == 'daili'} class="current"{/if}><a href="{r}/member" target="_blank"><span class="glyphicon glyphicon-retweet"></span>&nbsp;代理登录</a></li>
+    <li{if $var->p1 == 'daili'} class="current"{/if}><a onclick="return layer.alert('如果您有一定的渠道和推广知识，可以申请成为代理获取高额提成，联系客服：{cfg web,qq} 联系邮箱：jinmiyun@qq.com')"><span class="glyphicon glyphicon-transfer"></span>&nbsp;代理申请</a></li>
+
+    <li{if $var->p1 == 'qqun'} class="current"{/if}><a href="{cfg web,qqqun}" target="_blank"><span class="glyphicon glyphicon-send"></span>&nbsp;QQ交流群</a></li>
+
+    <!--li class="hidden-md hidden-lg"><a href="/member/userlogs"><span class="glyphicon glyphicon-log-out"></span>&nbsp;登录日志</a></li>
+    <li class="hidden-md hidden-lg"><a href="/login/logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;安全登出</a></li-->
+  </ul>
+</div>
+{/if}
+

@@ -1,0 +1,35 @@
+#news_list {
+	margin-top: 20px;
+	font-size: 1.4em;
+}
+#news_list a {
+	text-decoration: underline;
+}
+div.new_one {
+	margin-bottom: 20px;
+}
+div.new_one span.date {
+	font-weight: bold;
+	font-size: 0.7em;
+}
+div.new_one p.minim {
+	padding: 0;
+	margin: 0;
+}
+.wizard_form .wizard_rows .wizard_row_title {
+	width: 200px;
+	text-align: left;
+	font-weight: bold;
+	padding: 3px;
+}
+.wizard_form .wizard_rows .wizard_row_field {
+	width: 400px;
+	text-align: left;
+	padding: 3px;
+}
+.deftextinput, .combo-text {
+	width: 380px;
+}
+.wizard_actions {
+	padding-left: 30px;
+}

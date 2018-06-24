@@ -1,0 +1,144 @@
+@charset "utf-8";
+	body {
+	font-family:"Microsoft YaHei",Verdana,Geneva,sans-serif;
+	font-size:14px;
+	background:#fff;
+}
+body,html {
+	margin:0;
+	padding:0
+}
+p {
+	margin:0 0 10px 0;
+	padding:0;
+}
+a,a:hover,a:focus {
+	text-decoration:none;
+	outline:none;
+}
+a:hover,a:focus {
+	color:#666666;
+	transition:all .3s;
+}
+*{
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+.btn:hover,.btn:focus{
+	transition:all .3s;
+}
+img {
+	vertical-align:top;
+	outline:none;
+	height:auto;
+}
+a img {
+	border:none;
+	border-style:none;
+}
+*:focus {
+	outline:none;
+}
+a,input,button {
+	outline:none;
+}
+::-moz-focus-inner {
+	border:0px;
+}
+div,form,img,ul,ol,li,dl,dt,dd,p {
+	margin:0;
+	padding:0;
+	list-style:none;
+	border:0;
+}
+input {
+	vertical-align:middle;
+}
+.clear {
+	clear:both;
+	height:0;
+	font-size:0
+}
+
+/*****工具提示开始*****/
+.tooltip{
+	position:absolute;
+	z-index:1030;
+	display:block;
+	font-size:11px;
+	line-height:1.4;
+	opacity:0;
+	filter:alpha(opacity=0);
+	visibility:visible;
+}
+/*****工具提示结束*****/
+
+
+/*****工具提示2开始*****/
+#mcTooltip{
+    line-height:20px;
+	height:18px;
+    color:#FFFFFF;
+    padding: 5px 9px;
+    font-size: 12px;
+    background-color:#4D556D;
+	-webkit-border-radius:4px;
+	-moz-border-radius:4px;
+	border-radius:4px;
+}
+#mcttCo{
+	width:23px!important;
+	height:24px!important;
+	margin-left:4px;
+	margin-top:1px;
+	padding:3px 0;
+	z-index:-1;
+}
+#mcttCo b{
+	width:16px!important;
+	height:16px!important;
+	background-color:#1B273C!important;
+}
+#mcTooltipWrapper {
+	position:absolute;
+	visibility:hidden;
+	overflow:visible;
+	z-index:99;
+}
+.mcTooltipInner{
+	float:left;
+	position:relative;
+	width:auto;
+	height:auto;
+}
+#mcttCo,#mcttCo b{
+	position:absolute;
+	overflow:hidden;
+}
+#mcTooltip,#mcTooltip div {
+	box-sizing:content-box;
+}
+/*****工具提示2结束*****/
+
+.padding30{
+	padding:30px;
+}
+.textLineThrough{
+	text-decoration:line-through;
+}
+.floatRight{
+	float:right;
+}
+.floatLeft{
+	float:left;
+}
+.colorZi{
+	color:#37C6B8;
+}
+.fontSize18{
+	font-size:18px;
+}
+.genterFontSize12{
+	font-size:12px;
+}

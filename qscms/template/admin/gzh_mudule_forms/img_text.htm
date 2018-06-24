@@ -1,0 +1,148 @@
+<form class="form-horizontal" role="form" method="post" enctype="multipart/form-data" id="img_tex" style="margin-top:40px;">
+{v sys_hash_code}
+  <div class="form-group">
+    <label for="firstname" class="col-md-3 control-label"><b style="color:#F00;"> * </b> 关键词</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" name="keyword" value="{var $item[keyword]}">
+      <p>多个关键词请用空格隔开：例如：美丽 漂亮 好看</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-md-3 control-label">关键词类型</label>
+    <div class="col-md-9"> 
+           <label class="checkbox-inline">
+              <input type="radio" id="radio2" name="precisions" value="0" {if !empty($item) && $item[precisions] == 0}checked="checked"{/if}> 包含匹配 （当此关键词包含粉丝输入关键词时有效）
+           </label>
+           <label>
+              <input type="radio" id="radio1" name="precisions" value="1" {if !empty($item) && $item[precisions] == 1}checked="checked"{elseif !isset($item)}checked="checked"{/if}> 完全匹配  （当此关键词和粉丝输入关键词完全相同时有效）
+           </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="firstname" class="col-md-3 control-label">标题</label>
+    <div class="col-md-9">
+      <input type="text" class="form-control" id="title" name="title" value="{var $item[title]}">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="firstname" class="col-md-3 control-label">简介</label>
+    <div class="col-md-9">
+      <textarea class="form-control" rows="3" id="Hfcontent" name="text" style="resize:none;">{var $item[text]}</textarea>
+      <p>限制200字内 </p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-md-3 control-label">封面图片地址</label>
+    <div class="col-md-9"> 
+    	<input  class="form-control" name="pic" id="pic" value="" type="text" placeholder="使用带http://完整url的网络图片或者手动上传">
+        <input name="upfile" class="text textMiddle inputQ" value="上传" type="file">
+        {if !empty($item[pic])}<img src="$item[pic]" style="width:300px; height:200px;" />{/if}
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-md-3 control-label">详细页是否显示封面</label>
+    <div class="col-md-9"> 
+           <label class="checkbox-inline">
+              <input type="radio" name="showpic" value="1" {if (!empty($item) && $item[showpic] == 1) || !isset($item)}checked="checked"{/if}> 是
+           </label>
+           <label class="checkbox-inline">
+              <input type="radio" name="showpic" value="0" {if !empty($item) && $item[showpic] == 0}checked="checked"{/if}> 否
+           </label>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="lastname" class="col-md-3 control-label">关注、查看原文</label>
+    <div class="col-md-9"> 
+           <label class="checkbox-inline">
+              <input type="radio" name="is_focus" value="1" {if (!empty($item) && $item[is_focus] == 1) || !isset($item)}checked="checked"{/if}> 隐藏
+           </label>
+           <label class="checkbox-inline">
+              <input type="radio" name="is_focus" value="0" {if !empty($item) && $item[is_focus] == 0}checked="checked"{/if}> 显示
+           </label>
+           <p>设置隐藏后，关键词触发图文消息不会显示diy素材中的“关注”和“原文”素材。（微信粉丝接收信息不受影响）</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <p style="text-align:center">图文详细页内容</p>
+    <label for="lastname" class="col-md-2 control-label"></label>
+    <div class="col-md-9" style="top: 12px;">{sub ../vx_editor}</div>
+  </div>
+  {if false}
+  <div class="form-group">
+    <label for="lastname" class="col-md-3 control-label">图文外链网址</label>
+    <div class="col-md-9">
+    	<input class="form-control" id="url" value="{var $item[url]}" disabled="disabled" name="url" type="text">
+        <p><span class="red">如需跳转到其他网址，请在输入框右侧选择或这里填写网址(例如：http://baidu.com，记住如果填写必须有http://)</span>如果填写了图文详细内容，这里请留空，不要设置！</p>
+    </div>
+  </div>
+  {/if}
+  <!--<input  name="img_info" id="img_info" type="hidden" class="set_info" >-->
+  <input value="1" name="texttype" type="hidden">
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-9 chatPanel" id="singlenews"></div>
+    <div style="clear:both"></div>
+    <input type="hidden"  class="module_id" name="module_id"/>
+  </div>
+  <div class="form-group">
+    <div class="col-md-offset-3 col-md-9">
+      <input value="保存" name="sbmt" id="imgs_texts" class="btn btn-info" onclick="sub_check();" type="button">
+    </div>
+  </div>
+</form>
+<div style="display:none" id="noneContent">{var $item[info]}</div>
+<script>
+
+this.encodeHtml = function(s){
+	return (typeof s != "string") ? s :
+	s.replace(/"|&|'|<|>|[\x00-\x20]|[\x7F-\xFF]|[\u0100-\u2700]/g,
+	function($0){
+	var c = $0.charCodeAt(0), r = ["&#"];
+	c = (c == 0x20) ? 0xA0 : c;
+	r.push(c); r.push(";");
+	return r.join("");
+	});
+};
+var sub_check = function(){
+	
+	//alert($('[name=editorValue]').val());
+	//return false;
+	var info=$("[name=img_info]").val(); 
+	//alert(info);return false;
+	//if(info =='') { alert('图文内容不能为空');}
+	//$('.set_info').val(info);
+	var keyword = $("input[name=keyword]").val();
+	if(keyword =='') { alert('关键词不能为空');
+	$("input[name=keyword]").focus();
+	return false;}
+		
+	var title = $("input[name=title]").val();
+	if(title =='') { alert('图文标题不能为空');
+	$("input[name=title]").focus();
+	return false;}
+	var jianjie = $("#Hfcontent").val();
+	if(jianjie =='') { alert('图文简介不能为空');
+	 $("#Hfcontent").focus();
+	return false;}
+	
+	var feng1 = $("input[name=pic]").val();
+	var feng2 = $("input[name=upfile]").val(); 
+	{if !isset($item)}
+	if(feng1 =='' && feng2 =='') { alert('图文消息封面不能为空'); 
+	$("input[name=pic]").focus();
+	return false;}
+	{/if}
+	//alert($('.set_info').val());return false;
+	$('form#img_tex').submit();
+	
+}
+</script>
+
+<script>
+    var ue = UE.getEditor('editor');//初始化对象  
+        $(document).ready(function(){  
+		var ue = UE.getEditor('editor');
+		ue.ready(function() {//编辑器初始化完成再赋值 
+			ue.setContent($('#noneContent').html());
+		}); 
+    }); 
+</script>

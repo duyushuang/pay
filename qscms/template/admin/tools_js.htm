@@ -1,0 +1,118 @@
+{sub h}
+{if $method=='replace'}
+<table class="table table-bordered table-striped">
+	<tr>
+		<th class="partition" colspan="2">正则表达式替换</th>
+	</tr>
+	<tr class="hover">
+		<td width="120" align="right" valign="top">目标字符串：</td>
+		<td>
+			<textarea class="form-control" id="source" rows="5"></textarea>
+		</td>
+	</tr>
+	<tr class="hover">
+		<td width="120" align="right" valign="top">结果：</td>
+		<td>
+			<textarea class="form-control" id="destination" rows="5"></textarea>
+		</td>
+	</tr>
+	<tr class="hover">
+		<td width="120" align="right" valign="top">正则表达式：</td>
+		<td>
+			<textarea class="form-control" id="regStr" rows="5"></textarea>
+		</td>
+	</tr>
+	<tr class="hover">
+		<td width="120" align="right" valign="top">&nbsp;</td>
+		<td>
+			<label><input type="checkbox" id="ignoreI" name="ignoreI" />忽略{echo '$i'}</label><input type="button" value="替换" class="btn blue" onclick="$('#destination').val(preg_replace($('#regStr').val(), $('#source').val()))" />
+			<input type="button" value="切换" class="btn blue" onclick="$('#source').val($('#destination').val());$('#destination').val('')" />
+			<input type="button" value="复制" class="btn blue" onclick="copyText($('#destination').val())" />
+			<input type="button" value="粘贴" class="btn blue" onclick="$('#source').val(window.clipboardData.getData('Text'));window.status='内容已经粘贴'" />
+			<input type="button" value="运行" class="btn blue" onclick="eval($('#source').val())" />
+			<input type="button" value="预览" class="btn blue" onclick="preview()" />
+			<input type="button" value="行间倒序" class="btn blue" onclick="strLineReverse()" />
+			<div class="btn-group btn-group-solid">
+				<button data-toggle="dropdown" class="btn blue dropdown-toggle" type="button" aria-expanded="false">
+				<i class="fa fa-ellipsis-horizontal"></i> 其它操作 <i class="fa fa-angle-down"></i>
+				</button>
+				<ul class="dropdown-menu">
+					<li>
+						<a href="javascript:;" data-type="addslashes">字符串转义</a>
+					</li>
+				</ul>
+			</div>
+		</td>
+	</tr>
+</table>
+<script language="javascript">
+	var preg_replace = function(regStr, data){
+		var arr = regStr.split('\n');
+		for(var i = 0; i < arr.length; i++){
+			var tmp_data = arr[i];
+			var tmp_arr  = tmp_data.split(' ');
+			if (!tmp_arr[1]) tmp_arr[1] = '';
+			if (tmp_arr[1]) tmp_arr[1]  = tmp_arr[1].replace(/\\n|\\r\\n/g, '\r\n').replace(/\\s/g, ' ').replace(/\\t/g, '\t');
+			if (tmp_arr[0].match(/^\/(.+)\/([^\/]*)$/ig)){
+				var re=new RegExp(RegExp.$1,RegExp.$2);
+				data=data.replace(re,tmp_arr[1]);
+			} else if(tmp_arr[0]) {
+				data=data.replace(tmp_arr[0],tmp_arr[1]);
+			}
+		}
+		if (!$('#ignoreI').is(':checked')) {
+			var find_i=-1;
+			var find_j=0;
+			while((find_i=data.indexOf('$'+'i',find_i))>=0){
+				var next=true;
+				if(find_i>0){
+					
+				}
+				if(next){
+					find_j++;
+					var data2=data;
+					if(find_i>0)data=data2.substring(0,find_i);
+					else data='';
+					data+=find_j;
+					if(find_i+2<=data2.length)data+=data2.substring(find_i+2);
+				}
+			}
+		}
+		return data;
+	}
+	var preview=function(){
+		var wd=window.open('about:blank','_blank');
+		wd.document.write($('#destination').val());
+	};
+	var strLineReverse=function(){
+		var source = $('#source').val();
+		var des = '';
+		if (source) {
+			source = source.replace(/\r\n/g, "\n");
+			var sp = source.split("\n");
+			var len = sp.length;
+			for (var i = 0; i < len; i++) {
+				if (des) des = "\r\n" + des;
+				des = sp[i] + des;
+			}
+		}
+		$('#destination').val(des);
+	};
+	var addslashes = function(str) {
+		return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+	} 
+
+	var runType = function(type){
+		if (type == void(0)) type = $('#funcType').val();
+		switch (type) {
+			case 'addslashes':
+				$('#destination').val(addslashes($('#source').val()));
+			break;
+		}
+	};
+	$('.dropdown-menu li a').click(function(){
+		runType($(this).attr('data-type'));
+	});
+</script>
+{/if}
+{sub f}

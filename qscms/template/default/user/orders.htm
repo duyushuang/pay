@@ -1,0 +1,106 @@
+{sub header}
+{css_select jquery_ui}
+{jsFile ../jquery-ui.min}
+{jsFile datepicker,}
+<div class="col-md-10 right">
+  <div class="cb-title">
+    <div class="row">
+      <div class="col-sm-10 hidden-xs"><span class="glyphicon glyphicon-th-list"></span>&nbsp;交易订单&nbsp;&nbsp;<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:12px;color:#666">
+         提交订单数：<span class="blue">$allTotal</span> 
+          &nbsp;&nbsp;订单总金额：<span class="blue">&yen; $allMoney</span>
+         &nbsp;&nbsp;已付订单数：<span class="green">$payTotal</span>
+          &nbsp;&nbsp;已付总金额：<span class="green">&yen; $payMoney</span>
+        &nbsp;&nbsp;未付订单数：<span class="red">$notTotal</span> 
+          &nbsp;&nbsp;未付总金额：<span class="red">&yen; $notMoney</span>
+          &nbsp;&nbsp;</span>
+      </div>
+      <div class="col-sm-2 text-right red" style="font-size:12px">显示最近{$queryDay}天的数据&nbsp;&nbsp;</div>
+    </div>
+  </div>
+  <div style="background:#e3f2fd;padding:20px 15px;border:1px solid #ddd;border-top:0">
+    <form class="form-inline" action="" method="get">
+      <div class="form-group">
+        <select name="status" class="form-control"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择支付状态">
+          <option value="-1"{if $status == -1} selected{/if}>全部</option>
+          <option value="0"{if $status == 0} selected{/if}>待付款</option>
+          <option value="1"{if $status == 1} selected{/if}>已付款</option>
+        </select>
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <select class="form-control" name="type"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择支付通道">
+          <option value="0"{if $type == 0} selected{/if}>全部通道</option>
+        {loopQuick pay::$array}
+          <option value="$k"{if $type == $k} selected{/if}>$v</option>
+        {/loopQuick}
+        </select>
+      </div>
+      
+      
+      
+      
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <input type="text" class="form-control" name="sn" placeholder="{$webName}系统订单号" value="{var $sn}"  data-toggle="tooltip" title="" data-placement="top" data-original-title="{$webName}系统订单号，20位数">
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <input type="text" class="form-control" name="out_trade_no" placeholder="输入商户订单号" value="{var $out_trade_no}"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入商户订单号，23位数">
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        <input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly="" value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/>
+		<span class="input-group-addon">至</span>
+		<input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly="" value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/>
+        </div>
+      </div>
+      &nbsp;&nbsp;
+      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&nbsp;立即查询</button>
+    </form>
+  </div>
+  <div class="content-box table-responsive">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>订单时间</th>
+          <th>{$webName}系统订单号</th>
+          <th>商户订单号</th>
+          <th>支付场景</th>
+          <th>交易状态</th>
+          <th>交易时间</th>
+          <th>订单金额</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        {if $list}
+        {loopQuick $list}
+        <tr>
+          <td>{date $v[addTime]}</td>
+          <td>$v[sn]</td>
+          <td>$v[out_trade_no]</td>
+          <td>{echo pay::ename($v[type])}</td>
+          <td>{if $v[status] == 1}已支付{else}待支付{/if}</td>
+          <td>{if $v[payTime]}{date $v[payTime]}{/if}</td>
+          <td>$v[money]</td>
+        </tr>
+        {/loopQuick}
+        {else}
+        <tr>
+          <td colspan="10" class="text-center">no data.</td>
+        </tr>
+        {/if}
+      </tbody>
+    </table>
+    <div style="text-align:center">$multipage</div>
+  </div>
+</div>
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+</script>
+</div>
+</div>
+</section>
+{sub footer} 

@@ -1,0 +1,70 @@
+<html>
+<head>
+<title>{lang system,name}整站使用手册</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="{u}help/css/css.css" />
+<link rel="stylesheet" type="text/css" href="{u}help/css/jquery.treeview.css" />
+<link rel="stylesheet" type="text/css" href="{u}help/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="{u}help/css/help.css" />
+<script type="text/javascript" src="{u}help/js/jquery.js"></script>
+<script type="text/javascript" src="{u}help/js/jquery.cookie.js"></script>
+<script type="text/javascript" src="{u}help/js/jquery.treeview.js"></script>
+<script type="text/javascript" src="{u}help/js/show.js"></script>
+<script language="JavaScript">
+<!--
+function changeWin (thediv){
+	var lefttd = document.getElementById('LeftMenu');
+	if(lefttd.style.display==''){
+		lefttd.style.display='none';
+		thediv.className='show';
+	}else{
+		lefttd.style.display='';
+		thediv.className='hidden';
+	}
+}
+function ShowMenu(num){
+	var theli = document.getElementById('Menu'+num);
+	if(theli.className=='hidden'){
+		theli.className='show';
+	}else{		
+		theli.className='hidden';
+	}
+}
+//-->
+</script>
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" id="HelpTable">
+	<tr>
+		<td id="LeftMenu"><div class="logo" onClick="window.location.href='{echo WEB_URL}';"><br/>
+			</div>
+			<div class="menubox">
+				<ul id="red" class="treeview-red">
+					{eval
+						$tree = new tree(db::select('manual_help', 'id,title,l,r', '', 'l'));
+						function __getTree($list){
+							$str = '';
+							foreach ($list as $v) {
+								$str .= '<li>';
+								if ($v['sub']) {
+									$str .= '<span>'.$v[self][title].'</span>';
+									$str .= '<ul>'.__getTree($v[sub]).'</ul>';
+								} else {
+									$str .= '<span><a href="'.WEB_URL.'/help/index.php?action=article&id='.$v[self][id].'" title="'.$v[self][title].'" target="contentFrame">'.$v[self][title].'</a></span>';
+								}
+								$str .= '</li>';
+							}
+							return $str;
+						}
+						echo __getTree($tree->list);
+					}
+					
+				</ul>
+			</div></td>
+		<td id="Space"><div class="hidden" onClick="changeWin(this)"><br/>
+			</div></td>
+		<td id="Content"><iframe id="contentFrame" name="contentFrame" src="{u}help/index.php?action=html&name=map" frameborder=0 marginheight="0" marginwidth="0" width="100%" height="100%" scrolling="auto"></iframe></td>
+	</tr>
+</table>
+</body>
+</html>

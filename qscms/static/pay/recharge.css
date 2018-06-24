@@ -1,0 +1,119 @@
+html, body, div, p, span, ul, ol, dl, h1, h2, h3, h4, h5, h6 {
+	margin: 0;
+	padding: 0
+}
+body {
+	font-family: 微软雅黑, 'Microsoft Yahei';
+	background: #eee
+}
+ul, ol {
+	list-style: none
+}
+img {
+	border: 0;
+	outline: none
+}
+a {
+	color: #6B6D6E
+}
+a:hover {
+	color: #CD1C20;
+	text-decoration: none
+}
+#header {
+	background: #fff;
+	border-bottom: 1px solid #ddd;
+	height: 65px
+}
+#header .logo {
+	line-height: 55px
+}
+#header .logo span {
+	font-size: 1.4em;
+	margin-left: 10px;
+	position: absolute;
+	margin-top: 4px;
+	color: #337AB7
+}
+#main {
+	margin-top: 30px;
+}
+#main .content {
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 40px 45px;
+	;
+	border-radius: 3px
+}
+.paymoney {
+	padding-top: 20px
+}
+.bf {
+	font-size: 1.3em
+}
+.bf1 {
+	font-size: 2em;
+	color: #CD1C20;
+	letter-spacing: 2px
+}
+.bf1 span {
+	font-size: 0.5em;
+	color: #6B6D6E
+}
+dl.payinfo dd {
+	line-height: 25px
+}
+.pay_list {
+	padding-top: 30px;
+	padding-left: 40px;
+	padding-bottom: 30px;
+	border: 1px solid #eee;
+	border-top: 0
+}
+.pay_list ul li img {
+	border: 1px solid #ddd
+}
+.pay_list ul li {
+	float: left;
+	margin: 5px 45px 5px 0;
+	cursor: pointer
+}
+.pay_list ul li img:hover {
+	border: 1px solid #CD1C20
+}
+.pay_list ul li.current img {
+	border: 1px solid #CD1C20
+}
+.pay img {
+	border: 1px solid #ddd
+}
+.select_pay {
+	background: #337AB7;
+	padding-top: 5px;
+	padding-left: 20px
+}
+.select_pay ul li {
+	float: left;
+	margin-right: 20px;
+	color: #fff;
+	line-height: 35px;
+	cursor: pointer
+}
+.select_pay ul li.current {
+	background: #fff;
+	line-height: 40px;
+	padding: 0 10px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	color: #666
+}
+#footer {
+	background: #263445;
+	text-align: center;
+	color: #8392A7;
+	margin-top: 30px;
+	padding: 20px 0;
+}
+.red {
+	color: #CD1C20
+}

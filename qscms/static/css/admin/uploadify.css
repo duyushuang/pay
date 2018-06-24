@@ -1,0 +1,84 @@
+ul,li{list-style:none;padding:0px;margin:0px;}
+.uploadify {
+	float:left;
+	margin-left:0px;
+	margin-top:0px;
+	margin-bottom: 10px;
+}
+.uploadify-button {
+	background:url(upload_buttons.png) no-repeat left top;
+	width:180px;
+	height:180px;
+	border-radius: 3px;
+}
+.uploadify:hover .uploadify-button {
+	background:url(upload_buttons_hover.png) no-repeat left top;
+	width:180px;
+	height:180px;
+}
+.uploadify-button.disabled {
+	background-color: #D0D0D0;
+	color: #808080;
+}
+.uploadify-queue {
+	margin-bottom: 1em;
+}
+.uploadify-queue-item {
+	float:left;
+	position:relative;
+	margin-top:0px;
+	margin-right:10px;
+	margin-bottom: 10px;
+	background-color: #F5F5F5;
+	border-radius: 3px;
+	font: 11px Verdana, Geneva, sans-serif;
+	width: 180px;
+	height:180px;
+	padding:0px;
+	cursor:move;
+}
+.uploadify-queue-item .cover{
+	width:52px;
+	height:52px;
+	position:absolute;
+	top:-3px;
+	right:-3px;
+	background:url(cover.png) no-repeat left top;
+	_background:none;
+	_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='cover.png',sizingMethod='crop');
+	z-index:900;
+}
+.uploadify-queue-item .cancel{
+	position:absolute;
+	margin-top:150px;
+	height:	30px;
+	line-height:30px;
+	width: 170px;
+	background-color: #000;
+	padding:0px 5px;
+	opacity:0.5;
+	filter:alpha(opacity = 50);
+	text-align:right;
+	z-index:800;
+}
+.uploadify-queue-item .cancel a{
+	color:#fff;
+	font-size:12px;
+	text-decoration: none;
+}
+.uploadify-queue-item.completed {
+	background-color: #E5E5E5;
+}
+.uploadify-progress {
+	background-color: #E5E5E5;
+	margin-top: 60px;
+	width: 100%;
+}
+.uploadify-progress-bar {
+	background-color: #0099FF;
+	height: 10px;
+	width: 1px;
+}
+.uploadify-error {
+	background-color: #FDE5DD !important;
+}

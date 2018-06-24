@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>金米计费APP下载</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <!--后台全部样式开始-->
+    <!--gongyong-->
+    <link rel="stylesheet" href="<?php echo WEB_URL; ?>/style/appdownstyle/css/public.css">
+
+    <!--手机扫描样式开始-->
+    <link rel="stylesheet" href="<?php echo WEB_URL; ?>/style/appdownstyle/css/phoneScan.css?spm=v1.12">
+    <!--手机扫描样式结束-->
+<style>
+    .other_a{
+        display: table;
+        width: 95%;
+        height: 132px;
+        line-height: 132px;
+        text-align: center;
+    }
+#header {
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.62);
+    top: 0;
+    left: 0;
+    z-index: 30;
+}
+#header .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+#header .content #logo {
+    width: 100%;
+    height: 0.34rem;
+    text-align: center;
+    display: block;
+    padding: 0.27rem 0;
+}
+a {
+    text-decoration: none;
+}
+</style>
+</head>
+<body>
+
+
+<div id="header">
+	  <div class="content">
+		
+		<a href="#" id="logo">
+			<img src="{r}/{cfg web,webLogo}">
+		</a>
+
+		</div>
+	</div>
+<br/><br/>
+<div class="phoneScanMin">
+
+    <!--开始-->
+    <div class="phoneScan">
+        <img src="<?php echo WEB_URL; ?>/style/appdownstyle/img/applogo.png" alt="" />
+        <div class="phoneScanTitle">金米计费APP</div>
+    </div>
+    <div class="phoneScanSize">
+        <p>版本:1.0.2（build ）</p>
+        <p class="phoneScanVers"><span>/</span>大小：6 MB<span>/</span></p>
+        <p class="phoneScanTime">2017-09-09</p>
+    </div>
+	       <p class="phoneScanApply">
+          &nbsp;&nbsp;下载金米计费商户版APP，随时随地查看收款动态，随时随地了解账户信息，随时随地进行提现操作。金米计费APP在手，收款安全又无忧。
+    </p>
+
+
+
+                                        <a class="clickDownBtn" href="https://api1.line1.jinmiyun.cn/Jinmipay_V1.0.2.apk" target="_blank">下载安卓APP</a>
+                                        <a class="clickDownBtn" href="https://api1.line1.jinmiyun.cn/Jinmipay_V1.0.2.ipa" target="_blank">下载苹果APP</a>
+
+                                    <div class="phoneQr">
+        <p>用手机<span class="phoneQrcolor">扫描</span>下方的二维码安装</p>
+        <p><img class="phoneQrCode" src="<?php echo WEB_URL; ?>/style/appdownstyle/img/adappqr.jpg?spm=3.1" alt="" /></p>
+        <p><img class="phoneQrCode" src="<?php echo WEB_URL; ?>/style/appdownstyle/img/ipaqr.jpg?spm=3.1" alt="" /></p>
+        <p><img class="phoneQrImg" src="<?php echo WEB_URL; ?>/style/appdownstyle/img/phoneQrImg.png" alt="" /></p>
+		 <p style="text-align:center;">Copyright ©2013-2017 Jinmipay</p>
+		<p style="text-align:center;color:#686de4;"><a href="/user">WAP版商户中心</a></p>
+    </div>
+	</div>
+
+<!--手机扫描提示开始-->
+<div class="clickHint" id="tip" style="display: none">
+    <img src="https://www.appbsl.com/app/Tpl/main/fanwe/images/appconf_v2/clickHint.png" alt="" />
+    <!--
+    <img src="images/clickHintiOS.png" alt="" />
+    -->
+    <div class="clickHintBtn"><a onclick="close_tip()">知道了</a></div>
+</div>
+<!--手机扫描提示结束-->
+
+<!--结束-->
+
+</body>
+
+
+<script src="<?php echo WEB_URL; ?>/style/appdownstyle/js/jquery-3.0.0.min.js"></script>
+
+
+<!--工具提示插件youce-->
+<script src="<?php echo WEB_URL; ?>/style/appdownstyle/js/tooltip.js"></script>
+
+
+<!--溢出滚动条-->
+<!--[if lt IE 9]>
+<script src="/html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script src="/css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]-->
+<script src="<?php echo WEB_URL; ?>/style/appdownstyle/js/jquery.mCustomScrollbar.concat.min.js"></script>
+
+<!--下拉按钮-->
+<script src="<?php echo WEB_URL; ?>/style/appdownstyle/js/bootstrap.min.js"></script>
+
+
+<!--滑动条选值-->
+<script>
+    $(".horizontalDropOn").click(function(){
+        $(this).parent(".horizontalDrop").parent(".recommendBg").toggleClass("horizontalSlideOn",1000);
+        $(".horizontalSlide").mouseover(function(){
+            $(this).parent(".recommendBg").addClass("horizontalSlideOn",1000);
+        });
+        $(".horizontalSlide").mouseout(function(){
+            $(this).parent(".recommendBg").removeClass("horizontalSlideOn",1000);
+        });
+        return false;
+    })
+</script>
+<!--最小高度-->
+<script>
+    $(document).ready(function() {
+        var bigHeight= document.documentElement.clientHeight-237;
+        var myadHeight= bigHeight-54;
+        $(".myadMin").css('min-height',bigHeight);
+        $(".myadHeight").css('min-height',myadHeight);
+    });
+</script>
+
+<script>
+    function open_tip() {
+        $("#tip").css('display','');
+    }
+    function close_tip() {
+        $("#tip").css('display','none');
+    }
+    function downloadapp(type){
+        //id=$appinfo.id&is_test=$is_test
+        $.ajax({
+            type: 'post',
+            url: '/style/appdownstyle/Jinmipay_V1.2.apk', //(method path)
+            data: '',
+            async: true,
+            timeout: 200000,
+            success: function(data, status) {
+                data = eval("["+data+"]")[0];
+                if(data.code == 200){
+                    //alert(data.url);return;
+                    top.location.href = data.url;
+                }else{
+                    alert(data.msg);
+                }
+            }
+        });
+    }
+</script>
+</html>

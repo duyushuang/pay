@@ -1,0 +1,1 @@
+<?php exit;?>a:6:{s:5:"AppId";s:18:"wxdc41198ad4b4e410";s:9:"AppSecret";s:0:"";s:5:"Token";s:0:"";s:14:"EncodingAESKey";s:0:"";s:3:"pid";s:10:"1507000901";s:3:"key";s:32:"GQDbtgFkO1cdXbM1Ww8E8YS1U9ysXDoP";}

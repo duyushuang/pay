@@ -1,0 +1,345 @@
+body {
+	font-family: Arial;
+}
+img {
+	border: none;
+}
+div.clear {
+	clear: both;
+	height: 0px;
+	padding: 0px;
+	margin: 0px;
+	line-height: 0px;
+	font-size: 0px;
+}
+br.clear {
+	clear: both;
+}
+.hide {
+	display: none;
+}
+a {
+	color: #011153;
+	text-decoration: underline;
+}
+a:hover {
+	text-decoration: none;
+}
+.bold {
+	font-weight: bold;
+}
+.gray {
+	color: #777777;
+}
+div#my_menu {
+	height: 50px;
+}
+div#my_menu ul li {
+	float: left;
+	margin-right: 20px;
+	list-style: none;
+}
+div#my_menu ul li.on a {
+	text-decoration: none;
+}
+div#my_menu ul li.sep {
+	width: 100px;
+}
+div#my_menu ul li.right {
+	float: right;
+	margin-left: 20px;
+}
+div#work_area {
+	margin: 0;
+}
+.form_pattern {
+	display: none;
+}
+.wizard_form .wizard_rows .wizard_row_title {
+	width: 100px;
+	text-align: right;
+	float: left;
+	padding: 3px;
+}
+.wizard_form .wizard_rows .wizard_row_field {
+	width: 180px;
+	text-align: left;
+	float: left;
+	padding: 3px;
+}
+.wizard_form .wizard_rows .wizard_row_descr {
+	width: 20px;
+	text-align: left;
+	float: left;
+	padding: 3px;
+}
+.wizard_form .wizard_row {
+	margin-bottom: 5px;
+	clear: both;
+}
+.wizard_row_delimiter {
+	height: 0;
+}
+.hintlink {
+	width: 25px;
+	height: 25px;
+	float: left;
+	text-decoration: underline;
+	font-weight: bold;
+	cursor: pointer;
+}
+.hintlink:hover {
+	color: rgba(255,0,0,0);
+}
+.hintbody {
+	display: none;
+}
+.deftextinput, .combo-text {
+	width: 180px;
+}
+.wizard_form .wizard_rows .wizard_row_field textarea {
+	height: 150px;
+}
+.unread {
+	color: #ff0000;
+	font-weight: bold;
+}
+#noticesSub {
+	background: #F0F0F0;
+}
+#noticesSub div {
+	cursor: pointer;
+	font-size: 12px;
+	line-height: 20px;
+	padding: 2px;
+}
+#noticesSub div.notice-active {
+	background: #ffffff;
+}
+#noticesSub div.inner {
+	border-bottom: 1px dotted #CCCCCC;
+}
+#noticesSub div.last {
+	border: 0px;
+}
+#noticesSub div.read {
+	color: #CCCCCC;
+}
+#profile_settings .big-cell {
+	line-height: 26px;
+	height: 26px;
+}
+.ac_results {
+	padding: 0px;
+	border: 1px solid WindowFrame;
+	background-color: Window;
+	overflow: hidden;
+}
+.ac_results ul {
+	width: 100%;
+	list-style-position: outside;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.ac_results iframe {
+	display: none;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	filter: mask();
+	width: 3000px;
+	height: 3000px;
+}
+.ac_results li {
+	position: relative;
+	margin: 0px;
+	padding: 2px 5px;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	font: menu;
+	font-size: 12px;
+	overflow: hidden;
+}
+.ac_loading {
+	background: Window url('autocomplete_indicator.gif') right center no-repeat;
+}
+.ac_over {
+	background-color: Highlight;
+	color: HighlightText;
+}
+.loading_message_mask {
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background: #ccc;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	display: none;
+	z-index: 10000000000;
+}
+.loading_message {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	width: auto;
+	height: 50px;
+	width: 50px;
+	background: #fff url('loading.gif') no-repeat scroll center;
+	border: 2px solid #fece2f;
+	color: #222;
+	display: none;
+	z-index: 10000000001;
+}
+.light_border {
+	padding: 7px;
+	border: 1px solid gray;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
+}
+#message_happy {
+	padding: 10px;
+}
+#message_happy textarea {
+	width: 98%;
+	height: 150px;
+}
+#message_happy .mh_pre_text {
+	padding-bottom: 20px;
+}
+.req_video span {
+	color: #ff0000;
+}
+#message_happy_comment {
+	padding-bottom: 20px;
+	background: #FFFF00;
+}
+#message_happy_comment div {
+	font-style: italic;
+	font-weight: bold;
+	color: red;
+	font-size: 16px;
+}
+#message_happy_comment div a {
+	font-size: 12px;
+}
+#medals {
+	float: left;
+}
+#medals_big {
+	display: block;
+	text-align: center;
+	width: 100%;
+}
+#medals_big span {
+	display: block;
+	padding-bottom: 10px;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+	width: 100%;
+}
+#wizard_complete_registration .wizard_row_field {
+	width: 500px!important;
+}
+#wizard_complete_registration .wizard_row_descr {
+	display: none;
+	width: 100%!important;
+}
+#wizard_complete_registration .hintlink {
+	display: none!important;
+}
+#wizard_complete_registration .wizard_row_descr .hintbody {
+	display: block!important;
+	color: #777!important;
+	padding: 7px 20px!important;
+}
+.show_instruction {
+	cursor: pointer;
+	background: orange;
+	padding: 5px 10px;
+	border-radius: 6px;
+	text-decoration: none;
+	color: #333;
+	font-weight: bold;
+	displya: block;
+	border: 1px solid #777;
+}
+.menu {
+	overflow: visible!important;
+}
+.slon_link {
+	background: none repeat scroll 0 0 #2BB24C;
+	border-bottom: 2px solid #23923E;
+	border-radius: 2px;
+	color: #FFFFFF;
+	display: inline-block;
+	font-size: 13px;
+	line-height: 16px;
+	padding: 11px 20px 11px 20px;
+	position: relative;
+	text-align: left;
+	text-decoration: none;
+}
+.slon_link:hover {
+	background: none repeat scroll 0 0 #07A72E;
+	border-bottom: 2px solid #068926;
+}
+a.l-btn.mh_latter {
+	background: #FF9999;
+	color: #000000;
+	margin-right: 30px;
+}
+a.l-btn.mh_send {
+	background: #A7E83A;
+	color: #000000;
+}
+a.l-btn.mh_latter span.l-btn-left {
+	background: none;
+}
+a.l-btn.mh_send span.l-btn-left {
+	background: none;
+}
+.autocomplete-suggestions {
+	border: 1px solid #999;
+	background: #FFF;
+	cursor: default;
+	overflow: auto;
+	-webkit-box-shadow: 1px 4px 3px rgba(50,50,50,0.64);
+	-moz-box-shadow: 1px 4px 3px rgba(50,50,50,0.64);
+	box-shadow: 1px 4px 3px rgba(50,50,50,0.64);
+}
+.autocomplete-suggestion {
+	padding: 2px 5px;
+	white-space: nowrap;
+	overflow: hidden;
+}
+.autocomplete-no-suggestion {
+	padding: 2px 5px;
+}
+.autocomplete-selected {
+	background: #F0F0F0;
+}
+.autocomplete-suggestions strong {
+	font-weight: bold;
+	color: #000;
+}
+.autocomplete-group {
+	padding: 2px 5px;
+}
+.autocomplete-group strong {
+	font-weight: bold;
+	font-size: 16px;
+	color: #000;
+	display: block;
+	border-bottom: 1px solid #000;
+}
+#mh-upload-container-video iframe {
+	max-height: 250px;
+}

@@ -1,0 +1,375 @@
+{sub h}
+{if $method == 'list'}
+	{adminList
+		删？      |id  |del
+		排序      |sort|sort
+		储存器名称|name
+		储存器类型|type
+		          |id  |link2,编辑,method=edit&id=$v[id];link2,文件管理,method=fms&id=$v[id]
+	}
+{elseif $method == 'add' || $method == 'edit'}
+<script language="javascript">
+$(function(){
+	var lastType = '';
+	$('[name=type]').change(function(){
+		if (lastType) $('#'+lastType+'_cfg').hide();
+		$('#'+$(this).val()+'_cfg').show();
+		lastType = $(this).val();
+	});
+	$('[name=type][value={echo !empty($datas[type]) ? $datas[type] : 'ftp'}]').attr({checked:true}).change();
+	$('#qscmsForm').submit(function(){
+		var name = $('[name=name]').val().trim();
+		if (!name) {
+			alert('请输入储存器名称');
+			$('[name=name]').focus();
+			return false;
+		}
+		var url  = $('[name=url]').val().trim();
+		if (!url) {
+			alert('请输入储存器访问地址');
+			$('[name=url]').focus();
+			return false;
+		}
+		var type = $('[name=type]').rVal();
+		if (!type) {
+			alert('请选择储存类型');
+			return false;
+		}
+		switch (type) {
+			case 'ftp':
+				var obj, val;
+				obj = $('[name=ftp[ip]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入FTP IP地址');
+					obj.focus();
+					return false;
+				}
+				obj = $('[name=ftp[port]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入FTP端口');
+					obj.focus();
+					return false;
+				}
+				obj = $('[name=ftp[username]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入FTP用户名');
+					obj.focus();
+					return false;
+				}
+				obj = $('[name=ftp[password]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入FTP密码');
+					obj.focus();
+					return false;
+				}
+			break;
+			case 'web':
+				var obj, val;
+				obj = $('[name=web[url]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入WEB通信地址');
+					obj.focus();
+					return false;
+				}
+				if (!/^http:\/\/.+/.test(val)) {
+					alert('WEB通信地址格式不正确');
+					obj.focus();
+					return false;
+				}
+				obj = $('[name=web[key]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入WEB通信密钥');
+					obj.focus();
+					return false;
+				}
+				obj = $('[name=web[varName]]');
+				val = obj.val().trim();
+				if (!val) {
+					alert('请输入WEB通信变量');
+					obj.focus();
+					return false;
+				}
+			break;
+		}
+		return true;
+	});
+});
+</script>
+	<form method="post" enctype="application/x-www-form-urlencoded" id="qscmsForm" class="form-horizontal">
+	{v sys_hash_code}
+	<input type="hidden" name="referer" value="$referer" />
+		<table class="table table-bordered table-striped">
+			<tr class="tip">
+				<td colspan="2">{if $method == 'add'}添加{else}编辑{/if}储存器</td>
+			</tr>
+			<tr>
+				<th>储存器名称</th>
+				<td><input type="text" name="name" value="{var $datas[name]}" class="form-control" /></td>
+			</tr>
+			<tr>
+				<th>储存器类型</th>
+				<td><div class="radio-list">
+						<label class="radio-inline"><input type="radio" name="type" value="ftp" />FTP</label>
+						<label class="radio-inline"><input type="radio" name="type" value="web" />WEB</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>访问URL</th>
+				<td><input type="text" name="url" value="{var $datas[url]}" maxlength="128" class="txt" style="width:240px" /></td>
+			</tr>
+			<tr>
+				<th>是否启用</th>
+				<td><div class="radio-list">
+						<label class="radio-inline"><input type="radio" name="status" value="1"{if !empty($datas[status]) && $datas[status] == 1 || empty($datas[status])} checked="checked"{/if} />是</label>
+						<label class="radio-inline"><input type="radio" name="status" value="0"{if !empty($datas[status]) && $datas[status] == 0} checked="checked"{/if} />否</label>
+					</div>
+				</td>
+			</tr>
+			<tr style="display:none" id="ftp_cfg">
+				<th>FTP配置</th>
+				<td>
+					<table class="table table-bordered table-striped">
+						<tr>
+							<th>IP地址</th>
+							<td><input type="text" name="ftp[ip]" value="{if !empty($datas[type]) && $datas[type] == 'ftp'}{var $datas[data][ip]}{/if}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>端口</th>
+							<td><input type="text" name="ftp[port]" value="{echo !empty($datas[type]) && $datas[type] == 'ftp' && !empty($datas[data][port]) ? $datas[data][port] : '21'}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>帐号</th>
+							<td><input type="text" name="ftp[username]" value="{if !empty($datas[type]) && $datas[type] == 'ftp'}{var $datas[data][username]}{/if}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>密码</th>
+							<td><input type="text" name="ftp[password]" value="{if !empty($datas[type]) && $datas[type] == 'ftp'}{var $datas[data][password]}{/if}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>远程路径</th>
+							<td><input type="text" name="ftp[path]" value="{if !empty($datas[type]) && $datas[type] == 'ftp'}{var $datas[data][path]}{/if}" class="form-control" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr style="display:none" id="web_cfg">
+				<th>WEB配置</th>
+				<td>
+					<table class="table table-bordered table-striped">
+						<tr>
+							<th>通信地址</th>
+							<td><input type="text" name="web[url]" value="{if !empty($datas[type]) && $datas[type] == 'web'}{var $datas[data][url]}{/if}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>通信密钥</th>
+							<td><input type="text" name="web[key]" value="{if !empty($datas[type]) && $datas[type] == 'web'}{var $datas[data][key]}{/if}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>通信变量</th>
+							<td><input type="text" name="web[varName]" value="{echo !empty($datas[type]) && $datas[type] == 'web' && !empty($datas[data][varName]) ? $datas[data][varName] : 'qscmsUploadData'}" class="form-control" /></td>
+						</tr>
+						<tr>
+							<th>远程路径</th>
+							<td><input type="text" name="web[path]" value="{if !empty($datas[type]) && $datas[type] == 'web'}{var $datas[data][path]}{/if}" class="form-control" /></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="{if !empty($datas)}编辑{else}添加{/if}" class="btn green" /></td>
+			</tr>
+		</table>
+	</form>
+	<br />
+{elseif $method == 'fms'}
+{cssFile filetype,qscms}
+<script language="javascript">
+$.ajaxSetup({cache:false});
+var st;
+var showLoading = function(txt){
+	if (typeof st == 'object') st.stop();
+	$('#status').html(txt+'<span id="statusLoading"></span>');
+	st = new scrollText('......', 'statusLoading');
+	st.start();
+};
+var hideLoading = function(){
+	if (typeof st == 'object') st.stop();
+	$('#status').html('');
+};
+var showTxt = function(txt){
+	if (typeof st == 'object') st.stop();
+	$('#status').html(txt);
+};
+var getFDList = function(path){
+	if (path == void(0)) path = '';
+	$('#fileList').html('');
+	showLoading('文件获取中');
+	$.ajax({
+		type: 'post',
+		url : '{ajaxurl fileList}&path='+encodeURI(path),
+		success:function(html){
+			$('#fileList').html(html);
+			showTxt('操作完成');
+		}
+	});
+};
+var getCurrentFDList = function(dir){
+	var path = $('#path').val();
+	if (path.substr(0, 1) != '/') path = '/' + path;
+	if (path.substr(path.length - 1) != '/') path += '/';
+	if (dir == void(0)) dir = '';
+	else {
+		path += dir + '/';
+	}
+	$('#path').val(path);
+	getFDList(path);
+};
+var delDir = function(dir, file){
+	showLoading('正在删除' + dir + file+'/');
+	$.ajax({
+		type: 'post',
+		url : '{r}/ajax/fms/delete/',
+		data: 'type=dir&id=$id&file='+encodeURI(dir + file+'/'),
+		dataType:'json',
+		success:function(rs){
+			if (rs.status) {
+				if (rs.msg) showTxt(rs.msg);
+				else showTxt(dir+file+'/删除成功');
+				$('#fileList').find('div[val=dir:'+file+']').remove();
+			} else {
+				showTxt(rs.msg);
+			}
+		},
+		error:function(obj){
+			showTxt('错误：'+obj.responseText);
+		}
+	});
+};
+var delFile = function(dir, file){
+	showLoading('正在删除' + dir + file);
+	$.ajax({
+		type: 'post',
+		url : '{r}/ajax/fms/delete/',
+		data: 'type=file&id=$id&file='+encodeURI(dir + file),
+		dataType:'json',
+		success:function(rs){
+			if (rs.status) {
+				if (rs.msg) showTxt(rs.msg);
+				else showTxt(dir+file+'删除成功');
+				$('#fileList').find('div[val=file:'+file+']').remove();
+			} else {
+				showTxt(rs.msg);
+			}
+		},
+		error:function(obj){
+			showTxt('错误：'+obj.responseText);
+		}
+	});
+};
+$(function(){
+	$('#connect').click(function(){
+		//$(this).attr({disabled:true});
+		//showLoading('连接中');
+		$('#path').val('/');
+		getFDList();
+	});
+});
+</script>
+<table class="tab_view" style="width:800px">
+	<tr class="tip">
+		<td colspan="2">$datas[name]文件管理($datas[type],qscms file manage system)</td>
+	</tr>
+	{if $datas[type] == 'ftp'}
+	<tr>
+		<th>IP</th>
+		<td>$datas[data][ip]</td>
+	</tr>
+	<tr>
+		<th>端口</th>
+		<td>$datas[data][port]</td>
+	</tr>
+	<tr>
+		<th>帐号</th>
+		<td>$datas[data][username]</td>
+	</tr>
+	<tr>
+		<th>密码</th>
+		<td>$datas[data][password]</td>
+	</tr>
+	<tr>
+		<th>远程路径</th>
+		<td>$datas[data][path]</td>
+	</tr>
+	{elseif $datas[type] == 'web'}
+	<tr>
+		<th>通信地址</th>
+		<td>$datas[data][url]</td>
+	</tr>
+	<tr>
+		<th>通信密钥</th>
+		<td>$datas[data][key]</td>
+	</tr>
+	<tr>
+		<th>通信变量</th>
+		<td>$datas[data][varName]</td>
+	</tr>
+	<tr>
+		<th>远程路径</th>
+		<td>$datas[data][path]</td>
+	</tr>
+	{/if}
+	<tr>
+		<th>状态</th>
+		<td id="status"></td>
+	</tr>
+	<tr>
+		<th>文件窗口</th>
+		<td>
+			<table class="tab_view">
+				<tr>
+					<th>路径</th>
+					<td><input type="text" id="path" value="/" class="txt" style="width:400px" /><input type="button" value="跳转" onclick="getFDList($('#path').val())" class="btn" /></td>
+				</tr>
+				<tr>
+					<th>文件列表</th>
+					<td id="fileList">
+						<div class="fileList">
+							{ajax fileList 
+								{eval
+									$c = false;
+									if ($datas[type] == 'ftp') {
+										$c = disperse_obj::getFtp($id);
+									} else {
+										$c = disperse_obj::getWeb($id);
+									}
+									$path = $var->gp_path;
+									$list = $c->getFDList($path);
+								}
+								{loop $list[dirs] $v}
+								<div class="qs_icon_none qs_icon_fol" val="dir:$v"><a href="javascript:;" onclick="getCurrentFDList('$v')">$v</a>&nbsp;<a href="javascript:;" onclick="delDir('{echo $c->path}', '$v')">X</a></div>
+								{/loop}
+								{loop $list[files] $v}
+								<div class="qs_icon_none qs_icon_$v[suffix]" val="file:$v[file]">$v[file]&nbsp;<a href="javascript:;" onclick="delFile('{echo $c->path}', '$v[file]')">X</a></div>
+								{/loop}
+							}
+						</div>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td><input type="button" value="获取列表" class="btn" id="connect" /></td>
+	</tr>
+</table>
+{/if}
+{sub f}

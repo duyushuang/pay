@@ -1,0 +1,481 @@
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'42DA602535839B8724CE7CB8D15456AD','sp_billno'=>'20170702144328165216','time_end'=>'20170702144342','total_fee'=>'1','transaction_id'=>'14119206016012201707021585638814','ver'=>'2.0')
+notify_id:20170702144328165216
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144444-183]</retmsg>
+  <rmb_total_fee />
+  <sign>F4812F3000F3145F47C002517D1D3526</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144454-183]</retmsg>
+  <rmb_total_fee />
+  <sign>B1E4D53FF8B30D70FFB5CEF608240942</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144506-183]</retmsg>
+  <rmb_total_fee />
+  <sign>B10E8F840DC9C6C1D7A31E926C43951D</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144524-183]</retmsg>
+  <rmb_total_fee />
+  <sign>FF7F3793616893F5C0EA82C8646532C3</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144556-183]</retmsg>
+  <rmb_total_fee />
+  <sign>C17F9492F3F67C7790345731ECCA26DB</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'42DA602535839B8724CE7CB8D15456AD','sp_billno'=>'20170702144328165216','time_end'=>'20170702144342','total_fee'=>'1','transaction_id'=>'14119206016012201707021585638814','ver'=>'2.0')
+notify_id:20170702144328165216
+call杩涙潵浜�
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144747-183]</retmsg>
+  <rmb_total_fee />
+  <sign>D57CC0C28A99EF2CB5BAF2FC3D1A502C</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702144858-183]</retmsg>
+  <rmb_total_fee />
+  <sign>85CB0979448459BF3CFE76972039F8B7</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'08E6D76546C379E7A68D2BD7D6EF15FC','sp_billno'=>'20170702143111525374','time_end'=>'20170702143124','total_fee'=>'1','transaction_id'=>'14119206016011201707021170636088','ver'=>'2.0')
+notify_id:20170702143111525374
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702150533-183]</retmsg>
+  <rmb_total_fee />
+  <sign>A025CB5A079A99C6E37EE16CBC9C26FC</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'2677940394DF8AC1A92AE4E10737DDAD','sp_billno'=>'20170702143232860377','time_end'=>'20170702143241','total_fee'=>'1','transaction_id'=>'14119206016011201707021170636667','ver'=>'2.0')
+notify_id:20170702143232860377
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702150653-183]</retmsg>
+  <rmb_total_fee />
+  <sign>76F79B408F3D9D9B5E40573D19CB57A6</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'42DA602535839B8724CE7CB8D15456AD','sp_billno'=>'20170702144328165216','time_end'=>'20170702144342','total_fee'=>'1','transaction_id'=>'14119206016012201707021585638814','ver'=>'2.0')
+notify_id:20170702144328165216
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702151749-183]</retmsg>
+  <rmb_total_fee />
+  <sign>EFBCFB30237D30754A0D24690C8998D4</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'AF75E537063A4D45C1C38F04FA7DBC30','sp_billno'=>'20170702144443250636','time_end'=>'20170702144454','total_fee'=>'1','transaction_id'=>'14119206016011201707021371138629','ver'=>'2.0')
+notify_id:20170702144443250636
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702151901-183]</retmsg>
+  <rmb_total_fee />
+  <sign>E5D4B18C9B0B7930E23ED63C63D2B2E3</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'08E6D76546C379E7A68D2BD7D6EF15FC','sp_billno'=>'20170702143111525374','time_end'=>'20170702143124','total_fee'=>'1','transaction_id'=>'14119206016011201707021170636088','ver'=>'2.0')
+notify_id:20170702143111525374
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702153535-183]</retmsg>
+  <rmb_total_fee />
+  <sign>CD9B8F6FA7B363B1D3A41BE33623F177</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1
+GET:array('bank_type'=>'CFT','bargainor_id'=>'1411920601','charset'=>'1','fee_type'=>'1','pay_info'=>'success','pay_result'=>'0','purchase_alias'=>'1307301965','sign'=>'2677940394DF8AC1A92AE4E10737DDAD','sp_billno'=>'20170702143232860377','time_end'=>'20170702143241','total_fee'=>'1','transaction_id'=>'14119206016011201707021170636667','ver'=>'2.0')
+notify_id:20170702143232860377
+call jin lai le
+setContent:<?xml version="1.0" encoding="GBK"?>
+<root>
+  <agentid />
+  <attach />
+  <bank_billno />
+  <bank_type />
+  <buyer_alias />
+  <cash_ticket_fee>0</cash_ticket_fee>
+  <discount />
+  <fee_type />
+  <input_charset>GBK</input_charset>
+  <out_trade_no />
+  <partner>1411920601</partner>
+  <product_fee />
+  <retcode>88222004</retcode>
+  <retmsg>解密notify_id失败![20170702153655-183]</retmsg>
+  <rmb_total_fee />
+  <sign>1B0D7CC4538F94E97B5475BCFDCA9E13</sign>
+  <sign_key_index>1</sign_key_index>
+  <sign_type>MD5</sign_type>
+  <time_end />
+  <total_fee />
+  <trade_mode>1</trade_mode>
+  <trade_state />
+  <transaction_id />
+  <transport_fee />
+</root>
+
+
+key: 52d2fe2efdec276f8a399c40baf0b9e9
+isTenpaySign:1
+retcode:88222004
+trade_state:
+trade_mode:1

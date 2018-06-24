@@ -1,0 +1,81 @@
+{sub header}
+{css_select jquery_ui}
+{jsFile ../jquery-ui.min}
+{jsFile datepicker,}
+      <div class="col-md-10 right">
+        <div class="cb-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;结算记录</div>
+        
+        <div style="background:#e3f2fd;padding:20px 15px;border:1px solid #ddd;border-top:0">
+    <form class="form-inline" action="" method="get">
+      <div class="form-group">
+        <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        <input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly="" value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/>
+		<span class="input-group-addon">至</span>
+		<input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly="" value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/>
+        </div>
+      </div>
+      &nbsp;&nbsp;
+      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&nbsp;立即查询</button>&nbsp;&nbsp;
+      <a href="{r}/user/payments?startDate={echo date('Y-m-d');}">今天</a>
+      <span class="v-line">|</span><a href="{r}/user/payments?startDate={echo date('Y-m-d',strtotime('-1 day'));}">昨天</a>
+      <span class="v-line">|</span><a href="{r}/user/payments?startDate={echo date('Y-m-d ',strtotime('-7 day'));}">7天</a>
+      <span class="v-line">|</span><a href="{r}/user/payments?startDate={echo date('Y-m-d',strtotime('-30 day'));}">30天</a>
+      
+      <span class="v-line">|</span>累计提现金额: $allMoney 元
+      <span class="v-line">|</span>扣费后实际到账金额: $actualMoney 元
+      
+    </form>
+    
+    
+    
+  </div>
+        
+        
+        <div class="content-box">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>提现金额</th>
+                <th>手续费</th>
+                <th>实际金额</th>
+                <th>账单状态</th>
+                <th>真实姓名</th>
+                <th>提现时间</th>
+                <th>收款方式</th>
+              </tr>
+            </thead>
+            <tbody>
+            {if $list}
+            {loopQuick $list}
+            <tr>
+                <td>$v[cashMoney]</td>
+                <td>{echo $v[sxf]*100}%</td>
+                <td>$v[money]</td>
+                <td>{if $v[status] == 0}等待处理{elseif $v[status] == 1}提现成功{elseif $v[status] == 2}提现失败{else}未知{/if}</td>
+                <td>{if $v[type] == 0}支付宝{elseif $v[type] == 1}银行卡{elseif $v[type] == 2}微信{else}未知{/if}</td>
+                <td>{echo date('Y-m-d H:i', $v[addTime])}</td>
+                <td>{if $v[type] == 0}$v[alipay]{elseif $v[type] == 1}提现银行：$v[back_name] 银行卡号：$v[back_card]{elseif $v[type] == 2}提现微信：$v[wxname]{else}未知{/if}</td>
+            </tr>
+            {/loopQuick}
+            {else}
+              <tr>
+                <td colspan="8" class="text-center">no data.</td>
+              </tr>
+            {/if}
+            </tbody>
+          </table>
+          <div style="text-align:center">
+          $multipage
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+
+</script>
+{sub footer}

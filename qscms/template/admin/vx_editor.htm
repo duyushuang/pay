@@ -1,0 +1,143 @@
+﻿<link href="/vx_editor/css/common.css" type="text/css" rel="stylesheet">
+<link href="/vx_editor/css/index.css" type="text/css" rel="stylesheet">
+<link rel="stylesheet" href="/vx_editor/css/colorpicker.css" type="text/css" />
+<link rel="stylesheet" href="/vx_editor/css/editor-min.css" type="text/css" />
+<link href="/vx_editor/css/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="/vx_editor/css/breakingnews.css">
+<link rel="shortcut icon" href="/vx_editor/favicon.ico" type="image/x-icon">
+<script type="text/javascript" src="/vx_editor/js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="/vx_editor/js/colorpicker-min.js"></script>
+<script type="text/javascript" src="/vx_editor/js/indoorsteam2.js"></script>
+
+<script type="text/javascript" src="/vx_editor/ueditor/third-party/zeroclipboard/ZeroClipboard.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/vx_editor/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/vx_editor/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="/vx_editor/ueditor/lang/zh-cn/zh-cn.js"></script>
+<style>
+.demo {
+	width: 800px;
+	margin: 10px auto;
+	position: relative;
+	left: -16px;
+}
+.demo1 {
+	margin-top: 10px;
+}
+.demo2 {
+	margin-top: 10px;
+}
+#edui1_iframeholder{height: 500px !important;}
+#bdeditor{height: 700px !important;}
+.tab_con {height: 700px !important; padding:0 !important;}
+.tab_con .clearfix {height: 700px !important;overflow-x: hidden;}
+#edui2{height: 700px !important;overflow-x: hidden;}
+a {
+	color: #FFF
+}
+</style>
+<script src="/img/vx_editor/1471419173475.js"></script>
+
+<div  class="big_main">
+  <!--<div  class="main_top"></div>
+  <div  class="adbox"> </div>-->
+  <!-- 代码 开始 --> 
+  
+  <!-- 代码 结束 -->
+  
+  <div class="Public-content clearfix"><div class="tabbox clearfix">
+                <ul class="tabs list-inline" id="tabs">
+                  <!--<li class="editorlogo"><a href="javascript:;"><span style="font-size:25px;">微助理</span></a></li>-->
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab1" class="">关注</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab2" class="current">标题</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab3" class="">正文</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab11">动图背景</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab10">节日</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab4" class="">分割线</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab5" class="">阅读全文</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab6" class="">分享</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab7" class="">互推</a></li>
+                  <li><a style="font-size:16px;" href="javascript:;" tab="tab8" class="">图文模板</a></li>
+                  <!--<li class="editorlogo"><a href="javascript:;" onClick="show_mysucai()"><span style="font-size:16px;">我的素材</span></a></li>
+                  <li><a href="javascript:;" tab="tab9" class="">更多</a></li>-->
+                </ul>
+                <em class="fr"></em> </div>
+    <div class="Public">
+      <div class="Public-box clearfix">
+        <div class="wxeditor">
+          <div class="clearfix">
+            <div class="left clearfix">
+              
+              <script>
+					
+					var show_mysucai=function(){
+						url = "{r}/sucai";
+						$.ajax({
+							url:url,
+							type:"post",
+							dataType:"json",
+							success: function(data){
+								if(data.status){
+									layer.open({
+									type: 1,
+									skin: 'layui-layer-molv',
+									shade:0.7,
+									scrollbar: false,
+									content:  data.html,
+									title: ['我的素材库'],
+									area: ["640px","70%"],
+							shift: 1,
+						})
+									
+									}else{ layer.msg(data.msg);}
+								}
+							})
+							
+					
+						}
+						var show_anomysucai=function(page){
+						url = "{r}/sucai";
+						$.ajax({
+							url:url,
+							type:"post",
+							dataType:"json",
+							data:"spage="+page,
+							success: function(data){
+								if(data.status){
+									$('.layui-layer-content').html(data.html);
+									}else{ layer.msg(data.msg);}
+								}
+							})
+							
+					
+						}	
+				
+					</script>
+              <div class="tplcontent"> 
+                <!-- <div id="colorpickerbox"></div>-->
+                <div>
+                  <div id="tab1" class="tab_con "> </div>
+                  <div id="tab2" class="tab_con dn"> </div>
+                  <div id="tab3" class="tab_con dn"> </div>
+                  <div class="tab_con dn" id="tab11"> </div>
+                  <div class="tab_con dn" id="tab10"> </div>
+                  <div id="tab4" class="tab_con dn"> </div>
+                  <div id="tab5" class="tab_con dn"> </div>
+                  <div id="tab6" class="tab_con dn"> </div>
+                  <div id="tab7" class="tab_con dn"> </div>
+                  <div id="tab8" class="tab_con dn"> </div>
+                  <div id="tab9" class="tab_con dn"> </div>
+                </div>
+              </div>
+              <div class="goto"></div>
+            </div>
+            <div class="right">
+              <div id="bdeditor"> 
+                <script id="editor" type="text/plain" style="width:100%;height:510px;"></script> 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

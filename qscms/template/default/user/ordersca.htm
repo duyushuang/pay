@@ -1,0 +1,68 @@
+{sub header}
+{css_select jquery_ui}
+{jsFile ../jquery-ui.min}
+{jsFile datepicker,}
+      <div class="col-md-10 right">
+        <div class="cb-title hidden-xs"><span class="glyphicon glyphicon-th-list"></span>&nbsp;
+通道分析&nbsp;&nbsp;<span style="margin-bottom:0;font-size:14px;color:#333">充值总金额(含费率)：<span class="red" data-toggle="tooltip" data-placement="bottom" title=""  data-original-title="没有扣除通道费用的金额">$payMoney</span>元&nbsp;&nbsp;
+收入总金额(实收不含费率)：<span class="blue"  data-toggle="tooltip" data-placement="bottom" title=""   data-original-title="已经扣除通道费用的金额">$memberMoney</span>元
+&nbsp;&nbsp;
+提现总金额和待提现金额(含费率)：<span class="blue" data-toggle="tooltip" data-placement="bottom" title=""   data-original-title="没有扣除提现费用的金额">$cashMoney</span>元
+&nbsp;&nbsp;
+提现总金额和待提现金额(不含费率)：<span class="blue" data-toggle="tooltip" data-placement="bottom" title=""   data-original-title="扣除提现费用的金额">$actualMoney</span>元
+	</div>
+        <div style="background:#e3f2fd;padding:20px 15px;border:1px solid #ddd;border-top:0">
+          <form class="form-inline" action="" method="get">
+            <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+              <input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly="" value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/>
+				<span class="input-group-addon">至</span>
+			  <input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly="" value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/>
+            </div>
+            <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&nbsp;立即查询</button>
+          </form>
+        </div>
+        <div class="content-box table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>支付场景</th>
+                <th>已支付订单总数</th>
+                <th>已支付订单总额</th>
+                <th>待支付订单总数</th>
+                <th>待支付订单总额</th>
+                <th>提交订单总数</th>
+                <th>提交订单总额</th>
+                <th>商户收入总额</th>
+              </tr>
+            </thead>
+            <tbody>
+            	{if $payArr}
+                {loopQuick $payArr}
+                <tr>
+                 <td>$v[name]</td>
+                 <td>$v[payTotal]</td>
+                 <td>$v[payMoney]</td>
+                 <td>$v[notTotal]</td>
+                 <td>$v[notMoney]</td>
+                 <td>$v[allTotal]</td>
+                 <td>$v[allMoney]</td>
+                 <td>$v[memberMoney]</td>
+                </tr>
+                {/loopQuick}
+                {else}
+                <tr>
+                <td colspan="4">no data.</td>
+                </tr>
+                {/if}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+</script>
+{sub footer}

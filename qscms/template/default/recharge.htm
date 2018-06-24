@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title>$webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<link rel="shortcut icon" href="{r}/favicon.ico" type="image/x-icon">
+<link href="{su}pay/static/common/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="{su}pay/recharge.css" type="text/css" rel="stylesheet">
+<script src="{su}pay/static/common/jquery-1.12.1.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/bootstrap.min.js" type="text/javascript"></script>
+<script src="{su}layer/layer.js" type="text/javascript"></script>
+<script language="javascript">
+function is_mobile() {
+    var regex_match = /(nokia|iphone|android|motorola|^mot-|softbank|foma|docomo|kddi|up.browser|up.link|htc|dopod|blazer|netfront|helio|hosin|huawei|novarra|CoolPad|webos|techfaith|palmsource|blackberry|alcatel|amoi|ktouch|nexian|samsung|^sam-|s[cg]h|^lge|ericsson|philips|sagem|wellcom|bunjalloo|maui|symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte-|longcos|pantech|gionee|^sie-|portalmmm|jigs browser|hiptop|^benq|haier|^lct|operas*mobi|opera*mini|320x320|240x320|176x220)/i;
+  var u = navigator.userAgent;
+  if (null == u) {
+   return true;
+  }
+  var result = regex_match.exec(u);
+
+  if (null == result) {
+   return false
+  } else {
+   return true
+  }
+ }
+ if (is_mobile()) {
+  document.location.href= '<?php echo WEB_URL; ?>/recharge_m/user?out_trade_no=<?php echo $item['sn'];?>';
+ }
+</script>
+</head><body>
+<div id="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-1">
+        <div class="logo"><img src="{r}/{cfg web,webLogo}" style="height: 40px;"><span>收银台</span>
+          </logo>
+        </div>
+      </div>
+      <div class="col-md-6 text-right  hidden-xs" style="font-size:12px"> <a href="http://wpa.qq.com/msgrd?v=3&uin={cfg web,qq}&site=qq&menu=yes" target="_blank" class="red">
+        <p style="margin-top:15px">{$webName}提醒：</p>
+        <p>诈骗/洗钱/涉黄，请立即举报</p>
+        </a> </div>
+    </div>
+  </div>
+</div>
+<div id="main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <div class="content">
+          <div class="row">
+            <div class="col-md-6">
+              <dl class="payinfo">
+                <!--dd class="bf">订单号：<?php echo $item['sn'];?><span style="color:#CD1C20"></span></dd-->
+         	<br/>
+                <dd class="hidden-xs">平台首页：<a href="{r}/" target="_blank" class="red">{$webName}</a></dd>
+              </dl>
+            </div>
+            <div class="col-md-6">
+              <div class="paymoney bf1 text-right"> &yen;{$money}<span>元</span> </div>
+            </div>
+            <div class="col-md-12">
+              <div style="border-bottom:2px solid #337AB7">
+
+                <div class="hidden-xs" style="float:left;color:#666;line-height:30px">商户信息：{$webName}</div>
+
+                <div style="float:right;width:80px;background:#337AB7;text-align:center;color:#fff;line-height:30px">订单详情</div>
+                <div style="clear:right"></div>
+              </div>
+            </div>
+            <div class="col-md-12" style="margin-top:30px">
+              <form name=alipayment action="{r}/pay/" method="get">
+              	<input type="hidden" name="out_trade_no" value="$out_trade_no">
+                <input type="hidden" name="payment" id="payment" value="">
+                <div class="bf">选择付款方式：</div>
+                <br>
+                <div class="select_pay">
+                  <ul>
+                    <li class="current"><img src="{su}pay/static/default/images/icon_bank.png">&nbsp;选择支付方式</li>
+                    {if false}<li><img src="{su}pay/static/default/images/icon_card.png">&nbsp;充值卡支付</li>{/if}
+                  </ul>
+                  <div style="clear:left"></div>
+                </div>
+                <div class="pay_list">
+                  <ul class="banklist v0">
+                  	{if qscms::is_weixin() == false}
+                    <li><img src="{su}images/pay/ALIPAY.gif" data-pid="alipay" value="alipay" data-pty="alipay"></li>
+                    {/if}
+                    <li><img src="{su}images/pay/WEIXIN.gif" data-pid="wxpay" data-pty="wxpay" value="wxpay"></li>
+                    <li><img src="{su}images/pay/QQ2.gif" data-pid="qqpay" data-pty="qqpay"  value="qqpay"></li>
+                    <!--<li><img src="{su}images/pay/ICBC.gif" data-pid="101" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/CCB.gif" data-pid="301" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/ABC.gif" data-pid="401" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/PSBC.gif" data-pid="1902" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/BOCSH.gif" data-pid="1201" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/CMB.gif" data-pid="201" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/SPDB.gif" data-pid="601" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/GDB.gif" data-pid="1901" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/BOCOM.gif" data-pid="1101" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/CNCB.gif" data-pid="501" data-pty="bank"></li>-->
+                    
+                    {if false}
+                    <li><img src="{su}images/pay/CEB.gif" data-pid="701" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/PAB.gif" data-pid="801" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/UNIONPAY.gif" style=" width:150px; height:47px;" data-pid="11" data-pty="bank"></li>
+                    
+                    
+                    
+                    <li><img src="{su}images/pay/CIB.gif" data-pid="CIB" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/BOS.gif" data-pid="BOS" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/SRCB.gif" data-pid="SRCB" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/BCCB.gif" data-pid="BCCB" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/HXB.gif" data-pid="HXB" data-pty="bank"></li>
+                    <li><img src="{su}images/pay/CMBC.gif" data-pid="CMBC" data-pty="bank"></li>
+                    {/if}
+                  </ul>
+                  {if false}
+                  <ul class="cardlist v1" style="display:none">
+                    <li><img src="{su}images/pay/SNDACARD.jpg" data-pid="000601" data-pty="card"></li>
+                    <li><img src="{su}images/pay/QQ.jpg" data-pid="QQCARD" data-pty="card"></li>
+                    <li><img src="{su}images/pay/SZX.jpg" data-pid="000101" data-pty="card"></li>
+                    <li><img src="{su}images/pay/JIUYOU.jpg" data-pid="001201" data-pty="card"></li>
+                    <li><img src="{su}images/pay/JUNNET.jpg" data-pid="000501" data-pty="card"></li>
+                    <li><img src="{su}images/pay/UNICOM.jpg" data-pid="000201" data-pty="card"></li>
+                    <li><img src="{su}images/pay/WANMEI.jpg" data-pid="000801" data-pty="card"></li>
+                  </ul>
+                  {/if}
+                  <div style="clear:left"></div>
+                </div>
+                <br>
+                <br>
+                <div class="text-center">
+                  <button type="submit" class="btn btn-danger btn-lg">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-check"></span>&nbsp;确认付款&nbsp;&nbsp;&nbsp;</button>
+                </div>
+                <br>
+                <br>
+              </form>
+              <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                重要提示：请尽快付款，10分钟内未付款的订单将会超时关闭。 </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<!--
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">付款提示</h4>
+      </div>
+      <div class="modal-body"> 如果您已付款成功，请点击查看付款结果。如果还未付款，请重新选择付款方式进行付款。 </div>
+      <div class="modal-footer"> <a href="#" class="btn btn-success">查看付款结果</a>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">重新选择付款方式</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
+<script>
+$(function(){
+    var fp=$('.pay_list ul li').first();
+    fp.addClass('current');
+    $('[name=payment]').val(fp.find('img').attr('data-pid'));
+
+    $('.pay_list ul li img').click(function(){
+        $('.pay_list ul li').removeClass('current');
+        $(this).parent().addClass('current');
+        $('[name=payment]').val($(this).attr('data-pid'));
+    });
+
+    $('.select_pay li').click(function(){
+        $('.pay_list ul').hide();
+        $('.pay_list ul.v'+$(this).index()).show();
+        $('.select_pay li').removeClass('current');
+        $(this).addClass('current');
+    });
+
+    $('form').submit(function(){
+        //$('#myModal').modal('show')
+    });
+});
+</script> 

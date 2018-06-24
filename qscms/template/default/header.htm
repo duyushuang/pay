@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{eval
+	$__file = cache::get_code('tkd');
+	if ($__file){
+    	include($__file);
+	}else {
+		$webTitle = $webKeywords = $webDescription = '';
+	}
+}
+{if $webTitle}
+<title>$webTitle</title>
+{/if}
+{if $webKeywords}
+<meta name="keywords" content="$webKeywords" />
+{/if}
+{if $webDescription}
+<meta name="description" content="$webDescription" />
+{/if}
+<link rel="shortcut icon" href="{r}/favicon.ico" type="image/x-icon">
+
+<link href="{su}pay/static/common/bootstrap.min.css" type="text/css" rel="stylesheet">
+<link href="{su}pay/static/default/app.css?spm=1.12L.p21" type="text/css" rel="stylesheet">
+<script src="{su}pay/static/common/jquery-1.12.1.min.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/bootstrap.min.js" type="text/javascript"></script>
+<script src="{su}layer/layer.js" type="text/javascript"></script>
+<script src="{su}pay/static/common/comm.js" type="text/javascript"></script>
+<script>
+    $(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
+
+</head>
+<body>
+<div class="top-notice hidden-xs" style="background:#17a1e6;color:#fff;text-align:center;line-height:50px">
+     请需要开通接口的商户，注册账户了完善资料后，联系客服审核。&nbsp;&nbsp;
+      <a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true" target="_blank" class="btn btn-success btn-xs">
+        点击联系&nbsp;
+        <span class="glyphicon glyphicon-chevron-right">
+        </span>
+      </a>
+    </div>
+<!--[if (gt IE 6)&amp;(lt IE 9)]>
+<h1 style='color:red;text-align:center;'>
+      你好，浏览器版本过低，升级可正常访问,点击<a style="color:blue"href="http://browsehappy.com/">升级您的浏览器</a>
+</h1>
+<style type="text/css">#ielt9{ display: none; }h1{ height:300px;line-height: 300px;display:block; }header{ display: none; }#ie9{ display: block; }.tenxcloud-logo{ margin:50px auto 0;display:block}</style>
+<![endif]-->
+
+<div id="header">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-xs-3">
+        <div class="logo"> <a href="{r}/"> <img src="/logo.png" alt="$webName"> </a> </div>
+      </div>
+
+      <div class="col-md-9 col-sm-6 col-xs-9">
+        <ul class="nav-list">
+          {if $member}
+          <li class="i circle"> <a href="{r}/users/logout"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="安全退出"> 退出 </a> </li>
+          <li class="i circle"> <a href="{r}/users/"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="商户中心"> 会员中心 </a> </li>
+          {else}
+          <li class="i circle"> <a href="{r}/users/reg" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="还没有账户，可点这里注册"> 注册 </a> </li>
+          <li class="i"> <a href="{r}/users/login" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="商户登录入口"> 商户登录 </a> </li>
+          <li > <a href="{r}/member/login.html"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="若已开通代理权限，可从此处登录" class="hidden-xs hidden-sm"> 代理登录 </a> </li>
+          <li > <a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="加入代理，最高提成27%" class="hidden-xs hidden-sm"> 成为代理 </a> </li>
+          {/if}
+          <!--li class="i"><a href="{r}/recharge/test?money=0.01" target="_blank" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="接口充值演示">演示</a></li-->
+          <li class="i hidden-xs hidden-sm"><a  id="demosdk" href="#"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="接口充值演示">演示</a></li>
+          {if $member}
+          <li class="hidden-xs hidden-sm"><a  id="apisdk" href="#"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="api接口配置说明">文档</a></li>
+ 	  {/if}
+          <!--li class="hidden-xs hidden-sm"><a href="{r}/news/9"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="了解我们">了解我们</a></li-->
+          <li class="hidden-xs hidden-sm"> <a href="{r}/news_list" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="新闻资讯"> 资讯</a> </li>
+
+          <li class="hidden-xs hidden-sm"> <a href="{r}/product" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="马上搭建一个支付平台">搭建平台</a> </li>
+          {if $member}
+          <li class="hidden-xs hidden-sm"> <a href="{r}/vip" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="商户费率和商户会员"> 套餐费率 </a> </li>
+          {/if}
+          <li class="hidden-xs hidden-sm"> <a href="{r}/" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="首页"> 首页 </a> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$('#demosdk').on('click', function(){
+  layer.open({
+  type: 2,
+  title: '{$webName}API接口演示',
+  maxmin: true,
+  shadeClose: true, //点击遮罩关闭层
+  area : ['400px' , '620px'],
+  content: '{r}/sdk?spm=tp'
+  });
+});
+$('#apisdk').on('click', function(){
+  layer.open({
+  type: 2,
+  title: '{$webName}API接口演示',
+  maxmin: true,
+  shadeClose: true, //点击遮罩关闭层
+  area : ['80%' , '720px'],
+  content: '{r}/doc.html?spm=tp'
+  });
+});
+
+</script>

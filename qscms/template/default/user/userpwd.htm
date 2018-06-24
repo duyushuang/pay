@@ -1,0 +1,83 @@
+{sub header}
+      <div class="col-md-10 right">
+        {sub h_info}
+        <div class="content-box">
+          <form class="form-ajax form-horizontal" action="{r}/user/userpwd" method="post">
+          {v sys_hash_code}
+            <div class="form-group">
+              <label class="col-md-2 control-label">原密码：</label>
+              <div class="col-md-4">
+                <input type="password" name="old_password" id="old_password" class="form-control" maxlength="16" data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户原来的登录密码" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">新密码：</label>
+              <div class="col-md-4">
+                <input type="password" name="new_password" id="new_password" class="form-control" maxlength="16" data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您的新登录密码" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-2 control-label">确认新密码：</label>
+              <div class="col-md-4">
+                <input type="password" name="confim_password" id="confim_password" class="form-control" maxlength="16" data-toggle="tooltip" title="" data-placement="top" data-original-title="再次输入新登录密码" required>
+              </div>
+            </div>
+<!------
+ <div class="form-group" >
+        <label class="col-md-2 control-label">验证码：</label>
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" name="code" id="code" class="form-control" placeholder="您账户已绑定的手机号为{echo string::getXin($member->m_mobile, 6, 4);}" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户绑定手机号所收到的6位数验证码" required>
+            <span class="input-group-btn">
+            <button class="btn btn-default" id="yzm" onClick="getYZM()" type="button">获取验证码</button>
+            </span> </div>
+        </div>
+      </div>
+----->
+            <div class="form-group">
+              <div class="col-md-offset-2 col-md-4">
+                <button type="submit" class="btn btn-success">&nbsp;点击修改&nbsp;</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+var wait = '{echo message::sms_time();}';
+$('#yzm').attr('disabled', false);
+var time = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm').html('获取验证码');
+		$('#yzm').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm').html('获取验证码(' + wait + ')');
+		$('#yzm').attr('disabled', true);
+		wait--;
+		setTimeout('time()', 1000);
+	}
+}
+
+function getYZM(){
+	var rs = checkForm();
+	if (rs == true){
+		$.post('{r}/user/takecashcode', {hash:hash}, function(rs){
+			if (rs.status == true){
+				showError('验证码发送成功');
+				time();	
+			}else{
+				showError(rs.msg);
+				return false;	
+			}
+		},'json');	
+	}
+	return false;	
+})
+</script> 
+
+{sub footer}

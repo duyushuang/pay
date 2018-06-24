@@ -1,0 +1,45 @@
+{sub h}
+{if $method=='index'}
+	{cfgCate sms}
+{elseif $method=='index1'}
+	{cfgCate alisend}
+{elseif $method=='send'}
+{adminForm
+	当前余额                                        |money  |code,￥$money
+	手机号码列表,null=多个号码用逗号或空格或换行隔开|phones |textarea
+	信息内容,null=信息内容不能为空                  |message|textarea
+}
+{elseif $method=='mobile'}
+{adminList
+	删？    |id         |del
+	手机号码|mobilephone
+	验证码|content
+	发送时间|timestamp  |flag,date
+	发送状态|status     |code,{echo $v[status]?'<span style="color:#0F6">成功</span>':'<span style="color:#F00">失败</span>'}
+}
+{elseif $method=='list'}
+{adminList
+	删？    |id         |del
+	类型|name
+	验证码|vcode
+	发送时间|time  |flag,date
+	使用状态|status     |code,{echo $v[status]?'<span style="color:#0F6">成功</span>':'<span style="color:#F00">失败</span>'}
+}
+{elseif $method=='vcode_log'}
+{adminList
+	删？    |id         |del
+	用户    |uid        |code,{echo member_base::getUsername($v[uid])}
+	手机号码|mobilephone
+	激活码  |vcode
+	发送时间|timestamp  |flag,date
+	发送状态|status     |code,{echo $v[status]?'已经使用':'未使用'}
+}
+{elseif $method=='pwd2_log'}
+{adminList
+	删？    |id         |del
+	手机号码|mobilephone
+	新操作码|password
+	发送时间|timestamp  |flag,date
+}
+{/if}
+{sub f}

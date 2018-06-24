@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>$menus[$type]</title>
+<style>
+body{
+	padding:5px;
+	margin:0px;
+	font-size:12px;
+	background:#EEEEEE
+}
+.box{
+	width:100%;
+	text-align:center;
+}
+.box .pics{
+	width:300px;
+	white-space:nowrap; 
+	overflow-x:scroll;
+}
+#ids{
+	margin-top:30px;
+	width:250px;
+	height:20px;
+}
+</style>
+<script>
+function upload()
+{
+	callback({echo string::json_encode($list)});
+}
+function closewindow()
+{
+	unloadme();
+}
+var $=function(id){return document.getElementById(id);}
+var checkForm = function(){
+	var ids = $('ids').value.replace(/^\s+|\s+$/g, '');
+	if (/\d+(?:(?:,|，)\d+)*/.test(ids)) {
+		return true;
+	} else {
+		alert('请输入图片ID，多个ID用逗号隔开');
+		$('ids').focus();
+		return false;
+	}
+}
+</script>
+</head> 
+<body> 
+	<div class="box">{if $list}
+		<div class="pics">
+		{loopQuick $list}
+		<img src="$v[tiny]" />
+		{/loopQuick}
+		</div>
+		<br />
+		<input type="button" value="插入到编辑器" onclick="upload()" />
+		{/if}
+		<form enctype="application/x-www-form-urlencoded" method="post" onsubmit="return checkForm()">$sys_hash_code
+			要插入的ID：<input type="text" name="ids" id="ids" value="$ids" /><input type="submit" value="插入" />
+		</form>
+	</div>
+</body> 
+</html>

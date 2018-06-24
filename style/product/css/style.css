@@ -1,0 +1,251 @@
+.nav_banner{
+	width:100%;
+	overflow:hidden;
+	margin:0 auto;
+	text-align:center;
+	height: 400px;
+	background: url(../images/product_banner.png) no-repeat center 0;
+}
+
+/* p2p_price 开始 */
+ .bdw_1{
+	z-index:1;
+	position:relative;
+	margin:0px auto 0px;
+	width:1000px;
+	overflow:hidden;
+}
+.p2p_price table
+{
+	width:100%;
+	border-right:1px solid #ced6d9;
+	border-bottom:1px solid #ced6d9;
+border-spacing: 0;
+border-collapse: collapse;
+}
+.p2p_price th
+{
+	height:50px;
+ 	background-color:#fff4dc;
+ 	color:#3f3737;
+ 	font-size:16px;
+ 	font-weight:normal;
+ 	text-align:center;
+ 	border-left:1px solid #ced6d9;
+ 	border-top:1px solid #ced6d9;
+}
+.p2p_price td
+{
+	border-left:1px solid #ced6d9;
+ 	border-top:1px solid #ced6d9;
+	background:#fff;
+	color:#666;
+	font-size:12px;
+	line-height:18px;
+	text-align:center;
+ 	padding:10px 15px;
+}
+.p2p_price .price{
+	height:100px;
+}
+.p2p_price .price td{
+	background:#e8fefe;
+	font-family:"Microsoft YaHei";
+}
+.p2p_price td.tl{ text-align:left; padding-left:15px}
+.p2p_price td b
+{
+	color:#ff0000;
+	font-size:14px;	
+}
+.p2p_price .td_bg
+{
+	background-color:#fff;
+}
+.p2p_price .f_red{
+	 font-weight:bolder;
+	 color:#ff0000
+}
+.jiao_fuyong
+{
+	padding-top:20px;
+	background:url({$TMPL}/images/jiaoyu/jiaoyu_43.gif) repeat;
+	height:35px;
+	margin:0 auto;
+	position:relative;
+	margin-top:20px;
+}
+.jiao_fuyong h3
+{
+	color:#494949;
+	text-align:center;
+}
+.p2p_price i{
+	width:22px;
+	height:22px;
+	display:inline-block;
+	background:url(../images/table_icon.png) no-repeat;
+	vertical-align:middle;
+	margin-right:8px;
+}
+.p2p_price .mod_icon{
+	background-position:0 0;
+	width:17px;
+}
+.p2p_price .cate_icon{
+	background-position:0 -37px;
+	width:18px;
+}
+.p2p_price .standard_icon{
+	background-position:0 -77px;
+	width:17px;
+}
+.p2p_price .specialty_icon{
+	background-position:0 -116px;
+	width:14px;
+}
+.p2p_price .flagship_icon{
+	background-position:0 -157px;
+}
+.p2p_price .business_icon{
+	background-position:0 -198px;
+	width:17px;
+}
+/* p2p_price 结束 */
+
+/* customization_process 开始 */
+.customization_process .mod_hd{
+	width:1000px;
+	height:67px;
+	background:url(../images/process_tt.png) no-repeat;
+}
+.customization_process .mod_bd{
+	font-size:20px;
+	color:#454545;
+}
+.customization_process .mod_bd .intro{
+	color:#8c8c8c;
+	font-size:15px;
+	line-height:24px;
+	text-indent:2em;
+	text-align: center;
+}
+.customization_process .process_box{
+	width:770px;
+	height:815px;
+	background:url(../images/process_bg.png) no-repeat;
+}
+.process_box div{
+	position:absolute;
+	text-align:center;
+}
+.customization_process .s1{
+	width:178px;
+	height:55px;
+	color:#55afdf;
+	font-size:16px;
+	top:7px;
+}
+.customization_process .ys1{
+	width:182px;
+	height:59px;
+	color:#525151;
+	font-size:16px;
+}
+.customization_process .morecont{ padding-top:5px; }
+.customization_process .ys2{
+	width:152px;
+	height:45px;
+	line-height:45px;
+	text-align:center;
+	color:#525151;
+	font-size:20px;
+}
+.customization_process .s2{
+	left:275px;
+}
+.customization_process .s3{
+	left:559px;
+}
+.customization_process .s4{
+	top:104px;
+	left:559px;
+}
+.customization_process .s5{
+	top:211px;
+	left:559px;
+}
+.customization_process .s6{
+	top:211px;
+	left:275px;
+	line-height:59px;
+}
+.customization_process .s7{
+	top:211px;
+	font-size:20px;
+	line-height:59px;
+}
+.customization_process .s7_1{
+	top:104px;
+	line-height:59px;
+}
+.customization_process .s7_2{
+	top:110px;
+	left:293px;
+	width:152px;
+	height:45px;
+	line-height:45px;
+}
+.customization_process .s8{
+	top:319px;
+	left:275px;
+}
+.customization_process .s9{
+	top:426px;
+	left:275px;
+}
+.customization_process .s10{
+	top:426px;
+	left:559px;
+	line-height:59px;
+}
+.customization_process .s11{
+	top:326px;
+	left:576px;
+}
+.customization_process .s12{
+	top:539px;
+	left:275px;
+	line-height:59px;
+}
+.customization_process .s13{
+	top:539px;
+	line-height:59px;
+}
+.customization_process .s14{
+	top:650px;
+	line-height:59px;
+}
+.customization_process .s15{
+	top:650px;
+	left:275px;
+	line-height:59px;
+}
+.customization_process .s16{
+	top:650px;
+	left:559px;
+	line-height:59px;
+}
+.customization_process .end{
+	top:760px;
+	left:534px;
+	width:236px;
+	height:55px;
+	color:#fff;
+	line-height:55px;
+	text-align:center;
+}
+/* customization_process 结束 */
+
+.disabled{ background:#ccc!important;}
+ */

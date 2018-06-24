@@ -1,0 +1,494 @@
+{sub h}
+{if $tab == 'default'}
+{if $method == 'index'}
+	{adminList
+		删？|table0|del
+        表名|table1
+            |table0|link2,表结构,method=info&table=$v[table0];link2,改名,method=rename&table=$v[table0];link2,替换字符,method=replace&table=$v[table0];link2,复制表,method=copyTable&copy=$v[table0]
+	}
+{elseif $method == 'info'}
+<pre>$create_info</pre>
+{elseif $method == 'rename'}
+	{adminForm
+    	改为,null=请输入表名|name|text|240|64
+    }
+{elseif $method == 'replace'}
+	{adminForm
+		请慎用，使用前最好先备份一下数据库表|tip
+		源字符串,null=请输入要替换的字符串|source|textarea
+		目标字符串,null=请输入想要替换为的字符串|destination|textarea
+	}
+{elseif $method == 'replaceAll'}
+	{adminForm
+		请慎用，使用前最好先备份一下数据库表|tip
+		源字符串,null=请输入要替换的字符串|source|textarea
+		目标字符串,null=请输入想要替换为的字符串|destination|textarea
+	}
+{elseif $method == 'copyTable'}
+	{adminForm
+    	当前表名:{$var->gp_copy}|tip
+    	复制后的表名,null=请输入复制后的表名|tableName|text|240|240
+        是否重置自增长索引|resetAuto|radio,1=是,0=否
+    }
+{elseif $method == 'cusTable'}
+	{adminList
+		删？|id|del
+		排序|sort|sort
+		表名|name
+		字段数|fieldCount
+		    ||link2,修改,method=cusTableEdit&id=$v[id];link2,字段管理,cusTableField=$v[id];link2,索引管理,cusTableIndex=$v[id]
+	}
+{elseif $method == 'cusTableCreate' || $method == 'cusTableEdit'}
+<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+{v sys_hash_code}
+	<table class="table table-bordered table-striped">
+		<tr class="tip">
+			<td colspan="3">自定义表创建</td>
+		</tr>
+		<tr>
+			<th>表名</th>
+			<td style="width:600px"><input type="text" name="name" id="name" class="form-control" style="width:400px" maxlength="32" preg="null=请输入表名" value="{var $datas[name]}" /></td>
+			<td id="name_tip"></td>
+		</tr>
+		<tr class="tip">
+			<td colspan="3">事件触发</td>
+		</tr>
+		<tr>
+			<th>插入数据</th>
+			<td colspan="2">
+				<table class="tab_view">
+					<tr>
+						<th style="width:100px">是否触发事件</th>
+						<td><div class="radio-list">
+								<label class="radio-inline"><input type="radio" name="onInsert" value="1" />是</label>
+								<label class="radio-inline"><input type="radio" name="onInsert" value="0" />否</label>
+							</div>
+						</td>
+					</tr>
+					<tbody id="onInsertTrue" style="display:none">
+						<tr>
+							<th style="width:100px">执行类型</th>
+							<td><div class="radio-list">
+									<label class="radio-inline"><input type="radio" name="onInsertType" value="SQL"{if isset($datas[onInsertType]) && $datas[onInsertType] == 'SQL'} checked="checked"{/if} />SQL</label>
+									<label class="radio-inline"><input type="radio" name="onInsertType" value="PHP"{if isset($datas[onInsertType]) && $datas[onInsertType] == 'PHP'} checked="checked"{/if}  />PHP</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th style="width:100px">执行代码</th>
+							<td>
+								<textarea name="onInsertRun" class="form-control">{html $datas[onInsertRun]}</textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th>更新数据</th>
+			<td colspan="2">
+				<table class="tab_view">
+					<tr>
+						<th style="width:100px">是否触发事件</th>
+						<td><div class="radio-list">
+								<label class="radio-inline"><input type="radio" name="onUpdate" value="1" />是</label>
+								<label class="radio-inline"><input type="radio" name="onUpdate" value="0" />否</label>
+							</div>
+						</td>
+					</tr>
+					<tbody id="onUpdateTrue" style="display:none">
+						<tr>
+							<th style="width:100px">执行类型</th>
+							<td><div class="radio-list">
+									<label class="radio-inline"><input type="radio" name="onUpdateType" value="SQL"{if isset($datas[onUpdateType]) && $datas[onUpdateType] == 'SQL'} checked="checked"{/if}  />SQL</label>
+									<label class="radio-inline"><input type="radio" name="onUpdateType" value="PHP"{if isset($datas[onUpdateType]) && $datas[onUpdateType] == 'PHP'} checked="checked"{/if}  />PHP</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th style="width:100px">执行代码</th>
+							<td>
+								<textarea name="onUpdateRun" class="form-control">{html $datas[onUpdateRun]}</textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th>删除数据</th>
+			<td colspan="2">
+				<table class="tab_view">
+					<tr>
+						<th style="width:100px">是否触发事件</th>
+						<td><div class="radio-list">
+								<label class="radio-inline"><input type="radio" name="onDelete" value="1" />是</label>
+								<label class="radio-inline"><input type="radio" name="onDelete" value="0" />否</label>
+							</div>
+						</td>
+					</tr>
+					<tbody id="onDeleteTrue" style="display:none">
+						<tr>
+							<th style="width:100px">执行类型</th>
+							<td><div class="radio-list">
+									<label class="radio-inline"><input type="radio" name="onDeleteType" value="SQL"{if isset($datas[onDeleteType]) && $datas[onDeleteType] == 'SQL'} checked="checked"{/if}  />SQL</label>
+									<label class="radio-inline"><input type="radio" name="onDeleteType" value="PHP"{if isset($datas[onDeleteType]) && $datas[onDeleteType] == 'PHP'} checked="checked"{/if}  />PHP</label>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<th style="width:100px">执行代码</th>
+							<td>
+								<textarea name="onDeleteRun" class="form-control">{html $datas[onDeleteRun]}</textarea>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<th></th>
+			<td colspan="2"><input type="submit" value="提交" class="btn green" /></td>
+		</tr>
+	</table>
+</form>
+<script language="javascript">
+$('input[name*=on]').click(function(){
+	var name = $(this).attr('name');
+	var type = name.substring(2);
+	if (type == 'Insert' || type == 'Update' || type == 'Delete') {
+		if ($(this).val() == 1) {
+			$('#' + name + 'True').show();
+		} else {
+			$('#' + name + 'True').hide();
+		}
+	}
+});
+{if isset($datas[onInsert]) && $datas[onInsert]}
+$('input[name=onInsert][value=1]').click();
+{else}
+$('input[name=onInsert][value=0]').click();
+{/if}
+{if isset($datas[onUpdate]) && $datas[onUpdate]}
+$('input[name=onUpdate][value=1]').click();
+{else}
+$('input[name=onUpdate][value=0]').click();
+{/if}
+{if isset($datas[onDelete]) && $datas[onDelete]}
+$('input[name=onDelete][value=1]').click();
+{else}
+$('input[name=onDelete][value=0]').click();
+{/if}
+</script>
+{/if}
+{elseif $tab == 'field'}
+	{if $method == 'list'}
+		{adminList
+			删？      |id         |del
+			排序      |sort       |sort
+			名字      |name       |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[name]</div></div>
+			字段名    |fieldName  |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[fieldName]</div></div>
+			字段类型  |fieldType  |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[fieldType]</div></div>
+			HTML名    |htmlName   |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[htmlName]</div></div>
+			HTML类型  |htmlType   |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[htmlType]</div></div>
+			是否验证  |htmlIsReg  |code,{if $v[htmlIsReg]}是{else}否{/if}
+			正则表达式|htmlRegStr |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[htmlRegStr]</div></div>
+					  |id         |link2,编辑,method=edit&fid=$v[id]
+		}
+		<script language="javascript">
+		$('.txtOverflow').hover(function(){
+			$(this).overflow(true);
+		}, function(){
+			$(this).overflow(false);
+		});
+		</script>
+	{elseif $method == 'add' || $method == 'edit'}
+		<script language="javascript">
+		$(function(){
+			var addSelect = function(id, arr, s){
+				var optionsHTML = '<option value="">选择类型</option>';
+				if (s == void(0)) s = '';
+				for (var i = 0; i < arr.length; i++) {
+					var fieldType = arr[i];
+					if (fieldType) {
+						optionsHTML += '<option value="' + htmlspecialchars(fieldType.code) + '"' + (fieldType.code == s ? ' selected' : '') + '>' + fieldType.tip + '</option>'
+					}
+				}
+				$('#' + id + 'Box').append('&nbsp;&nbsp;<span>常用类型：</span><select onchange="$(\'#'+ id +'\').val($(this).val())" class="form-control">'+optionsHTML+'</select>');
+			};
+			addSelect('fieldType', [
+				{'tip' : '数字(-128~127)',               'code' : 'tinyint NOT NULL DEFAULT \'0\''},
+				{'tip' : '数字(0~255)',                  'code' : 'tinyint UNSIGNED NOT NULL DEFAULT \'0\''},
+				{'tip' : '数字(-32768~32767)',           'code' : 'smallint NOT NULL DEFAULT 0'},
+				{'tip' : '数字(0~65535)',                'code' : 'smallint UNSIGNED NOT NULL DEFAULT \'0\''},
+				{'tip' : '数字(-8388608~8388607)',       'code' : 'mediumint NOT NULL DEFAULT 0'},
+				{'tip' : '数字(0~16777215)',             'code' : 'mediumint UNSIGNED NOT NULL DEFAULT \'0\''},
+				{'tip' : '数字(-2147836648~2147836647)', 'code' : 'int NOT NULL DEFAULT \'0\''},
+				{'tip' : '数字(0~4294967295)',           'code' : 'int UNSIGNED NOT NULL DEFAULT \'0\''},
+				{'tip' : '货币'                        , 'code' : 'decimal(9,2) NOT NULL DEFAULT \'0.00\''},
+				{'tip' : '小数'                        , 'code' : 'double NOT NULL DEFAULT \'0\''},
+				{'tip' : '字符(32)',                     'code' : 'varchar(32) DEFAULT NULL'},
+				{'tip' : '字符(64)',                     'code' : 'varchar(64) DEFAULT NULL'},
+				{'tip' : '字符(128)',                    'code' : 'varchar(128) DEFAULT NULL'},
+				{'tip' : '字符(255)',                    'code' : 'varchar(255) DEFAULT NULL'},
+				{'tip' : '字符集(TEXT)',                 'code' : 'text'}
+			]{if !empty($datas[fieldType])}, {echo string::getVarString($datas[fieldType])}{/if});
+			addSelect('htmlType', [
+				{'tip' : '系统字段'   , 'code' : 'system'},
+				{'tip' : '隐藏'       , 'code' : 'hidden'},
+				{'tip' : '文本框'     , 'code' : 'txt'},
+				{'tip' : '多行文本框' , 'code' : 'textarea'},
+				{'tip' : '单选框'     , 'code' : 'radio'},
+				{'tip' : '复选框'     , 'code' : 'checkbox'},
+				{'tip' : '下拉框'     , 'code' : 'select'},
+				{'tip' : '文件'       , 'code' : 'file'},
+				{'tip' : '图片'       , 'code' : 'image'},
+				{'tip' : '编辑器'     , 'code' : 'editor'}
+			]{if !empty($datas[htmlType])}, {echo string::getVarString($datas[htmlType])}{/if});
+			var propertychange;
+			if($.browser.msie) {
+				propertychange = 'propertychange';
+			} else {
+				propertychange = 'input';
+			}
+			$('#fieldName').bind(propertychange, function() { 
+				if ($('#tong').attr('checked')) {
+					$('#htmlName').val($(this).val());
+				}
+			});
+			$('#tong').click(function(){
+				if ($(this).attr('checked')) {
+					//$('#htmlName').attr({disabled : true}).css({background : '#FFF0F0'}).val($('#fieldName').val());
+					$('#htmlName').css({background : '#FFF0F0'}).val($('#fieldName').val());
+				} else {
+					//$('#htmlName').attr({disabled : false}).css({background : ''});
+					$('#htmlName').css({background : '#F9F9F9'});
+				}
+			});
+		});
+		</script>
+		<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+		{v sys_hash_code}
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th style="width:120px">名称</th>
+					<td style="width:600px"><input type="txt" name="name" id="name" value="{var $datas[name]}" maxlength="32" class="form-control" preg="null=请输入字段备注" /></td>
+					<td style="width:180px" id="name_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">字段名</th>
+					<td style="width:600px"><input type="txt" name="fieldName" id="fieldName" value="{var $datas[fieldName]}" maxlength="32" class="form-control" preg="null=请输入字段名称" /></td>
+					<td style="width:180px" id="fieldName_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">字段类型</th>
+					<td style="width:600px" id="fieldTypeBox"><input type="txt" name="fieldType" id="fieldType" value="{var $datas[fieldType]}" maxlength="128" class="form-control" preg="null=请输入字段类型，慎重！" /></td>
+					<td style="width:180px" id="fieldType_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">是否为自增长</th>
+					<td style="width:600px">
+						<div class="radio-list">
+							<label class="radio-inline"><input type="radio" name="auto" id="auto" value="1" class="radio"{if !empty($datas[auto]) && $datas[auto]} checked{/if} />是</label>
+							<label class="radio-inline"><input type="radio" name="auto" id="auto" value="0" class="radio"{if empty($datas[auto]) || !$datas[auto]} checked{/if} />否</label>
+						</div>
+					</td>
+					<td style="width:180px"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML名</th>
+					<td style="width:600px"><input type="txt" name="htmlName" id="htmlName" value="{var $datas[htmlName]}" maxlength="32" class="form-control" style="{if !empty($datas) && $datas[fieldName] == $datas[htmlName]}background:#FFF0F0{/if}" preg="null=请输入HTML名" /><label><input type="checkbox" id="tong" class="checkbox"{if !empty($datas) && $datas[fieldName] == $datas[htmlName]} checked{/if} />同字段名</label></td>
+					<td style="width:180px" id="htmlName_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML类型</th>
+					<td style="width:600px" id="htmlTypeBox"><input type="txt" name="htmlType" id="htmlType" value="{var $datas[htmlType]}" maxlength="32" class="form-control" preg="null=请输入HTML类型，慎重！" emptyRunReg="false" /></td>
+					<td style="width:180px" id="htmlType_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML宽度</th>
+					<td style="width:600px"><input type="txt" name="htmlWidth" id="htmlWidth" value="{var $datas[htmlWidth]}" maxlength="6" class="form-control" preg="number=请输入HTML宽度" emptyRunReg="false" /></td>
+					<td style="width:180px" id="htmlWidth_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML高度</th>
+					<td style="width:600px"><input type="txt" name="htmlHeight" id="htmlHeight" value="{var $datas[htmlHeight]}" maxlength="6" class="form-control" preg="number=请输入HTML高度" emptyRunReg="false" /></td>
+					<td style="width:180px" id="htmlHeight_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">图片宽度</th>
+					<td style="width:600px"><input type="txt" name="imageWidth" id="imageWidth" value="{var $datas[imageWidth]}" maxlength="6" class="form-control" preg="number=请输入图片宽度" emptyRunReg="false" /></td>
+					<td style="width:180px" id="imageWidth_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">图片高度</th>
+					<td style="width:600px"><input type="txt" name="imageHeight" id="imageHeight" value="{var $datas[imageHeight]}" maxlength="6" class="form-control" preg="number=请输入图片高度" emptyRunReg="false" /></td>
+					<td style="width:180px" id="imageHeight_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">列表值</th>
+					<td style="width:600px"><textarea name="htmlListValue" id="htmlListValue" class="form-control" def="格式：值=显示，如：1=选择A，一行一个">{var $datas[htmlListValue]}</textarea></td>
+					<td style="width:180px"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">默认值</th>
+					<td style="width:600px"><input type="txt" name="htmlDefaultValue" id="htmlDefaultValue" value="{var $datas[htmlDefaultValue]}" maxlength="32" class="form-control" preg="null=请输入默认值" emptyRunReg="false" /></td>
+					<td style="width:180px" id="htmlDefaultValue_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML是否验证</th>
+					<td style="width:600px">
+						<div class="radio-list">
+							<label class="radio-inline"><input type="radio" name="htmlIsReg" id="htmlIsReg" value="1" class="radio"{if !empty($datas[htmlIsReg]) && $datas[htmlIsReg]} checked{/if} />是</label>
+							<label class="radio-inline"><input type="radio" name="htmlIsReg" id="htmlIsReg" value="0" class="radio"{if empty($datas[htmlIsReg]) || !$datas[htmlIsReg]} checked{/if} />否</label></td>
+						</div>
+					<td style="width:180px"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">HTML验证规则</th>
+					<td style="width:600px"><textarea name="htmlRegStr" id="htmlRegStr" class="form-control">{var $datas[htmlRegStr]}</textarea></td>
+					<td style="width:180px"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">提示信息</th>
+					<td style="width:600px"><textarea name="tip" id="tip" class="form-control" def="格式为：提示|错误|正确">{var $datas[tip]}</textarea></td>
+					<td style="width:180px" id="tip_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px"></th>
+					<td style="width:600px"><input type="submit" value="{if !empty($update) && $update}编辑{else}添加{/if}" class="btn green" /><input type="button" value="返回" onclick="history.back(-1)" class="btn default" /></td>
+					<td style="width:180px"></td>
+				</tr>
+			</table>
+		</form>
+	{/if}
+{elseif $tab == 'index'}
+	{if $method == 'list'}
+		
+			{adminList
+				删？      |id         |del
+				排序      |sort       |sort
+				名字      |name       |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[name]</div></div>
+				索引名    |indexName  |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[indexName]</div></div>
+				索引字段  |indexFiles |code,<div style="width:100px;height:24px;line-height:24px"><div class="txtOverflow">$v[indexFields]</div></div>
+				索引类型  |indexType  |code,{if $v[indexType]}唯一键(UNIQUE){else}普通索引{/if}
+						  |id         |link2,编辑,method=edit&iid=$v[id]
+			}
+		<script language="javascript">
+		$('.txtOverflow').hover(function(){
+			$(this).overflow(true);
+		}, function(){
+			$(this).overflow(false);
+		});
+		</script>
+	{elseif $method == 'add' || $method == 'edit'}
+		<script language="javascript">
+		$(function(){
+			$('#fieldsBox').find('.checkbox').each(function(){
+				$(this).click(function(){
+					var fields = '';
+					var lastFields = $('#indexFields').val();
+					var sp = lastFields.split(',');
+					lastFields = '';
+					for (var i = 0; i < sp.length; i++) {
+						var obj = $('input[type=checkbox][value='+sp[i]+']');
+						if (obj.attr('checked')) {
+							if (lastFields) lastFields += ',';
+							lastFields += obj.val();
+						}
+					}
+					$('#indexFields').val(lastFields);;
+					var thisField = $(this).val();
+					if ($(this).attr('checked')) {
+						if (lastFields != '') {
+							sp = lastFields.split(',');
+							lastFields = '';
+							for (var i = 0; i < sp.length; i++) {
+								if (sp[i] != thisField) {
+									if (lastFields != '') lastFields += ',';
+									lastFields += sp[i];
+								}
+							}
+							if (lastFields != '') lastFields += ',';
+							lastFields += thisField;
+						} else lastFields = $(this).val();
+					} else {
+						sp = lastFiels.split(',');
+						lastFields = '';
+						for (var i = 0; i < sp.length; i++) {
+							if (sp[i] != thisField) {
+								if (lastFields != '') lastFields += ',';
+								lastFields += sp[i];
+							}
+						}
+					}
+					$('#indexFields').val(lastFields);
+					return;
+					$('#fieldsBox').find('.checkbox').each(function(){
+						if ($(this).attr('checked')) {
+							if (fields) fields += ',';
+							fields += $(this).val();
+						}
+					});
+					$('#indexFields').val(fields);
+				});
+			});
+			var nowFields =  $('#indexFields').val();
+			if (nowFields != '') {
+				nowFields = nowFields.replace(/`/g, '');
+				$('#indexFields').val(nowFields);
+				var sp = nowFields.split(',');
+				for (var i = 0; i < sp.length; i++) {
+					var f = sp[i];
+					$('input[type=checkbox][value='+f+']').attr('checked', true);
+				}
+			}
+		});
+		</script>
+		<form method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+		{v sys_hash_code}
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th style="width:120px">名称</th>
+					<td style="width:600px"><input type="txt" name="name" id="name" value="{var $datas[name]}" maxlength="32" class="txt" style="width:240px" preg="null=请输入索引备注" /></td>
+					<td style="width:180px" id="name_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">索引名</th>
+					<td style="width:600px"><input type="txt" name="indexName" id="indexName" value="{var $datas[indexName]}" maxlength="32" class="txt" style="width:240px" preg="null=请输入索引名称" /></td>
+					<td style="width:180px" id="indexName_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">选择字段</th>
+					<td style="width:600px" id="fieldsBox">
+						{loopQuick table::getFields($tid,'name,fieldName')}
+						<div style="width:150px;float:left">
+						<label><input type="checkbox" id="f$k" value="$v[fieldName]" class="checkbox"{if isset($v[checked]) && $v[checked]} checked{/if} />$v[fieldName](<span style="color:green">$v[name]</span>)</label>
+						</div>
+						{/loopQuick}
+						<div class="clear"></div>
+					</td>
+					<td style="width:180px" id="indexName_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">字段集</th>
+					<td style="width:600px"><textarea name="indexFields" id="indexFields" class="tarea" preg="null=请输入字段集，慎重！" readonly="readonly">{var $datas[indexFields]}</textarea></td>
+					<td style="width:180px" id="indexFields_tip"></td>
+				</tr>
+				<tr>
+					<th style="width:120px">唯一性</th>
+					<td style="width:600px">
+						<label><input type="radio" name="indexType" id="indexType" value="1" class="radio"{if !empty($datas[indexType]) && $datas[indexType]} checked{/if} />是</label>
+						<label><input type="radio" name="indexType" id="indexType" value="0" class="radio"{if empty($datas[indexType]) || !$datas[indexType]} checked{/if} />否</label></td>
+					<td style="width:180px"></td>
+				</tr>
+				<tr>
+					<th style="width:120px"></th>
+					<td style="width:600px"><input type="submit" value="{if !empty($update) && $update}编辑{else}添加{/if}" class="btn" /><input type="button" value="返回" onclick="history.back(-1)" class="btn" /></td>
+					<td style="width:180px"></td>
+				</tr>
+			</table>
+		</form>
+	{/if}
+{/if}
+{sub f}

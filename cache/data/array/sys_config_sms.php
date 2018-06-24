@@ -1,0 +1,12 @@
+<?php exit;?>a:12:{s:8:"isGetPwd";s:1:"1";s:7:"api_url";s:0:"";s:8:"username";s:8:"lh337159";s:6:"status";s:379:"1 发送成功 true
+-1 没有该用户账户 false
+-2 接口密钥不正确 false
+-21 MD5接口密钥加密不正确 false
+-3 短信数量不足 false
+-11 该用户被禁用 false
+-14 短信内容出现非法字符 false
+-4 手机号格式不正确 false
+-41 手机号码为空 false
+-42 短信内容为空 false
+-51 短信签名格式不正确 false
+-6 IP限制 false";s:6:"is_num";s:1:"1";s:8:"password";s:11:"sanwang8899";s:11:"passwordRun";s:20:"m10f73e0fey269fe821w";s:11:"account_url";s:85:"http://sms.webchinese.cn/web_api/SMS/?Action=SMS_Num&Uid={username}&Key={passwordRun}";s:8:"send_url";s:97:"http://utf8.sms.webchinese.cn/?Uid={username}&Key={passwordRun}&smsMob={mobile}&smsText={content}";s:9:"price_one";s:3:"0.1";s:8:"sms_time";s:1:"1";s:10:"is_imitate";s:1:"0";}

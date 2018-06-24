@@ -1,0 +1,68 @@
+{sub h}
+{if $method == 'list'}
+<div style="color:red;font-weight:bold;margin-top:10px">注意：删除增加服务器，重新设置服务器排序都必须要到工具中更新Memcache缓存，否则数据会出错</div>
+	{adminList
+		删？|id|del
+		排序|sort|sort
+		IP|ip
+		端口|port
+		权重|weight
+		最后修改时间|time|flag,date
+		||link2,编辑,method=edit&id=$v[id]
+	}
+{elseif $method == 'add' || $method == 'edit'}
+	{adminForm
+		IP,null=请输入Memcache服务器IP|ip|text|240|17
+		端口,number=请输入Memcache服务器端口|port|text|240|5
+		权重,number=请输入该服务器的权重0~100，越高储存越多，所有服务器的权重值加起来不能大于100|weight|text|240|3
+	}
+{elseif $method == 'listInfo'}
+	{loopQuick mem::getServerAll()}
+	<table class="tab_view">
+		<tr class="tip">
+			<td colspan="2">服务器：$v[ip]:$v[port]:$v[weight]</td>
+		</tr>
+		<tr>
+			<th>状态</th>
+			<td>{if isset($listInfo[$v[ip].':'.$v[port]])}<span style="color:green">正常</span>{else}<span style="color:red">异常</span>{/if}</td>
+		</tr>{if isset($listInfo[$v[ip].':'.$v[port]])}
+		{eval $arr = $listInfo[$v[ip].':'.$v[port]];}
+		{loopQuick $infoNames $k1 $v1}
+		<tr>
+			<th>$v1</th>
+			<td>{eval
+				$data = $arr[$k1];
+				switch ($k1) {
+					case 'uptime':
+						echo time::times($data);
+					break;
+					case 'time':
+						echo date('Y-m-d H:i:s', $data);
+					break;
+					case 'pointer_size':
+						echo $data.'位系统';
+					break;
+					case 'bytes':
+						echo string::formatSize($data);
+					break;
+					case 'bytes_read':
+						echo string::formatSize($data);
+					break;
+					case 'bytes_written':
+						echo string::formatSize($data);
+					break;
+					case 'limit_maxbytes':
+						echo string::formatSize($data);
+					break;
+					default:
+						echo $data;
+					break;
+				}
+			}</td>
+		</tr>
+		{/loopQuick}
+		{/if}
+	</table>
+	{/loopQuick}
+{/if}
+{sub f}

@@ -1,0 +1,3 @@
+"use strict";var isSortSum=/(\/\?|&)sort=sum($|&)/.test(window.location.href);var clearUrl=window.location.href.replace(/(https{0,1}:\/\/[^\/]+\/.*\/)($|\?.*)/,'$1');$(function(){if(isSortSum){$('.sort input[name=isOrderSum]').prop('checked',true);}
+$('.sort input[name=isOrderSum]').change(function(){if($(this).prop('checked')){window.location.href=clearUrl+"?sort=sum";}
+else{window.location.href=clearUrl;}});$('#inputDate').datepicker({dateFormat:"yy-mm-dd"});$('[type=checkbox]').click(function(){var self=this;var value=($(self).prop('checked'))?1:0;$(self).val(value);})});

@@ -1,0 +1,171 @@
+{sub h}
+{if $method == 'itemList'}
+	{adminList
+		删？|id    |del
+		排序|sort  |sort
+		名称|name
+		标记|marker
+		    |id    |link2,编辑,method=itemEdit&id=$v[id]
+	}
+{elseif $method == 'itemAdd' || $method == 'itemEdit'}
+<script language="javascript">
+var itemHtml = {jsStr <tr id="item{flag}{id}">
+		<th><a href="javascript:;" onclick="$(this).parent().parent().remove();items--;" class="btn default btn-xs blue">移除</a></th>
+		<td>
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th>变量类型</th>
+					<td><div class="radio-list">{loopQuick tkd::$varTypes}
+						<label><input type="radio" name="varType[{id}]" value="$k" />$v</label><br />
+						{/loopQuick}
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>变量名称</th>
+					<td><input type="text" name="varName[{id}]" value="{name}" class="form-control" /></td>
+				</tr>
+				<tr>
+					<th>变量验证</th>
+					<td><textarea name="varCheck[{id}]" class="form-control">{check}</textarea></td>
+				</tr>
+			</table>
+		</td>
+	</tr>};
+var itemId = 0, items = 0;
+var addItem = function(type, name, check){
+	if (type == void(0)) type = 0;
+	if (name == void(0)) name = '';
+	if (check == void(0)) check = '';
+	var html = itemHtml;
+	html = html.replace(/\{id\}/mg, itemId);
+	html = html.replace(/\{flag\}/g, 'List');
+	html = html.replace(/\{name\}/g, name);
+	html = html.replace(/\{check\}/g, check);
+	$('#items').append(html);
+	$('[name=varType\\[' + itemId + '\\]][value='+type+']').attr({checked:true});
+	itemId++;
+	items++;
+};
+$(function(){
+	$('#qscmsForm').submit(function(){
+		var name = $('#name').val().replace(/^\s|\s+$/g, '');
+		var marker = $('#marker').val().replace(/^\s+|\s+$/g, '');
+		if (!name) {
+			alert('请填写项目名称');
+			$('#name').focus();
+			return false;
+		}
+		if (!marker) {
+			alert('请添加项目标记');
+			$('#marker').focus();
+			return false;
+		}
+		/*if (items <= 0) {
+			alert('请添加验证条件');
+			return false;
+		}*/
+		var isOk = true;
+		if (items > 0) {
+			$('tr[id*=itemList]').each(function(){
+				if (!$(this).find('[name*=varType]').checked()) {
+					alert('请选择变量类型');
+					isOk = false;
+					return false;
+				}
+				var varNameObj = $(this).find('[name*=varName]');
+				var varName = varNameObj.val().replace(/^\s+|\s+$/g, '');
+				var varCheckObj = $(this).find('[name*=varCheck]');
+				var varCheck = varCheckObj.val().replace(/^\s+|\s+$/g, '');
+				if (!varName) {
+					alert('请填写变量名称');
+					varNameObj.focus();
+					isOk = false;
+					return false;
+				}
+				if (!varCheck) {
+					alert('请填写变量验证');
+					varCheckObj.focus();
+					isOk = false;
+					return false;
+				}
+			});
+		}
+		return isOk;
+	});
+});
+{if !empty($whereList)}
+$(function(){
+	{loopQuick $whereList}
+	addItem($v[varType], '$v[varName]', {echo string::getJsVar($v[varCheck])});
+	{/loopQuick}
+});
+{/if}
+</script>
+	<form id="qscmsForm" method="post" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+		{v sys_hash_code}
+		<table class="table table-bordered table-striped">
+			<tr class="tip">
+				<td colspan="2">网站标题、关键词、简介条件配置</td>
+			</tr>
+			<tr>
+				<th>名称</th>
+				<td><input type="text" name="name" id="name" value="{var $name}" class="form-control" maxlength="32" /></td>
+			</tr>
+			<tr>
+				<th>标记</th>
+				<td><input type="text" name="marker" id="marker" value="{var $marker}" class="form-control" maxlength="32" /></td>
+			</tr>
+			<tr>
+				<th></th>
+				<td><a href="javascript:;" onclick="addItem()" class="btn default btn-xs blue">添加条件</a></td>
+			</tr>
+			<tbody id="items"></tbody>
+			<tr>
+				<th></th>
+				<td><input type="submit" value="{if !empty($update) && $update}编辑{else}提交{/if}" class="btn green" /></td>
+			</tr>
+		</table>
+	</form>
+{elseif $method == 'datas'}
+<div class="row">
+<form id="qscmsForm" method="post" enctype="application/x-www-form-urlencoded">
+	{v sys_hash_code}
+	{loopQuick $list}
+	<div class="portlet box blue ">
+		<div class="portlet-title">
+			<div class="caption">
+				<i class="fa fa-gift"></i> $v[name]($v[marker])
+			</div>
+			<div class="tools">
+				<a class="collapse" href="" data-original-title="" title="">
+				</a>
+				<a class="remove" href="" data-original-title="" title="">
+				</a>
+			</div>
+		</div>
+		<div class="portlet-body form">
+			<div class="form-body">
+				<div class="form-group">
+					<label class="control-label">标题</label>
+					<input type="text" name="title[$v[id]]" value="$v[title]" class="form-control" />
+				</div>
+				<div class="form-group has-success">
+					<label class="control-label">关键词</label>
+					<textarea name="keywords[$v[id]]" class="form-control">$v[keywords]</textarea>
+				</div>
+				<div class="form-group has-warning">
+					<label class="control-label">描述</label>
+					<textarea name="description[$v[id]]" class="form-control">$v[description]</textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+	{/loopQuick}
+	<div class="form-actions">
+		<button class="btn green" type="submit">提交</button>
+	</div>
+</form>
+</div>
+{/if}
+{sub f}

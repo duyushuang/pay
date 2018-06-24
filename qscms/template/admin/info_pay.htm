@@ -1,0 +1,57 @@
+{sub h}
+<style ="text/css">
+  th{
+    background: #5BC0DE;
+    color: #FFF;
+  }
+  td{ border: none !important;}
+  .form-horizontal .control-label{
+    padding: 7px 0 0 15px;
+  }
+  .radio {
+    padding-top: 2px !important;
+  }
+  #cke_img_info{
+	  border:1px solid #DDD;
+	 }
+</style>
+{if $method == 'pay'}
+<h4 style="padding: 10px 0;"> <span><i class="glyphicon glyphicon-th"></i> 通用配置 </span> </h4>
+{cfgCate pay}
+{elseif $method == 'bl'}
+	{adminList
+    	删？|id|del
+        排序  |sort |sort
+    	套餐名称|name
+		微信费率||code,{echo $v[wxpay] * 100}%
+		支付宝费率||code,{echo $v[alipay] * 100}%
+		QQ钱包费率||code,{echo $v[qqpay] * 100}%
+		百度网银费率||code,{echo $v[bdpay] * 100}%
+		套餐金额||code,{if $v[money]>0}$v[money]{else}免费{/if}
+       	是否开启||code,{if $v[isOff] == 1}<span style="color:#0F9">开启中</span>{else}未开启{/if}
+        		|id|link2,编辑,method=editbl&id=$v[id]
+    }
+{elseif $method == 'addbl' || $method == 'editbl'}
+	{adminForm
+        套餐名称|name|text|600
+        微信费率|wxpay|text|600
+        支付宝费率|alipay|text|600
+        QQ钱包费率|qqpay|text|600
+        百度网银费率|bdpay|text|600
+        套餐金额|money|text|600
+        是否开启该套餐 |isOff|radio,1=开启,0=关闭
+    }
+{elseif $method == 'wxpay'}
+<h4 style="padding: 10px 0;"> <span><i class="glyphicon glyphicon-th"></i> 微信配置 </span> </h4>
+{cfgCate wxpay}
+{elseif $method == 'alipay'}
+<h4 style="padding: 10px 0;"> <span><i class="glyphicon glyphicon-th"></i> 支付宝配置</span></h4>
+{cfgCate alipay}
+{elseif $method == 'qqpay'}
+<h4 style="padding: 10px 0;"> <span><i class="glyphicon glyphicon-th"></i> QQ钱包配置</span></h4>
+{cfgCate qqpay}
+{elseif $method == 'bdpay'}
+<h4 style="padding: 10px 0;"> <span><i class="glyphicon glyphicon-th"></i> 百度网银配置</span></h4>
+{cfgCate bdpay}
+{/if}
+{sub f}

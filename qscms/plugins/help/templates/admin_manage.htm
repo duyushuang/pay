@@ -1,0 +1,22 @@
+{sub admin_header}
+<br /><br /><br />
+{if $method == 'list'}
+	{adminList
+		删？|id|del
+		标题|title
+		下级信息|subNum
+		最后更新|upTime|flag,date
+		        |id    |link2,添加下级标题,method=addTitle&pid=$v[id];link2,查看下级标题,method=$method&pid=$v[id];link2,查看/编辑文章,method=editContent&id=$v[id]&pid=$pid
+	}
+{elseif $method == 'addTitle'}
+	{adminForm
+		上级标题：{if $pid > 0}$pinfo[title]{else}无{/if}|tip
+		标题,null=请输入标题|title|text|480|80
+	}
+{elseif $method == 'editContent'}
+	{adminForm
+		标题||code,$pinfo[title]
+		内容|content|fckeditor,800,300
+	}
+{/if}
+{sub admin_footer}

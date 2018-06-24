@@ -1,0 +1,166 @@
+{sub header}
+
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+
+<!--date js end-->
+        <div class="right_col" role="main">
+          <div class="">
+
+            <div class="row top_tiles">
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa fa-pie-chart"></i></div>
+                  <div class="count">$allTotal</div>
+                  <h3>订单总数</h3>
+                  <p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;已支付和未支付订单总数</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa  fa-credit-card"></i></div>
+                  <div class="count"> $allMoney</div>
+                  <h3>订单总金额</h3>
+                  <p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;包含未支付和已支付的</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa  fa fa-meh-o"></i></div>
+                  <div class="count">$payTotal</div>
+                  <h3>已付订单</h3>
+                  <p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;已付款的订单总数</p>
+                </div>
+              </div>
+              <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="tile-stats">
+                  <div class="icon"><i class="fa  fa-money"></i></div>
+                  <div class="count">$payMoney</div>
+                  <h3>已付总金额</h3>
+                  <p><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>&nbsp;已付款订单金额总数</p>
+                </div>
+              </div>
+            </div>
+
+    <div class="clearfix"></div>
+
+            <div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>交易订单 <small>&nbsp;未付订单数：<font class="red">$notTotal</font >&nbsp;未付总金额：<font  class="red">&yen; $notMoney</font >
+          &nbsp;&nbsp;</span>显示最近30天的数据</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                       
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                   
+	<!--订单搜索开始哒-->
+		  <div style=" background: #ededed; padding: 15px 15px; border-radius: 5px;">
+    <form class="form-inline"  method="get">
+      <div class="form-group">
+        <select name="status" class="form-control"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择支付状态">
+          <option value="-1"{if $status == -1} selected{/if}>全部</option>
+          <option value="0"{if $status == 0} selected{/if}>待付款</option>
+          <option value="1"{if $status == 1} selected{/if}>已付款</option>
+        </select>
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <select class="form-control" name="type"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择支付通道">
+          <option value="0"{if $type == 0} selected{/if}>全部通道</option>
+        {loopQuick pay::$array}
+          <option value="$k"{if $type == $k} selected{/if}>$v</option>
+        {/loopQuick}
+        </select>
+      </div>
+      
+       &nbsp;&nbsp;
+      <div class="form-group">
+        <input type="text" class="form-control" name="sn" placeholder="{$webName}系统订单号" value="{var $sn}"  data-toggle="tooltip" title="" data-placement="top" data-original-title="{$webName}系统订单号，20位数">
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <input type="text" class="form-control" name="out_trade_no" placeholder="输入商户订单号" value="{var $out_trade_no}"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入商户订单号，23位数">
+      </div>
+      &nbsp;&nbsp;
+      <div class="form-group">
+        <div class="input-group" style="margin-bottom: 0px;"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        <!--input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly="" value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/-->
+
+<input type="text" class="form-control input-inline" readonly=""   name="startDate" value="{var $startDate}"  class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间">
+
+		<span class="input-group-addon">至</span>
+
+<input type="text" class="form-control input-inline" readonly=""   name="endDate"  value="{var $endDate}"  class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间">
+
+
+		<!--input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly="" value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/-->
+        </div>
+      </div>
+      &nbsp;&nbsp;
+      <button type="submit" class="btn btn-primary" style="margin-bottom: 0px;"><span class="glyphicon glyphicon-search"></span>&nbsp;详细查询</button>
+
+
+    </form>
+  </div>
+<!--订单搜索结束哒-->
+	
+                    </p>
+                    <table id="jinmipay_out1" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th>订单时间</th>
+                          <th>系统订单号</th>
+                          <th>商户订单号</th>
+                          <th>支付场景</th>
+                          <th>交易状态</th>
+                          <th>交易时间</th>
+                          <th>订单金额</th>
+                        </tr>
+
+                      </thead>
+
+
+                      <tbody>
+        {if $list}
+        {loopQuick $list}
+
+                          <tr >
+                           <td>{date $v[addTime]}</td>
+                            <td>$v[sn]</td>
+                            <td >$v[out_trade_no] <i class="success fa fa-long-arrow-up"></i></td>
+                            <td>{echo pay::ename($v[type])}</td>
+                            <td>{if $v[status] == 1}已支付{else}待支付{/if}</td>
+                            <td>{if $v[payTime]}{date $v[payTime]}{else}待支付{/if}</td>
+                            <td>$v[money]</td>
+                            
+                          </tr>
+                         
+        {/loopQuick}
+        {else}
+	        <tr>
+          <td colspan="10" class="text-center">no data.</td>
+        </tr>
+        {/if}
+
+                       
+                      </tbody>
+                    </table>
+                     $multipage 
+                  </div>
+                </div>
+              </div></div>
+       {sub footer}
+

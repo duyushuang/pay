@@ -1,0 +1,123 @@
+{sub header}
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <!--div class="title_left">
+                <h3>Users <small>Some examples to get you started</small></h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div-->
+            </div>
+
+    <div class="clearfix"></div>
+
+            <div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>API信息<small>商户api信息</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  
+                   <!--内容开始-->
+	<style>
+.index-content{padding:15px;}.index-content .left-border{border-left:0px solid #ddd}.index-content>.row>.col-sm-6{border: 1px solid #fff;padding:60px 25px 50px 35px;min-height:210px;margin-left:-1px;margin-top:-1px}.index-content>.row>.col-sm-6:hover{background: #fafafa}.bf{font-size: 4em;color:#FFA600}.bf1{font-size: 1em;color:#999}.bf2{font-size: 2em;overflow-x:auto;color:#333}.bf2 a{color:#333}
+</style>
+
+
+<div class="col-md-10 right">
+  <div class="cb-title"></div>
+  <div class="content-box">
+    <div class="index-content">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="col-sm-3"><span class="glyphicon glyphicon-user bf"></span></div>
+          <div class="col-sm-8">
+            <p class="bf1">接入编号PID</p>
+            <p class="bf2">{$member->m_id}</p>
+          </div>
+        </div>
+        <div class="col-sm-6 left-border">
+          <div class="col-sm-3"><span class="glyphicon glyphicon-lock bf"></span></div>
+          <div class="col-sm-8">
+            <p class="bf1">接入密钥KEY</p>
+            <p class="bf2"><a href="javascript:;" onclick="{if $member->m_isApi}showContent('接入密钥','{r}/users/api/show');{else}layer.msg('您还未开通API支付接口权限，请联系客服'){/if}"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="点击获取商户号秘钥KEY">点击获取</a></p>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="col-sm-3"><span class="glyphicon glyphicon-download-alt bf"></span></div>
+          <div class="col-sm-8">
+            <p class="bf1">开发文档</p>
+            <p class="bf2"><a href="{r}/doc.html" target="_blank"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="查看接入支付的相关文档说明">在线查看</a></p>
+          </div>
+        </div>
+        <div class="col-sm-6 left-border">
+          <div class="col-sm-3"><span class="glyphicon glyphicon-file bf"></span></div>
+          <div class="col-sm-8">
+            <p class="bf1">插件列表</p>
+            <p class="bf2"><a href="{r}/users/plugin"  data-toggle="tooltip" title="" data-placement="bottom" data-original-title="API接口">下载插件</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+	<div class="modal" id="waModal" role="dialog" aria-labelledby="waModalLable">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+	   <script>
+function showContent(title,url){
+    $('#waModal').modal('show');
+    $('#waModal .modal-title').text(title);
+    $.get(url,{t:new Date().getTime()},function(data){
+        $('#waModal .modal-body').html(data);
+    });
+}
+</script>
+	<!--内容结束-->
+                  </div>
+                </div>
+              </div></div>
+
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+</script>
+        <!-- /page content -->
+
+        <!-- footer content -->
+       {sub footer}

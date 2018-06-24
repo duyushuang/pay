@@ -1,0 +1,79 @@
+{sub header}
+{css_select jquery_ui}
+{jsFile ../jquery-ui.min}
+{jsFile datepicker,}
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+    <div class="bg-light lter b-b wrapper-md hidden-print">
+      <h1 class="m-n font-thin h3">我的下级</h1>
+    </div>
+    <div class="wrapper-md control">
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"> &nbsp;收入统计&nbsp;&nbsp;<span style="margin-bottom:0;font-size:14px;color:#333">实付总额：<span class="red">$payMoney</span>元&nbsp;&nbsp;商户收入：<span class="blue">$memberMoney</span>元&nbsp;&nbsp;</span></div>
+  <div style="background:#e3f2fd;padding:20px 15px;border:1px solid #ddd;border-top:0">
+    <form class="form-inline" action="" method="get">
+      <div class="form-group">
+        <div class="input-group"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+		<input type="hidden" name="user" value="$uid"/>
+        <input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/>
+		<span class="input-group-addon">至</span>
+		<input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/>
+        </div>
+      </div>
+      &nbsp;&nbsp;
+      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>&nbsp;立即查询</button>&nbsp;&nbsp;
+      <a href="{r}/member/count?user=$uid&startDate={echo date('Y-m-d');}">今天</a>
+      <span class="v-line">|</span><a href="{r}/member/count?user=$uid&startDate={echo date('Y-m-d',strtotime('-1 day'));}">昨天</a>
+      <span class="v-line">|</span><a href="{r}/member/count?user=$uid&startDate={echo date('Y-m-d ',strtotime('-7 day'));}">7天</a>
+      <span class="v-line">|</span><a href="{r}/member/count?user=$uid&startDate={echo date('Y-m-d',strtotime('-30 day'));}">30天</a>
+      <span class="v-line">|</span>当前查询累计收入金额 $allMoney 元
+      <span class="v-line">|</span>当前查询累计实际收入金额 $actualMoney 元
+    </form>
+  </div>
+  <div class="content-box table-responsive">
+  
+  
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>订单时间</th>
+          <th>{$webName}支付单号</th>
+          <th>商户支付单号</th>
+          <th>支付场景</th>
+          <th>交易时间</th>
+          <th>订单金额</th>
+          <th>商户收入</th>
+          <th>费用比率</th>
+        </tr>
+      </thead>
+      <tbody>
+      
+        {if $list}
+        {loopQuick $list}
+        <tr>
+          <td>{date $v[addTime]}</td>
+          <td>$v[sn]</td>
+          <td>$v[out_trade_no]</td>
+          <td>{echo pay::ename($v[type])}</td>
+          <td>{if $v[payTime]}{date $v[payTime]}{/if}</td>
+          <td>$v[money]</td>
+          <td>$v[money1]</td>
+          <td>{echo $v[bl] * 100}%</td>
+        </tr>
+        {/loopQuick}
+        {else}
+        <tr>
+          <td colspan="10" class="text-center">no data.</td>
+        </tr>
+        {/if}
+      </tbody>
+    </table>
+    <div style="text-align:center">$multipage</div>
+  </div>
+</div>
+<script>
+$('[name=startDate]').datepicker();
+$('[name=endDate]').datepicker();
+
+</script>
+{sub footer}

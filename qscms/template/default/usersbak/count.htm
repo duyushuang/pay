@@ -1,0 +1,135 @@
+{sub header}
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+          <div class="">
+
+    <div class="clearfix"></div>
+
+            <div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>收入统计录<small>账户收入记录列表  &nbsp;&nbsp;实付总额：<font class="red">$payMoney</font>元&nbsp;&nbsp;商户收入：<font class="blue">$memberMoney</font>元&nbsp;&nbsp;</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                       
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                  <!--搜索开始-->
+<div style=" background: #ededed; padding: 20px 15px; border-radius: 5px;">
+	 <form class="form-inline" action="" method="get">
+      <div class="form-group">
+        <div class="input-group hidden-xs"><span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+         <!--input  size="16" type="text" style="width: 108px; margin-right: 5px;" readonly="" value="{var $startDate}" name="startDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间"/-->
+
+<input type="text" class="form-control input-inline" readonly=""  name="startDate" value="{var $startDate}"  class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择开始时间">
+
+		<span class="input-group-addon">至</span>
+
+<input type="text" class="form-control input-inline" readonly="" name="endDate"  value="{var $endDate}" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间">
+
+
+		<!--input  size="16" type="text" style="width: 108px; margin-left: 5px;" readonly="" value="{var $endDate}" name="endDate" class="form-control input-inline"  data-toggle="tooltip" title="" data-placement="top" data-original-title="选择结束时间"/-->
+        </div>
+      </div>
+      &nbsp;&nbsp;
+      <button type="submit" class="btn btn-primary hidden-xs"><span class="glyphicon glyphicon-search"></span>&nbsp;立即查询</button>&nbsp;&nbsp;
+<div class="col-md-3 col-sm-5 col-xs-12 pull-right">
+      <a href="{r}/users/count?startDate={echo date('Y-m-d');}" class="btn btn-success">今天</a>
+      <span class="v-line"></span><a href="{r}/users/count?startDate={echo date('Y-m-d',strtotime('-1 day'));}" class="btn btn-success">昨天</a>
+      <span class="v-line"></span><a href="{r}/users/count?startDate={echo date('Y-m-d ',strtotime('-7 day'));}" class="btn btn-success">7天</a>
+      <span class="v-line"></span><a href="{r}/users/count?startDate={echo date('Y-m-d',strtotime('-30 day'));}" class="btn btn-success">30天</a></div>
+      <span class="v-line"></span>累计收入金额: $allMoney 元
+      <span class="v-line"></span>扣费后实际所得金额: $actualMoney 元
+    </form>
+	</div>
+	<p></p>
+	<!--搜索结束-->
+                   <!--内容开始-->
+				   
+		  <table id="jmyorders" class="table table-striped table-bordered">
+                      <thead>
+                        <tr>
+          <th>订单时间</th>
+          <th>{$webName}支付单号</th>
+          <th>商户支付单号</th>
+          <th>支付场景</th>
+          <th>交易时间</th>
+          <th>订单金额</th>
+          <th>商户收入</th>
+          <th>费用比率</th>
+                        </tr>
+
+                      </thead>
+
+
+                      <tbody>
+        {if $list}
+        {loopQuick $list}
+
+                          <tr >
+          <td>{date $v[addTime]}</td>
+          <td>$v[sn]</td>
+          <td>$v[out_trade_no]</td>
+          <td>{echo pay::ename($v[type])}</td>
+          <td>{if $v[payTime]}{date $v[payTime]}{/if}</td>
+          <td>$v[money]</td>
+          <td>$v[money1]</td>
+          <td>{echo $v[bl] * 100}%</td>
+                          </tr>
+                         
+        {/loopQuick}
+        {else}
+	        <tr>
+          <td colspan="10" class="text-center">no data.</td>
+        </tr>
+        {/if}
+
+                       
+                      </tbody>
+                    </table>		   
+	<!--内容结束-->
+    $multipage 
+                  </div>
+                </div>
+              </div></div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+       {sub footer}
+
+    <script type="text/javascript">
+	/*
+$(document).ready(function() {
+$('#jmyorders').dataTable( {
+		"oLanguage": {
+			"sLengthMenu": "每页显示 _MENU_ 条记录",
+			"sZeroRecords": "抱歉， 没有找到",
+			"sInfo": "从 _START_ 到 _END_ /共 _TOTAL_ 条数据",
+			"sInfoEmpty": "没有数据",
+			"sInfoFiltered": "(从 _MAX_ 条数据中检索)",
+			"oPaginate": {  
+                    "sFirst": "首页",  
+                    "sPrevious": "前一页",
+                    "sNext": "后一页",  
+                    "sLast": "尾页"  ,
+                }, 
+			"sSearch": "小搜索:",
+			"sZeroRecords": "没有检索到数据",  
+			"sProcessing": "<img src='./loading.gif' />"
+		}
+	} );
+} );
+*/
+</script>

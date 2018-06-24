@@ -1,0 +1,2 @@
+<div class="alert alert-success" style="font-size:16px">{if $member->m_isApi}{$member->m_keys}<a href="javascript:;" style="margin-left:10px;" class="zclipCopy" data="{$member->m_keys}">复制</a>{/if}</div>
+<script>$('.zclipCopy').zclip({path: '{su}swf/copy.swf',copy: function(){return $(this).attr('data');},afterCopy: function(){layer.msg('复制成功');}});</script>

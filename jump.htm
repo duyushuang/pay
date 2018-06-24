@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		name="viewport" />
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+		<meta content="no-cache,must-revalidate" http-equiv="Cache-Control" />
+		<meta content="no-cache" http-equiv="pragma" />
+		<meta content="0" http-equiv="expires" />
+		<meta content="telephone=no, address=no" name="format-detection" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport"
+		/>
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<!-- apple devices fullscreen -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"
+		/>
+		<!-- Mobile Devices Support @end -->
+		<title>
+			成功提示
+		</title>
+		<link rel="shortcut icon" href="/favicon.ico"
+		type="image/x-icon" />
+		<link href="/qscms/static/pay/static/assets/css/wechat_pay.css" rel="stylesheet"
+		media="screen">
+		<link href="/style/css/jinmipay_qqpay_m.css" rel="stylesheet" media="screen">
+		<script language="javascript" type="text/javascript">
+var i = 8;
+var intervalid;
+intervalid = setInterval("fun()", 1000);
+function fun() {
+	if (i == 0) {
+		window.location.href = "{if $url}$url{else}{r}/{/if}";
+		clearInterval(intervalid);
+	}
+	document.getElementById("mes").innerHTML = i;
+	i--;
+}
+</script> 
+	</head>
+	<body>
+		<h1 class="mod-title">
+			<span class="text">
+				<img style="width:43px;height:43px;margin-bottom: 6px;" src="/qscms/static/images/pay/logom.png?spa=v1">
+				成功提示
+			</span>
+		</h1>
+		<div class="orderList">
+			<ul>
+				<li style="text-align:center;">
+					<label>
+						<span><a href="" target="_blank">
+							<img src=""  ></img></a>
+						</span>
+					</label>
+					<br />
+					<div class="qr-image" id="qrcode" style="border-width:0px;margin-top:10px;"
+					/>
+		</div>
+		<br>
+		<label1>
+			系统将在 <font id="mes">8</font> 秒钟后返回首页！
+			<br>
+			<span>
+				(登录手机QQ,进入"扫一扫",瞄准二维码扫码并支付)
+			</span>
+		</label1>
+		</li>
+		</ul>
+		</div>
+		<div class="weui_progress_inner_bar" id="progWait" style="width: 96%;">
+		</div>
+		<div style="height:30px;padding: 1em;color: #666666;text-align: center;"><p>不想等待？</p>请点击<span style="font-size: 1.2em;">↓</span><a  style="color: red;" href="{if $url}$url{else}{r}/{/if}">马上返回</a></div>
+
+		<script src="/qscms/static/pay/static/assets/js/qrcode.min.js">
+		</script>
+		<script src="/qscms/static/pay/static/assets/js/qcloud_util.js">
+			
+
+</body >
+
+			</html>

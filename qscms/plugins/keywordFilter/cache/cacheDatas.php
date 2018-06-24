@@ -1,0 +1,4 @@
+<?php exit;?>a:5:{s:5:"where";s:152:"/\/add\/?$/    title,message_1,message_2
+/^\/member\/reg/  email,nickname
+/\/actthread\/?(\?.*)?$/  content ajax
+/^\/ajax\/user\/gbook/  content ajax";s:4:"keys";s:53:"我草|我操|干你妈|毛片|艹|肏|操你妈|fuck";s:3:"tip";s:51:"您提交的信息中包含敏感字符，请检查";s:9:"urlencode";b:0;s:6:"wheres";a:4:{i:0;a:3:{s:1:"p";s:11:"/\/add\/?$/";s:4:"ajax";b:0;s:6:"fields";a:3:{i:0;s:5:"title";i:1;s:9:"message_1";i:2;s:9:"message_2";}}i:1;a:3:{s:1:"p";s:16:"/^\/member\/reg/";s:4:"ajax";b:0;s:6:"fields";a:2:{i:0;s:5:"email";i:1;s:8:"nickname";}}i:2;a:3:{s:1:"p";s:24:"/\/actthread\/?(\?.*)?$/";s:4:"ajax";b:1;s:6:"fields";a:1:{i:0;s:7:"content";}}i:3;a:3:{s:1:"p";s:22:"/^\/ajax\/user\/gbook/";s:4:"ajax";b:1;s:6:"fields";a:1:{i:0;s:7:"content";}}}}

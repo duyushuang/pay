@@ -1,0 +1,90 @@
+{sub header}
+        <!-- /top navigation -->
+
+        <!-- page content -->
+
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+              <!--div class="title_left">
+                <h3>Users <small>Some examples to get you started</small></h3>
+              </div>
+
+              <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                  </div>
+                </div>
+              </div-->
+            </div>
+
+    <div class="clearfix"></div>
+
+            <div class="row">
+<div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="x_panel">
+        <div class="x_title">
+          <h2>站内信列表<small>Message</small></h2>
+          <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> </li>
+            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a> </li>
+                <li><a href="#">Settings 2</a> </li>
+              </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a> </li>
+          </ul>
+          <div class="clearfix"></div>
+        </div>
+        <style type="text/css">
+
+	.jmy_index_gg{ background: #fff; border-radius: 3px; position: relative; padding: 7px; margin-bottom: 5px; list-style: none;font-size: 14px;}
+
+	.jmy_top_users{ width: 70%; background: #fff; margin-left: 15%; z-index: 1000; position: inherit; border: 1px solid rgba(52,73,94,.44); padding: 4px; border-radius: 50%;height: 70%;}
+
+	.jmy_gg_li{border-radius: 3px; position: relative; margin-bottom: 5px; list-style: none; float: left; clear: both; margin-top: 5px;}
+
+	</style>
+        <div class="x_content" >
+          <ul class="to_do">
+            <li>
+              
+              {if $list}
+              
+              {loopQuick $list}
+              <p class="jmy_index_gg">
+                {if false}<input type="checkbox" class="flat">{/if}
+                <i class="fa fa-envelope-o"></i><a href="javascript:;" onclick="showContent('站内信','{r}/users/smslist_item?id=$v[id]')"><span>[{date3 $v[addTime]}]</span> <span {if $v[color]}style="color:$v[color]"{/if}>$v[title]</span></a></p>
+              {/loopQuick}
+              
+              {/if} </li>
+          </ul>
+        </div>
+      </div>
+      $multipage 
+              </div></div>
+
+
+
+<div class="modal" id="waModal" role="dialog" aria-labelledby="waModalLable">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Modal title</h4>
+      </div>
+      <div class="modal-body"></div>
+    </div>
+  </div>
+</div>
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+       {sub footer}
+

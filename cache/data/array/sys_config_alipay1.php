@@ -1,0 +1,1 @@
+<?php exit;?>a:4:{s:4:"user";s:20:"pay_2@fengbaopay.com";s:3:"key";s:32:"pmzjpirubebys1b2a715x8xmrfp5bgmx";s:3:"pid";s:16:"2088131202258150";s:6:"app_id";s:0:"";}

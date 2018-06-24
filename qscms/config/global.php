@@ -1,0 +1,1 @@
+<?php !defined('IN_QSCMS')&&exit('ERROR');$config=array('sys_user'=>'admin','sys_pwd'=>'da7555cc92ba7c6fedf5d624939b5d77','auth_key'=>'59ce113da7baa6822dad0e4847c01cd6','sys_admin_folder'=>'admin','db_host'=>'localhost','db_port'=>'3306','db_name'=>'fengbaopay','db_user'=>'fengbaopay','db_pwd'=>'TDz8EzebG2','db_table_pre'=>'qs_','sys_salt'=>'939db0');?>

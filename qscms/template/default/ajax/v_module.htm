@@ -1,0 +1,41 @@
+{if $ids_count=='1'}
+<div un="item_1741035" class="chatItem you"> 　<a class="xiaoguo" href="javascript:;">
+							<div class="media mediaFullText" id="titledom">
+								<div class="mediaPanel">
+									<div class="mediaHead"><span class="title" id="zbt">$first_one[title]</span><span class="time">{date3 $first_one[time]}</span>
+										<div class="clr"></div>
+									</div>
+									<div class="mediaImg"><img id="suicaipic1" src="$first_one[pic]"></div>
+									<div class="mediaContent mediaContentP">
+										<p id="zinfo">消息简介</p>
+									</div>
+									<div class="mediaFooter"><span class="mesgIcon right"></span><span style="line-height:50px;" class="left">查看全文</span>
+										<div class="clr"></div>
+									</div>
+								</div>
+							</div>
+							</a></div>
+{elseif $ids_count>1}
+
+						
+						
+						
+						
+						<div class="media_preview_area" id="multinews" style="">
+							<div class="appmsg multi editing"> <a class="xiaoguo" href="javascript:;">
+								<div id="js_appmsg_preview" class="appmsg_content">
+									<div id="appmsgItem1" data-fileid="" data-id="1" class="js_appmsg_item ">
+										<div class="appmsg_info"><em class="appmsg_date"></em></div>
+										<div class="cover_appmsg_item" id="multione">
+											<h4 class="appmsg_title">$first_one[title]</h4>
+											<div class="appmsg_thumb_wrp"><img style="border:1px solid #ddd" class="js_appmsg_thumb appmsg_thumb" src="$first_one[pic]"></div>
+										</div>
+									</div>
+									{loopQuick $list $v1}
+									<div id="appmsgItem4" data-fileid="" data-id="4" class="appmsg_item js_appmsg_item "><img class="js_appmsg_thumb appmsg_thumb" src="$v1[pic]">
+										<h4 class="appmsg_title">{echo $v1[title]}</h4>
+									</div>
+									{/loopQuick} </div>
+							</div>
+							</a> </div>
+{/if}

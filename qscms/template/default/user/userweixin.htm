@@ -1,0 +1,128 @@
+﻿ {sub header}
+<style>
+.index-content{padding:15px;}
+.index-content .left-border{border-left:0px solid #ddd}
+.index-content>.row>.col-sm-6{border: 1px solid #fff;padding:10px 25px 10px 35px;min-height:210px;margin-left:-1px;margin-top:-1px}
+.index-content>.row>.col-sm-6:hover{background: #fafafa}
+.bf{font-size: 4em;color:#FFA600}
+.bf1{font-size: 1em;color:#999}
+.bf2{font-size: 2em;overflow-x:auto;color:#333}
+.bf2 a{color:#333}
+.left5{
+	margin-left: 5px;
+}
+.jinmipay_font_p{font-size:18px;color:#13C313; height:25px;}
+</style>
+<div class="col-md-10 right"> {sub h_info}
+
+ 
+ <div class="content-box" >
+   <div class="index-content">
+      <div class="row"> 
+
+        {if $member->m_wxid}
+
+        <div class="col-sm-6"> 
+
+          <p class="bf2"><span class="glyphicon glyphicon-ok-circle jinmipay_font_p"><span class="left5">绑定提示</span></span></p><br/>
+          <p class="bf1">您的账户已经绑定微信：【<font color="red"> $member->wxname </font>】，此微信账户若已实名将可用于户账户提现操作，未实名将无法提现成功。</p>
+          <br/>
+
+          <p class="bf2"><span class="glyphicon glyphicon-remove-circle jinmipay_font_p"><span class="left5">解绑提示</span></span></p>
+          <p class="bf1"> 解绑说明：账户已经绑定微信，如果解绑将无法使用微信提现以及其他微信相关的功能。</p>
+        </div>
+        <div class="col-sm-6">
+        <p class="bf2"><span class="glyphicon glyphicon-ok-circle jinmipay_font_p"><span class="left5">微信信息</span></span></p><br/>
+          <div class="col-sm-3"><img src="$member->m_wximg" width="100px" hight="100px" style="border:9px solid #eee;border-radius: 5px;"></div>
+	
+	 <p class="bf1">微信昵称：<font color="red"> $member->wxname </font></p>
+	 <p class="bf1" style="margin-top:15px;">功能使用：<font color="blue" > 账户提现 </font></p>
+	 <p class="bf1" style="margin-top:15px;">解绑操作：<font color="red" > 用户自选 </font></p>
+        </div>
+        {else}
+        <div class="col-sm-6"> 
+
+          <p class="bf2"><span class="glyphicon glyphicon-volume-up jinmipay_font_p"><span class="left5">绑定提示</span></span></p>
+          <p class="bf1">1、请务必用您<font color="red">已经实名认证</font>的微信进行绑定，绑定以后可以用于账户提现。<br/>2、如果您不使用微信提现，或微信没有经过实名认证无需扫码二维码绑定账户。<br/>3、未实名微信绑定无法收款，实名后便可提现收款。<br/>4、需要帮助可联系客服，绑定成功请刷新本页面</p>
+          <br/>
+                   <p class="bf2"><span class="glyphicon glyphicon-flag jinmipay_font_p"><span class="left5">功能说明</span></span></p>
+          <p class="bf1">目前绑定微信仅<font color="red">用于提现</font>暂无其他用途，后期将新增更多功能。敬请期待！</p>
+
+	<br/>
+
+          <p class="bf2"><span class="glyphicon glyphicon-remove-circle jinmipay_font_p" ><span class="left5">解绑提示</span></span></p>
+          <p class="bf1"> 账户已经绑定微信，如果<font color="red">解绑将无法使用</font>微信提现以及其他微信相关的功能。无特殊情况不建议解绑微信。</p>
+        </div>
+        <div class="col-sm-6">
+
+ <p class="bf2"><span class="glyphicon glyphicon-ok-circle jinmipay_font_p"><span class="left5">您的专属微信二维码</span></span></p><br/>
+          <div class="col-sm-6"><img src="{if $imgUrl}$imgUrl{/if}" width="200px" hight="200px" style="border:3px solid #13C313;"><p class="bf1" style="margin-top:15px;"><font color="red" >手机版微信扫一扫，即可绑定 </font></p></div>
+        </div>
+        {/if} </div>
+    </div>
+  </div>
+  
+{if $member->m_wxid}
+<div class="content-box" >
+
+ <div class="index-content">
+      <div class="row"> 
+	<div class="col-sm-8">
+<p class="bf2"><span class="glyphicon glyphicon-remove-circle jinmipay_font_p"><span class="left5">解绑操作</span></span></p>
+	<br/>
+          <form class="form-ajax form-horizontal" action="" method="post">
+            {v sys_hash_code}
+            <div class="form-group" >
+              <label class="col-md-2 control-label">解绑验证：</label>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <input type="text" name="code" id="code" class="form-control" placeholder="您账户已绑手机号为{echo string::getXin($member->m_mobile, 3, 5);}" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户绑定手机号所收到的6位数验证码" required>
+                  <span class="input-group-btn">
+                  <button class="btn btn-default" id="yzm" onClick="getYZM()" type="button">获取验证码</button>
+                  </span> </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-2 col-md-6">
+                <button type="submit" class="btn btn-success" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="提示：解除绑定后所有微信方面的功能将都无法使用" >&nbsp;<span class="glyphicon glyphicon-save" ></span>&nbsp;已了解风险并解除&nbsp;</button>
+              </div>
+            </div>
+          </form>
+          </div>  </div>
+       </div></div>
+{/if}
+
+
+</div>
+
+</section>
+<script>
+var wait = '{echo message::sms_time();}';
+$('#yzm').attr('disabled', false);
+var time = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm').html('获取验证码');
+		$('#yzm').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm').html('获取验证码(' + wait + ')');
+		$('#yzm').attr('disabled', true);
+		wait--;
+		setTimeout('time()', 1000);
+	}
+}
+function getYZM(){
+	$.post('{r}/user/weixincode', {hash:hash}, function(rs){
+		if (rs.status == true){
+			showError('验证码发送成功');
+			time();	
+		}else{
+			showError(rs.msg);
+			return false;	
+		}
+	},'json');	
+	return false;	
+}
+</script>
+{sub footer} 

@@ -1,0 +1,683 @@
+{sub h}
+
+{jsFile ../jquery-ui.min}
+
+{css_select jquery_ui}
+
+{js_select jquery_ui}
+
+{jsFile datepicker,}
+
+{if $method == 'list'}
+
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+
+<table class="table table-bordered table-striped">
+
+<input name="operation" value="$operation" type="hidden"/>
+
+<input name="action" value="$action" type="hidden" />
+
+<input name="method" value="$method" type="hidden" />
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提交订单数：$allTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已付订单数：$payTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>未付订单数：$notTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未付总金额：&yen; $notMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>订单总金额：&yen; $allMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>已付总金额：&yen; $payMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>商户得金额：&yen; $memberMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+
+      <!--    &nbsp;&nbsp;提交订单数：<span style=" color:blue">$allTotal</span>
+
+          &nbsp;&nbsp;订单总金额：<span style=" color:blue">&yen; $allMoney</span>
+
+          &nbsp;&nbsp;未付订单数：<span style=" color:red">$notTotal</span>
+
+          &nbsp;&nbsp;未付总金额：<span style=" color:red">&yen; $notMoney</span>
+
+          &nbsp;&nbsp;已付订单数：<span style=" color:green">$payTotal</span>
+
+          &nbsp;&nbsp;已付总金额：<span style=" color:green">&yen; $payMoney</span>
+
+          &nbsp;&nbsp;商户得金额：<span style=" color:red">&yen; $memberMoney</span>-->
+
+</span>
+
+</td>
+
+</tr>
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+<h3>搜索：</h3>
+
+
+
+<br />
+
+<br />
+
+<select class="form-control input-inline" name="status">
+
+	<option value="-1"{if $status == -1} selected{/if}>全部</option>
+
+	<option value="0"{if $status == 0} selected{/if}>待付款</option>
+
+	<option value="1"{if $status == 1} selected{/if}>已付款</option>
+
+</select>
+
+<select class="form-control input-inline" name="type">
+
+	<option value=""{if !$type} selected{/if}>全部通道</option>
+
+	{loopQuick pay::$array}
+
+	<option value="$k"{if $type == $k} selected{/if}>$v</option>
+
+	{/loopQuick}
+
+</select>
+
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+
+商户API订单：<input type="text" class="form-control input-inline" name="out_trade_no" value="{var $out_trade_no}" />
+
+系统订单：<input type="text" class="form-control input-inline" name="sn" value="{var $sn}" />
+<br />
+<br />
+提交来路搜索：<input type="text" class="form-control input-inline" name="referer_url" value="{var $referer_url}" />
+异步地址搜索：<input type="text" class="form-control input-inline" name="notify_url" value="{var $notify_url}" />
+返回地址搜索：<input type="text" class="form-control input-inline" name="return_url" value="{var $return_url}" />
+
+<br />
+
+<br />
+
+订单提交时间搜索
+
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+
+
+
+支付时间搜索
+
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_payTime1}" name="payTime1" id="payTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_payTime2}" name="payTime2" id="payTime2" class="form-control input-inline" />
+
+
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+
+{if false}
+
+积分：<input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+
+{/if}
+
+
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+
+<input type="submit" value="提交" class="btn green" /></td>
+
+	</tr>
+
+</table>
+
+</form>
+
+{adminList
+
+        用户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+
+        系统订单|sn
+
+        商户订单||code,<font color="green" data-toggle="tooltip" title="" data-original-title="商户订单：$v[out_trade_no]">$v[out_trade_no]</font>
+
+         api来路/异步/同步||code,<a onclick="return layer.alert('来路网址为：$v[referer_url]')" class="btn btn-xs green ajaxify"  data-toggle="tooltip" title="" data-original-title="来路网址：$v[referer_url]">来路</a><a onclick="return layer.alert('回调网址为：$v[notify_url]')" class="btn btn-xs blue ajaxify"  data-toggle="tooltip" title="" data-original-title="异步通知地址：$v[referer_url]">异址</a><a onclick="return layer.alert('返回网址为：$v[return_url]')" class="btn btn-xs yellow ajaxify"  data-toggle="tooltip" title="" data-original-title="同步返回网址：$v[return_url]">同址</a>
+
+        接口类型||code,{echo pay::ename($v[type])}
+
+        支付类型||code,{if $v[types] == 0}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="API接口充值">API充值</font>{elseif $v[types] == 1}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台商户充值">商户充值</font>{elseif $v[types] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台测数据">平台测数据</font>{/if}
+
+		支付状态||code,{if $v[status] == 0}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="该订单还未支付">待付</font>{elseif $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已支付">已付</font>{elseif $v[status] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已超时">超时</font>{/if}
+
+		充值金额||code,<font color="green" data-toggle="tooltip" title="" data-original-title="充值金额：$v[money]元"> $v[money]</font>
+
+		商户所得||code,<font color="red" data-toggle="tooltip" title="" data-original-title="商户后台到账金额：$v[money1]元">{if $v[money1]}$v[money1]元{/if}</font>
+
+		费率||code,{if $v[bl] > 0}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="商户费率：{echo $v[bl] * 100}%">{echo $v[bl] * 100}%</font>{else}{if $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="低于1元不收取费率  商户费率：0%">0%</font>{else}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="该订单还未支付">待付</font>{/if}{/if}
+
+        提交时间|addTime |flag,date2   
+
+        支付时间|payTime |flag,date2
+
+}
+
+{elseif  $method == 'list2'}
+
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+
+<table class="table table-bordered table-striped">
+
+<input name="operation" value="$operation" type="hidden"/>
+
+<input name="action" value="$action" type="hidden" />
+
+<input name="method" value="$method" type="hidden" />
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提交订单数：$allTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已付订单数：$payTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>未付订单数：$notTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未付总金额：&yen; $notMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>订单总金额：&yen; $allMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>已付总金额：&yen; $payMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>商户得金额：&yen; $memberMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+
+</span>
+
+</td>
+
+</tr>
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+<h3>搜索：</h3>
+
+<!--span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+          &nbsp;&nbsp;提交订单数：<span style=" color:blue">$allTotal</span>
+
+          &nbsp;&nbsp;订单总金额：<span style=" color:blue">&yen; $allMoney</span>
+
+          &nbsp;&nbsp;未付订单数：<span style=" color:red">$notTotal</span>
+
+          &nbsp;&nbsp;未付总金额：<span style=" color:red">&yen; $notMoney</span>
+
+          &nbsp;&nbsp;已付订单数：<span style=" color:green">$payTotal</span>
+
+          &nbsp;&nbsp;已付总金额：<span style=" color:green">&yen; $payMoney</span>
+
+          &nbsp;&nbsp;商户得金额：<span style=" color:red">&yen; $memberMoney</span>
+
+</span-->
+
+
+
+<select class="form-control input-inline" name="status">
+
+	<option value="-1"{if $status == -1} selected{/if}>全部</option>
+
+	<option value="0"{if $status == 0} selected{/if}>待付款</option>
+
+	<option value="1"{if $status == 1} selected{/if}>已付款</option>
+
+</select>
+
+<select class="form-control input-inline" name="type">
+
+	<option value=""{if !$type} selected{/if}>全部通道</option>
+
+	{loopQuick pay::$array}
+
+	<option value="$k"{if $type == $k} selected{/if}>$v</option>
+
+	{/loopQuick}
+
+</select>
+
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+
+系统订单：<input type="text" class="form-control input-inline" name="sn" value="{var $sn}" />
+
+
+
+时间搜索
+
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+
+<br />
+
+<br />
+
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+
+{if false}
+
+积分：<input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+
+{/if}
+
+
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+
+<input type="submit" value="提交" class="btn green" /></td>
+
+	</tr>
+
+</table>
+
+</form>
+
+{adminList
+
+        系统订单|sn
+
+        接口类型||code,{echo pay::$array[$v[type]]}
+
+        支付类型||code,{if $v[types] == 0}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="API接口充值">API充值</font>{elseif $v[types] == 1}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台商户充值">商户充值</font>{elseif $v[types] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台测数据">平台测数据</font>{/if}
+
+		支付状态||code,{if $v[status] == 0}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="该订单还未支付">待支付</font>{elseif $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已支付">已支付</font>{elseif $v[status] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已超时">超时</font>{/if}
+
+		充值金额||code,<font color="green" data-toggle="tooltip" title="" data-original-title="充值金额：$v[money]元"> $v[money]</font>
+
+        提交时间|addTime |flag,date2   
+
+        支付时间|payTime |flag,date2
+
+}
+
+{elseif  $method == 'list1'}
+
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+
+<table class="table table-bordered table-striped">
+
+<input name="operation" value="$operation" type="hidden"/>
+
+<input name="action" value="$action" type="hidden" />
+
+<input name="method" value="$method" type="hidden" />
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提交订单数：$allTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已付订单数：$payTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>未付订单数：$notTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未付总金额：&yen; $notMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>订单总金额：&yen; $allMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>已付总金额：&yen; $payMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>商户得金额：&yen; $memberMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+
+</span>
+
+</td>
+
+</tr>
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+<h3>搜索：</h3>
+
+<!--span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+          &nbsp;&nbsp;提交订单数：<span style=" color:blue">$allTotal</span>
+
+          &nbsp;&nbsp;订单总金额：<span style=" color:blue">&yen; $allMoney</span>
+
+          &nbsp;&nbsp;未付订单数：<span style=" color:red">$notTotal</span>
+
+          &nbsp;&nbsp;未付总金额：<span style=" color:red">&yen; $notMoney</span>
+
+          &nbsp;&nbsp;已付订单数：<span style=" color:green">$payTotal</span>
+
+          &nbsp;&nbsp;已付总金额：<span style=" color:green">&yen; $payMoney</span>
+
+          &nbsp;&nbsp;商户得金额：<span style=" color:red">&yen; $memberMoney</span>
+
+</span-->
+
+
+
+<select class="form-control input-inline" name="status">
+
+	<option value="-1"{if $status == -1} selected{/if}>全部</option>
+
+	<option value="0"{if $status == 0} selected{/if}>待付款</option>
+
+	<option value="1"{if $status == 1} selected{/if}>已付款</option>
+
+</select>
+
+<select class="form-control input-inline" name="type">
+
+	<option value=""{if !$type} selected{/if}>全部通道</option>
+
+	{loopQuick pay::$array}
+
+	<option value="$k"{if $type == $k} selected{/if}>$v</option>
+
+	{/loopQuick}
+
+</select>
+
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+
+系统订单：<input type="text" class="form-control input-inline" name="sn" value="{var $sn}" />
+
+
+
+时间搜索
+
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+
+<br />
+
+<br />
+
+金额：<input type="text" value="$minMoney" name="minMoney" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxMoney" name="maxMoney" style="width:100px;" />
+
+{if false}
+
+积分：<input type="text" value="$minCredit" name="minCredit" class="form-control input-inline" style="width:100px;" /> - <input type="text" class="form-control input-inline" value="$maxCredit" name="maxCredit" style="width:100px;" />
+
+{/if}
+
+
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+
+<input type="submit" value="提交" class="btn green" /></td>
+
+	</tr>
+
+</table>
+
+</form>
+
+{adminList
+
+		
+
+		用户ID||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+
+        系统订单|sn
+
+        接口类型||code,{echo pay::$array[$v[type]]}
+
+        支付类型||code,{if $v[types] == 0}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="API接口充值">API充值</font>{elseif $v[types] == 1}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台商户充值">商户充值</font>{elseif $v[types] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="平台测数据线下二维码支付">平台测数据</font>{elseif $v[types] == 3}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="线下二维码支付">线下二维码支付</font>{/if}
+
+		支付状态||code,{if $v[status] == 0}<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="该订单还未支付">待支付</font>{elseif $v[status] == 1}<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已支付">已支付</font>{elseif $v[status] == 2}<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="该订单已超时">超时</font>{/if}
+
+		充值金额||code,<font color="green" data-toggle="tooltip" title="" data-original-title="充值金额：$v[money]元"> $v[money]</font>
+
+        提交时间|addTime |flag,date2   
+
+        支付时间|payTime |flag,date2
+
+}
+
+{elseif $method == 'ordersca'}
+
+
+
+       
+
+<form action="" class="form-horizontal ajaxForm" data-box="default" id="list_serach">
+
+
+
+<table class="table table-bordered table-striped">
+
+<input name="operation" value="$operation" type="hidden"/>
+
+<input name="action" value="$action" type="hidden" />
+
+<input name="method" value="$method" type="hidden" />
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+
+
+<span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-list-alt"></em>提交订单数：$allTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs purple ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>已付订单数：$payTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs red ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-th-list"></em>未付订单数：$notTotal<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>未付总金额：&yen; $notMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>订单总金额：&yen; $allMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs yellow ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>已付总金额：&yen; $payMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs green ajaxify col-xs-12 col-md-6 col-lg-3" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-yen"></em>商户得金额：&yen; $memberMoney<br/><br/>--</span>
+
+
+
+<span class="btn btn-xs blue ajaxify col-xs-12 col-md-6 col-lg-2" style="margin-top:5px"><br/><br/><em class="glyphicon glyphicon-user glyphicon-l"></em>未定义：0<br/><br/>--</span>
+
+</span>
+
+</td>
+
+</tr>
+
+
+
+<tr class="hover">
+
+<td  align="left" colspan="3" >
+
+<h3>搜索：</h3>
+
+<!--span style="margin-top:-20px;margin-bottom:20px;text-align:center;font-size:15px;color:#000">
+
+          &nbsp;&nbsp;提交订单数：<span style=" color:blue">$allTotal</span>
+
+          &nbsp;&nbsp;订单总金额：<span style=" color:blue">&yen; $allMoney</span>
+
+          &nbsp;&nbsp;未付订单数：<span style=" color:red">$notTotal</span>
+
+          &nbsp;&nbsp;未付总金额：<span style=" color:red">&yen; $notMoney</span>
+
+          &nbsp;&nbsp;已付订单数：<span style=" color:green">$payTotal</span>
+
+          &nbsp;&nbsp;已付总金额：<span style=" color:green">&yen; $payMoney</span>
+
+          &nbsp;&nbsp;商户得金额：<span style=" color:red">&yen; $memberMoney</span>
+
+</span-->
+
+
+
+用户ID：<input type="text" class="form-control input-inline" name="uid" value="{var $uid}" />
+
+
+
+时间搜索
+
+<input type="text" style="width: 108px; margin-right: 5px;" value="{$var->gp_addTime1}" name="addTime1" id="addTime1" class="form-control input-inline" />--<input type="text" style="width: 108px; margin-left: 5px;" value="{$var->gp_addTime2}" name="addTime2" id="addTime2" class="form-control input-inline" />
+
+
+
+<input type="button" value="重置" class="btn" onclick="resets()" />
+
+<input type="submit" value="提交" class="btn green" /></td>
+
+	</tr>
+
+</table>
+
+</form>
+
+{adminList
+
+   		支付场景|name
+
+   		已支付订单总数||code,<font class="btn btn-xs yellow ajaxify" data-toggle="tooltip" title="" data-original-title="已支付订单总数：$v[payTotal]个">$v[payTotal]个</font>
+
+   		已支付订单总额||code,<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="已支付订单总额：$v[payMoney]元">$v[payMoney]元</font>
+
+		待支付订单总数||code,<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="待支付订单总数：$v[notTotal]个">$v[notTotal]个</font>
+
+		待支付订单总额||code,<font class="btn btn-xs red ajaxify" data-toggle="tooltip" title="" data-original-title="待支付订单总额：$v[notMoney]元">$v[notMoney]元</font>
+
+        提交订单总数||code,<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="提交订单总数：$v[allTotal]个">$v[allTotal]个</font>
+
+        提交订单总额||code,<font class="btn btn-xs green ajaxify" data-toggle="tooltip" title="" data-original-title="提交订单总额：$v[allMoney]元">$v[allMoney]元</font>
+
+        商户收入总额||code,<font class="btn btn-xs blue ajaxify" data-toggle="tooltip" title="" data-original-title="商户收入总额：$v[memberMoney]元">$v[memberMoney]元</font>
+
+}
+
+{/if}
+
+
+
+<script type="text/javascript">
+
+function resets(){
+
+	document.getElementById('list_serach').reset();
+
+	$('#addTime1').val('');
+
+	$('#addTime2').val('');
+
+	$('#addTime2').val('');
+
+	$('[name=status]').val(-1);
+
+	$('[name=type]').val('');	
+
+}
+$(function(){
+
+	$('[name=payTime1]').datepicker();
+
+	$('[name=payTime2]').datepicker();
+
+})
+$(function(){
+
+	$('[name=addTime1]').datepicker();
+
+	$('[name=addTime2]').datepicker();
+
+})
+
+</script>
+
+{sub f}

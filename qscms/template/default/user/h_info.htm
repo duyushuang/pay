@@ -1,0 +1,9 @@
+<div class="cb-title">
+{if $var->p1 != 'info'}<a href="{r}/user/info">{/if}<span class="glyphicon glyphicon-th-list"></span>&nbsp;用户资料 {if $var->p1 != 'info'}</a>{/if}
+<span class="glyphicon glyphicon-qrcode hidden-xs" style="margin-left:20px;"></span>
+{if $var->p1 != 'userweixin'}<a href="{r}/user/userweixin" class="hidden-xs">{/if}绑定微信{if $var->p1 != 'userweixin'}</a>{/if}
+<span class="glyphicon glyphicon-lock" style="margin-left:20px;"></span>
+{if $var->p1 != 'userpwd'}<a href="{r}/user/userpwd">{/if}修改密码{if $var->p1 != 'userpwd'}</a>{/if}
+<span class="glyphicon glyphicon-phone-alt hidden-xs" style="margin-left:20px;"></span>
+{if $var->p1 != 'usermobile'}<a href="{r}/user/usermobile">{/if}修改手机{if $var->p1 != 'usermobile'}</a>{/if}
+</div>

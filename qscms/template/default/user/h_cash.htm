@@ -1,0 +1,5 @@
+<div class="cb-title">
+{if $var->p1 != 'takecash'}<a href="{r}/user/takecash">{/if}<span class="glyphicon glyphicon-th-list"></span>&nbsp;申请提现 {if $var->p1 != 'takecash'}</a>{/if}
+<span class="glyphicon glyphicon-tasks" style="margin-left:20px;"></span>
+{if $var->p1 != 'transfer'}<a href="{r}/user/transfer" class="hidden-xs">{/if}&nbsp;转账操作{if $var->p1 != 'transfer'}</a>{/if}
+</div>

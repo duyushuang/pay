@@ -1,0 +1,93 @@
+#ticket_list {
+	margin: 10px;
+}
+.ticket_title {
+	padding: 10px;
+	border: 1px solid #FEEEBD;
+}
+.ticket_title.active {
+	border: 1px solid #D19405;
+	background: #FEE996;
+	border-radius: 5px;
+}
+.ticket_title img {
+	float: left;
+	margin-right: 10px;
+}
+#ticket_view .msg_row {
+	border-top: 1px solid #D19405;
+	padding: 15px 0px 5px 15px;
+}
+#ticket_view .msg_row.my_msg {
+	color: #888888;
+}
+#ticket_view .msg_user {
+	float: left;
+	width: 150px;
+}
+#ticket_view .msg {
+	margin-left: 180px;
+}
+#ticket_view .msg_hidden {
+	background: #CCC;
+	color: black;
+	overflow: hidden;
+	zoom: 1;
+}
+#ticket_view .msg_row.msg_hidden.my_msg {
+	color: black;
+}
+#add_comment_link {
+	padding: 10px;
+}
+#form_reply, #form_assign {
+	padding: 10px;
+}
+#form_assign {
+	padding-top: 30px;
+}
+#form_reply textarea {
+	width: 90%;
+	height: 200px;
+	margin-bottom: 15px;
+}
+#form_reply textarea.error {
+	border: 1px solid #ff0000;
+	-webkit-box-shadow: #ff0000 0px 0px 5px;
+	-moz-box-shadow: #ff0000 0px 0px 5px;
+	box-shadow: #ff0000 0px 0px 5px;
+}
+.ticket_status {
+	padding-bottom: 30px;
+}
+.ticket_status .l-btn span.l-btn-left {
+	padding-left: 8px;
+}
+.ticket_status .l-btn {
+	padding-right: 8px;
+	margin-left: 20px;
+}
+#ticket_view_status_view {
+	font-weight: bold;
+	margin-right: 20px;
+}
+#ticket_view_status a {
+	margin-left: 20px;
+}
+#form_comment_standart {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+#form_comment_standart table {
+	margin-bottom: 20px;
+	border-bottom: 1px solid #D19405;
+	width: 100%;
+}
+#form_comment_standart td {
+	border-top: 1px solid #D19405;
+	padding: 5px;
+}
+.error {
+	background: #FF1300;
+	color: #FFFFFF;
+}

@@ -1,0 +1,26 @@
+{if $list}
+<dl class="left fl_font">
+{loopQuick $list}
+  <dd><a href="{r}/cate/$v[id]" target="_blank" title="$v[name]" class="left fl_font_left">$v[name]</a>
+    <div class="left fl_font_right">
+    {eval
+    	$list1 = treeDB::childs('cate', $v[id], 'id,name,filename,suffix,did', 'isOn=1', 'sort,id DESC');
+        $count = count($list1);
+    }
+    {if $list1}
+    {loopQuick $list1}
+    <a href="{r}/cate/$v[id]/" target="_blank" title="$v[name]">$v[name]</a>
+    {if $k+1 < $count}<span>|</span>{/if}
+    {/loopQuick}
+    {/if}
+    </div>
+    <div class="clear"></div>
+  </dd>
+{/loopQuick}
+</dl>
+{/if}
+{if false}
+<div class="right fl_pinpai">
+  
+</div>
+{/if}

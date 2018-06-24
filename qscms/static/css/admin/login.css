@@ -1,0 +1,78 @@
+body{
+	margin:0;
+	/*background:#FFEEDD;*/
+}
+.main{
+	width:1000px;
+	height:590px;
+	margin:auto;
+	background-image: url(bg.jpg);
+}
+.login{
+	width:600px;
+	height:300px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:150px;
+}
+.logo{
+	width:552px;
+	height:200px;
+	margin:auto;
+	background-image: url(login_logo.png);
+}
+.login .left{
+	float:left;
+	width:200px;
+}
+.login .right{
+	float:left;
+	width:400px;
+}
+.login .h{
+	font-size: 24px;
+	font-family: "微软雅黑";
+	font-weight: bold;
+	color: #0066FF;/*FF9900*/
+}
+.login .d{
+	font-family: "宋体";
+	font-size: 16px;
+	color: #999999;
+}
+.login input[type="text"],.login input[type="password"]{
+	width:200px;
+	border: 1px solid #C5C9BE;	
+}
+.login input[type="text"]:hover,.login input:hover[type="password"]{
+	width:200px;
+	border: 1px solid #7B95FD;
+}
+/*input.msmove{border: 1px solid #7B95FD;}
+input.msout{border: 1px solid #C5C9BE;}*/
+.username{
+	width:177px;
+	height:24px;
+	line-height:24px;
+	border: 0px none #FFFFFF;
+	background-image: url(username.png);
+	padding-left:22px;
+	background-repeat: no-repeat;
+}
+.password{
+	width:177px;
+	height:24px;
+	line-height:24px;
+	border: 0px none #FFFFFF;
+	background-image: url(password.png);
+	padding-left:22px;
+	background-repeat: no-repeat;
+}
+.vcode{
+	width:177px;
+	height:24px;
+	line-height:24px;
+	border: 0px none #FFFFFF;
+	background-image: url(vcode.png);
+	padding-left:22px;
+}

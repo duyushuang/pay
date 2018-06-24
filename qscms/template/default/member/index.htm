@@ -1,0 +1,66 @@
+{sub header}
+<div id="content" class="app-content" role="main">
+  <div class="app-content-body ">
+    <div class="bg-light lter b-b wrapper-md hidden-print">
+      <h1 class="m-n font-thin h3">代理中心</h1>
+    </div>
+    <div class="wrapper-md control">
+      <div class="row">
+        <div class="col-md">
+          <div class="row row-sm text-center">
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="h1 text-info font-thin h1">{$allTotal}个</div>
+                <span class="text-muted text-xs">提成订单总数</span>
+                <div class="top text-right w-full"> </div>
+              </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="block panel padder-v bg-primary item"> <span class="text-white font-thin h1 block">￥{$allMoney}</span> <span class="text-muted text-xs">提成总额</span> <span class="bottom text-right w-full"> </span> </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="block panel padder-v bg-info item"> <span class="text-white font-thin h1 block">￥{$dayMoney}</span> <span class="text-muted text-xs">今日提成收入</span> <span class="top"> </span> </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="panel padder-v item">
+                <div class="font-thin h1">￥{$lastMoney}</div>
+                <span class="text-muted text-xs">昨日提成收入</span>
+                <div class="bottom"> </div>
+              </div>
+            </div>
+            <div class="col-xs-12 m-b-md">
+              <div class="r bg-light dker item hbox no-border">
+                <div class="col dk padder-v r-r">
+                  <div class="text-primary-dk font-thin h1"><span>￥{$member->m_money}</span></div>
+                  <span class="text-muted text-xs">商户当前余额</span> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- / stats -->
+      <div class="panel panel-default">
+        <div class="panel-heading font-bold"> 基本资料 </div>
+        <div class="panel-body">
+          <form class="form-horizontal devform">
+            <div class="form-group">
+              <label class="col-sm-2 control-label">商户ID</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" value="{$member->m_id}" disabled>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+            <div class="form-group">
+              <label class="col-sm-2 control-label">商户密钥</label>
+              <div class="col-sm-9">
+                <input class="form-control" type="text" value="{if $member->m_isApi}$member->m_keys{/if}" disabled>
+              </div>
+            </div>
+            <div class="line line-dashed b-b line-lg pull-in"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{sub footer}

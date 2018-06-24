@@ -1,0 +1,160 @@
+{sub header}
+<div class="col-md-10 right">
+
+<div class="alert alert-success hidden-xs" style="font-size:14px"> <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;提现说明：如果您对提现事宜不了解，可以查看此处的商户提现说明。&nbsp;<a href="#" id="cashsys" data-toggle="tooltip" title="" data-original-title="提现详细说明">点击查看</a></div>
+
+<script type="text/javascript">
+
+$('#cashsys').on('click', function(){
+  layer.open({
+  type: 2,
+  title: '提现说明',
+  maxmin: true,
+  shadeClose: true, //点击遮罩关闭层
+  area : ['80%' , '620px'],
+  content: '{r}/news/14?u'
+  });
+});
+
+
+</script>
+  <div class="cb-title"><span class="glyphicon glyphicon-th-list"></span>&nbsp;申请提现</div>
+  <div class="content-box" >
+    <form class="form-ajax form-horizontal" action="{r}/user/takecash" method="post">
+      {v sys_hash_code}
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现金额：</label>
+        <div class="col-md-2">
+          <input type="text" name="money" id="money" class="form-control" value="" placeholder="$member->m_money"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您需要提现的金额，单笔最高9999元" onchange="if(/\D/.test(this.value)){layer.alert('请确保输入的金额为整数，不能含有字符小数点，一次提现最多9999元');this.value='';}" maxlength="4" required>
+        </div>
+        <label class="col-md-2 control-label">实际到账：</label>
+        <div class="col-md-2">
+          <input type="text" id="money1" class="form-control" value="" placeholder="手续费{echo member_base::blCash() * 100}%" disabled>
+        </div>
+      </div>
+      {if $member->isCash}
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现支付宝：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" value="$member->m_alipay" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现银行：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" value="$member->m_back_name" disabled>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现银行卡：</label>
+        <div class="col-md-6">
+          <input type="text" class="form-control" value="$member->m_back_card" disabled>
+        </div>
+      </div>
+      {/if}
+      {if $member->isCash1}
+      <div class="form-group">
+        <label class="col-md-2 control-label"> 提现微信：</label>
+        <div class="col-md-6">
+          <img src="$member->m_wximg" style="width:30px; height:30px;" data-toggle="tooltip" title="" data-placement="top" data-original-title="您的微信头像"  />&nbsp;<font color="red"  data-toggle="tooltip" title="" data-placement="top" data-original-title="您绑定的微信账号是：$member->wxname" > $member->wxname</font>&nbsp;
+
+	<a onclick="return layer.alert('微信账号必须实名认证才可用于提现，未实名的账号将提现失败。')" class="btn btn-success btn-xs">
+         <span class="glyphicon glyphicon-exclamation-sign"></span>&nbsp;提示
+          </a></div>
+      </div>
+      {/if}
+      <div class="form-group">
+        <label class="col-md-2 control-label">提现方式：</label>
+        <div class="col-md-6">
+          <select errormsg="请选择提现方式" class="form-control left mt5 yz" datatype="select" id="type" name="type"  data-toggle="tooltip" title="" data-placement="top" data-original-title="目前提现方式为微信，支付宝和银行卡，您可以根据自己意愿选择" required>
+            <option value="">请选择</option>
+            {if $member->isCash}
+            <option value="0">支付宝</option>
+            <option value="1">银行卡</option>
+            {/if}
+            {if $member->isCash1}
+            <option value="2" selected="selected">微信</option>
+            {/if}
+          </select>
+        </div>
+      </div>
+      <div class="form-group" >
+        <label class="col-md-2 control-label">验证码：</label>
+        <div class="col-md-6">
+          <div class="input-group">
+            <input type="text" name="code" id="code" class="form-control" placeholder="您账户已绑定的手机号为{echo string::getXin($member->m_mobile, 6, 4);}" maxlength="6"  data-toggle="tooltip" title="" data-placement="top" data-original-title="输入您账户绑定手机号所收到的6位数验证码" required>
+            <span class="input-group-btn">
+            <button class="btn btn-default" id="yzm" onClick="getYZM()" type="button">获取验证码</button>
+            </span> </div>
+        </div>
+      </div>
+      <div class="form-group">
+         <div class="col-md-offset-2 col-md-6">
+           <button type="submit" class="btn btn-success" data-toggle="tooltip" title="" data-placement="bottom" data-original-title="每天可申请提现{cfg pay,cashNum}次" >&nbsp;<span class="glyphicon glyphicon-save" ></span>&nbsp;提现&nbsp;</button>
+         </div>
+      </div>
+    </form>
+  </div>
+</div>
+</div>
+</div>
+</section>
+<script>
+var wait = '{echo message::sms_time();}';
+$('#yzm').attr('disabled', false);
+var time = function() {
+	if (wait == 0) {
+		btnclick = true;
+		$('#yzm').html('获取验证码');
+		$('#yzm').attr('disabled', false);
+		wait = 60;
+	} else {
+		$('#yzm').html('获取验证码(' + wait + ')');
+		$('#yzm').attr('disabled', true);
+		wait--;
+		setTimeout('time()', 1000);
+	}
+}
+function checkForm(){
+	allMoney = $member->m_money;
+	money = $('#money').val();
+	if (money < {echo member_base::minMoney()}) {
+		showError('提现金额不能低于{echo member_base::minMoney()}元');
+		$('#money').focus();
+		return false;
+	}
+	if (allMoney < money){
+		$('#money').focus();
+		showError('余额不足');
+		return false;
+	}
+	type = $('#type').val();
+	if (!type){
+		showError('请选择提现方式');
+		return false;
+	}
+	return true;
+}
+function getYZM(){
+	var rs = checkForm();
+	if (rs == true){
+		$.post('{r}/user/takecashcode', {hash:hash}, function(rs){
+			if (rs.status == true){
+				showError('验证码发送成功');
+				time();	
+			}else{
+				showError(rs.msg);
+				return false;	
+			}
+		},'json');	
+	}
+	return false;	
+}
+$('#money').blur(function(){
+	var blCash = {echo member_base::blCash()};
+	cashMoney = $(this).val();
+	money1 = cashMoney - (cashMoney * blCash).toFixed(2);
+	$('#money1').val(money1);
+})
+</script> 
+{sub footer}

@@ -1,0 +1,197 @@
+{sub h}
+{if $method == 'list'}
+	{adminList
+        工单类型|name
+        等待处理||code,{eval $not_total = db::dataCount('gdlist', "type=0 AND gid=$v[id]");}<a href="$baseUrl&method=list1&type=$v[id]&status=0">$not_total</a>
+        正在处理||code,{eval $is_total = db::dataCount('gdlist', "type=1 AND gid=$v[id]"); }<a href="$baseUrl&method=list1&type=$v[id]&status=1">$is_total</a>
+        处理完成||code,{eval $yes_total = db::dataCount('gdlist', "type=2 AND gid=$v[id]");}<a href="$baseUrl&method=list1&type=$v[id]&status=2">$yes_total</a>
+		总数量||code,{eval $total = db::dataCount('gdlist');}<a href="$baseUrl&method=list1">$total</a>
+}
+
+{elseif $method == 'add' || $method == 'edit'}
+	{adminForm
+		工单类型名称,null=必填|name|text|600
+	}
+{elseif $method == 'list1'}
+	{adminList
+        
+        工单编号|id
+        提交用户||code,<a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$v[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show">$v[uid]</a>
+        工单类型|name
+		当前状态||code,{if $v[type] == 0}等待处理{elseif $v[type] == 1}正在处理{elseif $v[type] == 2}已结束{/if}
+        工单内容||code,{cuthtml $v[content], 50}
+        操作||code,<a class="btn btn-xs green ajaxify" href="$baseUrl&method=item&id=$v[id]" data-original-title="详情">详情</a>{if $v[type]!=2}<a class="btn btn-xs green ajaxify" href="$baseUrl&method=list1&id=$v[id]&change=2{echo ($urlVar ? '&'.$urlVar : '').'&page='.$page;}" data-original-title="处理完成点我">处理完成</a>{/if}
+	}
+{elseif $method == 'item'}
+<link rel="stylesheet" href="{su}layui/css/layui.css">
+<script src="{su}layui/layui.js"></script>
+<div class="right_col" role="main">
+  <style type="text/css">
+	.body{background: #f7f7f7;}
+	.jmydgcss{position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;}
+
+	</style>
+  
+  <!----gdlist start---->
+  <link href="{r}/style/newuser/jmyplugin/gdstyle/gdstyle.css?spm=1.192s" rel="stylesheet">
+  <div class="wrapper wrapper-content">
+    <div class="title_right">
+      
+      <!--view start-->
+      <div class="col-sm-9 animated fadeInRight">
+        <div class="mail-box-header">
+          <div class="pull-right tooltip-demo"> <a href="#LAY_layedit_2" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="继续提问"><i class="fa fa-reply"></i> 回复</a> {if $item[type] != 2}<a href="$baseUrl&method=chenge&id=$item[id]" class="btn btn-white btn-sm" data-toggle="tooltip" data-placement="top" title="关闭工单"><i class="fa fa-trash-o"></i>已处理该工单 </a>{/if} </div>
+          <h2> 工单详情 </h2>
+          <div class="mail-tools tooltip-demo m-t-md">
+            <h5> <span class="pull-right font-noraml">工单状态：<span class="label label-primary pull-right">{if $item[type] == 0}等待处理{elseif $item[type] == 1}正在处理{elseif $item[type] == 2}已结束{/if}</span></span> <span class="font-noraml"><b>用户名：</b><a href="$baseUrl&action=info&operation=member&method=list&type=so&uid=$item[uid]" target="_blank" class="btn btn-xs green ajaxify" data-type="show"> {if $m[name]}{$m[name]}{else}{$m[mobile]}{/if}</a></span> <span class="font-noraml"><b>工单分类：</b>$item[name]</span>  <span class="font-noraml"><b>工单编号：</b>$item[id]</span></h5>
+          </div>
+        </div>
+        <div class="mail-box">
+          <div class="mail-body">
+            <p> $item[content] </p>
+            <p class="text-right"> 提交时间：{date $item[addTime]} </p>
+          </div>
+          
+          <!--回复开始-->
+          {if $list}
+          {loopQuick $list}
+          {if $v[uid]}
+          	<div class="mail-body">
+            <h4>用户</h4>
+            <p> $v[content] </p>
+            <p class="text-right"> 提交时间：{date $v[addTime]} </p>
+          </div>
+          {else}
+          <div class="mail-box" deep="6">
+            <div class="mail-body" style="color: #2c14f7; background: #ecf7f0; border-radius: 9px;">
+            <h4 style="color:#f71414;">平台</h4>
+              <p> $v[content] </p>
+              <p class="text-right"> 回复时间：{date $v[addTime]} </p>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          {/if}
+          {/loopQuick}
+          {/if}
+          
+          
+          <!--回复结束--> 
+          {if $item[type]!=2}
+          <!--提交新工单输入框开始-->
+          <form action="" method="post" class="form-ajax1">
+            <!--提交新工单输入框开始--> 
+            {v sys_hash_code}
+            <div class="mail-attachment">
+              <div class="attachment">
+                <div class="layui-form-item layui-form-text">
+                  <div class="layui-input-block">
+                    <textarea class="layui-textarea layui-hide" name="content" lay-verify="content" id="add_editor"></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            
+            <!--提交结束-->
+            
+            <div class="mail-body text-right tooltip-demo">
+              <button class="btn btn-sm btn-info" lay-filter="*" lay-submit="" >提交回复</button>
+            </div>
+            <div class="clearfix"></div>
+          </form>
+          {/if}
+        </div>
+        </div>
+        
+        <!--提交结束-->
+        
+        <div class="clearfix"></div>
+      </div>
+    </div>
+    <!--View end--> 
+  </div>
+</div>
+<!----gdlist end---->
+</div>
+</div>
+<script>
+
+function showError(tip) {
+	layer.msg(tip);
+}
+layui.use(['layer','layedit', 'element'], function(){
+	
+  var layer = layui.layer
+  	,layedit = layui.layedit
+  	,element = layui.element;
+  var msg_editor = layedit.build('msg_editor');
+  var add_editor = layedit.build('add_editor');
+  var active = {
+    content: function(){
+	  val = layedit.getContent(msg_editor);
+      return val ? val : '' //获取编辑器内容
+    }
+    ,text: function(){
+      return layedit.getText(msg_editor); //获取编辑器纯文本内容
+    }
+    ,selection: function(){
+      return layedit.getSelection(msg_editor);//选中的内容
+    }
+  };
+  var active1 = {
+    content: function(){
+      return layedit.getContent(add_editor); //获取编辑器内容
+    }
+    ,text: function(){
+      return layedit.getText(add_editor); //获取编辑器纯文本内容
+    }
+    ,selection: function(){
+      return layedit.getSelection(add_editor);//选中的内容
+    }
+  };
+  
+  
+  
+  $('.form-ajax1').submit(function(e){
+		layedit.sync(msg_editor);
+		layedit.sync(add_editor);
+        e.preventDefault();
+        $.ajax({
+            url : $(this).attr('action'),
+            type : 'POST',
+            dataType : 'json',
+			cache:false,
+            data: $(this).serializeArray(),
+            success : function(result){
+				//$("iframe").contents().find("body").html('');
+				//$('#msg_editor').val('');
+				//$('#add_editor').val('');
+				
+				
+                if(result.status==false){
+					showError(result.msg);
+					return false;
+                }
+                if(result.status==true){
+					if (result.msg){
+						showError(result.msg);
+					}else{
+						showError('操作成功');	
+					}
+                    if(result.url){
+						window.location.href = result.url;
+                    }else{
+						history.go(-1);
+					}
+                }
+            },error: function(){
+			}
+
+        });
+		return false;
+    });
+  
+});
+</script> 
+{/if}
+{sub f}

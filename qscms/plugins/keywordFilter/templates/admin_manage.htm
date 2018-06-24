@@ -1,0 +1,10 @@
+{sub admin_header}
+{if $method == 'index'}
+	{adminForm
+		关键词用：逗号，分号，空格，换行符，或者{echo chr(0x7c)}隔开，关键词包含特殊字符，请使用URL编码|tip
+		过滤条件,null=输入过滤条件，默认无需修改|where|textarea
+		关键词,null=要过滤的关键词|keys   |textarea
+		提示信息|tip|textarea
+	}
+{/if}
+{sub admin_footer}

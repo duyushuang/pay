@@ -1,0 +1,176 @@
+{sub header}
+<link href="{su}pay/static/default/news.css" type="text/css" rel="stylesheet">
+<script src="{su}pay/static/default/nprogress.js"></script>
+<script src="{su}pay/static/default/jquery.lazyload.min.js"></script>
+<style>
+.highlight {
+    color: #A51111;
+}
+
+.title .more {
+    float: right;
+    position: relative;
+    bottom: 25px;
+}
+.title .more a {
+display: inline-block;
+    margin-left: 20px;
+    color: #6f6868;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid #ccb8b8;
+    border-radius: 5px;
+}
+.title .more a:hover{
+display: inline-block;
+    margin-left: 20px;
+    color: #349edc;
+    padding: 5px 5px 5px 5px;
+    border: 1px solid #9cc7ea;
+    border-radius: 5px;
+}
+</style>
+<section class="main-theme">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>资讯中心
+          <p> 最新行业信息，最新公告，最新文档，一目了然。  </p>
+        </h2>
+      </div>
+      <div class="col-md-6 text-right hidden-sm hidden-xs"> <img src="/qscms/static/pay/static/default/images/sub-banner-newbg.png"> </div>
+    </div>
+  </div>
+</section>
+<br/>
+ <section class="container">
+<div class="content-wrap">
+<div class="content" id="content">
+{if true}
+  <div id="focusslide" class="carousel slide" data-ride="carousel">
+	<ol class="carousel-indicators">
+	  <li data-target="#focusslide" data-slide-to="0" class=""></li>
+	  <li data-target="#focusslide" data-slide-to="1" class="active"></li>
+	</ol>
+	<div class="carousel-inner" role="listbox">
+	  <div class="item">
+	  <a href="{r}/vip?N" target="_blank" title="" draggable="false">
+	  <img src="{su}pay/static/default/images/newsvipad.jpg" alt="VIP会员" class="img-responsive" draggable="false" hight="200px"></a>
+	  </div>
+	  <div class="item active">
+	  <a href="{r}/user/reg/MTEwMzU=" target="_blank" title="注册商户" draggable="false">
+	  <img src="{su}pay/static/default/images/jr0092.jpg" alt="注册商户" class="img-responsive" draggable="false"></a>
+	  </div>
+	</div>
+	<a class="left carousel-control" href="#focusslide" role="button" data-slide="prev" rel="nofollow" draggable="false"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">上一个</span> </a> <a class="right carousel-control" href="#focusslide" role="button" data-slide="next" rel="nofollow" draggable="false"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">下一个</span> </a> </div>
+{/if}
+{if $one}
+  <article class="excerpt-minic excerpt-minic-index">
+		<h2><span class="red">【推荐】</span><a target="_blank" href="{r}/news/$one[id]" title="$one[title]" draggable="false">$one[title]</a>
+		</h2>
+		<p class="note">{cut $one[content], 60}</p>
+	</article>
+{/if}
+  <div class="title">
+	<h3>最新发布</h3>
+	<div class="more"> 
+    	    <a href="{r}/news_list/" title="全部" draggable="true" data-toggle="tooltip" title="" data-original-title="全部">全部</a>                
+    {if $cateList}
+    {loopQuick $cateList}               
+			<a href="{r}/news_list/$v[id]" title="$v[name]" draggable="true" data-toggle="tooltip" title="" data-original-title="$v[name]">$v[name]</a>                
+    {/loopQuick}  
+    {/if}         
+		</div>
+  </div>
+  
+  
+  {if $list}
+  {loopQuick $list}
+  <article class="excerpt excerpt-1" style="">
+  <a class="focus" href="{r}/news/$v[id]" title="$v[title]" target="_blank" draggable="false"><img class="thumb" data-original="{if $v[pic]}{r}/img/{$v[pic]}{else}{su}images/pay/default.jpg{/if}" src="{if $v[pic]}{r}/img/{$v[pic]}{else}{su}images/pay/default.jpg{/if}" alt="$v[title]" style="display: inline;" draggable="false"></a>
+		<header><a class="cat" href="{r}/news/$v[id]" title="$v[title]" draggable="false">{echo db::one_one('cms_news_cate', 'name', "id='$v[cid]'");}<i></i></a>
+			<h2><a href="{r}/news/$v[id]" title="$v[title]" target="_blank" draggable="false">$v[title]</a>
+			</h2>
+		</header>
+		<p class="meta">
+			<time class="time"><i class="glyphicon glyphicon-time"></i> {date3 $v[addTime]}</time>
+			<span class="views"><i class="glyphicon glyphicon-eye-open"></i> $v[clicks]</span>
+		</p>
+		<p class="note">{cut $v[content], 60}</p>
+	</article>
+    {/loopQuick}
+    {/if}
+    
+ {if false}<div class="ias_trigger"><a href="javascript:;">查看更多</a></div>{/if}
+ $multipage
+</div>
+</div>
+<aside class="sidebar">
+<div class="fixed" style="">
+  <div class="widget widget-tabs">
+	<ul class="nav nav-tabs" role="tablist">
+	  <li role="presentation" class="active"><a href="#notice" aria-controls="notice" role="tab" data-toggle="tab" draggable="false">统计信息</a></li>
+	  <li role="presentation"><a href="#contact" aria-controls="contact" role="tab" data-toggle="tab" draggable="false">联系我们</a></li>
+	</ul>
+	<div class="tab-content">
+	  <div role="tabpanel" class="tab-pane contact active" id="notice">
+		<h3>文章总数: {$count}篇
+		  </h3>
+		<h3>最新的资讯，最新的公告，</h3>
+		<h3>最新的说明文档，想要的都能找到。</h3>
+          {if false}
+		  <h2>网站运行:
+		  <span id="sitetime">88天 </span></h2>
+          {/if}
+	  </div>
+		<div role="tabpanel" class="tab-pane contact" id="contact">
+		  <h3>客服: 
+			  <a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="top" title="" data-original-title="客服QQ" draggable="false">联系客服</a>
+			QQ群：<a href="{if cfg::get('web', 'member_qqqun')}{cfg web,member_qqqun}{else}javascript:void(0);{/if}" target="_blank" rel="nofollow" data-toggle="tooltip" data-placement="top" title="" data-original-title="客户交流群" draggable="false">点击加群</a>
+		  </h3>
+		<h3>上班时间周一到周五，</h3>
+		<h3>有任何需要帮助的随时呼唤。</h3>
+          {if false}
+		  <h2>Email:
+		  <a href="#" target="_blank" data-toggle="tooltip" rel="nofollow" data-placement="bottom" title="" data-original-title="#" draggable="false"></a></h2>
+          {/if}
+	  </div>
+	</div>
+  </div>
+  <div class="widget widget_search">
+	<form class="navbar-form" action="" method="get">
+	  <div class="input-group">
+		<input type="text" name="keyword" id="keyword" class="form-control" size="35" value="{var $keyword}" placeholder="文关键字，5个字符内"  autocomplete="off" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" maxlength="5">
+		<span class="input-group-btn">
+		<button class="btn btn-default btn-search" name="search" type="submit">搜索</button>
+		</span> </div>
+	</form>
+  </div>
+</div>
+<div class="widget widget_hot">
+	  <h3>热门文章</h3>
+	  <ul>
+      {if $hotList}
+      {loopQuick $hotList}
+      <li><a title="$v[title]" href="{r}/news/$v[id]" draggable="false"><span class="thumbnail">
+				<img class="thumb" data-original="{su}images/pay/default.jpg" src="{su}images/pay/default.jpg" alt="$v[title]" style="display: block;" draggable="false">
+			</span><span class="text">$v[title]</span><span class="muted"><i class="glyphicon glyphicon-time"></i>
+				{date3 $v[addTime]}
+			</span><span class="muted"><i class="glyphicon glyphicon-eye-open"></i>$v[clicks]</span></a></li>
+      
+      {/loopQuick}
+      {/if}
+
+
+	  </ul>
+ </div>
+</aside>
+</section>
+<script src="{su}bootstrap/js/jquery.highlight.js" type="text/javascript"></script>
+<script>
+$(document).ready(function(){
+	var key = '{$keyword}';
+	$('#content').highlight(key);  //显示高亮
+});
+</script>
+{sub footer}
+

@@ -1,0 +1,396 @@
+{sub header}
+<style type="text/css">
+/**
+*20170728 19:25 auth jinmiapay.com
+*金米计费首页部分样式修改，和新增！
+*为了便于再次修改，暂未打包进app.css
+*
+**/
+.index_vip_style{background: #fff; width:25%; border: 5px solid #eee; border-radius: 9px; padding: 50px;border-top: 10px solid #00a63f;box-shadow: 5px 5px #dedede;}
+.index_vip_style_h1{color: #00a63f;text-align:center;; font-weight: 800;}
+.index_vip_style_h33{color:#111;text-align:center;; font-size:20px;font-weight: 600;}
+.index_vip_style_go{background:#00a63f;padding: 10.5px 20px;font-weight:700;color:#fff;border-radius: 3px;margin-right: 2px;}
+.index_vip_style_go:hover{background:#19b152;padding: 10.5px 20px;font-weight:700;color:#fff;border-radius: 3px;margin-right: 2px;}
+.index_vip_style_more{background:#fff;padding: 8px 17px;font-weight:700;color:#000;border-radius: 3px;border:3px solid #00a63f;overflow: hidden;}
+.index_vip_style_hei{color:#e2dede;text-align: left;; font-size:20px;font-weight: 600;margin-top: 43px;}
+.index_vip_style_hei_btm{padding: 8px 0px 8px 27px; width: 150px!important; font-weight: 700; background: #02c54c; color: #fff; border-radius: 3px; border: 3px solid #02c54c;float: right;margin-top: -10px;}
+.index_vip_style_line43{line-height: 43px!important;}
+.index_bg_kk{ background: #fff; width: 28%; boRder: 5px solid #111; border-radius: 9px; position: absolute; padding: 50px; margin-top: -115px;}
+.index_bg_kk_h1{color: #00a63f!important;text-align:left!important; font-weight: 800;}
+.index_bg_kk_h1_3{color:#111;text-align: left;; font-size:20px;font-weight: 600;}
+.index_bg_kk_reg{background:#00a63f;padding: 10.5px 20px;font-weight:700;color:#fff!important;border-radius: 3px;}
+.index_bg_kk_reg:hover{background:#2bc365;padding: 10.5px 20px;font-weight:700;color:#fff!important;border-radius: 3px;}
+.index_bg_kk_more{background:#fff;padding:8.5px 20px;width:110px;font-weight:700;color:#000;border-radius: 3px;border:3px solid #00a63f;margin-left: 5px;}
+</style>
+{if !$member}
+ <section class="index-main-top hidden-xs" style="background: #fff url({su}/pay/static/default/images/jmp_520.svg?spam=v1) center bottom no-repeat;">
+ {else}
+ <section class="index-main-top hidden-xs" style="background: #e6e7e9 url({su}/pay/static/default/images/r2.jpg?spam=v1) center bottom no-repeat;">
+{/if}
+      <div class="container">
+        <div class="row">
+	{if !$member}
+ <div class="col-sm-6 col-xs-6 index_bg_kk" >
+            <h1 class="index_bg_kk_h1">
+             网站收款专家，就选{$webName}！
+            </h1>
+            </br>
+            <h3 class="index_bg_kk_h1_3">
+             微信，QQ钱包，支付宝，网银通道，费率低至0.08！
+            </h3>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}/user/reg" class="index_bg_kk_reg" data-toggle="tooltip" title="" data-original-title="点击注册成为商户">
+                马上注册商户
+              </a>
+              <a href="{r}/news/9"class="index_bg_kk_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息..">
+                了解更多
+              </a>
+            </p>
+          </div>
+         
+	  {else}
+ <div class="col-sm-6 col-xs-6 index_bg_kk" >
+            <h1 class="index_bg_kk_h1">
+            {$webName}vip商户，费率更低！
+            </h1>
+            </br>
+            <h3 class="index_bg_kk_h1_3">
+             成为会员商户，通道费率低至0.008！
+            </h3>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}/vip" class="index_bg_kk_reg" data-toggle="tooltip" title="" data-original-title="点击升级为VIP商户">
+                马上升级商户
+              </a>
+              <a href="{r}/vip"class="index_bg_kk_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息..">
+                了解更多
+              </a>
+            </p>
+          </div>         
+	{/if}
+
+        </div>
+      </div>
+    </section>
+{if !$member}
+    <section class="index-pay-type hidden-sm hidden-xs" >
+      <div class="container">
+         <h3 class="index_vip_style_hei">
+             多种渠道，安全收款，快速结算，便捷申请，尽在{$webName}。        <a href="{r}/user/" class="index_vip_style_hei_btm">
+          马上接入
+        </a>
+            </h3>
+      </div>
+    </section>
+{else}
+    <section class="index-pay-type hidden-sm hidden-xs" >
+      <div class="container">
+         <h3 class="index_vip_style_hei">
+             {$webName}接口说明文档，一目了然，轻松接入，快捷收款。        <a   href="doc.html" class="index_vip_style_hei_btm">
+          查看文档
+        </a>
+            </h3>
+      </div>
+    </section>
+{/if}
+
+{if !$member}
+    <section class="index-acc index-acc-api" style="margin-top:-50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-push-6 text-right">
+            <img src="{su}pay/static/default/images/liuc.jpg">
+          </div>
+          <div class="col-md-6 col-md-pull-6">
+            <h3>
+              商户接入
+            </h3>
+            <p>
+              注册{$webName}账户并完善资料，联系审核后便可对接收款业务。可根据自己的业务需求，选择性接入{$webName}相应的API付款接口。需根据文档传递相关的业务参数，简单几步即可直达最终的付款页面。
+            </p>
+            <p>
+              <a href="{r}/user/api" class="btn btn-default">
+                立即接入
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{else}
+    <section class="index-acc index-acc-api" style="margin-top:-50px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-push-6 text-right">
+            <img src="{su}pay/static/default/images/acc2.png">
+          </div>
+          <div class="col-md-6 col-md-pull-6">
+            <h3>
+              接口对接
+            </h3>
+            <p>
+              如果您已经成为{$webName}的商户，并且开通的收款权限，那么您可以根据自己需要，对接支付接口。目前支持支付宝，微信，QQ钱包，四大行网银等等支付方式的对接。支付宝和QQ钱包只支持PC和wap支付，微信支付支持扫码和手机微信内部支付。
+            </p>
+            <p>
+              <a  href="{r}/doc.html"  class="btn btn-default">
+                文档说明
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{/if}
+
+    <section class="index-acc index-acc-api hidden-xs" style="margin-top:-50px">
+      <div class="container">
+        <div class="row" style="width:auto;display:inline-block">
+	<!--vip 1 start-->
+          <div class="col-sm-6 col-xs-6 index_vip_style"  >
+	<center><img src="{su}/pay/static/default/images/ptuser.png" width="90px"></center>
+            <h1 class="index_vip_style_h1">
+             注册会员
+            </h1>
+            </br>
+            <h1 class="index_vip_style_h33">
+             微信，QQ钱包，支付宝，网银通道
+            </h1></br>
+	 <h1 class="index_vip_style_h33">费率0.02</h1>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}/vip" class="index_vip_style_go" data-toggle="tooltip" title="" data-original-title="马上降低费率">
+                马上升级
+              </a>
+              <a href="{r}vip" class="index_vip_style_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息.." >
+               更多
+              </a>
+            </p>
+             {if !$member}{/if}
+          </div>
+ 	<!--vip 1 start end-->
+
+	<!--vip 2 start-->
+          <div class="col-sm-6 col-xs-6 index_vip_style">
+	<center><img src="{su}/pay/static/default/images/vipuser.png?spm=v12.s3" width="90px"></center>
+            <h1 class="index_vip_style_h1">
+             VIP会员
+            </h1>
+            </br>
+            <h1 class="index_vip_style_h33">
+             微信，QQ钱包，支付宝，网银通道
+            </h1></br>
+	 <h1 class="index_vip_style_h33">费率0.015</h1>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}vip" class="index_vip_style_go" data-toggle="tooltip" title="" data-original-title="马上降低费率">
+                马上升级
+              </a>
+              <a href="{r}/news/9" class="index_vip_style_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息..">
+                更多
+              </a>
+            </p>
+             {if !$member}{/if}
+          </div>
+ 	<!--vip 2 start end-->
+	<!--vip 3 start-->
+          <div class="col-sm-6 col-xs-6 index_vip_style">
+	<center><img src="{su}/pay/static/default/images/bjuser.png" width="90px"></center>
+            <h1 class="index_vip_style_h1">
+             白金会员
+            </h1>
+            </br>
+            <h1 class="index_vip_style_h33">
+             微信，QQ钱包，支付宝，网银通道
+            </h1></br>
+	 <h1 class="index_vip_style_h33">费率0.012</h1>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}vip" class="index_vip_style_go" data-toggle="tooltip" title="" data-original-title="马上降低费率">
+                马上升级
+              </a>
+              <a href="{r}vip" class="index_vip_style_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息..">
+                更多
+              </a>
+            </p>
+             {if !$member}{/if}
+          </div>
+ 	<!--vip 3 start end-->
+
+	<!--vip 4 start-->
+          <div class="col-sm-6 col-xs-6 index_vip_style">
+	<center><img src="{su}/pay/static/default/images/zsuser.png" width="90px"></center>
+            <h1 class="index_vip_style_h1">
+          钻石会员
+            </h1>
+            </br>
+           <h1 class="index_vip_style_h33">
+             微信，QQ钱包，支付宝，网银通道
+            </h1></br>
+	 <h1 class="index_vip_style_h33">费率0.008</h1>
+            </br>
+           
+            <p class="text-left index_vip_style_line43">
+              <a href="{r}/user/reg" class="index_vip_style_go" data-toggle="tooltip" title="" data-original-title="马上降低费率">
+                马上升级
+              </a>
+              <a href="{r}/news/9"class="index_vip_style_more" data-toggle="tooltip" title="" data-original-title="点击了解更多信息.." >
+                更多
+              </a>
+            </p>
+             {if !$member}{/if}
+          </div>
+ 	<!--vip 4 start end-->
+
+        </div>
+      </div>
+    </section>
+
+{if !$member}
+    <section class="index-acc-process" style="margin-top:30px">
+      <div class="container">
+        <div class="row">
+          <h3>
+            接入流程
+          </h3>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-check">
+              </span>
+            </i>
+            <p>
+              注册成为商户
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-user">
+              </span>
+            </i>
+            <p>
+             完善商户信息
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-share">
+              </span>
+            </i>
+            <p>
+            联系客服审核
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-ok">
+              </span>
+            </i>
+            <p>
+             客服审核通过
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-briefcase">
+              </span>
+            </i>
+            <p>
+             参考文档，开始对接
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-usd">
+              </span>
+            </i>
+            <p>
+            开始收款
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{else}
+    <section class="index-acc-process" style="margin-top:30px">
+      <div class="container">
+        <div class="row">
+          <h3>
+            合作流程
+          </h3>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-check">
+              </span>
+            </i>
+            <p>
+              注册成为商户
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-user">
+              </span>
+            </i>
+            <p>
+             完善商户信息
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-heart">
+              </span>
+            </i>
+            <p>
+            申请成为代理
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-fullscreen">
+              </span>
+            </i>
+            <p>
+             开始推广下线
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-usd">
+              </span>
+            </i>
+            <p>
+             获取佣金
+            </p>
+          </div>
+          <div class="col-md-2">
+            <i>
+              <span class="glyphicon glyphicon-yen">
+              </span>
+            </i>
+            <p>
+          满50元申请提现
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+{/if}
+{if !$member}
+<div class="join">
+    <h2>即刻加入，马上开始收款</h2>
+    <a href="{r}/user/reg">立即注册成为商户</a>   &nbsp; <a href="{r}/sdk/" class="hidden-xs" target="_blank">支付接口演示</a>
+</div>
+{else}
+
+<div class="join">
+    <h2>成为代理，获取高达27%的分成</h2>
+    <a href="http://q.url.cn/CDpF3o?_type=wpa&qidian=true">马上成为代理</a>   &nbsp; <a href="{r}/member" class="hidden-xs" target="_blank">登录代理中心</a>
+</div>
+
+{/if}
+{sub footer}

@@ -1,0 +1,127 @@
+{sub header}
+        <!-- /top navigation -->
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+          <div class="">
+            <div class="page-title">
+             
+            </div>
+            <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>账户资料<small>编辑</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="#">Settings 1</a>
+                          </li>
+                          <li><a href="#">Settings 2</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+
+                    <form class="form-horizontal form-label-left form-ajax"  method="post" novalidate>
+	{if !$member->m_back_card}
+                      <p class="alert alert-danger hidden-xs">系统提示：您账户信息未完善，请完善账户信息，提现银行卡和支付宝都需填写。</a>
+		{/if}
+                      </p>
+                      
+	 {v sys_hash_code}
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="mobile">手机号码<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input  class="form-control col-md-7 col-xs-12" data-validate-length-range="6" data-validate-words="2"  name="mobile" id="mobile" placeholder="手机号码"  type="text" value="{echo string::getXin($member->m_mobile, 3, 4);}" disabled>
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">真实姓名<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="name" id="name" class="form-control col-md-7 col-xs-12" value="$member->m_name" placeholder="收款人真实姓名" data-toggle="tooltip" title="" data-placement="top" data-original-title="请填写和提现收款人账户一致的姓名">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="card">身份证号<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="card" id="card" placeholder="身份证号码" data-toggle="tooltip" title="" data-placement="top" data-original-title="请填写和提现收款人账户一致的身份证号码" value="{echo string::getXin($member->m_card,0,0);}"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="m_alipay">支付宝账户 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="alipay" id="alipay" data-validate-minmax="10,20" class="form-control col-md-7 col-xs-12" value="$member->m_alipay" required data-toggle="tooltip" title="" data-placement="top" data-original-title="用于提现，请勿胡乱填写。以免导致提现失败资金损失！" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="back_name">收款银行 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="back_name" id="back_name"  value="$member->m_back_name" required  data-toggle="tooltip" title="" data-placement="top" data-original-title="核对提现信息所用，请勿写错，以免导致提现失败资金损失！"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="back_card">收款银行账号<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="back_card" id="back_card"  data-validate-length-range="5,20" class="optional form-control col-md-7 col-xs-12" value="$member->m_back_card" placeholder="银行卡号" required data-toggle="tooltip" title="" data-placement="top" data-original-title="请认真填写您的银行卡卡号，写错将提现失败！" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="back_add" class="control-label col-md-3">开户地址</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input name="back_add" id="back_add" data-validate-length="6,8" class="form-control col-md-7 col-xs-12"  value="$member->m_back_add" placeholder="省份/城市/分行名称" required data-toggle="tooltip" title="" data-placement="top" data-original-title="银行卡开户地址，例如：广东深圳龙华区xx分行" >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label for="sitename" class="control-label col-md-3 col-sm-3 col-xs-12">网站名称</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input name="sitename" id="sitename"  data-validate-linked="password" class="form-control col-md-7 col-xs-12" required="required" value="$member->m_sitename" data-toggle="tooltip" title="" data-placement="top" data-original-title="填写您收款网站的网站名！">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="siteurl">站点地址<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" name="siteurl" id="siteurl" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" value="$member->m_siteurl" {if cfg::get('pay', 'isReferer')}placeholder="必填使用接口地址如：{echo WEB_URL}"{/if} data-toggle="tooltip" title="" data-placement="top" data-original-title="填写您收款网站的地址：如：{echo WEB_URL;}"  >
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="qq">联系QQ<span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <input type="text" name="qq" id="qq" data-validate-length-range="8,20" class="form-control col-md-7 col-xs-12" value="{if $member->m_qq}$member->m_qq{/if}" data-toggle="tooltip" title="" data-placement="top" data-original-title="填写您的联系QQ，便于客服沟通联系！"  >
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-md-offset-3">
+                          <button type="submit" id="send" class="btn btn-success" >保存资料</button>
+                          <a href="{r}/users" class="btn btn-primary">返回</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /page content -->
+
+{sub footer}
